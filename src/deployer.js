@@ -14,13 +14,13 @@ const main = async function() {
             deployer.controllers = await require(__dirname + "/controllers/index.js")(deployer)();
         }
         Desplegar_servidor: {
-            console.log(deployer);
-            deployer.utilities.deploy_server();
+            deployer.utilities.desplegar_servidor();
         }
         return deployer;
     } catch(error) {
         console.error("Error al desplegar aplicación HQL.");
         console.error(error);
+        throw error;
     }
 };
 
