@@ -1,0 +1,786 @@
+[
+    {
+        "tabla": "Usuario",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(256) UNIQUE NOT NULL",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "domicilio",
+                "tipo": "VARCHAR",
+                "detalles": "(1024)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "correo",
+                "tipo": "VARCHAR",
+                "detalles": "(512)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contrasenya",
+                "tipo": "VARCHAR",
+                "detalles": "(512)",
+                "atributos": null
+            }
+        ]
+    },
+    {
+        "tabla": "Voto",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_votacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "sentido",
+                "tipo": "VARCHAR",
+                "detalles": "(32)",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_votacion",
+                "tabla_foranea": "Votacion",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Comentario",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_votacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_comentario_padre",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "comentario",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_votacion",
+                "tabla_foranea": "Votacion",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_comentario_padre",
+                "tabla_foranea": "Comentario",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Votacion",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "estado",
+                "tipo": "VARCHAR",
+                "detalles": "(32)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "resultado",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            }
+        ]
+    },
+    {
+        "tabla": "Problema",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario_creador",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario_creador",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Problema_destacado",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_problema_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_problema_original",
+                "tabla_foranea": "Problema",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Solucion",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario_creador",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_problema_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario_creador",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_problema_original",
+                "tabla_foranea": "Problema",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Solucion_destacada",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_solucion_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_solucion_original",
+                "tabla_foranea": "Solucion",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Implementacion",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario_creador",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_solucion_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario_creador",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_solucion_original",
+                "tabla_foranea": "Solucion_destacada",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Implementacion_destacada",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_implementacion_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_implementacion_original",
+                "tabla_foranea": "Implementacion",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Ley",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "uuid",
+                "tipo": "VARCHAR",
+                "detalles": "(128)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_modificacion_de_ley_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_implementacion_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ley_padre",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_modificacion_de_ley_original",
+                "tabla_foranea": "Modificacion_de_ley",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_implementacion_original",
+                "tabla_foranea": "Implementacion_destacada",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ley_padre",
+                "tabla_foranea": "Ley",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Modificacion_de_ley",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(2048)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "uuid",
+                "tipo": "VARCHAR",
+                "detalles": "(128)",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_implementacion_original",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_implementacion_original",
+                "tabla_foranea": "Implementacion_destacada",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Sesion",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario",
+                "tipo": "INTEGER",
+                "detalles": "NOT NULL",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "token_de_sesion",
+                "tipo": "VARCHAR",
+                "detalles": "(100) NOT NULL",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Ciclo_democratico",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "DEFAULT CURRENT_TIMESTAMP",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "etapa_de_ciclo_actual",
+                "tipo": "INTEGER",
+                "detalles": "DEFAULT 1",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario_creador",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario_creador",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            }
+        ]
+    },
+    {
+        "tabla": "Pulsion_democratica",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "especificacion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_ciclo_democratico",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_ciclo_democratico",
+                "tabla_foranea": "Ciclo_democratico",
+                "columna_foranea": "id"
+            }
+        ]
+    }
+]
