@@ -16,7 +16,9 @@ module.exports = function (deployer) {
             ///////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////
             response.json({
-                operation, table
+                operation,
+                table,
+                datos: request.hql_data
             })
         } catch (error) {
             console.error("Error en «src/utilities/controlador_de_operacion.js»");

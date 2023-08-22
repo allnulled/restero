@@ -5,32 +5,75 @@ module.exports = function (deployer) {
             if(["select","insert","update","delete"].indexOf(operation) === -1) {
                 throw new Error("Operación no reconocida");
             }
-            const tablas_coincidentes = deployer.db.schema.filter(function() {
+            const tablas_coincidentes = deployer.db.schema.filter(function(datos_de_tabla) {
                 return datos_de_tabla.tabla === table;
             });
-            if(tablas_coincidentes.length !== 1) {
+            if(tablas_coincidentes.length === 0) {
                 throw new Error("Tipo de dato no reconocido");
             }
             request.hql_data = {};
             if(operation === "select") {
-                request.hql_data.where = deployer.utilities.obtener_parametro(request, "where", []);
-                request.hql_data.order = deployer.utilities.obtener_parametro(request, "order", ["id"]);
-                request.hql_data.page = deployer.utilities.obtener_parametro(request, "page", 1);
-                request.hql_data.items = deployer.utilities.obtener_parametro(request, "items", 20);
+                Obtenemos_parametros_de_select: {
+                    const parametros_de_select = {};
+                    parametros_de_select.where = deployer.utilities.obtener_parametro(request, "where", "[]");
+                    parametros_de_select.order = deployer.utilities.obtener_parametro(request, "order", '[["id","asc"]]');
+                    parametros_de_select.page = deployer.utilities.obtener_parametro(request, "page", "1");
+                    parametros_de_select.items = deployer.utilities.obtener_parametro(request, "items", "20");
+                    const { where, order, page, items } = deployer.utilities.parsear_propiedades_como_json(parametros_de_select);
+                    if(!Array.isArray(where)) {
+                        throw new Error("Parámetro «where» debe ser un array de arrays [943612789]");
+                    }
+                    if(!Array.isArray(order)) {
+                        throw new Error("Parámetro «order» debe ser un array de arrays [943612788]");
+                    }
+                    if(typeof page !== "number") {
+                        throw new Error("Parámetro «page» debe ser un número [943612787]");
+                    }
+                    if(typeof items !== "number") {
+                        throw new Error("Parámetro «items» debe ser un número [943612786]");
+                    }
+                    Object.assign(request.hql_data, { where, order, page, items });
+                }
             }
             if(operation === "insert") {
-                // @TODO.... del schema
-                // @TODO....
-                // @TODO....
+                Obtenemos_item: {
+                    const datos_de_tabla = tablas_coincidentes[0];
+                    const columnas = {};
+                    for(let index_composicion = 0; index_composicion < datos_de_tabla.composicion.length; index_composicion++) {
+                        const sentencia = datos_de_tabla.composicion[index_composicion];
+                        if(sentencia.sentencia === "columna") {
+                            columnas[sentencia.columna] = sentencia;
+                        }
+                    }
+                    const datos_de_columnas = {};
+                    for(let columna_id in columnas) {
+                        datos_de_columnas[columna_id] = deployer.utilities.obtener_parametro(request, columna_id, null);
+                    }
+                    request.hql_data.item = datos_de_columnas;
+                }
             }
             if(operation === "update") {
-                request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
-                // @TODO.... del schema
-                // @TODO....
-                // @TODO....
+                Obtenemos_item_e_id: {
+                    const datos_de_tabla = tablas_coincidentes[0];
+                    const columnas = {};
+                    for (let index_composicion = 0; index_composicion < datos_de_tabla.composicion.length; index_composicion++) {
+                        const sentencia = datos_de_tabla.composicion[index_composicion];
+                        if (sentencia.sentencia === "columna") {
+                            columnas[sentencia.columna] = sentencia;
+                        }
+                    }
+                    const datos_de_columnas = {};
+                    for (let columna_id in columnas) {
+                        datos_de_columnas[columna_id] = deployer.utilities.obtener_parametro(request, columna_id, null);
+                    }
+                    request.hql_data.item = datos_de_columnas;
+                    request.hql_data.id = datos_de_columnas.id;
+                }
             }
             if(operation === "delete") {
-                request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
+                Obtenemos_id: {
+                    request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
+                }
             }
             next();
         } catch (error) {
