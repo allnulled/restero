@@ -42,6 +42,40 @@
         "script": "CREATE TABLE Usuario (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
     },
     {
+        "tabla": "Sesion",
+        "atributos": null,
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario",
+                "tipo": "INTEGER",
+                "detalles": "NOT NULL UNIQUE",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "token_de_sesion",
+                "tipo": "VARCHAR",
+                "detalles": "(128)",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Sesion (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER NOT NULL UNIQUE,\n  token_de_sesion VARCHAR(128),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+    },
+    {
         "tabla": "Voto",
         "atributos": null,
         "composicion": [
@@ -674,40 +708,6 @@
             }
         ],
         "script": "\n\nCREATE TABLE Modificacion_de_ley (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
-    },
-    {
-        "tabla": "Sesion",
-        "atributos": null,
-        "composicion": [
-            {
-                "sentencia": "columna",
-                "columna": "id",
-                "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
-            },
-            {
-                "sentencia": "columna",
-                "columna": "id_usuario",
-                "tipo": "INTEGER",
-                "detalles": "NOT NULL",
-                "atributos": null
-            },
-            {
-                "sentencia": "columna",
-                "columna": "token_de_sesion",
-                "tipo": "VARCHAR",
-                "detalles": "(100) NOT NULL",
-                "atributos": null
-            },
-            {
-                "sentencia": "clave foránea",
-                "columna": "id_usuario",
-                "tabla_foranea": "Usuario",
-                "columna_foranea": "id"
-            }
-        ],
-        "script": "\n\nCREATE TABLE Sesion (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER NOT NULL,\n  token_de_sesion VARCHAR(100) NOT NULL,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Ciclo_democratico",

@@ -3,6 +3,8 @@ module.exports = function (deployer) {
         try {
             deployer.server = require("http").createServer();
             deployer.app = require("express")(deployer.server);
+            deployer.app.use("/api/v1/login", deployer.utilities.controlador_de_login);
+            deployer.app.use("/api/v1/logout", deployer.utilities.controlador_de_logout);
             deployer.app.use("/api/v1/:operation/:table", [
                 deployer.utilities.middleware_de_parametros,
                 deployer.utilities.middleware_de_autorizadores,

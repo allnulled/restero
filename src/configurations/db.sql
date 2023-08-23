@@ -6,6 +6,13 @@ CREATE TABLE Usuario (
   contrasenya VARCHAR(512)
 );
 
+CREATE TABLE Sesion (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_usuario INTEGER NOT NULL UNIQUE,
+  token_de_sesion VARCHAR(128),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
+);
+
 CREATE TABLE Voto (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
@@ -120,13 +127,6 @@ CREATE TABLE Modificacion_de_ley (
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
   FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)
-);
-
-CREATE TABLE Sesion (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  id_usuario INTEGER NOT NULL,
-  token_de_sesion VARCHAR(100) NOT NULL,
-  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
 );
 
 CREATE TABLE Ciclo_democratico (
