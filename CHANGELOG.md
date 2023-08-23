@@ -10,5 +10,9 @@
 
 **Versión `v0.0.3`.** *El 23 de agosto de 2023 a las 16:35pm.*
 
+- [✔] Extendido README y CHANGELOG para explicar login y logout.
+
+**Versión `v0.0.4`.** *El 23 de agosto de 2023 a las 16:35pm.*
+
 - [✔] Te hace autentificación por cada operación (usando headers.authorization).
 - [✖] No te hace ni autorizadores, ni nada especial (rest+auth).
