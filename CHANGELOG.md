@@ -7,3 +7,8 @@
 
 - [✔] Te hace login y logout.
 - [✖] No te hace ni autorizadores, ni nada especial (rest+auth). Solo login y logout de sesiones. Tienes que tener la tabla «Sesion».
+
+**Versión `v0.0.3`.** *El 23 de agosto de 2023 a las 16:35pm.*
+
+- [✔] Te hace autentificación por cada operación (usando headers.authorization).
+- [✖] No te hace ni autorizadores, ni nada especial (rest+auth).

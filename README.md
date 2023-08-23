@@ -36,6 +36,11 @@ npm start
 
 Nótese que las operaciones de UPDATE y DELETE requieren siempre del campo `id`. De lo contrario, darán error.
 
+También puedes usar `login` y `logout` así:
+
+  - `/api/v1/login?nombre=admin&contrasenya=admin`
+  - `/api/v1/logout?token_de_sesion=43U3TIQA7J8F8GKOVK1Q0E4XMTXEWZVK0IUA5S163QLDJ...`
+
 ## Versiones
 
 Ir al [CHANGELOG](./CHANGELOG.md) para ver especificidades de cada versión.
