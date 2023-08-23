@@ -38,10 +38,7 @@ Nótese que las operaciones de UPDATE y DELETE requieren siempre del campo `id`.
 
 ## Versiones
 
-**Versión `v0.0.1`.** *El 23 de agosto de 2023 a las 12:54pm.*
-
-- Te hace la **REST automáticamente** desde el script [HQL](https://github.com/allnulled/h-query-language).
-- No te hace login, ni autorizadores, ni nada especial. Solo REST automática abierta.
+Ir al [CHANGELOG](./CHANGELOG.md) para ver especificidades de cada versión.
 
 
 
