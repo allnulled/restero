@@ -3,34 +3,30 @@ module.exports = function (deployer) {
         try {
             const { operation, table } = request.params;
             if(operation === "select") {
+                const consulta_select = deployer.utilities.preparar_select(table, request.hql_data);
                 const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
-                console.log(conexion);
-                const resultado = await conexion.ejecutar("SELECT 100;");
-                request.hql_data.resultado = resultado;
-                // @TODO: montar query
-                // @TODO: recoger conexión a base de datos
-                // @TODO: lanzar query
-                // @TODO: devolver datos de query
+                const resultado = await conexion.ejecutar(consulta_select);
+                request.hql_resultado = resultado;
             } else if (operation === "insert") {
-                // @TODO: montar query
-                // @TODO: recoger conexión a base de datos
-                // @TODO: lanzar query
-                // @TODO: devolver datos de query
+                const consulta_insert = deployer.utilities.preparar_insert(table, request.hql_data);
+                const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
+                const resultado = await conexion.ejecutar(consulta_insert);
+                request.hql_resultado = resultado;
             } else if (operation === "update") {
-                // @TODO: montar query
-                // @TODO: recoger conexión a base de datos
-                // @TODO: lanzar query
-                // @TODO: devolver datos de query
+                const consulta_update = deployer.utilities.preparar_update(table, request.hql_data);
+                const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
+                const resultado = await conexion.ejecutar(consulta_update);
+                request.hql_resultado = resultado;
             } else if (operation === "delete") {
-                // @TODO: montar query
-                // @TODO: recoger conexión a base de datos
-                // @TODO: lanzar query
-                // @TODO: devolver datos de query
+                const consulta_delete = deployer.utilities.preparar_delete(table, request.hql_data);
+                const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
+                const resultado = await conexion.ejecutar(consulta_delete);
+                request.hql_resultado = resultado;
             }
             response.json({
                 operation,
                 table,
-                datos: request.hql_data
+                resultado: request.hql_resultado
             })
         } catch (error) {
             console.error("Error en «src/utilities/controlador_de_operacion.js»");

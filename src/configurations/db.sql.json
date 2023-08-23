@@ -38,7 +38,8 @@
                 "detalles": "(512)",
                 "atributos": null
             }
-        ]
+        ],
+        "script": "CREATE TABLE Usuario (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
     },
     {
         "tabla": "Voto",
@@ -84,7 +85,8 @@
                 "tabla_foranea": "Votacion",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Voto (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_votacion INTEGER,\n  sentido VARCHAR(32),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id)\n);"
     },
     {
         "tabla": "Comentario",
@@ -143,7 +145,8 @@
                 "tabla_foranea": "Comentario",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Comentario (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_votacion INTEGER,\n  id_comentario_padre INTEGER,\n  comentario VARCHAR(2048),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id),\n  FOREIGN KEY (id_comentario_padre) REFERENCES Comentario (id)\n);"
     },
     {
         "tabla": "Votacion",
@@ -184,7 +187,8 @@
                 "detalles": "",
                 "atributos": null
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Votacion (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  estado VARCHAR(32),\n  resultado TEXT\n);"
     },
     {
         "tabla": "Problema",
@@ -237,7 +241,8 @@
                 "tabla_foranea": "Usuario",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Problema (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  id_usuario_creador INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Problema_destacado",
@@ -290,7 +295,8 @@
                 "tabla_foranea": "Problema",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Problema_destacado (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  id_problema_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_problema_original) REFERENCES Problema (id)\n);"
     },
     {
         "tabla": "Solucion",
@@ -356,7 +362,8 @@
                 "tabla_foranea": "Problema",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Solucion (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  id_usuario_creador INTEGER,\n  id_problema_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),\n  FOREIGN KEY (id_problema_original) REFERENCES Problema (id)\n);"
     },
     {
         "tabla": "Solucion_destacada",
@@ -409,7 +416,8 @@
                 "tabla_foranea": "Solucion",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Solucion_destacada (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  id_solucion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_solucion_original) REFERENCES Solucion (id)\n);"
     },
     {
         "tabla": "Implementacion",
@@ -475,7 +483,8 @@
                 "tabla_foranea": "Solucion_destacada",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Implementacion (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  id_usuario_creador INTEGER,\n  id_solucion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),\n  FOREIGN KEY (id_solucion_original) REFERENCES Solucion_destacada (id)\n);"
     },
     {
         "tabla": "Implementacion_destacada",
@@ -528,7 +537,8 @@
                 "tabla_foranea": "Implementacion",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Implementacion_destacada (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion (id)\n);"
     },
     {
         "tabla": "Ley",
@@ -601,7 +611,8 @@
                 "tabla_foranea": "Ley",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Ley (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT,\n  id_modificacion_de_ley_original INTEGER,\n  id_implementacion_original INTEGER,\n  id_ley_padre INTEGER,\n  FOREIGN KEY (id_modificacion_de_ley_original) REFERENCES Modificacion_de_ley (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id),\n  FOREIGN KEY (id_ley_padre) REFERENCES Ley (id)\n);"
     },
     {
         "tabla": "Modificacion_de_ley",
@@ -661,7 +672,8 @@
                 "tabla_foranea": "Implementacion_destacada",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Modificacion_de_ley (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
     },
     {
         "tabla": "Sesion",
@@ -694,7 +706,8 @@
                 "tabla_foranea": "Usuario",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Sesion (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER NOT NULL,\n  token_de_sesion VARCHAR(100) NOT NULL,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Ciclo_democratico",
@@ -741,7 +754,8 @@
                 "tabla_foranea": "Usuario",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Ciclo_democratico (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT,\n  id_usuario_creador INTEGER,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Pulsion_democratica",
@@ -781,6 +795,7 @@
                 "tabla_foranea": "Ciclo_democratico",
                 "columna_foranea": "id"
             }
-        ]
+        ],
+        "script": "\n\nCREATE TABLE Pulsion_democratica (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  especificacion TEXT,\n  descripcion TEXT,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
     }
 ]

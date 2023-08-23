@@ -21,6 +21,7 @@ module.exports = function (deployer) {
                         try {
                             conexion_bruta.serialize(function () {
                                 try {
+                                    console.log("[SQL] " + consulta_unica);
                                     conexion_bruta.all(consulta_unica, [], function (error, data) {
                                         if (error) {
                                             return fail(error);

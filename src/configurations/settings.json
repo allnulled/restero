@@ -1,3 +1,4 @@
 {
+    "DB_RESET": true,
     "APP_PORT": 5046
 }

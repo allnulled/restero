@@ -13,11 +13,11 @@ function peg$subclass(child, parent) {
 }
 
 function peg$SyntaxError(message, expected, found, location) {
-  this.message  = message;
+  this.message = message;
   this.expected = expected;
-  this.found    = found;
+  this.found = found;
   this.location = location;
-  this.name     = "SyntaxError";
+  this.name = "SyntaxError";
 
   if (typeof Error.captureStackTrace === "function") {
     Error.captureStackTrace(this, peg$SyntaxError);
@@ -26,37 +26,37 @@ function peg$SyntaxError(message, expected, found, location) {
 
 peg$subclass(peg$SyntaxError, Error);
 
-peg$SyntaxError.buildMessage = function(expected, found) {
+peg$SyntaxError.buildMessage = function (expected, found) {
   var DESCRIBE_EXPECTATION_FNS = {
-        literal: function(expectation) {
-          return "\"" + literalEscape(expectation.text) + "\"";
-        },
+    literal: function (expectation) {
+      return "\"" + literalEscape(expectation.text) + "\"";
+    },
 
-        "class": function(expectation) {
-          var escapedParts = "",
-              i;
+    "class": function (expectation) {
+      var escapedParts = "",
+        i;
 
-          for (i = 0; i < expectation.parts.length; i++) {
-            escapedParts += expectation.parts[i] instanceof Array
-              ? classEscape(expectation.parts[i][0]) + "-" + classEscape(expectation.parts[i][1])
-              : classEscape(expectation.parts[i]);
-          }
+      for (i = 0; i < expectation.parts.length; i++) {
+        escapedParts += expectation.parts[i] instanceof Array
+          ? classEscape(expectation.parts[i][0]) + "-" + classEscape(expectation.parts[i][1])
+          : classEscape(expectation.parts[i]);
+      }
 
-          return "[" + (expectation.inverted ? "^" : "") + escapedParts + "]";
-        },
+      return "[" + (expectation.inverted ? "^" : "") + escapedParts + "]";
+    },
 
-        any: function(expectation) {
-          return "any character";
-        },
+    any: function (expectation) {
+      return "any character";
+    },
 
-        end: function(expectation) {
-          return "end of input";
-        },
+    end: function (expectation) {
+      return "end of input";
+    },
 
-        other: function(expectation) {
-          return expectation.description;
-        }
-      };
+    other: function (expectation) {
+      return expectation.description;
+    }
+  };
 
   function hex(ch) {
     return ch.charCodeAt(0).toString(16).toUpperCase();
@@ -65,13 +65,13 @@ peg$SyntaxError.buildMessage = function(expected, found) {
   function literalEscape(s) {
     return s
       .replace(/\\/g, '\\\\')
-      .replace(/"/g,  '\\"')
+      .replace(/"/g, '\\"')
       .replace(/\0/g, '\\0')
       .replace(/\t/g, '\\t')
       .replace(/\n/g, '\\n')
       .replace(/\r/g, '\\r')
-      .replace(/[\x00-\x0F]/g,          function(ch) { return '\\x0' + hex(ch); })
-      .replace(/[\x10-\x1F\x7F-\x9F]/g, function(ch) { return '\\x'  + hex(ch); });
+      .replace(/[\x00-\x0F]/g, function (ch) { return '\\x0' + hex(ch); })
+      .replace(/[\x10-\x1F\x7F-\x9F]/g, function (ch) { return '\\x' + hex(ch); });
   }
 
   function classEscape(s) {
@@ -79,13 +79,13 @@ peg$SyntaxError.buildMessage = function(expected, found) {
       .replace(/\\/g, '\\\\')
       .replace(/\]/g, '\\]')
       .replace(/\^/g, '\\^')
-      .replace(/-/g,  '\\-')
+      .replace(/-/g, '\\-')
       .replace(/\0/g, '\\0')
       .replace(/\t/g, '\\t')
       .replace(/\n/g, '\\n')
       .replace(/\r/g, '\\r')
-      .replace(/[\x00-\x0F]/g,          function(ch) { return '\\x0' + hex(ch); })
-      .replace(/[\x10-\x1F\x7F-\x9F]/g, function(ch) { return '\\x'  + hex(ch); });
+      .replace(/[\x00-\x0F]/g, function (ch) { return '\\x0' + hex(ch); })
+      .replace(/[\x10-\x1F\x7F-\x9F]/g, function (ch) { return '\\x' + hex(ch); });
   }
 
   function describeExpectation(expectation) {
@@ -94,7 +94,7 @@ peg$SyntaxError.buildMessage = function(expected, found) {
 
   function describeExpected(expected) {
     var descriptions = new Array(expected.length),
-        i, j;
+      i, j;
 
     for (i = 0; i < expected.length; i++) {
       descriptions[i] = describeExpectation(expected[i]);
@@ -138,86 +138,86 @@ function peg$parse(input, options) {
 
   var peg$FAILED = {},
 
-      peg$startRuleFunctions = { HQL_Lenguaje: peg$parseHQL_Lenguaje },
-      peg$startRuleFunction  = peg$parseHQL_Lenguaje,
+    peg$startRuleFunctions = { HQL_Lenguaje: peg$parseHQL_Lenguaje },
+    peg$startRuleFunction = peg$parseHQL_Lenguaje,
 
-      peg$c0 = function(sentencias) { return sentencias },
-      peg$c1 = "CREATE TABLE",
-      peg$c2 = peg$literalExpectation("CREATE TABLE", false),
-      peg$c3 = "create table",
-      peg$c4 = peg$literalExpectation("create table", false),
-      peg$c5 = "(",
-      peg$c6 = peg$literalExpectation("(", false),
-      peg$c7 = ");",
-      peg$c8 = peg$literalExpectation(");", false),
-      peg$c9 = function(token1, tabla, token2, atributos, token3, composicion, token4) { return { tabla, atributos, composicion } },
-      peg$c10 = function(sentencia1, sentenciaN) { return [].concat([sentencia1]).concat(sentenciaN); },
-      peg$c11 = function(token1, columna, token2, tipo, detalles, atributos) { return { sentencia: "columna", columna, tipo, detalles, atributos } },
-      peg$c12 = ",",
-      peg$c13 = peg$literalExpectation(",", false),
-      peg$c14 = "\n",
-      peg$c15 = peg$literalExpectation("\n", false),
-      peg$c16 = "/*",
-      peg$c17 = peg$literalExpectation("/*", false),
-      peg$c18 = peg$anyExpectation(),
-      peg$c19 = function() { return text().trim() },
-      peg$c20 = "*/",
-      peg$c21 = peg$literalExpectation("*/", false),
-      peg$c22 = function(token1, atributos, token2) { return atributos },
-      peg$c23 = "@",
-      peg$c24 = peg$literalExpectation("@", false),
-      peg$c25 = function(token1, hiperatributo) { return hiperatributo },
-      peg$c26 = function() { return text() },
-      peg$c27 = "INTEGER",
-      peg$c28 = peg$literalExpectation("INTEGER", false),
-      peg$c29 = "integer",
-      peg$c30 = peg$literalExpectation("integer", false),
-      peg$c31 = "int",
-      peg$c32 = peg$literalExpectation("int", false),
-      peg$c33 = "VARCHAR",
-      peg$c34 = peg$literalExpectation("VARCHAR", false),
-      peg$c35 = "varchar",
-      peg$c36 = peg$literalExpectation("varchar", false),
-      peg$c37 = "TEXT",
-      peg$c38 = peg$literalExpectation("TEXT", false),
-      peg$c39 = "text",
-      peg$c40 = peg$literalExpectation("text", false),
-      peg$c41 = "DATETIME",
-      peg$c42 = peg$literalExpectation("DATETIME", false),
-      peg$c43 = "datetime",
-      peg$c44 = peg$literalExpectation("datetime", false),
-      peg$c45 = "FOREIGN KEY",
-      peg$c46 = peg$literalExpectation("FOREIGN KEY", false),
-      peg$c47 = "foreign key",
-      peg$c48 = peg$literalExpectation("foreign key", false),
-      peg$c49 = ")",
-      peg$c50 = peg$literalExpectation(")", false),
-      peg$c51 = "REFERENCES",
-      peg$c52 = peg$literalExpectation("REFERENCES", false),
-      peg$c53 = "references",
-      peg$c54 = peg$literalExpectation("references", false),
-      peg$c55 = function(token1, columna, token2, tabla_foranea, token3, columna_foranea, token4) { return { sentencia: "clave foránea", columna, tabla_foranea, columna_foranea } },
-      peg$c56 = function(token1, sentencia) { return sentencia },
-      peg$c57 = /^[A-Za-z_]/,
-      peg$c58 = peg$classExpectation([["A", "Z"], ["a", "z"], "_"], false, false),
-      peg$c59 = /^[A-Za-z0-9_$]/,
-      peg$c60 = peg$classExpectation([["A", "Z"], ["a", "z"], ["0", "9"], "_", "$"], false, false),
-      peg$c61 = "\r",
-      peg$c62 = peg$literalExpectation("\r", false),
-      peg$c63 = function() {},
-      peg$c64 = "\t",
-      peg$c65 = peg$literalExpectation("\t", false),
-      peg$c66 = " ",
-      peg$c67 = peg$literalExpectation(" ", false),
+    peg$c0 = function (sentencias) { return sentencias },
+    peg$c1 = "CREATE TABLE",
+    peg$c2 = peg$literalExpectation("CREATE TABLE", false),
+    peg$c3 = "create table",
+    peg$c4 = peg$literalExpectation("create table", false),
+    peg$c5 = "(",
+    peg$c6 = peg$literalExpectation("(", false),
+    peg$c7 = ");",
+    peg$c8 = peg$literalExpectation(");", false),
+    peg$c9 = function (token1, tabla, token2, atributos, token3, composicion, token4) { return { tabla, atributos, composicion, script: text() } },
+    peg$c10 = function (sentencia1, sentenciaN) { return [].concat([sentencia1]).concat(sentenciaN); },
+    peg$c11 = function (token1, columna, token2, tipo, detalles, atributos) { return { sentencia: "columna", columna, tipo, detalles, atributos } },
+    peg$c12 = ",",
+    peg$c13 = peg$literalExpectation(",", false),
+    peg$c14 = "\n",
+    peg$c15 = peg$literalExpectation("\n", false),
+    peg$c16 = "/*",
+    peg$c17 = peg$literalExpectation("/*", false),
+    peg$c18 = peg$anyExpectation(),
+    peg$c19 = function () { return text().trim() },
+    peg$c20 = "*/",
+    peg$c21 = peg$literalExpectation("*/", false),
+    peg$c22 = function (token1, atributos, token2) { return atributos },
+    peg$c23 = "@",
+    peg$c24 = peg$literalExpectation("@", false),
+    peg$c25 = function (token1, hiperatributo) { return hiperatributo },
+    peg$c26 = function () { return text() },
+    peg$c27 = "INTEGER",
+    peg$c28 = peg$literalExpectation("INTEGER", false),
+    peg$c29 = "integer",
+    peg$c30 = peg$literalExpectation("integer", false),
+    peg$c31 = "int",
+    peg$c32 = peg$literalExpectation("int", false),
+    peg$c33 = "VARCHAR",
+    peg$c34 = peg$literalExpectation("VARCHAR", false),
+    peg$c35 = "varchar",
+    peg$c36 = peg$literalExpectation("varchar", false),
+    peg$c37 = "TEXT",
+    peg$c38 = peg$literalExpectation("TEXT", false),
+    peg$c39 = "text",
+    peg$c40 = peg$literalExpectation("text", false),
+    peg$c41 = "DATETIME",
+    peg$c42 = peg$literalExpectation("DATETIME", false),
+    peg$c43 = "datetime",
+    peg$c44 = peg$literalExpectation("datetime", false),
+    peg$c45 = "FOREIGN KEY",
+    peg$c46 = peg$literalExpectation("FOREIGN KEY", false),
+    peg$c47 = "foreign key",
+    peg$c48 = peg$literalExpectation("foreign key", false),
+    peg$c49 = ")",
+    peg$c50 = peg$literalExpectation(")", false),
+    peg$c51 = "REFERENCES",
+    peg$c52 = peg$literalExpectation("REFERENCES", false),
+    peg$c53 = "references",
+    peg$c54 = peg$literalExpectation("references", false),
+    peg$c55 = function (token1, columna, token2, tabla_foranea, token3, columna_foranea, token4) { return { sentencia: "clave foránea", columna, tabla_foranea, columna_foranea } },
+    peg$c56 = function (token1, sentencia) { return sentencia },
+    peg$c57 = /^[A-Za-z_]/,
+    peg$c58 = peg$classExpectation([["A", "Z"], ["a", "z"], "_"], false, false),
+    peg$c59 = /^[A-Za-z0-9_$]/,
+    peg$c60 = peg$classExpectation([["A", "Z"], ["a", "z"], ["0", "9"], "_", "$"], false, false),
+    peg$c61 = "\r",
+    peg$c62 = peg$literalExpectation("\r", false),
+    peg$c63 = function () { },
+    peg$c64 = "\t",
+    peg$c65 = peg$literalExpectation("\t", false),
+    peg$c66 = " ",
+    peg$c67 = peg$literalExpectation(" ", false),
 
-      peg$currPos          = 0,
-      peg$savedPos         = 0,
-      peg$posDetailsCache  = [{ line: 1, column: 1 }],
-      peg$maxFailPos       = 0,
-      peg$maxFailExpected  = [],
-      peg$silentFails      = 0,
+    peg$currPos = 0,
+    peg$savedPos = 0,
+    peg$posDetailsCache = [{ line: 1, column: 1 }],
+    peg$maxFailPos = 0,
+    peg$maxFailExpected = [],
+    peg$silentFails = 0,
 
-      peg$result;
+    peg$result;
 
   if ("startRule" in options) {
     if (!(options.startRule in peg$startRuleFunctions)) {
@@ -284,7 +284,7 @@ function peg$parse(input, options) {
 
       details = peg$posDetailsCache[p];
       details = {
-        line:   details.line,
+        line: details.line,
         column: details.column
       };
 
@@ -306,17 +306,17 @@ function peg$parse(input, options) {
 
   function peg$computeLocation(startPos, endPos) {
     var startPosDetails = peg$computePosDetails(startPos),
-        endPosDetails   = peg$computePosDetails(endPos);
+      endPosDetails = peg$computePosDetails(endPos);
 
     return {
       start: {
         offset: startPos,
-        line:   startPosDetails.line,
+        line: startPosDetails.line,
         column: startPosDetails.column
       },
       end: {
         offset: endPos,
-        line:   endPosDetails.line,
+        line: endPosDetails.line,
         column: endPosDetails.column
       }
     };
@@ -1574,5 +1574,5 @@ function peg$parse(input, options) {
 
 module.exports = {
   SyntaxError: peg$SyntaxError,
-  parse:       peg$parse
+  parse: peg$parse
 };
