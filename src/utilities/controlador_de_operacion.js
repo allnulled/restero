@@ -2,6 +2,7 @@ module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
             const { operation, table } = request.params;
+            // console.log(request.hql_authentication);
             if(operation === "select") {
                 const consulta_select = deployer.utilities.preparar_select(table, request.hql_data);
                 const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();

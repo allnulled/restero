@@ -14,5 +14,9 @@
 
 **Versión `v0.0.4`.** *El 23 de agosto de 2023 a las 16:35pm.*
 
-- [✔] Te hace autentificación por cada operación (usando headers.authorization).
+- [✔] Te hace autentificación por cada operación (usando body, query o headers.authorization).
 - [✖] No te hace ni autorizadores, ni nada especial (rest+auth).
+
+**Versión `v0.0.5`.** *El 23 de agosto de 2023 a las 16:35pm.*
+
+- [✔] Te hace autorizadores (rest+auth).

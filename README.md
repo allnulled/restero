@@ -19,13 +19,15 @@ npm install
 
 **Paso 1.** Crea y coloca el script en [HQL](https://github.com/allnulled/h-query-language) en el fichero `src/configurations/db.sql`.
 
-**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`.
+**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`. Modifica también el fichero de migracion inicial si escaece, en `src/configurations/db.migracion.sql`, que se ejecutará en caso que la base de datos deba crearse.
 
 **Paso 3.** Despliega la aplicación con el comando:
 
 ```sh
 npm start
 ```
+
+Este comando creará la base de datos si la primera tabla del script no existe, y aplicará la migración inicial. De lo contrario, obviará estos pasos, y continuará la ejecución del despliegue del servidor.
 
 **Paso 4.** Ya puedes hacer todas las operaciones CRUD automáticamente mediante HTTP, por ejemplo:
 
@@ -34,7 +36,7 @@ npm start
   - `/api/v1/select/Usuario?`
   - `/api/v1/delete/Usuario?id=1`
 
-Nótese que las operaciones de UPDATE y DELETE requieren siempre del campo `id`. De lo contrario, darán error.
+Nótese que las operaciones de UPDATE y DELETE requieren siempre del campo `id`. De lo contrario, darán error. Esto invalida poder usar múltiples `PRIMARY KEY` en una tabla, de momento.
 
 También puedes usar `login` y `logout` así:
 

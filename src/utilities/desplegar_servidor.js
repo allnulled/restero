@@ -7,6 +7,7 @@ module.exports = function (deployer) {
             deployer.app.use("/api/v1/logout", deployer.utilities.controlador_de_logout);
             deployer.app.use("/api/v1/:operation/:table", [
                 deployer.utilities.middleware_de_parametros,
+                deployer.utilities.middleware_de_autentificacion,
                 deployer.utilities.middleware_de_autorizadores,
                 deployer.utilities.controlador_de_operacion
             ]);

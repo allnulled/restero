@@ -1,6 +1,6 @@
 const fs = require("fs");
 const sqlstring = require("sqlstring");
-const hql_parser = require(__dirname + "/h-query-language.js");
+const hql_parser = require(__dirname + "/parsers/h-query-language.js");
 
 const main = async function() {
     try {
@@ -13,6 +13,9 @@ const main = async function() {
         }
         Cargar_controladores: {
             deployer.controllers = await require(__dirname + "/controllers/index.js")(deployer)();
+        }
+        Cargar_autorizadores: {
+            deployer.authorizers = await require(__dirname + "/authorizers/index.js")(deployer)();
         }
         Desplegar_base_de_datos: {
             await deployer.utilities.desplegar_base_de_datos();

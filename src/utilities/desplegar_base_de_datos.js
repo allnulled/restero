@@ -14,6 +14,12 @@ module.exports = function (deployer) {
                     const datos_de_tabla = deployer.db.schema[index_tabla];
                     await conexion.ejecutar(datos_de_tabla.script);
                 }
+                const migracion_inicial = deployer.fs.readFileSync(__dirname + "/../configurations/db.migracion.sql").toString();
+                const sentencias_de_migracion = migracion_inicial.split(/(^|\n)\-\- Sentencia\:/g).map(sentencia => sentencia.trim()).filter(sentencia => sentencia !== "");
+                for(let index_sentencias = 0; index_sentencias < sentencias_de_migracion.length; index_sentencias++) {
+                    const sentencia_de_migracion = sentencias_de_migracion[index_sentencias];
+                    await conexion.ejecutar(sentencia_de_migracion);
+                }
                 return true;
             }
         } catch (error) {

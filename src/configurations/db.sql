@@ -14,7 +14,7 @@ CREATE TABLE Sesion (
 );
 
 CREATE TABLE Voto (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER,
   id_usuario INTEGER,
   id_votacion INTEGER,
   sentido VARCHAR(32),
