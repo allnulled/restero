@@ -47,5 +47,9 @@ También puedes usar `login` y `logout` así:
 
 Ir al [CHANGELOG](./CHANGELOG.md) para ver especificidades de cada versión.
 
+## Documentación
+
+Para ver la documentación oficial, ir a [REFERENCE.md](./REFERENCE.md).
+
 
 

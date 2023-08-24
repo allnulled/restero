@@ -1,4 +1,11 @@
-CREATE TABLE Usuario (
+CREATE TABLE Usuario /*
+@tiene_autorizador: espera_segundos: 1000
+@tiene_autorizador: espera_segundos: 1000
+@tiene_autorizador: espera_segundos: 1000
+@tiene_autorizador: espera_segundos: 1000
+@tiene_autorizador: espera_segundos: 1000
+@tiene_autorizador: espera_segundos: 1000
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   domicilio VARCHAR(1024),

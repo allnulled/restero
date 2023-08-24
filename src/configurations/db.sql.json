@@ -1,7 +1,14 @@
 [
     {
         "tabla": "Usuario",
-        "atributos": null,
+        "atributos": [
+            "tiene_autorizador: espera_segundos: 1000",
+            "tiene_autorizador: espera_segundos: 1000",
+            "tiene_autorizador: espera_segundos: 1000",
+            "tiene_autorizador: espera_segundos: 1000",
+            "tiene_autorizador: espera_segundos: 1000",
+            "tiene_autorizador: espera_segundos: 1000"
+        ],
         "composicion": [
             {
                 "sentencia": "columna",
@@ -39,7 +46,7 @@
                 "atributos": null
             }
         ],
-        "script": "CREATE TABLE Usuario (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
+        "script": "CREATE TABLE Usuario /*\n@tiene_autorizador: espera_segundos: 1000\n@tiene_autorizador: espera_segundos: 1000\n@tiene_autorizador: espera_segundos: 1000\n@tiene_autorizador: espera_segundos: 1000\n@tiene_autorizador: espera_segundos: 1000\n@tiene_autorizador: espera_segundos: 1000\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
     },
     {
         "tabla": "Sesion",

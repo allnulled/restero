@@ -5,3 +5,4 @@ Test 1: login. De admin-admin :S
 Test 2: imprime la autentificacion por consola (línea comentada en el código, el utilities/controlador_de_operaciones):
 
     http://127.0.0.1:5046/api/v1/select/Usuario?authorization=3ABIII7T3WYN8I8PTL7PBSKGVMV9FMZL5Q9WN4N5GHW85V4H0J7G1S4DUD0KMKMTJ7IU4S6LRMKXDUYEFL6I43UMSUU1L1BHDLP1
+
