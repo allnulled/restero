@@ -1,0 +1,1 @@
+[{"test":"login.test.js","estado":"OK"},{"test":"logout.test.js","estado":"OK"},{"test":"si_insertable_por_mismo_usuario.test.js","estado":"FALLADO"},{"test":"si_actualizable_por_mismo_usuario.test.js","estado":"OK"},{"test":"si_eliminable_por_mismo_usuario.test.js","estado":"OK"},{"test":"si_seleccionable_por_mismo_usuario.test.js","estado":"OK"}]

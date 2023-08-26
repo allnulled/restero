@@ -1,0 +1,399 @@
+Ejecutable como documento HTML5
+    con autor allnulled
+    con nombre index
+    con versión 1
+<head>
+    <title>Asamblearismo</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./win7.scoped.css" />
+    <style>
+      .win7 .title-bar {
+        padding: 3px;
+        padding-bottom: 0px;
+      }
+      .like_link {
+        color:blue;
+        text-decoration:underline;
+        cursor:pointer;
+      }
+      .like_link:hover {
+        color: #3333CC;
+      }
+      ul,li {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      .partenon {
+        font-size: 23px;
+        text-shadow: 0 0 0 white;
+        cursor: pointer;
+      }
+      .partenon:hover {
+        text-shadow: 0 0 4px blue;
+      }
+    </style>
+</head>
+<body><div id="app"></div></body>.
+
+importo api nativa.
+
+creo PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plantilla {
+  <div class="PaginaDeInicio Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">...</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body" style="padding: 6px;">
+        <div>Secciones:</div>
+        <ul>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/problemas/destacados')">Ver problemas destacados</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/problemas/propuestos')">Ver problemas</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/soluciones/destacadas')">Ver soluciones destacadas</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/soluciones/propuestas')">Ver soluciones</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/implementaciones/destacadas')">Ver implementaciones destacadas</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/implementaciones/propuestas')">Ver implementaciones</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/votaciones/actuales')">Ver votaciones actuales</span></li>
+          <li><span class="like_link" v-on:click="abrir_pagina_de('/votaciones/anteriores')">Ver votaciones anteriores</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad methods como {
+      método abrir_pagina_de(pagina) donde {
+        hago this.$router.history.push(pagina).
+      }.
+    }.
+  }.
+}.
+
+creo PaginaDeProblemasDestacados como un componente vue2 con nombre "PaginaDeProblemasDestacados" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Problemas destacados</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeProblemasPropuestos como un componente vue2 con nombre "PaginaDeProblemasPropuestos" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Problemas propuestos</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeSolucionesDestacadas como un componente vue2 con nombre "PaginaDeSolucionesDestacadas" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Soluciones destacadas</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeSolucionesPropuestas como un componente vue2 con nombre "PaginaDeSolucionesPropuestas" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Soluciones propuestas</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeImplementacionesDestacadas como un componente vue2 con nombre "PaginaDeImplementacionesDestacadas" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Implementaciones destacadas</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeImplementacionesPropuestas como un componente vue2 con nombre "PaginaDeImplementacionesPropuestas" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">ImplementacionesPropuestas</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeVotacionesActuales como un componente vue2 con nombre "PaginaDeVotacionesActuales" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">VotacionesActuales</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+creo PaginaDeVotacionesAnteriores como un componente vue2 con nombre "PaginaDeVotacionesAnteriores" con plantilla {
+  <div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">VotacionesAnteriores</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    método data() donde {
+      retorno {}.
+    }.
+  }.
+}.
+
+creo App como una aplicación vue2 con nombre "App" con rutas [{
+    propiedad path como "/problemas/destacados".
+    propiedad name como "ProblemasDestacados".
+    propiedad component como PaginaDeProblemasDestacados.
+    propiedad props como {}.
+}, {
+    propiedad path como "/problemas/propuestos".
+    propiedad name como "ProblemasPropuestos".
+    propiedad component como PaginaDeProblemasPropuestos.
+    propiedad props como {}.
+}, {
+    propiedad path como "/soluciones/destacadas".
+    propiedad name como "SolucionesDestacadas".
+    propiedad component como PaginaDeSolucionesDestacadas.
+    propiedad props como {}.
+}, {
+    propiedad path como "/soluciones/propuestas".
+    propiedad name como "SolucionesPropuestas".
+    propiedad component como PaginaDeSolucionesPropuestas.
+    propiedad props como {}.
+}, {
+    propiedad path como "/implementaciones/destacadas".
+    propiedad name como "ImplementacionesDestacadas".
+    propiedad component como PaginaDeImplementacionesDestacadas.
+    propiedad props como {}.
+}, {
+    propiedad path como "/implementaciones/propuestas".
+    propiedad name como "ImplementacionesPropuestas".
+    propiedad component como PaginaDeImplementacionesPropuestas.
+    propiedad props como {}.
+}, {
+    propiedad path como "/votaciones/actuales".
+    propiedad name como "VotacionesActuales".
+    propiedad component como PaginaDeVotacionesActuales.
+    propiedad props como {}.
+}, {
+    propiedad path como "/votaciones/anteriores".
+    propiedad name como "VotacionesAnteriores".
+    propiedad component como PaginaDeVotacionesAnteriores.
+    propiedad props como {}.
+}, {
+    propiedad path como "/".
+    propiedad name como "Home".
+    propiedad component como PaginaDeInicio.
+    propiedad props como {}.
+}] con traducciones {
+    propiedad es como {}.
+    propiedad en como {}.
+    propiedad ca como {}.
+} con plantilla {
+  <div class="App Component Castelog-app win7">
+    <router-view></router-view>
+  </div>
+} con estilos {
+    html {}
+    body {}
+    .Component {}
+    .App {}
+} con lógica {
+  retorno {
+    método data donde {
+      retorno {
+        
+      }.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método mounted donde {}.
+  }.
+} montada en "#app".

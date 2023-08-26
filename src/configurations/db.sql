@@ -1,10 +1,5 @@
 CREATE TABLE Usuario /*
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
+  @tiene_autorizador: no_usable
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
@@ -13,14 +8,20 @@ CREATE TABLE Usuario /*
   contrasenya VARCHAR(512)
 );
 
-CREATE TABLE Sesion (
+CREATE TABLE Sesion /*
+  @tiene_autorizador: no_usable
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER NOT NULL UNIQUE,
   token_de_sesion VARCHAR(128),
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
 );
 
-CREATE TABLE Voto (
+CREATE TABLE Voto /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER,
   id_usuario INTEGER,
   id_votacion INTEGER,
@@ -29,7 +30,11 @@ CREATE TABLE Voto (
   FOREIGN KEY (id_votacion) REFERENCES Votacion (id)
 );
 
-CREATE TABLE Comentario (
+CREATE TABLE Comentario /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   id_votacion INTEGER,
@@ -40,7 +45,9 @@ CREATE TABLE Comentario (
   FOREIGN KEY (id_comentario_padre) REFERENCES Comentario (id)
 );
 
-CREATE TABLE Votacion (
+CREATE TABLE Votacion /*
+  @tiene_autorizador: no_modificable
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -48,7 +55,11 @@ CREATE TABLE Votacion (
   resultado TEXT
 );
 
-CREATE TABLE Problema (
+CREATE TABLE Problema /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -58,7 +69,11 @@ CREATE TABLE Problema (
   FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)
 );
 
-CREATE TABLE Problema_destacado (
+CREATE TABLE Problema_destacado /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -68,7 +83,11 @@ CREATE TABLE Problema_destacado (
   FOREIGN KEY (id_problema_original) REFERENCES Problema (id)
 );
 
-CREATE TABLE Solucion (
+CREATE TABLE Solucion /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -80,7 +99,11 @@ CREATE TABLE Solucion (
   FOREIGN KEY (id_problema_original) REFERENCES Problema (id)
 );
 
-CREATE TABLE Solucion_destacada (
+CREATE TABLE Solucion_destacada /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -90,7 +113,11 @@ CREATE TABLE Solucion_destacada (
   FOREIGN KEY (id_solucion_original) REFERENCES Solucion (id)
 );
 
-CREATE TABLE Implementacion (
+CREATE TABLE Implementacion /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -102,7 +129,11 @@ CREATE TABLE Implementacion (
   FOREIGN KEY (id_solucion_original) REFERENCES Solucion_destacada (id)
 );
 
-CREATE TABLE Implementacion_destacada (
+CREATE TABLE Implementacion_destacada /*
+  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT,
@@ -112,7 +143,9 @@ CREATE TABLE Implementacion_destacada (
   FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion (id)
 );
 
-CREATE TABLE Ley (
+CREATE TABLE Ley /*
+  @tiene_autorizador: no_modificable
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
@@ -125,7 +158,9 @@ CREATE TABLE Ley (
   FOREIGN KEY (id_ley_padre) REFERENCES Ley (id)
 );
 
-CREATE TABLE Modificacion_de_ley (
+CREATE TABLE Modificacion_de_ley /*
+  @tiene_autorizador: no_modificable
+*/  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
@@ -136,7 +171,9 @@ CREATE TABLE Modificacion_de_ley (
   FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)
 );
 
-CREATE TABLE Ciclo_democratico (
+CREATE TABLE Ciclo_democratico /*
+  @tiene_autorizador: no_modificable
+*/  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
   etapa_de_ciclo_actual INTEGER DEFAULT 1,
@@ -145,7 +182,9 @@ CREATE TABLE Ciclo_democratico (
   FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)
 );
 
-CREATE TABLE Pulsion_democratica (
+CREATE TABLE Pulsion_democratica /*
+  @tiene_autorizador: no_modificable
+*/  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   especificacion TEXT,
   descripcion TEXT,

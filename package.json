@@ -1,10 +1,11 @@
 {
   "name": "hql-deployer",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Deploys H-Query-Language based applications.",
   "main": "src/deployer.js",
   "scripts": {
-    "start": "node src/deployer.js"
+    "start": "node src/deployer.js",
+    "test": "cd test/unit && bash test.sh"
   },
   "dependencies": {
     "axios": "^1.4.0",
@@ -16,5 +17,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "cli-color": "^2.0.3"
+  }
 }

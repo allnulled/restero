@@ -20,3 +20,26 @@
 **Versión `v0.0.5`.** *El 24 de agosto de 2023 a las 12:54pm.*
 
 - [✔] Te hace autorizadores (rest+auth).
+
+**Versión `v0.0.6`.** *El 26 de agosto de 2023 a las 19:05pm.*
+
+- [✔] Test unitarios por feature e2e
+  - [✔] Que rearranca y resetea la aplicación por cada test
+  - [✔] Que reporta los cambios al final
+- [✔] Tests de algunos features
+  - [✔] Test para login
+  - [✔] Test para logout
+- [✔] Autorizadores más básicos
+  - [✔] no_actualizable.js
+  - [✔] no_eliminable.js
+  - [✔] no_insertable.js
+  - [✔] no_modificable.js
+  - [✔] no_seleccionable.js
+  - [✔] no_usable.js
+  - [✔] si_actualizable_por_mismo_usuario.js
+  - [✔] si_eliminable_por_mismo_usuario.js
+  - [✔] si_insertable_por_mismo_usuario.js
+  - [✔] si_seleccionable_por_mismo_usuario.js
+- [✖] No te hace los tests de todos los autorizadores (y convendría severamente)
+
+

@@ -45,6 +45,8 @@ module.exports = function (deployer) {
                 sql += " ";
                 sql += deployer.sqlstring.escape(obj);
             }
+            // @TODO: order by
+            // @TODO: limit & offset
             return sql;
         } catch (error) {
             console.error("Error en «src/utilities/preparar_select.js»");

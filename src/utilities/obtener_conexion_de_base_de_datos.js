@@ -16,6 +16,7 @@ module.exports = function (deployer) {
                 });
             });
             const conexion_neta = {
+                nativa: conexion_bruta,
                 ejecutar: function (consulta_unica) {
                     return new Promise(function (ok, fail) {
                         try {

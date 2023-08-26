@@ -40,28 +40,7 @@ Y luego puedas incluir más ficheros en la carpeta:
 
 Lo primero es el fichero de la base de datos, `src/configurations/db.sql`. En él puedes centrar toda la atención inicial.
 
-En él, puedes encontrar un cacho de código como este:
-
-```sql
-CREATE TABLE Usuario /*
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-@tiene_autorizador: espera_segundos: 1000
-*/ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nombre VARCHAR(256) UNIQUE NOT NULL,
-  domicilio VARCHAR(1024),
-  correo VARCHAR (512),
-  contrasenya VARCHAR(512)
-);
-```
-
-Pues lo primero que deberías es quitar todos los atributos de autorizador, porque hace que las peticiones a Usuario se relenticen unos 6 segundos.
-
-Ese cacho de código está puesto como ejemplo de uso de los autorizadores.
+En él, puedes encontrar cachos de código que :
 
 ## ¿Qué otras cosas debo saber?
 
@@ -71,8 +50,10 @@ El deployer viene ya con unas rutas y controladores asociados. En el fichero `sr
 module.exports = function (deployer) {
     return async function () {
         try {
+            const path = require("path");
+            const express = require("express");
             deployer.server = require("http").createServer();
-            deployer.app = require("express")(deployer.server);
+            deployer.app = express(deployer.server);
             deployer.app.use("/api/v1/login", deployer.utilities.controlador_de_login);
             deployer.app.use("/api/v1/logout", deployer.utilities.controlador_de_logout);
             deployer.app.use("/api/v1/:operation/:table", [
@@ -81,6 +62,7 @@ module.exports = function (deployer) {
                 deployer.utilities.middleware_de_autorizadores,
                 deployer.utilities.controlador_de_operacion
             ]);
+            deployer.app.use("/", express.static(path.resolve(__dirname + "/../www/files")));
             deployer.app.listen(deployer.settings.APP_PORT, function() {
                 console.log("[*] Servidor escuchando en:");
                 console.log("[*]     http://127.0.0.1:" + deployer.settings.APP_PORT);
@@ -107,7 +89,7 @@ Conviene echar un ojo a algunos ficheros especialmente, para hacerse una idea de
   - `desplegar_base_de_datos`: este fichero crea la base de datos si no existe, y además le pasaría la migración inicial, emplazada en la carpeta `src/configurations`.
   - `obtener_conexion_de_base_de_datos`: devuelve un objeto, asíncronamente, que contiene un método `ejecutar`, el cual permite operaciones SQL contra la base de datos. Sigue un patrón `singleton`, por lo cual se usa siempre la misma conexión. Además, está pensado para SQLite, no todavía para MySQL ni PostgreSQL.
 
-Principalmente, estos son los ficheros que más te interesa entender. Luego, los `preparar_{select | insert | update | delete}` son funciones que se encargan de montar de manera estándar las consultas SQL, en función de parámetros de tipo objeto y array. Pero son más opcionales, excepto cuando usas las operaciones de la HTTP REST API.
+Principalmente, estos son los ficheros que más te interesa entender. Luego, los `preparar_{select | insert | update | delete}` son funciones que se encargan de montar de manera estándar las consultas SQL, en función de parámetros de tipo objeto y array. Pero son más opcionales, excepto cuando usas las operaciones de la HTTP REST API propias, que debes conocer los parámetros que aceptan.
 
 Y principalmente, esto es todo. Conviene leerse el código, porque es poco, pero muy efectivo, y está concentrado en estos ficheros, principalmente, cubriendo cada uno de estos aspectos del despliegue.
 
