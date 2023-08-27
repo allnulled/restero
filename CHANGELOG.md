@@ -36,10 +36,24 @@
   - [✔] no_modificable.js
   - [✔] no_seleccionable.js
   - [✔] no_usable.js
-  - [✔] si_actualizable_por_mismo_usuario.js
-  - [✔] si_eliminable_por_mismo_usuario.js
-  - [✔] si_insertable_por_mismo_usuario.js
-  - [✔] si_seleccionable_por_mismo_usuario.js
+  - [✔] solo_actualizable_por_mismo_usuario.js
+  - [✔] solo_eliminable_por_mismo_usuario.js
+  - [✔] solo_insertable_por_mismo_usuario.js
+  - [✔] solo_seleccionable_por_mismo_usuario.js
 - [✖] No te hace los tests de todos los autorizadores (y convendría severamente)
 
+**Versión `v0.0.7`.** *El 26 de agosto de 2023 a las 19:05pm.*
+
+- [✔] Te hace los tests de algunos de los principales autorizadores:
+  - [✔] solo_actualizable_por_mismo_usuario.js
+  - [✔] solo_eliminable_por_mismo_usuario.js
+  - [✔] solo_insertable_por_mismo_usuario.js
+- [✖] No te hace los tests de todos los autorizadores (y convendría severamente)
+  - [✖] no_actualizable.js
+  - [✖] no_eliminable.js
+  - [✖] no_insertable.js
+  - [✖] no_modificable.js
+  - [✖] no_seleccionable.js
+  - [✖] no_usable.js
+  - [✖] solo_seleccionable_por_mismo_usuario.js
 

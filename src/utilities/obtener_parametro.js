@@ -4,7 +4,7 @@ module.exports = function (deployer) {
             if(request.body && request.body[parametro]) {
                 return request.body[parametro];
             }
-            if(parametro in request.query) {
+            if(request.query && (parametro in request.query)) {
                 return request.query[parametro];
             }
             return valor_por_defecto;

@@ -18,11 +18,11 @@ CREATE TABLE Sesion /*
 );
 
 CREATE TABLE Voto /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
-  id INTEGER,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   id_votacion INTEGER,
   sentido VARCHAR(32),
@@ -31,9 +31,9 @@ CREATE TABLE Voto /*
 );
 
 CREATE TABLE Comentario /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
@@ -56,9 +56,9 @@ CREATE TABLE Votacion /*
 );
 
 CREATE TABLE Problema /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
@@ -70,9 +70,9 @@ CREATE TABLE Problema /*
 );
 
 CREATE TABLE Problema_destacado /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
@@ -84,9 +84,9 @@ CREATE TABLE Problema_destacado /*
 );
 
 CREATE TABLE Solucion /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
@@ -100,9 +100,9 @@ CREATE TABLE Solucion /*
 );
 
 CREATE TABLE Solucion_destacada /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
@@ -114,9 +114,9 @@ CREATE TABLE Solucion_destacada /*
 );
 
 CREATE TABLE Implementacion /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
@@ -130,9 +130,9 @@ CREATE TABLE Implementacion /*
 );
 
 CREATE TABLE Implementacion_destacada /*
-  @tiene_autorizador: si_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: si_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
