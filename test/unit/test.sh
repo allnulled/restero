@@ -7,6 +7,6 @@ node ./feature/solo_eliminable_por_mismo_usuario.test.js
 node ./feature/solo_seleccionable_por_mismo_usuario.test.js
 node ./feature/no_visibles_columnas.test.js
 node ./feature/select_search.test.js
-node ./feature/select_page.test.js
 node ./feature/select_order.test.js
+node ./feature/select_page.test.js
 node ./feature/analisis.test.js

@@ -4,7 +4,9 @@ const { log_verde, log_rojo } = require(__dirname + "/../test.utilidades.js");
 
 const main = async function () {
     try {
-        const resultados_actuales = JSON.parse(require("fs").readFileSync(__dirname + "/../test.resultados.json").toString());
+        const datos_de_tests_json = require("fs").readFileSync(__dirname + "/../test.resultados.json").toString();
+        const datos_de_tests = JSON.parse(datos_de_tests_json);
+        const resultados_actuales = datos_de_tests.tests;
         const spaces_max = `|-------|---------|----------------------------------------------------------+`;
         log_verde(`+-------+---------+----+`);
         log_verde(`| STATE |  ORDER  | ID |`);
@@ -32,6 +34,11 @@ const main = async function () {
             }
         }
         log_verde(`+-------+---------+----------------------------------------------------------+`);
+        const momento_de_inicio = new Date(datos_de_tests.inicio);
+        const momento_de_final = new Date();
+        const tiempo_tomado = (momento_de_final - momento_de_inicio) / 1000;
+        log_verde(` ✔✔✔ Los ${resultados_actuales.length} tests tomaron ${tiempo_tomado} segundos.`);
+        log_verde(` ✔✔✔ Cada test tomó una media de ${tiempo_tomado / resultados_actuales.length} segundos.`);
     } catch (error) {
         console.log(error);
         throw error;

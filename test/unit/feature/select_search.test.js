@@ -36,7 +36,9 @@ const main = async function () {
         expect(typeof response_de_select_comentario.data).to.equal("object");
         expect(typeof response_de_select_comentario.data.resultado).to.equal("object");
         expect(typeof response_de_select_comentario.data.resultado.length).to.equal("number");
-        expect(response_de_select_comentario.data.resultado.length).to.equal(1);
+        Solo_encuentra_el_comentario_que_contiene_el_string_del_search: {
+            expect(response_de_select_comentario.data.resultado.length).to.equal(1);
+        }
         ////////////////////////////////////////////////////////////////////////
         log_verde("[✔] Test para select_search exitoso");
         pasar_test("select_search.test.js");

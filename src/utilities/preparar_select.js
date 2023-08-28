@@ -75,7 +75,6 @@ module.exports = function (deployer) {
                     sql += deployer.sqlstring.escape(obj);
                 }
             }
-            // @TODO: search
             if(parametros.search) {
                 sql += "\n  AND (";
                 for(let index_columnas_participes = 0; index_columnas_participes < nombres_de_columnas.length; index_columnas_participes++) {
@@ -90,8 +89,41 @@ module.exports = function (deployer) {
                 }
                 sql += "\n  )";
             }
-            // @TODO: order by
-            // @TODO: limit & offset
+            if (parametros.order) {
+                for(let index_order_rules = 0; index_order_rules < parametros.order.length; index_order_rules++) {
+                    const regla_order = parametros.order[index_order_rules];
+                    const [ columna, sentido ] = regla_order;
+                    if(nombres_de_columnas.indexOf(columna) === -1) {
+                        throw new Error("Columna no reconocida para ordenar por ella: «" + columna + "»");
+                    }
+                    if(["asc","desc"].indexOf(sentido.toLowerCase()) === -1) {
+                        throw new Error("Sentido de ordenación no reconocido para ordenar: «" + sentido + "»");
+                    }
+                    if(index_order_rules === 0) {
+                        sql += "\nORDER BY ";
+                        sql += deployer.sqlstring.escapeId(columna);
+                        sql += " ";
+                        sql += sentido.toUpperCase();
+                    } else {
+                        sql += ", ";
+                        sql += deployer.sqlstring.escapeId(columna);
+                        sql += " ";
+                        sql += sentido.toUpperCase();
+                    }
+                }
+            }
+            if(!parametros.items) {
+                parametros.items = 20;
+            }
+            if(!parametros.page) {
+                parametros.page = 1;
+            }
+            if(parametros.items && parametros.page) {
+                const limit = parametros.items;
+                const offset = parametros.items * (parametros.page - 1);
+                sql += `\nLIMIT ${limit}`;
+                sql += `\nOFFSET ${offset}`;
+            }
             return sql;
         } catch (error) {
             console.error("Error en «src/utilities/preparar_select.js»");
