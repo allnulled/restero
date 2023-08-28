@@ -19,6 +19,7 @@ module.exports = function (deployer) {
                     parametros_de_select.order = deployer.utilities.obtener_parametro(request, "order", '[["id","asc"]]');
                     parametros_de_select.page = deployer.utilities.obtener_parametro(request, "page", "1");
                     parametros_de_select.items = deployer.utilities.obtener_parametro(request, "items", "20");
+                    const search = deployer.utilities.obtener_parametro(request, "search", "");
                     const { where, order, page, items } = deployer.utilities.parsear_propiedades_como_json(parametros_de_select);
                     if(!Array.isArray(where)) {
                         throw new Error("Parámetro «where» debe ser un array de arrays [943612789]");
@@ -32,7 +33,7 @@ module.exports = function (deployer) {
                     if(typeof items !== "number") {
                         throw new Error("Parámetro «items» debe ser un número [943612786]");
                     }
-                    Object.assign(request.hql_data, { where, order, page, items });
+                    Object.assign(request.hql_data, { where, order, page, items, search });
                 }
             }
             if(operation === "insert") {

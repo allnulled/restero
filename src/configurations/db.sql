@@ -21,11 +21,16 @@ CREATE TABLE Voto /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @no_visibles_columnas: declaracion, notas
+  @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   id_votacion INTEGER,
   sentido VARCHAR(32),
+  declaracion VARCHAR(256),
+  notas VARCHAR(256),
+  un_usuario_por_votacion VARCHAR(128) UNIQUE,
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id),
   FOREIGN KEY (id_votacion) REFERENCES Votacion (id)
 );
@@ -34,6 +39,7 @@ CREATE TABLE Comentario /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @tiene_padre: id_comentario_padre
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
@@ -55,7 +61,7 @@ CREATE TABLE Votacion /*
   resultado TEXT
 );
 
-CREATE TABLE Problema /*
+CREATE TABLE Problema_propuesto /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
@@ -83,7 +89,7 @@ CREATE TABLE Problema_destacado /*
   FOREIGN KEY (id_problema_original) REFERENCES Problema (id)
 );
 
-CREATE TABLE Solucion /*
+CREATE TABLE Solucion_propuesta /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
@@ -113,7 +119,7 @@ CREATE TABLE Solucion_destacada /*
   FOREIGN KEY (id_solucion_original) REFERENCES Solucion (id)
 );
 
-CREATE TABLE Implementacion /*
+CREATE TABLE Implementacion_propuesta /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
