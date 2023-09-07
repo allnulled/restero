@@ -27,6 +27,8 @@ module.exports = function (deployer) {
             response.json({
                 operation,
                 table,
+                query: request.query,
+                body: request.body,
                 resultado: request.hql_resultado
             })
         } catch (error) {

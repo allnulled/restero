@@ -1,0 +1,33 @@
+asigno window.BreadcrumbGenerico como un componente vue2 con nombre "BreadcrumbGenerico" con plantilla {
+  <div class="BreadcrumbGenerico Component">
+    <h5 style="margin-bottom: 1px;">
+      <span v-for="miga, miga_index in migas" v-bind:key="'breadcrumb-miga-' + miga_index">
+        <span v-if="miga_index !== 0">
+           » 
+        </span>
+        <span class="como_link_claro" v-on:click="() => $router.history.push(miga.link)">
+          {{ miga.texto }}
+        </span>
+      </span>
+    </h5>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      },
+      migas: {
+        type: Array,
+        required: false,
+        default: []
+      }
+    }.
+    método data donde {
+      retorno {
+        
+      }.
+    }.
+  }.
+}.

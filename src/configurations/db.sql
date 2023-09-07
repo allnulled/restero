@@ -10,10 +10,15 @@ CREATE TABLE Usuario /*
 
 CREATE TABLE Sesion /*
   @tiene_autorizador: no_usable
+  @nombre_humano: Sesión
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  id_usuario INTEGER NOT NULL UNIQUE,
-  token_de_sesion VARCHAR(128),
+  id_usuario INTEGER NOT NULL UNIQUE /*
+    @nombre_humano: ID de usuario
+  */,
+  token_de_sesion VARCHAR(128) /*
+    @nombre_humano: Token de sesión
+  */,
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
 );
 
@@ -28,9 +33,13 @@ CREATE TABLE Voto /*
   id_usuario INTEGER,
   id_votacion INTEGER,
   sentido VARCHAR(32),
-  declaracion VARCHAR(256),
+  declaracion VARCHAR(256) /*
+    @nombre_humano: Declaración
+  */,
   notas VARCHAR(256),
-  un_usuario_por_votacion VARCHAR(128) UNIQUE,
+  un_usuario_por_votacion VARCHAR(128) UNIQUE /*
+    @nombre_humano: Un usuario por votación
+  */,
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id),
   FOREIGN KEY (id_votacion) REFERENCES Votacion (id)
 );
@@ -42,7 +51,7 @@ CREATE TABLE Comentario /*
   @tiene_padre: id_comentario_padre
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  id_usuario INTEGER,
+  id_usuario INTEGER ,
   id_votacion INTEGER,
   id_comentario_padre INTEGER,
   comentario VARCHAR(2048),
@@ -52,23 +61,28 @@ CREATE TABLE Comentario /*
 );
 
 CREATE TABLE Votacion /*
+  @nombre_humano: Votación
   @tiene_autorizador: no_modificable
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
   estado VARCHAR(32),
   resultado TEXT
 );
 
 CREATE TABLE Problema_propuesto /*
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
   id_usuario_creador INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
@@ -76,13 +90,16 @@ CREATE TABLE Problema_propuesto /*
 );
 
 CREATE TABLE Problema_destacado /*
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_usuario_creador INTEGER,
   id_problema_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
@@ -90,13 +107,16 @@ CREATE TABLE Problema_destacado /*
 );
 
 CREATE TABLE Solucion_propuesta /*
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @nombre_humano: Solución propuesta
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
   id_usuario_creador INTEGER,
   id_problema_original INTEGER,
   id_ciclo_democratico INTEGER,
@@ -106,13 +126,17 @@ CREATE TABLE Solucion_propuesta /*
 );
 
 CREATE TABLE Solucion_destacada /*
+  @nombre_humano: Solución destacada
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_usuario_creador INTEGER,
   id_solucion_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
@@ -120,13 +144,16 @@ CREATE TABLE Solucion_destacada /*
 );
 
 CREATE TABLE Implementacion_propuesta /*
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @nombre_humano: Implementación propuesta
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
   id_usuario_creador INTEGER,
   id_solucion_original INTEGER,
   id_ciclo_democratico INTEGER,
@@ -136,13 +163,17 @@ CREATE TABLE Implementacion_propuesta /*
 );
 
 CREATE TABLE Implementacion_destacada /*
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @nombre_humano: Implementación destacada
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_usuario_creador INTEGER,
   id_implementacion_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
@@ -155,7 +186,9 @@ CREATE TABLE Ley /*
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
   id_modificacion_de_ley_original INTEGER,
   id_implementacion_original INTEGER,
   id_ley_padre INTEGER,
@@ -165,12 +198,15 @@ CREATE TABLE Ley /*
 );
 
 CREATE TABLE Modificacion_de_ley /*
+  @nombre_humano: Modificación de ley
   @tiene_autorizador: no_modificable
 */  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
-  descripcion TEXT,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
   id_implementacion_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
@@ -178,22 +214,34 @@ CREATE TABLE Modificacion_de_ley /*
 );
 
 CREATE TABLE Ciclo_democratico /*
+  @nombre_humano: Ciclo democrático
   @tiene_autorizador: no_modificable
 */  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
   etapa_de_ciclo_actual INTEGER DEFAULT 1,
-  descripcion TEXT,
-  id_usuario_creador INTEGER,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_usuario_creador INTEGER /*
+    @nombre_humano: Id de usuario creador
+  */,
   FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)
 );
 
 CREATE TABLE Pulsion_democratica /*
+  @nombre_humano: Pulsión democrática
   @tiene_autorizador: no_modificable
 */  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  especificacion TEXT,
-  descripcion TEXT,
-  id_ciclo_democratico INTEGER,
+  especificacion TEXT /*
+    @nombre_humano: Especificación
+  */,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_ciclo_democratico INTEGER /*
+    @nombre_humano: Id de ciclo democrático
+  */,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)
 );

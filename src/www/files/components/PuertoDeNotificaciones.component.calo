@@ -1,0 +1,46 @@
+asigno window.PuertoDeNotificaciones como un componente vue2 con nombre "PuertoDeNotificaciones" con plantilla {
+  <div class="PuertoDeNotificaciones Component">
+    <div class="punto_de_puerto_de_notificaciones">
+			<div class="contenedor_de_puerto_de_notificaciones">
+				<div class="caja_de_puerto_de_notificaciones">
+					<div class="caja_de_notificacion" v-for="notificacion, notificacion_index in notificaciones" v-bind:key="'puerto-notificaciones-notificacion-'+notificacion_index">
+            <div v-on:click="() => cerrar_notificacion(notificacion)">
+						{{ notificacion }}
+            </div>
+					</div>
+				</div>
+			</div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data() donde {
+      retorno {
+        notificaciones: []
+      }.
+    }.
+    propiedad methods como {
+      método agregar_notificacion (notificacion) donde {
+        creo nueva_notificacion como Object.assign({}, notificacion, {
+          id: un texto aleatorio de 10 caracteres
+        }).
+        apendizo nueva_notificacion en this.notificaciones.
+        hago this.$forceUpdate(true).
+      }.
+      método cerrar_notificacion (notificacion) donde {
+        creo indice_notificacion como this.notificaciones.indexOf(notificacion).
+        hago this.notificaciones.splice(indice_notificacion, 1).
+        hago this.$forceUpdate(true).
+      }.
+    }.
+    método mounted donde {
+      asigno this.$window.$notificaciones como this.
+    }.
+  }.
+}.

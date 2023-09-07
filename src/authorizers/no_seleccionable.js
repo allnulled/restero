@@ -3,7 +3,7 @@ module.exports = function (deployer) {
         try {
             const { operation, table } = request.params;
             if ("select" === operation) {
-                throw new Error("Operación no permitida por «no_seleccionable»");
+                throw new Error(`Operación «select» en «${table}» no permitida por autorizador «no_seleccionable»`);
             }
         } catch (error) {
             console.error("Error en «src/authorizers/no_seleccionable.js»");

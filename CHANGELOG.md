@@ -72,9 +72,6 @@ Pero todavía...
   - [✖] No te hace `page` e `items` en el **select**
 - [✖] No te hace un autorizador y su test de:
   - [✖] mientras_clave_multiple.js
-  - [✖] tiene_padre.js // que no tiene que hacer nada
-  - [✖] solo_insertable_por_mismo_usuario.js
-- [✖] No te hace clave_multiple
 - [✖] No te hace los tests de todos los autorizadores (y convendría severamente)
   - [✖] no_actualizable.js
   - [✖] no_eliminable.js
@@ -96,8 +93,6 @@ Pero todavía...
 - [✖] No te hace un autorizador y su test de:
   - [✖] mientras_clave_multiple.js
   - [✖] tiene_padre.js // que no tiene que hacer nada
-  - [✖] solo_insertable_por_mismo_usuario.js
-- [✖] No te hace clave_multiple
 - [✖] No te hace los tests de todos los autorizadores (y convendría severamente)
   - [✖] no_actualizable.js
   - [✖] no_eliminable.js
@@ -107,3 +102,6 @@ Pero todavía...
   - [✖] no_usable.js
   - [✖] solo_seleccionable_por_mismo_usuario.js
 
+**Versión `v0.0.10`.** *El 30 de agosto de 2023 a las 10:41am.*
+
+- [✔] Interfaz de usuario (muchas cosas)

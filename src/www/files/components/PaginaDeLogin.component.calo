@@ -1,0 +1,58 @@
+asigno window.PaginaDeLogin como un componente vue2 con nombre "PaginaDeLogin" con plantilla {
+  <div class="text_align_center" style="margin-top: 80px;">
+    <div class="background_image_for_login"></div>
+    <div class="window text_align_left display_inline_block" style="max-width:300px; width: 100%;">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <span>Login</span>
+        </div>
+      </div>
+      <div class="window-body">
+        <h5>Login de usuario</h5>
+        <div class="caja_de_entrada_de_formulario primera">
+          <div>Usuario:</div>
+          <input class="w_100" type="text" placeholder="" v-model="nombre" />
+        </div>
+        <div class="caja_de_entrada_de_formulario">
+          <div>Contraseña:</div>
+          <input class="w_100" type="password" placeholder="" v-model="contrasenya" />
+        </div>
+        <hr />
+        <div class="caja_de_entrada_de_formulario text_align_right">
+          <button v-on:click="loguearse">Entrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data() donde {
+      retorno {
+        nombre: "",
+        contrasenya: ""
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono loguearse () donde {
+        hago this.$router.history.push("/").
+        creo respuesta_login como asíncronamente una petición http
+          con url "/api/v1/login"
+          con método "POST"
+          con cuerpo { nombre: this.nombre, contrasenya: this.contrasenya }.
+        asigno this.root.token_de_sesion como respuesta_login.data.token_de_sesion_activo.
+        creo respuesta_esquema como asíncronamente una petición http
+          con url "/api/v1/db/schema"
+          con método "POST"
+          con cuerpo {}
+          con cabeceras { authorization: this.root.token_de_sesion }.
+        asigno this.root.esquema como respuesta_esquema.data.esquema.
+      }.
+    }.
+  }.
+}.

@@ -1,0 +1,43 @@
+asigno window.utilidades como {}.
+
+asigno window.utilidades.texto_humanizado como una función con (texto) donde {
+  retorno texto.replace(una nueva RegExp("_", "g"), " ").
+}.
+
+asigno window.utilidades.busco_tabla_en_esquema como una función con (esquema, tabla_buscada, valor_por_defecto) donde {
+  desde 0 hasta esquema.length {
+    creo tabla como esquema[index].
+    si tabla.tabla es igual que tabla_buscada {
+      retorno esquema[index].
+    }.
+  }.
+  retorno valor_por_defecto.
+}.
+
+asigno window.utilidades.busco_atributo_en_tabla como una función con (tabla, atributo_buscado, valor_por_defecto) donde {
+  creo etiqueta como atributo_buscado + ":".
+  desde 0 hasta tabla.atributos.length usando indice_atributo {
+    creo atributo_iterado como tabla.atributos[indice_atributo].
+    si atributo_iterado.startsWith(etiqueta) {
+      retorno atributo_iterado.substr(etiqueta.length).trim().
+    }.
+  }.
+  retorno valor_por_defecto.
+}.
+
+asigno window.utilidades.texto_humanizado_de_columna como una función con (esquema, tabla_id, columna_id) donde {
+  desacoplo constantes [ tabla ] a partir de esquema filtrado con (item) donde retorno item.tabla es igual que tabla_id.
+  desacoplo constantes [ columna ] a partir de tabla.composicion filtrado con (item) donde retorno item.sentencia es igual que "columna" y item.columna es igual que columna_id.
+  si columna.atributos es tipo lista {
+    desacoplo constantes [ atributo_de_nombre_humano ] a partir de columna.atributos filtrado con (item) donde retorno item.startsWith("nombre_humano:").
+    creo nombre_humano como atributo_de_nombre_humano.substr("nombre_humano:".length).trim().
+    retorno nombre_humano.
+  }.
+  retorno window.utilidades.texto_humanizado(columna.columna.substr(0,1).toUpperCase() + columna.columna.substr(1)).
+}.
+
+asigno window.utilidades.gestion_de_error_desde_respuesta como una función con (respuesta) donde {
+  si respuesta.data.error es igual que true {
+    hago window.$notificaciones.agregar_notificacion(respuesta.data).
+  }.
+}.

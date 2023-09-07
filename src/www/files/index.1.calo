@@ -3,46 +3,382 @@ Ejecutable como documento HTML5
     con nombre index
     con versión 1
 <head>
-    <title>Asamblearismo</title>
+    <title>Interfaz de usuario</title>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./win7.scoped.css" />
-    <style>
-      .win7 .title-bar {
-        padding: 3px;
-        padding-bottom: 0px;
-      }
-      .like_link {
-        color:blue;
-        text-decoration:underline;
-        cursor:pointer;
-      }
-      .like_link:hover {
-        color: #3333CC;
-      }
-      ul,li {
-        margin: 0;
-        padding: 0;
-      }
-      ul {
-        padding-left: 20px;
-      }
-      .partenon {
-        font-size: 23px;
-        text-shadow: 0 0 0 white;
-        cursor: pointer;
-      }
-      .partenon:hover {
-        text-shadow: 0 0 4px blue;
-      }
-    </style>
+    <link rel="stylesheet" href="./components/theme.css" />
+    <script src="./components/calo.js"></script>
+    <script src="./components/utilidades.js"></script>
+    <script src="./components/PuertoDeNotificaciones.component.js"></script>
+    <script src="./components/BreadcrumbGenerico.component.js"></script>
+    <script src="./components/PaginaDeInicio.component.js"></script>
+    <script src="./components/PaginaDeLogin.component.js"></script>
+    <script src="./components/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
 </head>
 <body><div id="app"></div></body>.
 
-importo api nativa.
+asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDeDatos" con plantilla {
+  <div class="ExploradorDeDatos Component">
+    <div v-if="esSeleccionable !== '0'">
+      <table>
+        <tbody>
+          <tr>
+            <td class="w_100">
+              <input class="w_100" type="text" disabled="true" v-model="seleccionados" />
+            </td>
+            <td class="w_auto">
+              <button class="w_auto" :class="{active:esta_mostrando_panel_normal}" v-on:click="alternar_panel_normal">#</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div v-if="(esSeleccionable === '0') || esta_mostrando_panel_normal">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button class="w_auto" v-on:click="ir_a_crear_fila">+</button>
+            </td>
+            <td class="w_100">
+              <div class="searchbox w_100">
+                <input class="w_100" type="search" placeholder="Buscar" v-model="busqueda" />
+                <button aria-label="search" v-on:click="buscar_texto"></button>
+              </div>
+            </td>
+            <td>
+              <button class="w_auto" :class="{active:esta_mostrando_panel_de_busqueda_avanzada}" v-on:click="alternar_panel_de_busqueda_avanzada">⋮</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="esta_mostrando_panel_de_busqueda_avanzada">
+        <section class="tabs">
+          <menu role="tablist" aria-label="Tabs Template">
+            <button role="tab" :aria-selected="esta_mostrando_panel_de_busqueda_avanzada_sobre === 'filtros'" v-on:click="() => seleccionar_panel_de_busqueda_avanzada_sobre('filtros')">→ Filtros</button>
+            <button role="tab" :aria-selected="esta_mostrando_panel_de_busqueda_avanzada_sobre === 'orden'" v-on:click="() => seleccionar_panel_de_busqueda_avanzada_sobre('orden')">↓ Orden</button>
+            <button role="tab" :aria-selected="esta_mostrando_panel_de_busqueda_avanzada_sobre === 'paginacion'" v-on:click="() => seleccionar_panel_de_busqueda_avanzada_sobre('paginacion')">@ Página</button>
+          </menu>
+          <article role="tabpanel" v-if="esta_mostrando_panel_de_busqueda_avanzada_sobre === 'filtros'">
+            <h5>→ Filtros</h5>
+            <div>
+              <div>
+                <button v-on:click="agregar_filtro">Añadir</button>
+              </div>
+              <div>
+                <div class="filtro_del_explorador" v-for="filtro, filtro_index in filtros" v-bind:key="'busqueda-de-' + tabla_id + '-filtro-' + filtro_index">
+                  <span class="campo_del_filtro">
+                    <select v-model="filtro[0]">
+                      <option v-for="id_columna, id_columna_index in columnas_de_fila" v-bind:key="'busqueda-de-' + tabla_id + '-filtro-' + filtro_index + '-opcion-columna-' + id_columna_index" :value="id_columna">
+                        {{ $window.utilidades.texto_humanizado(id_columna) }}
+                      </option>
+                    </select>
+                  </span>
+                  <span class="campo_del_filtro">
+                    <select v-model="filtro[1]">
+                      <option v-for="operador, operador_index in operadores_de_filtro" v-bind:key="'busqueda-de-' + tabla_id + '-filtro-' + filtro_index + '-opcion-columna-' + operador_index" :value="operador">
+                        {{ operador }}
+                      </option>
+                    </select>
+                  </span>
+                  <span class="campo_del_filtro">
+                    <input type="text" v-model="filtro[2]" />
+                  </span>
+                  <span class="campo_del_filtro">
+                    <button class="w_auto" v-on:click="() => { filtros.splice(filtro_index, 1); $forceUpdate(true); }">Eliminar</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article role="tabpanel" v-if="esta_mostrando_panel_de_busqueda_avanzada_sobre === 'orden'">
+            <h5>↓ Orden</h5>
+            <div>
+              <div>
+                <button v-on:click="agregar_orden">Añadir</button>
+              </div>
+              <div>
+                <div class="orden_del_explorador" v-for="orden, orden_index in ordenes" v-bind:key="'busqueda-de-' + tabla_id + '-orden-' + orden_index">
+                  <span class="campo_del_orden">
+                    <select v-model="orden[0]">
+                      <option v-for="id_columna, id_columna_index in columnas_de_fila" v-bind:key="'busqueda-de-' + tabla_id + '-orden-' + orden_index + '-opcion-columna-' + id_columna_index" :value="id_columna">
+                        {{ $window.utilidades.texto_humanizado(id_columna) }}
+                      </option>
+                    </select>
+                  </span>
+                  <span class="campo_del_orden">
+                    <select v-model="orden[1]">
+                      <option value="ASC">ascendente</option>
+                      <option value="DESC">descendente</option>
+                    </select>
+                  </span>
+                  <span class="campo_del_orden">
+                    <button class="w_auto" v-on:click="() => { ordenes.splice(orden_index, 1); $forceUpdate(true); }">Eliminar</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article role="tabpanel" v-if="esta_mostrando_panel_de_busqueda_avanzada_sobre === 'paginacion'">
+            <h5>@ Paginación</h5>
+            <div>
+              <div class="paginacion_del_explorador">
+                <div>Página:</div>
+                <span class="campo_de_la_paginacion">
+                  <input type="number" v-model="pagina" v-on:keypress.enter="buscar_pagina" />
+                </span>
+              </div>
+              <div class="paginacion_del_explorador">
+                <div>Ítems:</div>
+                <span class="campo_de_la_paginacion">
+                  <input type="number" v-model="items" v-on:keypress.enter="buscar_pagina" />
+                </span>
+              </div>
+              <div class="paginacion_del_explorador">
+                <span class="campo_de_la_paginacion">
+                  <button class="w_100" v-on:click="buscar_pagina">Ir a página</button>
+                </span>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+      <div v-if="Array.isArray(filas) && filas.length">
+        <div class="paginacion alta">
+          <div class="display_inline_block">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <button class="w_auto" :disabled="pagina_actual === 1" v-on:click="buscar_pagina('««')">
+                    ««
+                    </button>
+                  </td>
+                  <td>
+                    <button class="w_auto" :disabled="pagina_actual === 1" v-on:click="buscar_pagina('«')">
+                    «
+                    </button>
+                  </td>
+                  <td class="w_auto">
+                    Pág. {{ pagina_actual }}
+                  </td>
+                  <td>
+                    <button class="w_auto" :disabled="filas && (filas.length < items)" v-on:click="buscar_pagina('»')">
+                    »
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="visor_de_tabla">
+          <table class="w_100">
+            <thead>
+              <tr>
+                <th v-if="esSeleccionable !== '0'"></th>
+                <th v-for="id_columna, id_columna_index in columnas_de_fila" v-bind:key="'busqueda-de-' + tabla_id + '-columna-' + id_columna_index">
+                  {{ $window.utilidades.texto_humanizado(id_columna) }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="fila, fila_index in filas" v-bind:key="'busqueda-de-' + tabla_id + '-fila-' + fila_index">
+                <td v-if="esSeleccionable !== '0'" style="vertical-align: middle;">
+                  <span style="vertical-align: middle;">
+                    <button class="w_auto" v-on:click="() => seleccionar_fila(fila.id)">
+                      <span v-if="esta_fila_seleccionada(fila.id)">
+                        ✔
+                      </span>
+                      <span v-else>
+                        ✘
+                      </span>
+                    </button>
+                  </span>
+                </td>
+                <td v-for="columna, columna_index in fila" v-bind:key="'busqueda-de-' + tabla_id + '-fila-' + fila_index + '-columna-' + columna_index">
+                  <span v-if="columna_index === 'id'">
+                    <span class="como_link" v-on:click="() => ir_a_fila(columna)">
+                      {{ columna }}
+                    </span>
+                  </span>
+                  <span v-else>{{ columna }}</span>
+                </td>
+                <td class="w_100">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="paginacion baja">
+          <div class="display_inline_block">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <button class="w_auto" :disabled="pagina_actual === 1" v-on:click="buscar_pagina('««')">
+                    ««
+                    </button>
+                  </td>
+                  <td>
+                    <button class="w_auto" :disabled="pagina_actual === 1" v-on:click="buscar_pagina('«')">
+                    «
+                    </button>
+                  </td>
+                  <td class="w_auto">
+                    Pág. {{ pagina_actual }}
+                  </td>
+                  <td>
+                    <button class="w_auto" :disabled="filas && (filas.length < items)" v-on:click="buscar_pagina('»')">
+                    »
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="Array.isArray(filas)">
+        No se obtuvieron resultados.
+      </div>
+      <div v-else>
+        No se ha hecho ninguna búsqueda.
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      },
+      esSeleccionable: {
+        type: String,
+        default: "0"
+      },
+      idDeTabla: {
+        type: String,
+        default: una función donde retorno ""
+      },
+      seleccionPorDefecto: {
+        type: [String,Number],
+        default: una función donde retorno ""
+      }
+    }.
+    método data() donde {
+      retorno this.obtener_datos({}).
+    }.
+    propiedad methods como {
+      agregar_filtro: una función donde {
+        apendizo ["","=",""] en this.filtros.
+      },
+      agregar_orden: una función donde {
+        apendizo ["","ASC"] en this.ordenes.
+      },
+      alternar_panel_de_busqueda_avanzada: una función donde {
+        asigno this.esta_mostrando_panel_de_busqueda_avanzada como no this.esta_mostrando_panel_de_busqueda_avanzada.
+        hago this.$forceUpdate(true).
+      },
+      alternar_panel_normal: una función donde {
+        asigno this.esta_mostrando_panel_normal como no this.esta_mostrando_panel_normal.
+        hago this.$forceUpdate(true).
+      },
+      buscar: una función asíncrona donde {
+        creo respuesta_busqueda como asíncronamente una petición http
+          con url "/api/v1/select/" + this.tabla_id
+          con método "POST"
+          con cuerpo {
+            search: this.busqueda,
+            where: this.filtros textualizado,
+            order: this.ordenes textualizado,
+            page: this.pagina,
+            items: this.items
+          }
+          con cabeceras { authorization: this.root.token_de_sesion }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_busqueda, this).
+        asigno this.pagina_actual como this.pagina.
+        asigno this.filas como respuesta_busqueda.data.resultado.
+        hago this.$forceUpdate(true).
+      },
+      buscar_pagina: una función con (pagina) donde {
+        si pagina es tipo número asigno this.pagina como pagina.
+        si pagina es igual que "««" asigno this.pagina como 1.
+        si pagina es igual que "«" decremento this.pagina.
+        si pagina es igual que "»" incremento this.pagina.
+        retorno this.buscar().
+      },
+      buscar_texto: una función donde {
+        asigno this.pagina como 1.
+        retorno this.buscar().
+      },
+      ir_a_fila: una función con (index_fila) donde {
+        hago this.$router.history.push(`/formulario/${this.tabla.tabla}/id/${index_fila}`).
+      },
+      ir_a_crear_fila: una función con () donde {
+        hago this.$router.history.push(`/formulario/${this.tabla.tabla}/new`).
+      },
+      obtener_datos: una función con (base o en su defecto {}) donde {
+        retorno base extendido por {
+          seleccionados: (this.seleccionPorDefecto + "").split(","),
+          tabla: false,
+          tabla_id: this.idDeTabla o this.$route.params.id_de_tabla,
+          busqueda: "",
+          filtros: [],
+          ordenes: [],
+          pagina: 1,
+          pagina_actual: 1,
+          items: 20,
+          esta_mostrando_panel_normal: false,
+          esta_mostrando_panel_de_busqueda_avanzada: false,
+          esta_mostrando_panel_de_busqueda_avanzada_sobre: "filtros",
+          filas: undefined,
+          columnas_de_fila: undefined,
+          operadores_de_filtro: ["=","!=","<","<=",">=",">","IS NULL","IS NOT NULL","LIKE","NOT LIKE","IN","NOT IN"]
+        }.
+      },
+      seleccionar_panel_de_busqueda_avanzada_sobre: una función con (subpanel) donde {
+        asigno this.esta_mostrando_panel_de_busqueda_avanzada_sobre como subpanel.
+        hago this.$forceUpdate(true).
+      },
+      seleccionar_fila: una función con (fila_id) donde {
+        creo posicion como this.seleccionados.indexOf(fila_id).
+        si posicion no es igual que 0-1 {
+          hago this.seleccionados.splice(posicion, 1).
+        } pero si posicion es igual que 0-1 {
+          creo es_seleccionable_por_1 como this.esSeleccionable es igual que "1".
+          si es_seleccionable_por_1 {
+            creo hay_uno_seleccionado como this.seleccionados.length es mayor que 0.
+            si hay_uno_seleccionado {
+              asigno this.seleccionados como [].
+            }.
+          }.
+          hago this.seleccionados.push(fila_id).
+        }.
+      },
+      esta_fila_seleccionada: una función con (fila_id) donde {
+        creo posicion como this.seleccionados.indexOf(fila_id).
+        retorno posicion no es igual que 0-1.
+      }
+    }.
+    propiedad watch como {
+      filas: una función con (nuevo_valor) donde {
+        si nuevo_valor es tipo lista y nuevo_valor.length {
+          asigno this.columnas_de_fila como un conjunto de claves del objeto nuevo_valor[0].
+        }.
+      }
+    }.
+    método asíncrono mounted donde {
+      asigno this.tabla como this.$window.utilidades.busco_tabla_en_esquema(this.root.esquema, this.tabla_id).
+      hago asíncronamente this.buscar().
+    }.
+  }.
+}.
 
-creo PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plantilla {
-  <div class="PaginaDeInicio Component">
+asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre "PaginaDeFormularioDeDatoDeTabla" con plantilla {
+  <div class="PaginaDeFormularioDeDatoDeTabla Component">
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -53,322 +389,176 @@ creo PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plan
                   <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
                 </td>
                 <td>
-                  <span class="">...</span>
+                  <span>Formulario de tabla</span>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="window-body" style="padding: 6px;">
-        <div>Secciones:</div>
-        <ul>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/problemas/destacados')">Ver problemas destacados</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/problemas/propuestos')">Ver problemas</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/soluciones/destacadas')">Ver soluciones destacadas</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/soluciones/propuestas')">Ver soluciones</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/implementaciones/destacadas')">Ver implementaciones destacadas</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/implementaciones/propuestas')">Ver implementaciones</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/votaciones/actuales')">Ver votaciones actuales</span></li>
-          <li><span class="like_link" v-on:click="abrir_pagina_de('/votaciones/anteriores')">Ver votaciones anteriores</span></li>
-        </ul>
+      <div class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Explorador',link:'/explorador/'+tabla_id}]"></BreadcrumbGenerico>
+        <h5>{{ $window.utilidades.texto_humanizado(tabla_id) }}: {{ $route.params.id_de_fila || "nuevo" }}</h5>
+        <div v-if="fila" style="padding: 4px; padding-top: 0px;">
+          <div class="orden_del_explorador" v-for="columna, columna_index in fila" v-bind:key="'formulario-columna-'+columna_index">
+            <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
+            <div v-if="columna_index in columnas_foraneas">
+              <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" :seleccion-por-defecto="fila[columna_index]" />
+            </div>
+            <div v-else>
+              <textarea v-model="fila[columna_index]"></textarea>
+            </div>
+          </div>
+          <div class="orden_del_explorador" v-if="modalidad === 'editar'">
+            <button v-on:click="eliminar_fila">Eliminar</button>
+            <button v-on:click="buscar_fila">Cargar</button>
+            <button v-on:click="guardar_fila">Guardar</button>
+          </div>
+          <div class="orden_del_explorador" v-else-if="modalidad === 'crear'">
+            <button v-on:click="crear_fila">Crear</button>
+          </div>
+        </div>
+        <div v-else-if="!fila" style="padding: 4px; padding-top: 0px;">
+          <div class="orden_del_explorador" v-for="columna, columna_index in columnas_locales" v-bind:key="'formulario-columna-'+columna_index">
+            <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
+            <div v-if="columna_index in columnas_foraneas">
+              <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" />
+            </div>
+            <div v-else>
+              <textarea v-model="fila_nueva[columna_index]"></textarea>
+            </div>
+          </div>
+          <div class="orden_del_explorador" v-if="modalidad === 'editar'">
+            <button v-on:click="buscar_fila">Cargar</button>
+            <button v-on:click="guardar_fila">Guardar</button>
+          </div>
+          <div class="orden_del_explorador" v-else-if="modalidad === 'crear'">
+            <button v-on:click="crear_fila">Crear</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 } con lógica {
   retorno {
-    propiedad methods como {
-      método abrir_pagina_de(pagina) donde {
-        hago this.$router.history.push(pagina).
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      },
+      modalidad: {
+        type: String,
+        default: una función donde retorno "editar"
+      }
+    }.
+    método data() donde {
+      retorno {
+        tabla: false,
+        tabla_id: this.$route.params.id_de_tabla,
+        fila: false,
+        fila_nueva: {},
+        columnas_foraneas: {},
+        columnas_locales: {}
       }.
     }.
-  }.
-}.
-
-creo PaginaDeProblemasDestacados como un componente vue2 con nombre "PaginaDeProblemasDestacados" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">Problemas destacados</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
+    propiedad methods como {
+      método asíncrono buscar_fila () donde {
+        creo respuesta_fila como asíncronamente una petición http
+          con url `/api/v1/select/${this.tabla_id}`
+          con método "POST"
+          con cuerpo {
+            where: [["id","=", this.$route.params.id_de_fila]] textualizado
+          }
+          con cabeceras { authorization: this.root.token_de_sesion }.
+        asigno this.fila como respuesta_fila.data.resultado[0].
+      }.
+      método asíncrono guardar_fila () donde {
+        creo respuesta_guardar como asíncronamente una petición http
+          con url `/api/v1/update/${this.tabla_id}`
+          con método "POST"
+          con cuerpo {
+            id: this.$route.params.id_de_fila,
+            ...incluyo this.fila
+          }
+          con cabeceras { authorization: this.root.token_de_sesion }.
+        hago asíncronamente this.buscar_fila().
+      }.
+      método asíncrono crear_fila () donde {
+        creo respuesta_crear como asíncronamente una petición http
+          con url `/api/v1/insert/${this.tabla_id}`
+          con método "POST"
+          con cuerpo {
+            ...incluyo this.fila
+          }
+          con cabeceras { authorization: this.root.token_de_sesion }.
+        hago this.$router.history.push(`/explorador/${this.tabla_id}`).
+      }.
+      método asíncrono eliminar_fila () donde {
+        creo respuesta_eliminar como asíncronamente una petición http
+          con url `/api/v1/delete/${this.tabla_id}`
+          con método "POST"
+          con cuerpo {
+            id: this.$route.params.id_de_fila
+          }
+          con cabeceras { authorization: this.root.token_de_sesion }.
+        hago this.$router.history.push(`/explorador/${this.tabla_id}`).
+      }.
+      método cargar_metadatos_de_tabla donde {
+        asigno this.tabla como this.root.esquema.filter(una lambda con (tabla) donde retorno tabla.tabla es igual que this.tabla_id)[0].
+        asigno this.columnas_locales como un hecho donde {
+          creo columnas_locales como {}.
+          desde 0 hasta this.tabla.composicion.length usando indice_componente {
+            creo componente como this.tabla.composicion[indice_componente].
+            si componente.sentencia es igual que "columna" {
+              asigno columnas_locales[componente.columna] como componente.
+            }.
+          }.
+          retorno columnas_locales.
+        }.
+        asigno this.columnas_foraneas como un hecho donde {
+          creo columnas_foraneas como {}.
+          desde 0 hasta this.tabla.composicion.length usando indice_componente {
+            creo componente como this.tabla.composicion[indice_componente].
+            si componente.sentencia es igual que "clave foránea" {
+              asigno columnas_foraneas[componente.columna] como componente.
+            }.
+          }.
+          retorno columnas_foraneas.
+        }.
+      }.
     }.
-  }.
-}.
-creo PaginaDeProblemasPropuestos como un componente vue2 con nombre "PaginaDeProblemasPropuestos" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">Problemas propuestos</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
+    método asíncrono beforeMount donde {
+      hago this.cargar_metadatos_de_tabla().
     }.
-  }.
-}.
-creo PaginaDeSolucionesDestacadas como un componente vue2 con nombre "PaginaDeSolucionesDestacadas" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">Soluciones destacadas</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
-    }.
-  }.
-}.
-creo PaginaDeSolucionesPropuestas como un componente vue2 con nombre "PaginaDeSolucionesPropuestas" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">Soluciones propuestas</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
-    }.
-  }.
-}.
-creo PaginaDeImplementacionesDestacadas como un componente vue2 con nombre "PaginaDeImplementacionesDestacadas" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">Implementaciones destacadas</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
-    }.
-  }.
-}.
-creo PaginaDeImplementacionesPropuestas como un componente vue2 con nombre "PaginaDeImplementacionesPropuestas" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">ImplementacionesPropuestas</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
-    }.
-  }.
-}.
-creo PaginaDeVotacionesActuales como un componente vue2 con nombre "PaginaDeVotacionesActuales" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">VotacionesActuales</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
-    }.
-  }.
-}.
-creo PaginaDeVotacionesAnteriores como un componente vue2 con nombre "PaginaDeVotacionesAnteriores" con plantilla {
-  <div>
-    <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">
-          <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">VotacionesAnteriores</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="window-body">
-      </div>
-    </div>
-  </div>
-} con lógica {
-  retorno {
-    método data() donde {
-      retorno {}.
+    método asíncrono mounted donde {
+      hago asíncronamente this.buscar_fila().
     }.
   }.
 }.
 
-creo App como una aplicación vue2 con nombre "App" con rutas [{
-    propiedad path como "/problemas/destacados".
-    propiedad name como "ProblemasDestacados".
-    propiedad component como PaginaDeProblemasDestacados.
+asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
+    propiedad path como "/login".
+    propiedad name como "Login".
+    propiedad component como PaginaDeLogin.
     propiedad props como {}.
 }, {
-    propiedad path como "/problemas/propuestos".
-    propiedad name como "ProblemasPropuestos".
-    propiedad component como PaginaDeProblemasPropuestos.
+    propiedad path como "/explorador/:id_de_tabla".
+    propiedad name como "ExploradorDeDatosDeTabla".
+    propiedad component como PaginaDeExploradorDeDatosDeTabla.
     propiedad props como {}.
 }, {
-    propiedad path como "/soluciones/destacadas".
-    propiedad name como "SolucionesDestacadas".
-    propiedad component como PaginaDeSolucionesDestacadas.
-    propiedad props como {}.
+    propiedad path como "/formulario/:id_de_tabla/new".
+    propiedad name como "FormularioDeDatoDeTabla".
+    propiedad component como PaginaDeFormularioDeDatoDeTabla.
+    propiedad props como { modalidad: "crear" }.
 }, {
-    propiedad path como "/soluciones/propuestas".
-    propiedad name como "SolucionesPropuestas".
-    propiedad component como PaginaDeSolucionesPropuestas.
-    propiedad props como {}.
-}, {
-    propiedad path como "/implementaciones/destacadas".
-    propiedad name como "ImplementacionesDestacadas".
-    propiedad component como PaginaDeImplementacionesDestacadas.
-    propiedad props como {}.
-}, {
-    propiedad path como "/implementaciones/propuestas".
-    propiedad name como "ImplementacionesPropuestas".
-    propiedad component como PaginaDeImplementacionesPropuestas.
-    propiedad props como {}.
-}, {
-    propiedad path como "/votaciones/actuales".
-    propiedad name como "VotacionesActuales".
-    propiedad component como PaginaDeVotacionesActuales.
-    propiedad props como {}.
-}, {
-    propiedad path como "/votaciones/anteriores".
-    propiedad name como "VotacionesAnteriores".
-    propiedad component como PaginaDeVotacionesAnteriores.
-    propiedad props como {}.
+    propiedad path como "/formulario/:id_de_tabla/id/:id_de_fila".
+    propiedad name como "FormularioDeDatoDeTabla".
+    propiedad component como PaginaDeFormularioDeDatoDeTabla.
+    propiedad props como { modalidad: "editar" }.
 }, {
     propiedad path como "/".
-    propiedad name como "Home".
+    propiedad name como "Inicio".
     propiedad component como PaginaDeInicio.
     propiedad props como {}.
 }] con traducciones {
@@ -377,7 +567,13 @@ creo App como una aplicación vue2 con nombre "App" con rutas [{
     propiedad ca como {}.
 } con plantilla {
   <div class="App Component Castelog-app win7">
-    <router-view></router-view>
+    <div v-if="token_de_sesion">
+      <router-view :root="this"></router-view>
+    </div>
+    <div v-else>
+      <PaginaDeLogin :root="this" />
+    </div>
+    <PuertoDeNotificaciones :root="this" />
   </div>
 } con estilos {
     html {}
@@ -388,12 +584,15 @@ creo App como una aplicación vue2 con nombre "App" con rutas [{
   retorno {
     método data donde {
       retorno {
-        
+        esquema: undefined,
+        token_de_sesion: undefined
       }.
     }.
     propiedad methods como {}.
     propiedad watch como {}.
-    método beforeMount donde {}.
+    método beforeMount donde {
+      asigno this.$window como window.
+    }.
     método mounted donde {}.
   }.
 } montada en "#app".

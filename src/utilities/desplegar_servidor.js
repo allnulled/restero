@@ -13,6 +13,7 @@ module.exports = function (deployer) {
             deployer.app.use("/api/v1/login", deployer.utilities.controlador_de_login);
             deployer.app.use("/api/v1/logout", deployer.utilities.controlador_de_logout);
             deployer.app.use("/api/v1/shutdown", deployer.utilities.controlador_de_shutdown);
+            deployer.app.use("/api/v1/db/schema", deployer.utilities.controlador_de_esquema);
             deployer.app.use("/api/v1/:operation/:table", [
                 deployer.utilities.middleware_de_parametros,
                 deployer.utilities.middleware_de_autentificacion,
@@ -23,7 +24,7 @@ module.exports = function (deployer) {
             await new Promise((ok, fail) => {
                 deployer.app.listen(deployer.settings.APP_PORT, function() {
                     console.log("[*] Servidor escuchando en:");
-                    console.log("[*]     http://127.0.0.1:" + deployer.settings.APP_PORT);
+                    console.log("[*]     http://127.0.0.1:" + deployer.settings.APP_PORT + "/index.1.html");
                     return ok();
                 });
             })

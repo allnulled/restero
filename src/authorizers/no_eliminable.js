@@ -3,7 +3,7 @@ module.exports = function (deployer) {
         try {
             const { operation, table } = request.params;
             if("delete" === operation) {
-                throw new Error("Operación no permitida por «no_eliminable»");
+                throw new Error(`Operación «${operation}» en «${table}» no permitida por autorizador «no_eliminable»`);
             }
         } catch (error) {
             console.error("Error en «src/authorizers/no_eliminable.js»");

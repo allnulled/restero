@@ -27,6 +27,7 @@ module.exports = function (deployer) {
             if(!es_mismo_usuario) {
                 throw new Error("Operación no permitida por «solo_actualizable_por_mismo_usuario»");
             }
+            delete request.hql_data.item[campo_de_usuario];
         } catch (error) {
             console.error("Error en «src/authorizers/solo_actualizable_por_mismo_usuario.js»");
             console.error(error);
