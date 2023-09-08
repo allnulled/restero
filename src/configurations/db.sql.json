@@ -833,7 +833,9 @@
         "tabla": "Ciclo_democratico",
         "atributos": [
             "nombre_humano: Ciclo democrático",
-            "tiene_autorizador: no_modificable"
+            "tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador",
+            "tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador",
+            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador"
         ],
         "composicion": [
             {
@@ -848,6 +850,13 @@
                 "columna": "fecha_de_creacion",
                 "tipo": "DATETIME",
                 "detalles": "DEFAULT CURRENT_TIMESTAMP",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(128)",
                 "atributos": null
             },
             {
@@ -882,7 +891,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Ciclo_democratico /*\n  @nombre_humano: Ciclo democrático\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER /*\n    @nombre_humano: Id de usuario creador\n  */,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Ciclo_democratico /*\n  @nombre_humano: Ciclo democrático\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  nombre VARCHAR(128),\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER /*\n    @nombre_humano: Id de usuario creador\n  */,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Pulsion_democratica",

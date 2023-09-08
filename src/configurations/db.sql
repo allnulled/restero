@@ -215,10 +215,13 @@ CREATE TABLE Modificacion_de_ley /*
 
 CREATE TABLE Ciclo_democratico /*
   @nombre_humano: Ciclo democrático
-  @tiene_autorizador: no_modificable
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+  nombre VARCHAR(128),
   etapa_de_ciclo_actual INTEGER DEFAULT 1,
   descripcion TEXT /*
     @nombre_humano: Descripción

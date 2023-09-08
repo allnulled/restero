@@ -23,6 +23,22 @@ module.exports = function (deployer) {
                 const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
                 const resultado = await conexion.ejecutar(consulta_delete);
                 request.hql_resultado = resultado;
+            } else if (operation === "getfile") {
+                const consulta_delete = deployer.utilities.preparar_select(table, [["id","=",request.hql_data.id]]);
+                const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
+                const resultado_select = await conexion.ejecutar(consulta_delete);
+                // @TODO: entregar fichero final
+                // @TODO: entregar fichero final
+                // @TODO: entregar fichero final
+                // @TODO: entregar fichero final
+            } else if (operation === "setfile") {
+                const consulta_delete = deployer.utilities.preparar_select(table, [["id", "=", request.hql_data.id]]);
+                const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
+                const resultado_select = await conexion.ejecutar(consulta_delete);
+                // @TODO: entregar referencia a fichero final
+                // @TODO: entregar referencia a fichero final
+                // @TODO: entregar referencia a fichero final
+                // @TODO: entregar referencia a fichero final
             }
             response.json({
                 operation,

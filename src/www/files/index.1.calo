@@ -39,7 +39,7 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
         <tbody>
           <tr>
             <td>
-              <button class="w_auto" v-on:click="ir_a_crear_fila">✚</button>
+              <button v-if="esSeleccionable === '0'" class="w_auto" v-on:click="ir_a_crear_fila">✚</button>
             </td>
             <td class="w_100">
               <div class="searchbox w_100">
@@ -198,7 +198,7 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
                   </span>
                 </td>
                 <td v-for="columna, columna_index in fila" v-bind:key="'busqueda-de-' + tabla_id + '-fila-' + fila_index + '-columna-' + columna_index">
-                  <span v-if="columna_index === 'id'">
+                  <span v-if="(columna_index === 'id') && (esSeleccionable === '0')">
                     <span class="como_link" v-on:click="() => ir_a_fila(columna)">
                       {{ columna }}
                     </span>
@@ -241,7 +241,12 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
         </div>
       </div>
       <div v-else-if="Array.isArray(filas)">
-        No se obtuvieron resultados.
+        <span>No se obtuvieron resultados.</span>
+        <span v-if="pagina !== 1">
+          <span>Puedes <span class="como_link" v-on:click="ir_a_pagina_anterior">volver a página anterior</span></span>
+          <span> o </span>
+          <span class="como_link" v-on:click="ir_a_pagina_inicial">volver a página inicial</span><span>.</span>
+        </span>
       </div>
       <div v-else>
         No se ha hecho ninguna búsqueda.
@@ -320,6 +325,14 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
       ir_a_crear_fila: una función con () donde {
         hago this.$router.history.push(`/formulario/${this.tabla.tabla}/new`).
       },
+      ir_a_pagina_anterior: una función con () donde {
+        decremento this.pagina en 1.
+        retorno this.buscar().
+      },
+      ir_a_pagina_inicial: una función con () donde {
+        asigno this.pagina como 1.
+        retorno this.buscar().
+      },
       obtener_datos: una función con (base o en su defecto {}) donde {
         retorno base extendido por {
           seleccionados: (this.seleccionPorDefecto + "").split(","),
@@ -343,7 +356,8 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
         asigno this.esta_mostrando_panel_de_busqueda_avanzada_sobre como subpanel.
         hago this.$forceUpdate(true).
       },
-      seleccionar_fila: una función con (fila_id) donde {
+      seleccionar_fila: una función con (fila_id_num) donde {
+        creo fila_id como "" + fila_id_num.
         creo posicion como this.seleccionados.indexOf(fila_id).
         si posicion no es igual que 0-1 {
           hago this.seleccionados.splice(posicion, 1).
@@ -359,7 +373,7 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
         }.
       },
       esta_fila_seleccionada: una función con (fila_id) donde {
-        creo posicion como this.seleccionados.indexOf(fila_id).
+        creo posicion como this.seleccionados.indexOf("" + fila_id).
         retorno posicion no es igual que 0-1.
       }
     }.
@@ -400,39 +414,47 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Explorador',link:'/explorador/'+tabla_id}]"></BreadcrumbGenerico>
         <h5>{{ $window.utilidades.texto_humanizado(tabla_id) }}: {{ $route.params.id_de_fila || "nuevo" }}</h5>
         <div v-if="fila" style="padding: 4px; padding-top: 0px;">
-          <div class="orden_del_explorador" v-for="columna, columna_index in fila" v-bind:key="'formulario-columna-'+columna_index">
-            <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
-            <div v-if="columna_index in columnas_foraneas">
-              <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" :seleccion-por-defecto="fila[columna_index]" />
-            </div>
-            <div v-else>
-              <textarea v-model="fila[columna_index]"></textarea>
+          <div class="" v-for="columna, columna_index in fila" v-bind:key="'formulario-columna-'+columna_index">
+            <div class="columna_del_formulario">
+              <div v-if="columna_index === 'id'">
+                <label>ID: <span>{{ columna }}</span></label>
+              </div>
+              <div v-else-if="columna_index in columnas_foraneas">
+                <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
+                <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" :seleccion-por-defecto="fila[columna_index]" />
+              </div>
+              <div v-else>
+                <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
+                <textarea v-model="fila[columna_index]"></textarea>
+              </div>
             </div>
           </div>
-          <div class="orden_del_explorador" v-if="modalidad === 'editar'">
+          <div class="columna_del_formulario" v-if="modalidad === 'editar'">
             <button v-on:click="eliminar_fila">Eliminar</button>
             <button v-on:click="buscar_fila">Cargar</button>
             <button v-on:click="guardar_fila">Guardar</button>
           </div>
-          <div class="orden_del_explorador" v-else-if="modalidad === 'crear'">
+          <div class="columna_del_formulario" v-else-if="modalidad === 'crear'">
             <button v-on:click="crear_fila">Crear</button>
           </div>
         </div>
         <div v-else-if="!fila" style="padding: 4px; padding-top: 0px;">
-          <div class="orden_del_explorador" v-for="columna, columna_index in columnas_locales" v-bind:key="'formulario-columna-'+columna_index">
-            <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
-            <div v-if="columna_index in columnas_foraneas">
-              <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" />
-            </div>
-            <div v-else>
-              <textarea v-model="fila_nueva[columna_index]"></textarea>
+          <div class="" v-for="columna, columna_index in columnas_locales" v-bind:key="'formulario-columna-'+columna_index">
+            <div class="columna_del_formulario" v-if="columna_index !== 'id'">
+              <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
+              <div v-if="columna_index in columnas_foraneas">
+                <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea"  />
+              </div>
+              <div v-else>
+                <textarea v-model="fila_nueva[columna_index]"></textarea>
+              </div>
             </div>
           </div>
-          <div class="orden_del_explorador" v-if="modalidad === 'editar'">
+          <div class="columna_del_formulario" v-if="modalidad === 'editar'">
             <button v-on:click="buscar_fila">Cargar</button>
             <button v-on:click="guardar_fila">Guardar</button>
           </div>
-          <div class="orden_del_explorador" v-else-if="modalidad === 'crear'">
+          <div class="columna_del_formulario" v-else-if="modalidad === 'crear'">
             <button v-on:click="crear_fila">Crear</button>
           </div>
         </div>
@@ -470,6 +492,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             where: [["id","=", this.$route.params.id_de_fila]] textualizado
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_fila, this).
         asigno this.fila como respuesta_fila.data.resultado[0].
       }.
       método asíncrono guardar_fila () donde {
@@ -481,6 +504,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             ...incluyo this.fila
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_guardar, this).
         hago asíncronamente this.buscar_fila().
       }.
       método asíncrono crear_fila () donde {
@@ -488,10 +512,12 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           con url `/api/v1/insert/${this.tabla_id}`
           con método "POST"
           con cuerpo {
-            ...incluyo this.fila
+            ...incluyo this.fila_nueva
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
-        hago this.$router.history.push(`/explorador/${this.tabla_id}`).
+        si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_crear, this) {
+          hago this.$router.history.push(`/explorador/${this.tabla_id}`).
+        }.
       }.
       método asíncrono eliminar_fila () donde {
         creo respuesta_eliminar como asíncronamente una petición http
@@ -501,7 +527,9 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             id: this.$route.params.id_de_fila
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
-        hago this.$router.history.push(`/explorador/${this.tabla_id}`).
+        si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_eliminar, this) {
+          hago this.$router.history.push(`/explorador/${this.tabla_id}`).
+        }.
       }.
       método cargar_metadatos_de_tabla donde {
         asigno this.tabla como this.root.esquema.filter(una lambda con (tabla) donde retorno tabla.tabla es igual que this.tabla_id)[0].

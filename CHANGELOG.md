@@ -102,6 +102,19 @@ Pero todavía...
   - [✖] no_usable.js
   - [✖] solo_seleccionable_por_mismo_usuario.js
 
-**Versión `v0.0.10`.** *El 30 de agosto de 2023 a las 10:41am.*
+**Versión `v0.0.10`.** *El 5 de septiembre de 2023 a las 10:32am.*
 
 - [✔] Interfaz de usuario (muchas cosas)
+
+**Versión `v0.0.10`.** *El 8 de septiembre de 2023 a las 13:26pm.*
+- [✔] Mejoras en la interfaz de usuario
+  - [✔] [BUG] crear instancia de «Ciclo democrático» permite poner «nombre» al crear
+    - [✔] no tener que ir a actualizar luego.
+  - [✔] [BUG] última página no omite paginación
+    - [✔] el "no se obtuvieron resultados" irá acompañado de un «Volver a página anterior» y un «volver al principio» .
+    - [✔] siempre que la página no sea "1"
+  - [✔] [BUG] cuando al crear no puede, lanza un error el ajax pero no la interfaz, y además te transporta a otro punto de la UI igualmente
+    - [✔] que el error le aparezca al usuario por las notificaciones
+    - [✔] que si hay error, no te traslade a otro punto de la UI
+  - [✖] [BUG] id aparece como campo de texto en formulario de crear
+    - [✖] que id no aparezca para nada en formulario de crear

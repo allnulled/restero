@@ -60,6 +60,7 @@
 .paginacion.baja {
     text-align: right;
 }
+.columna_del_formulario,
 .paginacion_del_explorador,
 .orden_del_explorador,
 .filtro_del_explorador {
@@ -68,11 +69,13 @@
     box-shadow: 0 0 3px black;
     background-color: #DDDDDD;
 }
+.campo_del_formulario,
 .campo_de_la_paginacion,
 .campo_del_orden,
 .campo_del_filtro {
     display: block;
 }
+.campo_del_formulario > *,
 .campo_de_la_paginacion > *,
 .campo_del_orden > *,
 .campo_del_filtro > * {

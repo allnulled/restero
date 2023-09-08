@@ -22,7 +22,7 @@ window.ExploradorDeDatos = Castelog.metodos.un_componente_vue2("ExploradorDeDato
  + "        <tbody>"
  + "          <tr>"
  + "            <td>"
- + "              <button class=\"w_auto\" v-on:click=\"ir_a_crear_fila\">✚</button>"
+ + "              <button v-if=\"esSeleccionable === '0'\" class=\"w_auto\" v-on:click=\"ir_a_crear_fila\">✚</button>"
  + "            </td>"
  + "            <td class=\"w_100\">"
  + "              <div class=\"searchbox w_100\">"
@@ -181,7 +181,7 @@ window.ExploradorDeDatos = Castelog.metodos.un_componente_vue2("ExploradorDeDato
  + "                  </span>"
  + "                </td>"
  + "                <td v-for=\"columna, columna_index in fila\" v-bind:key=\"'busqueda-de-' + tabla_id + '-fila-' + fila_index + '-columna-' + columna_index\">"
- + "                  <span v-if=\"columna_index === 'id'\">"
+ + "                  <span v-if=\"(columna_index === 'id') && (esSeleccionable === '0')\">"
  + "                    <span class=\"como_link\" v-on:click=\"() => ir_a_fila(columna)\">"
  + "                      {{ columna }}"
  + "                    </span>"
@@ -224,7 +224,12 @@ window.ExploradorDeDatos = Castelog.metodos.un_componente_vue2("ExploradorDeDato
  + "        </div>"
  + "      </div>"
  + "      <div v-else-if=\"Array.isArray(filas)\">"
- + "        No se obtuvieron resultados."
+ + "        <span>No se obtuvieron resultados.</span>"
+ + "        <span v-if=\"pagina !== 1\">"
+ + "          <span>Puedes <span class=\"como_link\" v-on:click=\"ir_a_pagina_anterior\">volver a página anterior</span></span>"
+ + "          <span> o </span>"
+ + "          <span class=\"como_link\" v-on:click=\"ir_a_pagina_inicial\">volver a página inicial</span><span>.</span>"
+ + "        </span>"
  + "      </div>"
  + "      <div v-else>"
  + "        No se ha hecho ninguna búsqueda."
@@ -369,6 +374,24 @@ throw error;
 }
 
 },
+ir_a_pagina_anterior:function(  ) {try {
+this.pagina -= 1;
+return this.buscar(  );
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+ir_a_pagina_inicial:function(  ) {try {
+this.pagina = 1;
+return this.buscar(  );
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
 obtener_datos:function( base = { 
 } ) {try {
 return Object.assign(base, { seleccionados:( this.seleccionPorDefecto + "" ).split( "," ),
@@ -413,7 +436,8 @@ throw error;
 }
 
 },
-seleccionar_fila:function( fila_id ) {try {
+seleccionar_fila:function( fila_id_num ) {try {
+const fila_id = "" + fila_id_num;
 const posicion = this.seleccionados.indexOf( fila_id );
 if((!(posicion === 0 - 1))) {
 this.seleccionados.splice( posicion,
@@ -436,7 +460,7 @@ throw error;
 
 },
 esta_fila_seleccionada:function( fila_id ) {try {
-const posicion = this.seleccionados.indexOf( fila_id );
+const posicion = this.seleccionados.indexOf( "" + fila_id );
 return (!(posicion === 0 - 1));
 } catch(error) {
 console.log(error);
@@ -491,39 +515,47 @@ window.PaginaDeFormularioDeDatoDeTabla = Castelog.metodos.un_componente_vue2("Pa
  + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Explorador',link:'/explorador/'+tabla_id}]\"></BreadcrumbGenerico>"
  + "        <h5>{{ $window.utilidades.texto_humanizado(tabla_id) }}: {{ $route.params.id_de_fila || \"nuevo\" }}</h5>"
  + "        <div v-if=\"fila\" style=\"padding: 4px; padding-top: 0px;\">"
- + "          <div class=\"orden_del_explorador\" v-for=\"columna, columna_index in fila\" v-bind:key=\"'formulario-columna-'+columna_index\">"
- + "            <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
- + "            <div v-if=\"columna_index in columnas_foraneas\">"
- + "              <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\" :seleccion-por-defecto=\"fila[columna_index]\" />"
- + "            </div>"
- + "            <div v-else>"
- + "              <textarea v-model=\"fila[columna_index]\"></textarea>"
+ + "          <div class=\"\" v-for=\"columna, columna_index in fila\" v-bind:key=\"'formulario-columna-'+columna_index\">"
+ + "            <div class=\"columna_del_formulario\">"
+ + "              <div v-if=\"columna_index === 'id'\">"
+ + "                <label>ID: <span>{{ columna }}</span></label>"
+ + "              </div>"
+ + "              <div v-else-if=\"columna_index in columnas_foraneas\">"
+ + "                <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
+ + "                <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\" :seleccion-por-defecto=\"fila[columna_index]\" />"
+ + "              </div>"
+ + "              <div v-else>"
+ + "                <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
+ + "                <textarea v-model=\"fila[columna_index]\"></textarea>"
+ + "              </div>"
  + "            </div>"
  + "          </div>"
- + "          <div class=\"orden_del_explorador\" v-if=\"modalidad === 'editar'\">"
+ + "          <div class=\"columna_del_formulario\" v-if=\"modalidad === 'editar'\">"
  + "            <button v-on:click=\"eliminar_fila\">Eliminar</button>"
  + "            <button v-on:click=\"buscar_fila\">Cargar</button>"
  + "            <button v-on:click=\"guardar_fila\">Guardar</button>"
  + "          </div>"
- + "          <div class=\"orden_del_explorador\" v-else-if=\"modalidad === 'crear'\">"
+ + "          <div class=\"columna_del_formulario\" v-else-if=\"modalidad === 'crear'\">"
  + "            <button v-on:click=\"crear_fila\">Crear</button>"
  + "          </div>"
  + "        </div>"
  + "        <div v-else-if=\"!fila\" style=\"padding: 4px; padding-top: 0px;\">"
- + "          <div class=\"orden_del_explorador\" v-for=\"columna, columna_index in columnas_locales\" v-bind:key=\"'formulario-columna-'+columna_index\">"
- + "            <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
- + "            <div v-if=\"columna_index in columnas_foraneas\">"
- + "              <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\" />"
- + "            </div>"
- + "            <div v-else>"
- + "              <textarea v-model=\"fila_nueva[columna_index]\"></textarea>"
+ + "          <div class=\"\" v-for=\"columna, columna_index in columnas_locales\" v-bind:key=\"'formulario-columna-'+columna_index\">"
+ + "            <div class=\"columna_del_formulario\" v-if=\"columna_index !== 'id'\">"
+ + "              <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
+ + "              <div v-if=\"columna_index in columnas_foraneas\">"
+ + "                <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\"  />"
+ + "              </div>"
+ + "              <div v-else>"
+ + "                <textarea v-model=\"fila_nueva[columna_index]\"></textarea>"
+ + "              </div>"
  + "            </div>"
  + "          </div>"
- + "          <div class=\"orden_del_explorador\" v-if=\"modalidad === 'editar'\">"
+ + "          <div class=\"columna_del_formulario\" v-if=\"modalidad === 'editar'\">"
  + "            <button v-on:click=\"buscar_fila\">Cargar</button>"
  + "            <button v-on:click=\"guardar_fila\">Guardar</button>"
  + "          </div>"
- + "          <div class=\"orden_del_explorador\" v-else-if=\"modalidad === 'crear'\">"
+ + "          <div class=\"columna_del_formulario\" v-else-if=\"modalidad === 'crear'\">"
  + "            <button v-on:click=\"crear_fila\">Crear</button>"
  + "          </div>"
  + "        </div>"
@@ -567,6 +599,8 @@ const respuesta_fila = (await Castelog.metodos.una_peticion_http(`/api/v1/select
 this.$route.params.id_de_fila ] ], null, 2)
 }, { authorization:this.root.token_de_sesion
 }, null, null));
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_fila,
+this );
 this.fila = respuesta_fila.data.resultado[ 0 ];
 } catch(error) {
 console.log(error);
@@ -580,6 +614,8 @@ const respuesta_guardar = (await Castelog.metodos.una_peticion_http(`/api/v1/upd
 ...(this.fila )
 }, { authorization:this.root.token_de_sesion
 }, null, null));
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_guardar,
+this );
 (await this.buscar_fila(  ));
 } catch(error) {
 console.log(error);
@@ -589,10 +625,13 @@ throw error;
 },
 async crear_fila(  ) {try {
 const respuesta_crear = (await Castelog.metodos.una_peticion_http(`/api/v1/insert/${this.tabla_id}`, "POST", { 
-...(this.fila )
+...(this.fila_nueva )
 }, { authorization:this.root.token_de_sesion
 }, null, null));
+if((!(this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_crear,
+this )))) {
 this.$router.history.push( `/explorador/${this.tabla_id}` );
+}
 } catch(error) {
 console.log(error);
 throw error;
@@ -603,7 +642,10 @@ async eliminar_fila(  ) {try {
 const respuesta_eliminar = (await Castelog.metodos.una_peticion_http(`/api/v1/delete/${this.tabla_id}`, "POST", { id:this.$route.params.id_de_fila
 }, { authorization:this.root.token_de_sesion
 }, null, null));
+if((!(this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_eliminar,
+this )))) {
 this.$router.history.push( `/explorador/${this.tabla_id}` );
+}
 } catch(error) {
 console.log(error);
 throw error;

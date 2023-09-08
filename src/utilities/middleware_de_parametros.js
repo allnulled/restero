@@ -76,6 +76,16 @@ module.exports = function (deployer) {
                     request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
                 }
             }
+            if(operation === "getfile") {
+                // @TODO: obtener parámetros para «getfile»
+                request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
+                request.hql_data.columna = deployer.utilities.obtener_parametro(request, "columna", []);
+            }
+            if (operation === "setfile") {
+                // @TODO: obtener parámetros para «setfile»
+                request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
+                request.hql_data.columna = deployer.utilities.obtener_parametro(request, "columna", []);
+            }
             next();
         } catch (error) {
             console.error("Error en «src/utilities/middleware_de_parametros.js»");

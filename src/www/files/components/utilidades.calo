@@ -39,5 +39,7 @@ asigno window.utilidades.texto_humanizado_de_columna como una función con (esqu
 asigno window.utilidades.gestion_de_error_desde_respuesta como una función con (respuesta) donde {
   si respuesta.data.error es igual que true {
     hago window.$notificaciones.agregar_notificacion(respuesta.data).
+    retorno true.
   }.
+  retorno false.
 }.
