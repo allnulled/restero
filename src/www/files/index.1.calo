@@ -6,8 +6,8 @@ Ejecutable como documento HTML5
     <title>Interfaz de usuario</title>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./win7.scoped.css" />
-    <link rel="stylesheet" href="./components/theme.css" />
+    <link rel="stylesheet" type="text/css" href="./components/win7.scoped.css" />
+    <link rel="stylesheet" type="text/css" href="./components/theme.css" />
     <script src="./components/calo.js"></script>
     <script src="./components/utilidades.js"></script>
     <script src="./components/PuertoDeNotificaciones.component.js"></script>
@@ -423,6 +423,15 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
                 <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
                 <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" :seleccion-por-defecto="fila[columna_index]" />
               </div>
+              <div v-else-if="columna_index in columnas_fichero">
+                <form enctype="multipart/form-data">
+                  <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
+                  <input class="inputfile" type="file" v-on:change="evento => cambiar_fichero(columna_index, evento)" />
+                  <div v-if="columnas_fichero_cargando[columna_index] !== true">
+                    <img class="inputfileimage" :src="'/api/v1/getfile/' + tabla_id + '/?columna=' + columna_index + '&id=' + fila.id + '&nocache=' + new Date()"  v-on:click="() => refrescar_imagen(columna_index)" />
+                  </div>
+                </form>
+              </div>
               <div v-else>
                 <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
                 <textarea v-model="fila[columna_index]"></textarea>
@@ -433,9 +442,6 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             <button v-on:click="eliminar_fila">Eliminar</button>
             <button v-on:click="buscar_fila">Cargar</button>
             <button v-on:click="guardar_fila">Guardar</button>
-          </div>
-          <div class="columna_del_formulario" v-else-if="modalidad === 'crear'">
-            <button v-on:click="crear_fila">Crear</button>
           </div>
         </div>
         <div v-else-if="!fila" style="padding: 4px; padding-top: 0px;">
@@ -450,11 +456,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
               </div>
             </div>
           </div>
-          <div class="columna_del_formulario" v-if="modalidad === 'editar'">
-            <button v-on:click="buscar_fila">Cargar</button>
-            <button v-on:click="guardar_fila">Guardar</button>
-          </div>
-          <div class="columna_del_formulario" v-else-if="modalidad === 'crear'">
+          <div class="columna_del_formulario" v-if="modalidad === 'crear'">
             <button v-on:click="crear_fila">Crear</button>
           </div>
         </div>
@@ -480,7 +482,10 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
         fila: false,
         fila_nueva: {},
         columnas_foraneas: {},
-        columnas_locales: {}
+        columnas_locales: {},
+        columnas_fichero: {},
+        columnas_fichero_cargando: {},
+        esta_cambiando_fichero: false
       }.
     }.
     propiedad methods como {
@@ -531,6 +536,27 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           hago this.$router.history.push(`/explorador/${this.tabla_id}`).
         }.
       }.
+      método asíncrono cambiar_fichero (columna_index, evento) donde {
+        hago this.desactualizar_imagen(columna_index).
+        creo datos_de_formulario como un nuevo FormData().
+        creo ficheros_seleccionados como evento.target.files.
+        desacoplo constantes [ fichero_seleccionado ] a partir de ficheros_seleccionados.
+        hago datos_de_formulario.append("id", this.$route.params.id_de_fila).
+        hago datos_de_formulario.append("columna", columna_index).
+        hago datos_de_formulario.append("fichero", fichero_seleccionado).
+        creo respuesta_cambiar como asíncronamente una petición http
+          con url `/api/v1/setfile/${this.tabla_id}`
+          con método "POST"
+          con cuerpo datos_de_formulario
+          con cabeceras {
+            "Content-Type": "multipart/form-data",
+            authorization: this.root.token_de_sesion
+          }.
+        si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_cambiar, this) {
+          
+        }.
+        hago asíncronamente this.actualizar_imagen(columna_index).
+      }.
       método cargar_metadatos_de_tabla donde {
         asigno this.tabla como this.root.esquema.filter(una lambda con (tabla) donde retorno tabla.tabla es igual que this.tabla_id)[0].
         asigno this.columnas_locales como un hecho donde {
@@ -553,6 +579,34 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           }.
           retorno columnas_foraneas.
         }.
+        asigno this.columnas_fichero como un hecho donde {
+          creo columnas_fichero como {}.
+          desde 0 hasta this.tabla.atributos.length usando indice_atributo {
+            creo atributo como this.tabla.atributos[indice_atributo].
+            si atributo.startsWith("tiene_fichero:") {
+              creo columna_fichero como atributo.substr("tiene_fichero:".length).trim().
+              asigno columnas_fichero[columna_fichero] como 0.
+            }.
+          }.
+          retorno columnas_fichero.
+        }.
+      }.
+      método desactualizar_imagen con (columna_index) donde {
+        asigno this.columnas_fichero_cargando[columna_index] como true.
+        hago this.$forceUpdate(true).
+      }.
+      método actualizar_imagen con (columna_index) donde {
+        retorno una nueva Promise(una lambda con (ok) donde {
+          hago setTimeout(una lambda donde {
+            asigno this.columnas_fichero_cargando[columna_index] como false.
+            hago this.$forceUpdate(true).
+            retorno ok().
+          }, 1000).
+        }).
+      }.
+      método asíncrono refrescar_imagen con (columna_index) donde {
+        hago asíncronamente this.desactualizar_imagen(columna_index).
+        hago asíncronamente this.actualizar_imagen(columna_index).
       }.
     }.
     método asíncrono beforeMount donde {

@@ -106,7 +106,7 @@ Pero todavía...
 
 - [✔] Interfaz de usuario (muchas cosas)
 
-**Versión `v0.0.10`.** *El 8 de septiembre de 2023 a las 13:26pm.*
+**Versión `v0.0.11`.** *El 8 de septiembre de 2023 a las 13:26pm.*
 - [✔] Mejoras en la interfaz de usuario
   - [✔] [BUG] crear instancia de «Ciclo democrático» permite poner «nombre» al crear
     - [✔] no tener que ir a actualizar luego.
@@ -116,5 +116,10 @@ Pero todavía...
   - [✔] [BUG] cuando al crear no puede, lanza un error el ajax pero no la interfaz, y además te transporta a otro punto de la UI igualmente
     - [✔] que el error le aparezca al usuario por las notificaciones
     - [✔] que si hay error, no te traslade a otro punto de la UI
-  - [✖] [BUG] id aparece como campo de texto en formulario de crear
-    - [✖] que id no aparezca para nada en formulario de crear
+  - [✔] [BUG] id aparece como campo de texto en formulario de crear
+    - [✔] que id no aparezca para nada en formulario de crear
+  - [✔] Operaciones «getfile» y «setfile»
+    - [✔] que el input type text aparezca cuando el atributo de tabla «tiene fichero: { columna }» se indique
+    - [✔] que cuando hay imágenes, reaparezca la imagen cargada cuando se actualiza
+    - [✔] que el campo de ficheros no aparezca en los formularios de crear y sí en los de editar
+    - [✔] que al clicar la imagen, se recargue del servidor

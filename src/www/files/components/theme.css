@@ -173,3 +173,13 @@ hr {
     width: 100%;
     resize: vertical;
 }
+.win7 input.inputfile {
+    border: 1px solid #888;
+    background-color: white;
+    border-radius: 2pt;
+    width: 100%;
+    cursor: pointer;
+}
+.win7 img.inputfileimage {
+    width: 100%;
+}

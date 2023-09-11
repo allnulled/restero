@@ -95,4 +95,4 @@ Y principalmente, esto es todo. Conviene leerse el código, porque es poco, pero
 
 Buena suerte, o mejor: no dependas de la suerte para que vaya bien.
 
-
+Si te supo a poco esta documentación, puedes probar con [REFERENCEv2.md](./REFERENCEv2.md).

@@ -22,6 +22,32 @@ CREATE TABLE Sesion /*
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
 );
 
+CREATE TABLE Fichero /*
+  @tiene_fichero: fichero
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_usuario INTEGER,
+  fichero VARCHAR(512),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
+);
+
+CREATE TABLE Fichero_de_problema_propuesto /*
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_fichero INTEGER,
+  id_problema_propuesto INTEGER,
+  id_usuario INTEGER,
+  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),
+  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
+);
+
 CREATE TABLE Voto /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario

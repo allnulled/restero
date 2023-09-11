@@ -2,7 +2,7 @@ module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
             const { operation, table } = request.params;
-            if(["select","insert","update","delete"].indexOf(operation) === -1) {
+            if(["select","insert","update","delete","getfile","setfile"].indexOf(operation) === -1) {
                 throw new Error("Operación no reconocida");
             }
             const tablas_coincidentes = deployer.db.schema.filter(function(datos_de_tabla) {
@@ -77,14 +77,16 @@ module.exports = function (deployer) {
                 }
             }
             if(operation === "getfile") {
-                // @TODO: obtener parámetros para «getfile»
-                request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
-                request.hql_data.columna = deployer.utilities.obtener_parametro(request, "columna", []);
+                Obtenemos_columna_e_id: {
+                    request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", undefined);
+                    request.hql_data.columna = deployer.utilities.obtener_parametro(request, "columna", undefined);
+                }
             }
             if (operation === "setfile") {
-                // @TODO: obtener parámetros para «setfile»
-                request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", []);
-                request.hql_data.columna = deployer.utilities.obtener_parametro(request, "columna", []);
+                Obtenemos_columna_e_id: {
+                    request.hql_data.id = deployer.utilities.obtener_parametro(request, "id", undefined);
+                    request.hql_data.columna = deployer.utilities.obtener_parametro(request, "columna", undefined);
+                }
             }
             next();
         } catch (error) {
