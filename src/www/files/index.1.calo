@@ -537,6 +537,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
         }.
       }.
       método asíncrono cambiar_fichero (columna_index, evento) donde {
+        imprimo columna_index.
         hago this.desactualizar_imagen(columna_index).
         creo datos_de_formulario como un nuevo FormData().
         creo ficheros_seleccionados como evento.target.files.

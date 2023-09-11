@@ -123,3 +123,8 @@ Pero todavía...
     - [✔] que cuando hay imágenes, reaparezca la imagen cargada cuando se actualiza
     - [✔] que el campo de ficheros no aparezca en los formularios de crear y sí en los de editar
     - [✔] que al clicar la imagen, se recargue del servidor
+
+**Versión `v0.0.12`.** *El 11 de septiembre de 2023 a las 20:29pm.*
+- [✔] [BUG] antes no aparecía la imagen porque no se ponían de acuerdo con el nombre porque uno no cogía bien los parámetros
+  - [✔] ahora aparece la imagen al momento de subirla automáticamente.
+  

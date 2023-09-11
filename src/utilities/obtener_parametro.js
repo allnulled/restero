@@ -1,10 +1,10 @@
 module.exports = function (deployer) {
     return function (request, parametro, valor_por_defecto = undefined) {
         try {
-            if(request.params && request.params[parametro]) {
+            if(request.params && (parametro in request.params)) {
                 return request.params[parametro];
             }
-            if(request.body && request.body[parametro]) {
+            if(request.body && (parametro in request.body)) {
                 return request.body[parametro];
             }
             if(request.query && (parametro in request.query)) {

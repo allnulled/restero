@@ -674,6 +674,7 @@ throw error;
 },
 async cambiar_fichero( columna_index,
 evento ) {try {
+console.log(columna_index);
 this.desactualizar_imagen( columna_index );
 const datos_de_formulario = new FormData(  );
 const ficheros_seleccionados = evento.target.files;
