@@ -8,6 +8,48 @@ CREATE TABLE Usuario /*
   contrasenya VARCHAR(512)
 );
 
+CREATE TABLE Grupo /**/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre VARCHAR(256) UNIQUE NOT NULL,
+  descripcion TEXT
+);
+
+CREATE TABLE Permiso /**/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre VARCHAR(256) UNIQUE NOT NULL,
+  descripcion TEXT
+);
+
+CREATE TABLE Permiso_de_grupo /*
+  @tiene_autorizador: no_usable
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_permiso INTEGER,
+  id_grupo INTEGER,
+  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),
+  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)
+);
+
+CREATE TABLE Permiso_de_usuario /*
+  @tiene_autorizador: no_usable
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_permiso INTEGER,
+  id_usuario INTEGER,
+  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),
+  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)
+);
+
+CREATE TABLE Grupo_de_usuario /*
+  @tiene_autorizador: no_usable
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_usuario INTEGER,
+  id_grupo INTEGER,
+  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
+);
+
 CREATE TABLE Sesion /*
   @tiene_autorizador: no_usable
   @nombre_humano: Sesión

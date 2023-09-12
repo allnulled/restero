@@ -44,6 +44,188 @@
         "script": "CREATE TABLE Usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
     },
     {
+        "tabla": "Grupo",
+        "atributos": [],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(256) UNIQUE NOT NULL",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            }
+        ],
+        "script": "\n\nCREATE TABLE Grupo /**/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
+    },
+    {
+        "tabla": "Permiso",
+        "atributos": [],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "nombre",
+                "tipo": "VARCHAR",
+                "detalles": "(256) UNIQUE NOT NULL",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": null
+            }
+        ],
+        "script": "\n\nCREATE TABLE Permiso /**/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
+    },
+    {
+        "tabla": "Permiso_de_grupo",
+        "atributos": [
+            "tiene_autorizador: no_usable"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_permiso",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_grupo",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_grupo",
+                "tabla_foranea": "Grupo",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_permiso",
+                "tabla_foranea": "Permiso",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Permiso_de_grupo /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
+    },
+    {
+        "tabla": "Permiso_de_usuario",
+        "atributos": [
+            "tiene_autorizador: no_usable"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_permiso",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_permiso",
+                "tabla_foranea": "Permiso",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Permiso_de_usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
+    },
+    {
+        "tabla": "Grupo_de_usuario",
+        "atributos": [
+            "tiene_autorizador: no_usable"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_usuario",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_grupo",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": null
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_grupo",
+                "tabla_foranea": "Grupo",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Grupo_de_usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+    },
+    {
         "tabla": "Sesion",
         "atributos": [
             "tiene_autorizador: no_usable",

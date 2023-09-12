@@ -35,7 +35,12 @@ module.exports = function (deployer) {
                 await conexion.ejecutar(consulta_de_insercion_de_sesion);
                 token_de_sesion_activo = nuevo_token;
             }
-            return response.json({ token_de_sesion_activo });
+            request.headers.authorization = token_de_sesion_activo;
+            const autentificacion = await deployer.utilities.obtener_autentificacion(request);
+            return response.json({
+                token_de_sesion_activo,
+                autentificacion
+            });
         } catch (error) {
             console.error("Error en «src/utilities/controlador_de_login.js»");
             console.error(error);

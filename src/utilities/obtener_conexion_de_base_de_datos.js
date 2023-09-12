@@ -25,11 +25,13 @@ module.exports = function (deployer) {
                                     console.log("[SQL] " + consulta_unica);
                                     conexion_bruta.all(consulta_unica, [], function (error, data) {
                                         if (error) {
+                                            console.error(error);
                                             return fail(error);
                                         }
                                         return ok(data);
                                     });
                                 } catch (error) {
+                                    console.error(error);
                                     return fail(error);
                                 }
                             });

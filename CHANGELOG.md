@@ -128,3 +128,8 @@ Pero todavía...
 - [✔] [BUG] antes no aparecía la imagen porque no se ponían de acuerdo con el nombre porque uno no cogía bien los parámetros
   - [✔] ahora aparece la imagen al momento de subirla automáticamente.
   
+**Versión `v0.0.13`.** *El 12 de septiembre de 2023 a las 02:02pm.*
+- [✔] Tiene Grupo y Permiso y tablas intermedias
+- [✔] Hace la autentificación con JOINs para Grupo y Permiso
+- [✔] Te ordena los grupos y permisos (por grupo y por usuario).
+- [✔] Te devuelve los grupos y permisos totales en la autentificación del login.
