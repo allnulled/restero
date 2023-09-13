@@ -9,4 +9,5 @@ node ./feature/no_visibles_columnas.test.js
 node ./feature/select_search.test.js
 node ./feature/select_order.test.js
 node ./feature/select_page.test.js
+node ./feature/incluir.test.js
 node ./feature/analisis.test.js
