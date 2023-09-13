@@ -40,8 +40,6 @@ Y luego puedas incluir más ficheros en la carpeta:
 
 Lo primero es el fichero de la base de datos, `src/configurations/db.sql`. En él puedes centrar toda la atención inicial.
 
-En él, puedes encontrar cachos de código que :
-
 ## ¿Qué otras cosas debo saber?
 
 El deployer viene ya con unas rutas y controladores asociados. En el fichero `src/utilities/desplegar_servidor.js` verás los detalles. Pero son estos:
@@ -93,6 +91,4 @@ Principalmente, estos son los ficheros que más te interesa entender. Luego, los
 
 Y principalmente, esto es todo. Conviene leerse el código, porque es poco, pero muy efectivo, y está concentrado en estos ficheros, principalmente, cubriendo cada uno de estos aspectos del despliegue.
 
-Buena suerte, o mejor: no dependas de la suerte para que vaya bien.
 
-Si te supo a poco esta documentación, puedes probar con [REFERENCEv2.md](./REFERENCEv2.md).

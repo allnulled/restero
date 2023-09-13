@@ -1113,7 +1113,8 @@
             "nombre_humano: Ciclo democrático",
             "tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador",
             "tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador",
-            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador"
+            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador",
+            "tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}"
         ],
         "composicion": [
             {
@@ -1169,13 +1170,13 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Ciclo_democratico /*\n  @nombre_humano: Ciclo democrático\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  nombre VARCHAR(128),\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER /*\n    @nombre_humano: Id de usuario creador\n  */,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Ciclo_democratico /*\n  @nombre_humano: Ciclo democrático\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  nombre VARCHAR(128),\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER /*\n    @nombre_humano: Id de usuario creador\n  */,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Pulsion_democratica",
         "atributos": [
             "nombre_humano: Pulsión democrática",
-            "tiene_autorizador: no_modificable"
+            "tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}"
         ],
         "composicion": [
             {
@@ -1219,6 +1220,6 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Pulsion_democratica /*\n  @nombre_humano: Pulsión democrática\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  especificacion TEXT /*\n    @nombre_humano: Especificación\n  */,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_ciclo_democratico INTEGER /*\n    @nombre_humano: Id de ciclo democrático\n  */,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
+        "script": "\n\nCREATE TABLE Pulsion_democratica /*\n  @nombre_humano: Pulsión democrática\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  especificacion TEXT /*\n    @nombre_humano: Especificación\n  */,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_ciclo_democratico INTEGER /*\n    @nombre_humano: Id de ciclo democrático\n  */,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
     }
 ]

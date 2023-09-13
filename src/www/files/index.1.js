@@ -262,6 +262,16 @@ throw error;
 }
 
 }
+},
+alCambiar:{ type:Function,
+default:function() {try {
+return "";
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+}
 }
 },
 data(  ) {try {
@@ -453,6 +463,8 @@ this.seleccionados = [  ];
 }
 this.seleccionados.push( fila_id );
 }
+this.alCambiar( this.seleccionados,
+this );
 } catch(error) {
 console.log(error);
 throw error;
@@ -522,7 +534,7 @@ window.PaginaDeFormularioDeDatoDeTabla = Castelog.metodos.un_componente_vue2("Pa
  + "              </div>"
  + "              <div v-else-if=\"columna_index in columnas_foraneas\">"
  + "                <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
- + "                <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\" :seleccion-por-defecto=\"fila[columna_index]\" />"
+ + "                <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\" :al-cambiar=\"v => fila[columna_index] = v[0]\" :seleccion-por-defecto=\"fila[columna_index]\" />"
  + "              </div>"
  + "              <div v-else-if=\"columna_index in columnas_fichero\">"
  + "                <form enctype=\"multipart/form-data\">"
@@ -539,18 +551,18 @@ window.PaginaDeFormularioDeDatoDeTabla = Castelog.metodos.un_componente_vue2("Pa
  + "              </div>"
  + "            </div>"
  + "          </div>"
- + "          <div class=\"columna_del_formulario\" v-if=\"modalidad === 'editar'\">"
+ + "          <div class=\"columna_del_formulario\">"
  + "            <button v-on:click=\"eliminar_fila\">Eliminar</button>"
  + "            <button v-on:click=\"buscar_fila\">Cargar</button>"
  + "            <button v-on:click=\"guardar_fila\">Guardar</button>"
  + "          </div>"
  + "        </div>"
- + "        <div v-else-if=\"!fila\" style=\"padding: 4px; padding-top: 0px;\">"
+ + "        <div v-else-if=\"modalidad === 'crear'\" style=\"padding: 4px; padding-top: 0px;\">"
  + "          <div class=\"\" v-for=\"columna, columna_index in columnas_locales\" v-bind:key=\"'formulario-columna-'+columna_index\">"
  + "            <div class=\"columna_del_formulario\" v-if=\"columna_index !== 'id'\">"
  + "              <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>"
  + "              <div v-if=\"columna_index in columnas_foraneas\">"
- + "                <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\"  />"
+ + "                <ExploradorDeDatos :root=\"root\" es-seleccionable=\"1\" :id-de-tabla=\"columnas_foraneas[columna_index].tabla_foranea\" :al-cambiar=\"v => fila_nueva[columna_index] = v[0]\" />"
  + "              </div>"
  + "              <div v-else>"
  + "                <textarea v-model=\"fila_nueva[columna_index]\"></textarea>"
@@ -661,7 +673,6 @@ throw error;
 },
 async cambiar_fichero( columna_index,
 evento ) {try {
-console.log(columna_index);
 this.desactualizar_imagen( columna_index );
 const datos_de_formulario = new FormData(  );
 const ficheros_seleccionados = evento.target.files;

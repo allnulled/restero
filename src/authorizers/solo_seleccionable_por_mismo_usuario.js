@@ -11,7 +11,6 @@ module.exports = function (deployer) {
             }
             const id_usuario_de_peticion = autentificacion.usuario.id;
             const campo_de_usuario = parametro.trim();
-            console.log(request.hql_data);
             request.hql_data.where.push([campor_de_usuario, "=", id_usuario_de_peticion]);
         } catch (error) {
             console.error("Error en «src/authorizers/solo_seleccionable_por_mismo_usuario.js»");

@@ -128,8 +128,19 @@ Pero todavía...
 - [✔] [BUG] antes no aparecía la imagen porque no se ponían de acuerdo con el nombre porque uno no cogía bien los parámetros
   - [✔] ahora aparece la imagen al momento de subirla automáticamente.
   
-**Versión `v0.0.13`.** *El 12 de septiembre de 2023 a las 02:02pm.*
+**Versión `v0.0.13`.** *El 12 de septiembre de 2023 a las 02:02am.*
 - [✔] Tiene Grupo y Permiso y tablas intermedias
 - [✔] Hace la autentificación con JOINs para Grupo y Permiso
 - [✔] Te ordena los grupos y permisos (por grupo y por usuario).
 - [✔] Te devuelve los grupos y permisos totales en la autentificación del login.
+
+**Versión `v0.0.14`.** *El 12 de septiembre de 2023 a las 12:54pm.*
+- [✔] Ampliada documentación REFv2
+- [✔] Tiene incluir y excluir como autorizadores de tabla
+  - [✔] Tcambién están documentados
+- [✔] [BUG] no se estaban cambiando los datos de columnas externas de fila_nueva en formulario crear, ni fila en editar.
+  - [✔] ahora hay un evento que al cambiar el valor de la columna externa, se lanza
+    - [✔] y está programado para que cambie al valor de fila o de fila_nueva
+    - [✔] por lo cual, ahora sí se cambia en ambos formularios.
+
+**Versión `v0.0.15`.** *El 13 de septiembre de 2023 a las 14:55pm.*

@@ -286,6 +286,7 @@ CREATE TABLE Ciclo_democratico /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
 */  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -302,7 +303,7 @@ CREATE TABLE Ciclo_democratico /*
 
 CREATE TABLE Pulsion_democratica /*
   @nombre_humano: Pulsión democrática
-  @tiene_autorizador: no_modificable
+  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
 */  (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   especificacion TEXT /*

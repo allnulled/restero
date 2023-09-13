@@ -1,6 +1,38 @@
 # Referencia oficial del HQL-Deployer
 
-[HQL](https://github.com/allnulled/h-query-language) es un subconjunto del lenguaje SQL. *Deployer* significa *desplegador*. Este proyecto consiste en un **desplegador de aplicaciones basadas en script HQL**.
+[HQL](https://github.com/allnulled/h-query-language) es un subconjunto del lenguaje SQL. *Deployer* significa *desplegador*. Este proyecto consiste en un **desplegador de aplicaciones basadas en scripts HQL**.
+
+## Índice
+
+1. [Introducción](#introducción)
+1. [Carpetas y ficheros](#introducción)
+1. [El proceso de configuración manual](#el-proceso-de-)
+1. [El proceso de despliegue](#el-proceso-de-)
+1. [El proceso de tests](#el-proceso-de-)
+1. [Peticiones disponibles](#peticiones-disponibles)
+   1. [Ejemplo de «login»](#ejemplo-de-login)
+   1. [Ejemplo de «logout»](#ejemplo-de-login)
+   1. [Ejemplo de «select»](#ejemplo-de-login)
+   1. [Ejemplo de «insert»](#ejemplo-de-login)
+   1. [Ejemplo de «update»](#ejemplo-de-login)
+   1. [Ejemplo de «delete»](#ejemplo-de-login)
+   1. [Ejemplo de «getfile»](#ejemplo-de-login)
+   1. [Ejemplo de «setfile»](#ejemplo-de-login)
+1. [Los hiperatributos](#los-hiperatributos)
+1. [Los autorizadores](#los-autorizadores)
+   1. [Autorizador de tabla: `no_actualizable`](#)
+   1. [Autorizador de tabla: `no_eliminable`](#)
+   1. [Autorizador de tabla: `no_insertable`](#)
+   1. [Autorizador de tabla: `no_modificable`](#)
+   1. [Autorizador de tabla: `no_seleccionable`](#)
+   1. [Autorizador de tabla: `no_usable`](#)
+   1. [Autorizador de tabla: `no_visibles_columnas`](#)
+   1. [Autorizador de tabla: `solo_actualizable_por_mismo_usuario`](#)
+   1. [Autorizador de tabla: `solo_eliminable_por_mismo_usuario`](#)
+   1. [Autorizador de tabla: `solo_insertable_por_mismo_usuario`](#)
+   1. [Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`](#)
+   1. [Autorizador de tabla: `incluir`](#)
+   1. [Autorizador de tabla: `excluir`](#)
 
 ## Introducción
 
@@ -93,7 +125,7 @@ El **proceso de despliegue** del `hql-deployer` está programado en el `src/depl
   - *Cargar controladores*: carga los ficheros de `src/controllers`
   - *Cargar autorizadores*: carga los ficheros de `src/authorizers`
   - *Desplegar base de datos*: carga una primera conexión, y luego resetea y migra la base de datos, si escaese.
-  - *Desplegar servidor*: carga la aplicación y s (en Linux)us rutas, y luego la pone a escuchar peticiones.
+  - *Desplegar servidor*: carga la aplicación y sus rutas, y luego la pone a escuchar peticiones.
 
 ## El proceso de tests
 
@@ -112,6 +144,8 @@ cd test/unit && bash test.sh
 Pasará los tests en 1 por proceso, y finalmente listará los resultados obtenidos por pantalla en colores y en una tabla.
 
 ## Peticiones disponibles
+
+Las peticiones generalmente aceptan un `HTTP header` con el que se le facilita el token de sesión al servidor: el clásico `authorization`. De esta forma, el servidor puede autentificar la petición, y pasar los filtros especificados correspondientemente.
 
 A continuación se listan las principales acciones que se pueden hacer vía petición HTTP con el servidor desplegado por `hql-deployer`.
 
@@ -147,4 +181,210 @@ A continuación se listan las principales acciones que se pueden hacer vía peti
 #### Ejemplo de **«delete»**
   - `[POST] /api/v1/delete/Usuario?id=1`
     - `id`: `«Number»` con el identificador del ítem a actualizar
+
+#### Ejemplo de **«getfile»**
+  - `[POST] /api/v1/getfile/Fichero?id=1&columna=fichero`
+    - `id`: `«Number»` con el identificador del ítem a acceder
+    - `columna`: `«String»` con la columna que apunta al fichero
+
+#### Ejemplo de **«setfile»**
+  - `[POST] /api/v1/setfile/Usuario?id=1&columna=fichero`
+    - `id`: `«Number»` con el identificador del ítem a actualizar
+    - `columna`: `«String»` con la columna que apunta al fichero
+    - `fichero`: `«File»` con el fichero en sí.
+    - *Nota: esta petición se realiza codificada mediante `multipart/form-data` y por eso se permiten ficheros en la petición*
+
+## Los hiperatributos
+
+Los **hiperatributos** son parámetros que se asocian a tablas o columnas dentro del script de creación de base de datos, siguiendo la sintaxis del [**HQL** o Hyper Query Language](https://github.com/allnulled/h-query-language). Estos hiperatributos permiten decirle al desplegador cómo quiere gestionar partes del esquema de datos en distintos aspectos.
+
+## Los autorizadores
+
+Los **autorizadores** o *authorizers* son un conjunto de hiperatributos que nos permiten determinarle al desplegador cómo gestionar los servicios web que van a poner a disposición de los usuarios la información de la base de datos, basándonos en el esquema de datos, vía HTTP. Hay un correlato entre los nombres de los autorizadores y los ficheros bajo la carpeta `src/autorhizers`. Del mismo modo, para crear nuevos solo tienes que añadir nuevos ficheros en esta carpeta, porque se cargarán automáticamente por `src/authorizers/index.js`.
+
+#### Autorizador de tabla: `no_actualizable`
+
+Función:
+
+> No permite **actualizar datos** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_actualizable
+*/ ( ... );
+```
+
+
+#### Autorizador de tabla: `no_eliminable`
+
+Función:
+
+> No permite **eliminar datos** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_eliminable
+*/ ( ... );
+```
+
+
+#### Autorizador de tabla: `no_insertable`
+
+Función:
+
+> No permite **insertar datos** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_insertable
+*/ ( ... );
+```
+
+
+#### Autorizador de tabla: `no_modificable`
+
+Función:
+
+> No permite **insertar, actualizar ni eliminar datos** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_modificable
+*/ ( ... );
+```
+
+
+#### Autorizador de tabla: `no_seleccionable`
+
+Función:
+
+> No permite **seleccionar datos** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_seleccionable
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `no_usable`
+
+Función:
+
+> No permite **seleccionar, insertar, actualizar ni eliminar datos** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_usable
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `no_visibles_columnas`
+
+Función:
+
+> No permite **seleccionar ciertas columnas** de dicha tabla **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @no_visibles_columnas: columna1, columna2, columna3
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `solo_actualizable_por_mismo_usuario`
+
+Función:
+
+> Solo permite **actualizar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @solo_actualizable_por_mismo_usuario: id_usuario
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `solo_eliminable_por_mismo_usuario`
+
+Función:
+
+> Solo permite **eliminar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @solo_eliminable_por_mismo_usuario: id_usuario
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `solo_insertable_por_mismo_usuario`
+
+Función:
+
+> Solo permite **insertar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @solo_insertable_por_mismo_usuario: id_usuario
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`
+
+Función:
+
+> Solo permite **seleccionar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @solo_seleccionable_por_mismo_usuario: id_usuario
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `incluir`
+
+Función:
+
+> Permite escoger qué **operaciones** (`select`, `insert`, `update`, `delete`, `getfile`, `setfile`) y qué **objetos de autorización** (`usuarios`, `grupos` y `privilegios`) pueden emparejarse. Esto provocará que los usuarios que no reúnan alguno de estos objetos de autorización en las operaciones especificadas, no podrán llevar a cabo la operación.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @incluir: insert | update | delete | setfile: { "permiso" : "permiso de administrar" }
+*/ ( ... );
+```
+
+#### Autorizador de tabla: `excluir`
+
+Función:
+
+> Permite escoger qué **operaciones** (`select`, `insert`, `update`, `delete`, `getfile`, `setfile`) y qué **objetos de autorización** (`usuarios`, `grupos` y `privilegios`) pueden emparejarse. Esto provocará que los usuarios que sí reúnan alguno de estos objetos de autorización en las operaciones especificadas, no podrán llevar a cabo la operación.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @excluir: insert | update | delete | setfile: { "permiso" : "permiso de no molestar" }
+*/ ( ... );
+```
 
