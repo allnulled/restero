@@ -14,6 +14,7 @@ Ejecutable como documento HTML5
     <script src="./components/BreadcrumbGenerico.component.js"></script>
     <script src="./components/PaginaDeInicio.component.js"></script>
     <script src="./components/PaginaDePanelDeAdministracion.component.js"></script>
+    <script src="./components/PaginaDePanelDeConfiguraciones.component.js"></script>
     <script src="./components/PaginaDeLogin.component.js"></script>
     <script src="./components/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
 </head>
@@ -328,7 +329,7 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
         hago this.$router.history.push(`/formulario/${this.tabla.tabla}/id/${index_fila}`).
       },
       ir_a_crear_fila: una función con () donde {
-        hago this.$router.history.push(`/formulario/${this.tabla.tabla}/new`).
+        hago this.$router.history.push(`/formulario/${this.tabla.tabla}/crear`).
       },
       ir_a_pagina_anterior: una función con () donde {
         decremento this.pagina en 1.
@@ -635,7 +636,7 @@ asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
     propiedad component como PaginaDeExploradorDeDatosDeTabla.
     propiedad props como {}.
 }, {
-    propiedad path como "/formulario/:id_de_tabla/new".
+    propiedad path como "/formulario/:id_de_tabla/crear".
     propiedad name como "FormularioDeDatoDeTabla".
     propiedad component como PaginaDeFormularioDeDatoDeTabla.
     propiedad props como { modalidad: "crear" }.
@@ -648,6 +649,11 @@ asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
     propiedad path como "/administracion".
     propiedad name como "PanelDeAdministracion".
     propiedad component como PaginaDePanelDeAdministracion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/configuraciones".
+    propiedad name como "PanelDeConfiguraciones".
+    propiedad component como PaginaDePanelDeConfiguraciones.
     propiedad props como {}.
 }, {
     propiedad path como "/".

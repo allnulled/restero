@@ -1,5 +1,5 @@
 {
     "APP_PORT": 5046,
     "DB_RESET": true,
-    "DB_TEST_MIGRATION": true
+    "DB_TEST_MIGRATION": false
 }

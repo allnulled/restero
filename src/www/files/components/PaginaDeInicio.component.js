@@ -27,7 +27,7 @@ window.PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "            </span>"
  + "          </li>"
  + "          <li>"
- + "            <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/configuracion')\">"
+ + "            <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/configuraciones')\">"
  + "              Configuraciones"
  + "            </span>"
  + "          </li>"

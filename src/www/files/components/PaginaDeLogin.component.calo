@@ -46,6 +46,7 @@ asigno window.PaginaDeLogin como un componente vue2 con nombre "PaginaDeLogin" c
           con método "POST"
           con cuerpo { nombre: this.nombre, contrasenya: this.contrasenya }.
         asigno this.root.token_de_sesion como respuesta_login.data.token_de_sesion_activo.
+        asigno this.root.autentificacion como respuesta_login.data.autentificacion.
         creo respuesta_esquema como asíncronamente una petición http
           con url "/api/v1/db/schema"
           con método "POST"

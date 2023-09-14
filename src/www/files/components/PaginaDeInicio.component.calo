@@ -26,7 +26,7 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
             </span>
           </li>
           <li>
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/configuracion')">
+            <span class="como_link" v-on:click="() => abrir_pagina_de('/configuraciones')">
               Configuraciones
             </span>
           </li>

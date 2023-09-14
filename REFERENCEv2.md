@@ -37,6 +37,8 @@
    1. [Autorizador de columna: `no_insertable`](#)
    1. [Autorizador de columna: `no_modificable`](#)
    1. [Autorizador de columna: `solo_modificable_por`](#)
+1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
+   1. [Comando `restero generar`](#)
 
 ## Introducción
 
@@ -456,6 +458,43 @@ CREATE TABLE x (
 );
 ```
 
-Permite especificar .
+## Interfaz de línea de comandos
 
+La interfaz de línea de comandos se llama `restero` y puede usarse una vez se ha ejecutado el comando `npm link` en el proyecto.
+
+A continuación se explican los comandos que permite la interfaz.
+
+#### Comando `restero generar`
+
+- Argumento `salida`:
+   - `--salida {ruta}`: **Opcional**. Por defecto: `.`. Especifica el directorio en el que se copiará el proyecto inicial del `hql-deployer`.
+
+Ejemplo:
+
+```sh
+restero generar --salida .
+restero generar --salida ../otro_directorio
+```
+
+----
+
+- Argumento `fichero`:
+   - `--fichero {fichero}`: **Opcional**. Por defecto: `undefined`. Especifica el fichero `db.sql` de la aplicación.
+
+Ejemplo:
+
+```sh
+restero generar --fichero mydb.sql
+```
+
+----
+
+- Argumento `directorio`:
+   - `--directorio {directorio}`: **Opcional**. Por defecto: `undefined`. Especifica las carpetas y ficheros que van a sobreescribir al proyecto original.
+
+Ejemplo:
+
+```sh
+restero generar --directorio app
+```
 

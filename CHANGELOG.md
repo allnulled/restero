@@ -158,3 +158,9 @@ Pero todavía...
 - [✔] mejorado panel de notificaciones del front
 - [✔] preparando la versión `v0.1.0` como branca.
 - [✔] controlador de shutdown protegido para solo administradores.
+
+**Versión `v0.0.17`.** *El 14 de septiembre de 2023 a las 20:17pm.*
+
+- [✔] binario de línea de comandos que permite crear proyectos desde 0 rápidamente.
+- [✔] cambiado nombre a `restero`
+- [✔] cambiada versión del parser a v0.0.5 para pasar siempre arrays (vacíos o no) como atributos, no nulls.

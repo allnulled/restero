@@ -45,6 +45,7 @@ const respuesta_login = (await Castelog.metodos.una_peticion_http("/api/v1/login
 contrasenya:this.contrasenya
 }, null, null, null));
 this.root.token_de_sesion = respuesta_login.data.token_de_sesion_activo;
+this.root.autentificacion = respuesta_login.data.autentificacion;
 const respuesta_esquema = (await Castelog.metodos.una_peticion_http("/api/v1/db/schema", "POST", { 
 }, { authorization:this.root.token_de_sesion
 }, null, null));

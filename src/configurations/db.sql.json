@@ -10,35 +10,35 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(256) UNIQUE NOT NULL",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "domicilio",
                 "tipo": "VARCHAR",
                 "detalles": "(1024)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "correo",
                 "tipo": "VARCHAR",
                 "detalles": "(512)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "contrasenya",
                 "tipo": "VARCHAR",
                 "detalles": "(512)",
-                "atributos": null
+                "atributos": []
             }
         ],
         "script": "CREATE TABLE Usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
@@ -54,21 +54,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(256) UNIQUE NOT NULL",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "descripcion",
                 "tipo": "TEXT",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             }
         ],
         "script": "\n\nCREATE TABLE Grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
@@ -84,21 +84,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(256) UNIQUE NOT NULL",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "descripcion",
                 "tipo": "TEXT",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             }
         ],
         "script": "\n\nCREATE TABLE Permiso /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
@@ -114,21 +114,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_permiso",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_grupo",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -156,21 +156,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_permiso",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_usuario",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -198,21 +198,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_usuario",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_grupo",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -241,7 +241,7 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -284,21 +284,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_usuario",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "fichero",
                 "tipo": "VARCHAR",
                 "detalles": "(512)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -322,28 +322,28 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_fichero",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_problema_propuesto",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_usuario",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -381,28 +381,28 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_usuario",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_votacion",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "sentido",
                 "tipo": "VARCHAR",
                 "detalles": "(32)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -418,7 +418,7 @@
                 "columna": "notas",
                 "tipo": "VARCHAR",
                 "detalles": "(256)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -458,35 +458,35 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_usuario",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_votacion",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_comentario_padre",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "comentario",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -521,14 +521,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -544,14 +544,14 @@
                 "columna": "estado",
                 "tipo": "VARCHAR",
                 "detalles": "(32)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "resultado",
                 "tipo": "TEXT",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             }
         ],
         "script": "\n\nCREATE TABLE Votacion /*\n  @nombre_humano: Votación\n  @tiene_autorizador: no_modificable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  estado VARCHAR(32),\n  resultado TEXT\n);"
@@ -569,14 +569,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -601,14 +601,14 @@
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -638,14 +638,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -661,21 +661,21 @@
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_problema_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -706,14 +706,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -729,21 +729,21 @@
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_problema_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -780,14 +780,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -803,21 +803,21 @@
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_solucion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -848,14 +848,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -871,21 +871,21 @@
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_solucion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -922,14 +922,14 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -945,21 +945,21 @@
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_implementacion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -987,21 +987,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "uuid",
                 "tipo": "VARCHAR",
                 "detalles": "(128)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -1017,21 +1017,21 @@
                 "columna": "id_modificacion_de_ley_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_implementacion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ley_padre",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -1066,21 +1066,21 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(2048)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "uuid",
                 "tipo": "VARCHAR",
                 "detalles": "(128)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -1096,14 +1096,14 @@
                 "columna": "id_implementacion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "clave foránea",
@@ -1135,28 +1135,28 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "fecha_de_creacion",
                 "tipo": "DATETIME",
                 "detalles": "DEFAULT CURRENT_TIMESTAMP",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "nombre",
                 "tipo": "VARCHAR",
                 "detalles": "(128)",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "etapa_de_ciclo_actual",
                 "tipo": "INTEGER",
                 "detalles": "DEFAULT 1",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -1197,7 +1197,7 @@
                 "columna": "id",
                 "tipo": "INTEGER",
                 "detalles": "PRIMARY KEY AUTOINCREMENT",
-                "atributos": null
+                "atributos": []
             },
             {
                 "sentencia": "columna",
