@@ -12,7 +12,9 @@ module.exports = function (deployer) {
             deployer.app.use(body_parser.json({ extended: true }));
             deployer.app.use("/api/v1/login", deployer.utilities.controlador_de_login);
             deployer.app.use("/api/v1/logout", deployer.utilities.controlador_de_logout);
-            deployer.app.use("/api/v1/shutdown", deployer.utilities.controlador_de_shutdown);
+            deployer.app.use("/api/v1/shutdown", [
+                deployer.utilities.middleware_de_solo_administradores
+            ], deployer.utilities.controlador_de_shutdown);
             deployer.app.use("/api/v1/db/schema", deployer.utilities.controlador_de_esquema);
             deployer.app.use("/api/v1/:operation/:table", [
                 deployer.utilities.middleware_de_parametros,

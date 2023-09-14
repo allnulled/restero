@@ -6,7 +6,7 @@ asigno window.PuertoDeNotificaciones como un componente vue2 con nombre "PuertoD
           <div class="window" v-if="notificaciones.length">
             <div class="title-bar">
               <div class="title-bar-text">
-                Notificaciones recientes:
+                Notificaciones recientes: {{ notificaciones.length }}
               </div>
 					  </div>
             <div class="window-body">

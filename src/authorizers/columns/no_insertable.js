@@ -5,6 +5,9 @@ module.exports = function (deployer) {
             if (operation !== "insert") {
                 return;
             }
+            if (columna_id in request.hql_data.item) {
+                request.hql_data.item[columna_id] = null;
+            }
         } catch (error) {
             console.error("Error en «src/authorizers/columns/no_insertable.js»");
             console.error(error);

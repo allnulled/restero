@@ -11,7 +11,6 @@ module.exports = function (deployer) {
             if (!(request.hql_data.columna in resultado_select[0])) {
                 throw new Error(`No se encontró campo «${request.hql_data.columna}» en instancia de «${table}»`);
             }
-            console.log(resultado_select);
             const nombre_original = resultado_select[0][request.hql_data.columna];
             const nombre_del_fichero = table + "." + request.hql_data.id + "." + request.hql_data.columna + "." + nombre_original;
             const ruta_del_fichero = path.resolve(__dirname + "/../uploads", nombre_del_fichero);

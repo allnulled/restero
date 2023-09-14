@@ -12,7 +12,6 @@ module.exports = function (deployer) {
             sql += tabla;
             sql += " SET";
             let index_columnas_1 = 0;
-            console.log(parametros.item);
             Columnas_del_update:
             for (let columna in parametros.item) {
                 if(columna === "id") {

@@ -49,9 +49,7 @@ Ir al [CHANGELOG](./CHANGELOG.md) para ver especificidades de cada versión.
 
 ## Documentación
 
-Para ver la documentación oficial, ir a [REFERENCE.md](./REFERENCE.md).
-
-Para ver la documentación oficial versión 2, ir a [REFERENCEv2.md](./REFERENCEv2.md).
+Para ver la documentación oficial, ir a [REFERENCEv2.md](./REFERENCEv2.md).
 
 
 

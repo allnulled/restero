@@ -33,6 +33,10 @@
    1. [Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`](#)
    1. [Autorizador de tabla: `incluir`](#)
    1. [Autorizador de tabla: `excluir`](#)
+   1. [Autorizador de columna: `no_actualizable`](#)
+   1. [Autorizador de columna: `no_insertable`](#)
+   1. [Autorizador de columna: `no_modificable`](#)
+   1. [Autorizador de columna: `solo_modificable_por`](#)
 
 ## Introducción
 
@@ -191,7 +195,7 @@ A continuación se listan las principales acciones que se pueden hacer vía peti
   - `[POST] /api/v1/setfile/Usuario?id=1&columna=fichero`
     - `id`: `«Number»` con el identificador del ítem a actualizar
     - `columna`: `«String»` con la columna que apunta al fichero
-    - `fichero`: `«File»` con el fichero en sí.
+    - `fichero`: `«File»` con el fichero en sí
     - *Nota: esta petición se realiza codificada mediante `multipart/form-data` y por eso se permiten ficheros en la petición*
 
 ## Los hiperatributos
@@ -387,4 +391,71 @@ CREATE TABLE x /*
   @excluir: insert | update | delete | setfile: { "permiso" : "permiso de no molestar" }
 */ ( ... );
 ```
+
+#### Autorizador de columna: `no_actualizable`
+
+Función:
+
+> No permite **actualizar datos** de dicha columna **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  x2 INTEGER /*
+    @tiene_autorizador: no_actualizable
+  */
+);
+```
+
+#### Autorizador de columna: `no_insertable`
+
+Función:
+
+> No permite **insertar datos** en dicha columna **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  x2 INTEGER /*
+    @tiene_autorizador: no_insertable
+  */
+);
+```
+
+#### Autorizador de columna: `no_modificable`
+
+Función:
+
+> No permite **insertar ni actualizar datos** de dicha columna **a nadie**.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  x2 INTEGER /*
+    @tiene_autorizador: no_modificable
+  */
+);
+```
+
+#### Autorizador de columna: `solo_modificable_por`
+
+Función:
+
+> Permite **insertar y actualizar datos** de dicha columna solo a los usuarios que reúnan alguno de los `permisos`, `grupos` o `usuarios` especificados como parámetro.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  x2 INTEGER /*
+    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
+  */
+);
+```
+
+Permite especificar .
+
 

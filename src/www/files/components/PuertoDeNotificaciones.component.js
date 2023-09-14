@@ -7,7 +7,7 @@ window.PuertoDeNotificaciones = Castelog.metodos.un_componente_vue2("PuertoDeNot
  + "          <div class=\"window\" v-if=\"notificaciones.length\">"
  + "            <div class=\"title-bar\">"
  + "              <div class=\"title-bar-text\">"
- + "                Notificaciones recientes:"
+ + "                Notificaciones recientes: {{ notificaciones.length }}"
  + "              </div>"
  + "\t\t\t\t\t  </div>"
  + "            <div class=\"window-body\">"

@@ -19,7 +19,7 @@ window.PaginaDeExploradorDeDatosDeTabla = Castelog.metodos.un_componente_vue2("P
  + "        </div>"
  + "      </div>"
  + "      <div class=\"window-body\">"
- + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'}]\"></BreadcrumbGenerico>"
+ + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Administración',link:'/administracion'}]\"></BreadcrumbGenerico>"
  + "        <h5>Explorador de datos</h5>"
  + "        <ExploradorDeDatos :root=\"root\" />"
  + "      </div>"

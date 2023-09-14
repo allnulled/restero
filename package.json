@@ -1,6 +1,6 @@
 {
   "name": "hql-deployer",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "Deploys H-Query-Language based applications.",
   "main": "src/deployer.js",
   "scripts": {

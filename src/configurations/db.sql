@@ -8,20 +8,24 @@ CREATE TABLE Usuario /*
   contrasenya VARCHAR(512)
 );
 
-CREATE TABLE Grupo /**/ (
+CREATE TABLE Grupo /*
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   descripcion TEXT
 );
 
-CREATE TABLE Permiso /**/ (
+CREATE TABLE Permiso /*
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
+*/ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   descripcion TEXT
 );
 
 CREATE TABLE Permiso_de_grupo /*
-  @tiene_autorizador: no_usable
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_permiso INTEGER,
@@ -31,7 +35,7 @@ CREATE TABLE Permiso_de_grupo /*
 );
 
 CREATE TABLE Permiso_de_usuario /*
-  @tiene_autorizador: no_usable
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_permiso INTEGER,
@@ -41,7 +45,7 @@ CREATE TABLE Permiso_de_usuario /*
 );
 
 CREATE TABLE Grupo_de_usuario /*
-  @tiene_autorizador: no_usable
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
@@ -150,6 +154,9 @@ CREATE TABLE Problema_propuesto /*
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
+  */,
+  notas_del_administrador TEXT /*
+    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
   id_usuario_creador INTEGER,
   id_ciclo_democratico INTEGER,
@@ -275,9 +282,7 @@ CREATE TABLE Modificacion_de_ley /*
   descripcion TEXT /*
     @nombre_humano: Descripción
   */,
-  id_implementacion_original INTEGER /*
-    @tiene_autorizador: no_actualizable
-  */,
+  id_implementacion_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
   FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)
@@ -313,6 +318,10 @@ CREATE TABLE Pulsion_democratica /*
   */,
   descripcion TEXT /*
     @nombre_humano: Descripción
+  */,
+  notas_especificas TEXT /*
+    @tiene_autorizador: no_insertable
+    @tiene_autorizador: no_actualizable
   */,
   id_ciclo_democratico INTEGER /*
     @nombre_humano: Id de ciclo democrático

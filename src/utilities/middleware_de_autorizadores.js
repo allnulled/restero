@@ -43,10 +43,6 @@ module.exports = function (deployer) {
                     const autorizador_de_columna = autorizadores_de_columna[index_autorizador];
                     const [ etiqueta, id_autorizador_con_parametros ] = deployer.utilities.obtener_string_partido_en_dos(autorizador_de_columna, ":", true);
                     const [autorizador_id, autorizador_parametros] = deployer.utilities.obtener_string_partido_en_dos(id_autorizador_con_parametros, ":", true);
-                    console.log("id_autorizador_con_parametros", id_autorizador_con_parametros);
-                    console.log("etiqueta", etiqueta);
-                    console.log("autorizador_id", autorizador_id);
-                    console.log("autorizador_parametros", autorizador_parametros);
                     if(!(autorizador_id in deployer.authorizers.columns)) {
                         throw new Error(`Autorizador de columna «${table}.${columna.columna}» no reconocido: «${autorizador_id}»`);
                     }

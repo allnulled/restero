@@ -45,7 +45,9 @@
     },
     {
         "tabla": "Grupo",
-        "atributos": [],
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
         "composicion": [
             {
                 "sentencia": "columna",
@@ -69,11 +71,13 @@
                 "atributos": null
             }
         ],
-        "script": "\n\nCREATE TABLE Grupo /**/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
+        "script": "\n\nCREATE TABLE Grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
     },
     {
         "tabla": "Permiso",
-        "atributos": [],
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
         "composicion": [
             {
                 "sentencia": "columna",
@@ -97,12 +101,12 @@
                 "atributos": null
             }
         ],
-        "script": "\n\nCREATE TABLE Permiso /**/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
+        "script": "\n\nCREATE TABLE Permiso /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
     },
     {
         "tabla": "Permiso_de_grupo",
         "atributos": [
-            "tiene_autorizador: no_usable"
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
         ],
         "composicion": [
             {
@@ -139,12 +143,12 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Permiso_de_grupo /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
+        "script": "\n\nCREATE TABLE Permiso_de_grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
     },
     {
         "tabla": "Permiso_de_usuario",
         "atributos": [
-            "tiene_autorizador: no_usable"
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
         ],
         "composicion": [
             {
@@ -181,12 +185,12 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Permiso_de_usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
+        "script": "\n\nCREATE TABLE Permiso_de_usuario /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
     },
     {
         "tabla": "Grupo_de_usuario",
         "atributos": [
-            "tiene_autorizador: no_usable"
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
         ],
         "composicion": [
             {
@@ -223,7 +227,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Grupo_de_usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Grupo_de_usuario /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Sesion",
@@ -585,6 +589,15 @@
             },
             {
                 "sentencia": "columna",
+                "columna": "notas_del_administrador",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
+                ]
+            },
+            {
+                "sentencia": "columna",
                 "columna": "id_usuario_creador",
                 "tipo": "INTEGER",
                 "detalles": "",
@@ -610,7 +623,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  notas_del_administrador TEXT /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  id_usuario_creador INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Problema_destacado",
@@ -1083,9 +1096,7 @@
                 "columna": "id_implementacion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": [
-                    "tiene_autorizador: no_actualizable"
-                ]
+                "atributos": null
             },
             {
                 "sentencia": "columna",
@@ -1107,7 +1118,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Modificacion_de_ley /*\n  @nombre_humano: Modificación de ley\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_implementacion_original INTEGER /*\n    @tiene_autorizador: no_actualizable\n  */,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
+        "script": "\n\nCREATE TABLE Modificacion_de_ley /*\n  @nombre_humano: Modificación de ley\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
     },
     {
         "tabla": "Ciclo_democratico",
@@ -1208,6 +1219,16 @@
             },
             {
                 "sentencia": "columna",
+                "columna": "notas_especificas",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: no_insertable",
+                    "tiene_autorizador: no_actualizable"
+                ]
+            },
+            {
+                "sentencia": "columna",
                 "columna": "id_ciclo_democratico",
                 "tipo": "INTEGER",
                 "detalles": "",
@@ -1222,6 +1243,6 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Pulsion_democratica /*\n  @nombre_humano: Pulsión democrática\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  especificacion TEXT /*\n    @nombre_humano: Especificación\n  */,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_ciclo_democratico INTEGER /*\n    @nombre_humano: Id de ciclo democrático\n  */,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
+        "script": "\n\nCREATE TABLE Pulsion_democratica /*\n  @nombre_humano: Pulsión democrática\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  especificacion TEXT /*\n    @nombre_humano: Especificación\n  */,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  notas_especificas TEXT /*\n    @tiene_autorizador: no_insertable\n    @tiene_autorizador: no_actualizable\n  */,\n  id_ciclo_democratico INTEGER /*\n    @nombre_humano: Id de ciclo democrático\n  */,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
     }
 ]

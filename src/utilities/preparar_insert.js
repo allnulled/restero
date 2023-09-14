@@ -12,7 +12,6 @@ module.exports = function (deployer) {
             sql += tabla;
             sql += " (";
             let index_columnas_1 = 0;
-            console.log(parametros.item);
             for(let columna in parametros.item) {
                 if (index_columnas_1 !== 0) {
                     sql += ","

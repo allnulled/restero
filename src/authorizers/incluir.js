@@ -21,7 +21,6 @@ module.exports = function (deployer) {
                     autorizado = autorizado || esta_en_grupo.length;
                 }
                 if(permisos) {
-                    console.log(permisos);
                     const esta_en_permiso = autentificacion.permisos.filter(permiso => permisos.indexOf(permiso.nombre) !== -1);
                     autorizado = autorizado || esta_en_permiso.length;
                 }

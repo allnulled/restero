@@ -147,3 +147,14 @@ Pero todavía...
 - [✔] [BUG] al no autentificarse, el autorizador «incluir» lanzaba un error de que no se podía acceder a una variable
   - [✔] ahora lanza un error de que se requiere autentificación
   - [✔] igual con «excluir»
+
+**Versión `v0.0.16`.** *El 14 de septiembre de 2023 a las 14:55pm.*
+- [✔] autorizadores de columna funcionando:
+  - [✔] no_actualizable
+  - [✔] no_insertable
+  - [✔] no_modificable
+  - [✔] solo_modificable_por
+- [✔] autorizadores documentados en REFv2.
+- [✔] mejorado panel de notificaciones del front
+- [✔] preparando la versión `v0.1.0` como branca.
+- [✔] controlador de shutdown protegido para solo administradores.

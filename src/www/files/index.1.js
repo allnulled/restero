@@ -1,5 +1,5 @@
 
-// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n    <title>Interfaz de usuario</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/win7.scoped.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/theme.css\" />\n    <script src=\"./components/calo.js\"></script>\n    <script src=\"./components/utilidades.js\"></script>\n    <script src=\"./components/PuertoDeNotificaciones.component.js\"></script>\n    <script src=\"./components/BreadcrumbGenerico.component.js\"></script>\n    <script src=\"./components/PaginaDeInicio.component.js\"></script>\n    <script src=\"./components/PaginaDeLogin.component.js\"></script>\n    <script src=\"./components/PaginaDeExploradorDeDatosDeTabla.component.js\"></script>\n</head>","body":"<body><div id=\"app\"></div></body>"}}
+// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n    <title>Interfaz de usuario</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/win7.scoped.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/theme.css\" />\n    <script src=\"./components/calo.js\"></script>\n    <script src=\"./components/utilidades.js\"></script>\n    <script src=\"./components/PuertoDeNotificaciones.component.js\"></script>\n    <script src=\"./components/BreadcrumbGenerico.component.js\"></script>\n    <script src=\"./components/PaginaDeInicio.component.js\"></script>\n    <script src=\"./components/PaginaDePanelDeAdministracion.component.js\"></script>\n    <script src=\"./components/PaginaDeLogin.component.js\"></script>\n    <script src=\"./components/PaginaDeExploradorDeDatosDeTabla.component.js\"></script>\n</head>","body":"<body><div id=\"app\"></div></body>"}}
 
 window.ExploradorDeDatos = Castelog.metodos.un_componente_vue2("ExploradorDeDatos",
   "<div class=\"ExploradorDeDatos Component\">"
@@ -524,7 +524,7 @@ window.PaginaDeFormularioDeDatoDeTabla = Castelog.metodos.un_componente_vue2("Pa
  + "        </div>"
  + "      </div>"
  + "      <div class=\"window-body\">"
- + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Explorador',link:'/explorador/'+tabla_id}]\"></BreadcrumbGenerico>"
+ + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Administración',link:'/administracion'},{texto:'Explorador',link:'/explorador/'+tabla_id}]\"></BreadcrumbGenerico>"
  + "        <h5>{{ $window.utilidades.texto_humanizado(tabla_id) }}: {{ $route.params.id_de_fila || \"nuevo\" }}</h5>"
  + "        <div v-if=\"fila\" style=\"padding: 4px; padding-top: 0px;\">"
  + "          <div class=\"\" v-for=\"columna, columna_index in fila\" v-bind:key=\"'formulario-columna-'+columna_index\">"
@@ -877,6 +877,12 @@ props:{ modalidad:"crear"
 name:"FormularioDeDatoDeTabla",
 component:PaginaDeFormularioDeDatoDeTabla,
 props:{ modalidad:"editar"
+}
+},
+{ path:"/administracion",
+name:"PanelDeAdministracion",
+component:PaginaDePanelDeAdministracion,
+props:{ 
 }
 },
 { path:"/",
