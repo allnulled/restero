@@ -144,3 +144,6 @@ Pero todavía...
     - [✔] por lo cual, ahora sí se cambia en ambos formularios.
 
 **Versión `v0.0.15`.** *El 13 de septiembre de 2023 a las 14:55pm.*
+- [✔] [BUG] al no autentificarse, el autorizador «incluir» lanzaba un error de que no se podía acceder a una variable
+  - [✔] ahora lanza un error de que se requiere autentificación
+  - [✔] igual con «excluir»

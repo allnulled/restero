@@ -275,7 +275,9 @@ CREATE TABLE Modificacion_de_ley /*
   descripcion TEXT /*
     @nombre_humano: Descripción
   */,
-  id_implementacion_original INTEGER,
+  id_implementacion_original INTEGER /*
+    @tiene_autorizador: no_actualizable
+  */,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
   FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)

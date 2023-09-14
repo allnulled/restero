@@ -13,7 +13,7 @@ module.exports = function (deployer) {
             const filenames_for_columns = deployer.fs.readdirSync(__dirname + "/columns");
             for (let index = 0; index < filenames_for_columns.length; index++) {
                 const filename = filenames_for_columns[index];
-                const authorizer = await require(__dirname + "/" + filename)(deployer);
+                const authorizer = await require(__dirname + "/columns/" + filename)(deployer);
                 authorizers.columns[filename.replace(/\.js$/g, "")] = authorizer;
             }
             return authorizers;

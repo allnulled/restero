@@ -171,12 +171,12 @@ A continuación se listan las principales acciones que se pueden hacer vía peti
 
 #### Ejemplo de **«insert»**
   - `[POST] /api/v1/insert/Usuario?item={"nombre":"Pepito de los Palotes"}`
-    - `item`: `«Object»` con el ítem a insertar
+    - `...item`: `«Object»` con el ítem a insertar. Se pasan como parámetros directos, no como un objeto.
 
 #### Ejemplo de **«update»**
   - `[POST] /api/v1/update/Usuario?id=1&item={"nombre":"Pepito de los Palotes"}`
     - `id`: `«Number»` con el identificador del ítem a actualizar
-    - `item`: `«Object»` con los campos del ítem a actualizar
+    - `...item`: `«Object»` con los campos del ítem a actualizar. Se pasan como parámetros directos, no como un objeto.
 
 #### Ejemplo de **«delete»**
   - `[POST] /api/v1/delete/Usuario?id=1`

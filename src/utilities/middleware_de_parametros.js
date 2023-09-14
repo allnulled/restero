@@ -9,7 +9,7 @@ module.exports = function (deployer) {
                 return datos_de_tabla.tabla === table;
             });
             if(tablas_coincidentes.length === 0) {
-                throw new Error("Tipo de dato no reconocido");
+                throw new Error(`Tipo de dato «${table}» no reconocido`);
             }
             request.hql_data = {};
             if(operation === "select") {

@@ -29,9 +29,12 @@ asigno window.utilidades.texto_humanizado_de_columna como una función con (esqu
   desacoplo constantes [ tabla ] a partir de esquema filtrado con (item) donde retorno item.tabla es igual que tabla_id.
   desacoplo constantes [ columna ] a partir de tabla.composicion filtrado con (item) donde retorno item.sentencia es igual que "columna" y item.columna es igual que columna_id.
   si columna.atributos es tipo lista {
-    desacoplo constantes [ atributo_de_nombre_humano ] a partir de columna.atributos filtrado con (item) donde retorno item.startsWith("nombre_humano:").
-    creo nombre_humano como atributo_de_nombre_humano.substr("nombre_humano:".length).trim().
-    retorno nombre_humano.
+    creo atributos_de_nombre_humano como columna.atributos filtrado con (item) donde retorno item.startsWith("nombre_humano:").
+    si atributos_de_nombre_humano.length {
+      desacoplo constantes [ atributo_de_nombre_humano ] a partir de atributos_de_nombre_humano.
+      creo nombre_humano como atributo_de_nombre_humano.substr("nombre_humano:".length).trim().
+      retorno nombre_humano.
+    }.
   }.
   retorno window.utilidades.texto_humanizado(columna.columna.substr(0,1).toUpperCase() + columna.columna.substr(1)).
 }.

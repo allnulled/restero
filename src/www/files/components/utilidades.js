@@ -50,11 +50,14 @@ const [ columna ] = Castelog.metodos.un_filtrado_por(tabla.composicion, ( item )
 return item.sentencia === "columna" && item.columna === columna_id;
 }, null, null);
 if(Array.isArray(columna.atributos)) {
-const [ atributo_de_nombre_humano ] = Castelog.metodos.un_filtrado_por(columna.atributos, ( item ) => {
+const atributos_de_nombre_humano = Castelog.metodos.un_filtrado_por(columna.atributos, ( item ) => {
 return item.startsWith( "nombre_humano:" );
 }, null, null);
+if(atributos_de_nombre_humano.length) {
+const [ atributo_de_nombre_humano ] = atributos_de_nombre_humano;
 const nombre_humano = atributo_de_nombre_humano.substr( "nombre_humano:".length ).trim(  );
 return nombre_humano;
+}
 }
 return window.utilidades.texto_humanizado( columna.columna.substr( 0,
 1 ).toUpperCase(  ) + columna.columna.substr( 1 ) );

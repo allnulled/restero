@@ -3,6 +3,9 @@ module.exports = function (deployer) {
         try {
             const { operation, table } = request.params;
             const autentificacion = await deployer.utilities.obtener_autentificacion(request);
+            if(!autentificacion) {
+                throw new Error(`Operación «${operation}» en «${table}» requiere de autentificación por autorizador «incluir»`);
+            }
             const [ operaciones, objetos ] = deployer.utilities.obtener_string_partido_en_dos(parametro, ":");
             const operaciones_afectadas = operaciones.split("|").map(op => op.trim());
             const objeto_parametrico = JSON.parse(objetos);
@@ -18,6 +21,7 @@ module.exports = function (deployer) {
                     autorizado = autorizado || esta_en_grupo.length;
                 }
                 if(permisos) {
+                    console.log(permisos);
                     const esta_en_permiso = autentificacion.permisos.filter(permiso => permisos.indexOf(permiso.nombre) !== -1);
                     autorizado = autorizado || esta_en_permiso.length;
                 }

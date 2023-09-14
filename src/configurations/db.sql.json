@@ -1083,7 +1083,9 @@
                 "columna": "id_implementacion_original",
                 "tipo": "INTEGER",
                 "detalles": "",
-                "atributos": null
+                "atributos": [
+                    "tiene_autorizador: no_actualizable"
+                ]
             },
             {
                 "sentencia": "columna",
@@ -1105,7 +1107,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Modificacion_de_ley /*\n  @nombre_humano: Modificación de ley\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
+        "script": "\n\nCREATE TABLE Modificacion_de_ley /*\n  @nombre_humano: Modificación de ley\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_implementacion_original INTEGER /*\n    @tiene_autorizador: no_actualizable\n  */,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
     },
     {
         "tabla": "Ciclo_democratico",
