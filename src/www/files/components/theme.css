@@ -89,7 +89,7 @@
     right: 0;
     bottom: 0;
     height: auto;
-    max-height: 80px;
+    max-height: 90px;
 }
 .contenedor_de_puerto_de_notificaciones {
     position: relative;
@@ -105,6 +105,7 @@
     color: #333333;
     overflow: scroll;
     max-height: 40px;
+    font-size: 9px;
     cursor: pointer;
 }
 

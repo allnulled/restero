@@ -3,10 +3,19 @@ asigno window.PuertoDeNotificaciones como un componente vue2 con nombre "PuertoD
     <div class="punto_de_puerto_de_notificaciones">
 			<div class="contenedor_de_puerto_de_notificaciones">
 				<div class="caja_de_puerto_de_notificaciones">
-					<div class="caja_de_notificacion" v-for="notificacion, notificacion_index in notificaciones" v-bind:key="'puerto-notificaciones-notificacion-'+notificacion_index">
-            <div v-on:click="() => cerrar_notificacion(notificacion)">
-						{{ notificacion }}
-            </div>
+          <div class="window" v-if="notificaciones.length">
+            <div class="title-bar">
+              <div class="title-bar-text">
+                Notificaciones recientes:
+              </div>
+					  </div>
+            <div class="window-body">
+              <div class="caja_de_notificacion" v-for="notificacion, notificacion_index in notificaciones" v-bind:key="'puerto-notificaciones-notificacion-'+notificacion_index">
+                <div v-on:click="() => cerrar_notificacion(notificacion)">
+                {{ notificacion }}
+                </div>
+              </div>
+					  </div>
 					</div>
 				</div>
 			</div>
