@@ -56,6 +56,12 @@ git clone https://github.com/allnulled/hql-deployer.git .
 npm install
 ```
 
+Alternativamente, puedes usar la línea de comandos para generar un proyecto automáticamente. Para esto, te tendrías que descargar este paquete de NPM:
+
+  - [https://www.npmjs.com/package/restero](https://www.npmjs.com/package/restero)
+
+Para usar la línea de comandos para generar el proyecto, puedes consultar la sección de [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos) de este documento.
+
 
 ## Uso 
 
