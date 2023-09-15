@@ -1,6 +1,6 @@
 {
   "name": "restero",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Despliega aplicaciones REST basadas en ficheros HQL (Hyper Query Language).",
   "main": "src/deployer.js",
   "bin": {
