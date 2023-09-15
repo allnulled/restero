@@ -164,3 +164,11 @@ Pero todavía...
 - [✔] binario de línea de comandos que permite crear proyectos desde 0 rápidamente.
 - [✔] cambiado nombre a `restero`
 - [✔] cambiada versión del parser a v0.0.5 para pasar siempre arrays (vacíos o no) como atributos, no nulls.
+
+**Versión `v0.0.18`.** *El 15 de septiembre de 2023 a las 10:35am.*
+
+- [✔] links del explorador hechos botón
+- [✔] botones de crear, guardar, cargar, eliminar del formulario, a la derecha.
+- [✔] package.json con la info de git también
+- [✔] preparado para subir a NPM.
+

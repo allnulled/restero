@@ -201,9 +201,9 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
                 </td>
                 <td v-for="columna, columna_index in fila" v-bind:key="'busqueda-de-' + tabla_id + '-fila-' + fila_index + '-columna-' + columna_index">
                   <span v-if="(columna_index === 'id') && (esSeleccionable === '0')">
-                    <span class="como_link" v-on:click="() => ir_a_fila(columna)">
+                    <button v-on:click="() => ir_a_fila(columna)">
                       {{ columna }}
-                    </span>
+                    </button>
                   </span>
                   <span v-else>{{ columna }}</span>
                 </td>
@@ -445,7 +445,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
               </div>
             </div>
           </div>
-          <div class="columna_del_formulario">
+          <div class="columna_del_formulario text_align_right">
             <button v-on:click="eliminar_fila">Eliminar</button>
             <button v-on:click="buscar_fila">Cargar</button>
             <button v-on:click="guardar_fila">Guardar</button>
@@ -463,7 +463,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
               </div>
             </div>
           </div>
-          <div class="columna_del_formulario" v-if="modalidad === 'crear'">
+          <div class="columna_del_formulario text_align_right" v-if="modalidad === 'crear'">
             <button v-on:click="crear_fila">Crear</button>
           </div>
         </div>

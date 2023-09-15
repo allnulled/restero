@@ -1,6 +1,6 @@
 {
   "name": "restero",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Despliega aplicaciones REST basadas en ficheros HQL (Hyper Query Language).",
   "main": "src/deployer.js",
   "bin": {
@@ -21,11 +21,25 @@
     "sqlstring": "^2.3.3",
     "yargs": "^17.7.2"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "rest",
+    "automatic"
+  ],
+  "author": "allnulled",
+  "license": "WTFPL",
   "devDependencies": {
     "chai": "^4.3.8",
     "cli-color": "^2.0.3"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allnulled/restero.git"
+  },
+  "bugs": {
+    "url": "https://github.com/allnulled/restero/issues"
+  },
+  "homepage": "https://github.com/allnulled/restero#readme"
 }
