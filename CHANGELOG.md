@@ -172,3 +172,7 @@ Pero todavía...
 - [✔] package.json con la info de git también
 - [✔] preparado para subir a NPM.
 
+**Versión `v0.0.19`.** *El 15 de septiembre de 2023 a las 11:30am.*
+
+- [✔] Cambiado nombre del readme.
+- [✔] Unificada la información del readme + reference
