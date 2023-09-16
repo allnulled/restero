@@ -46,3 +46,11 @@ asigno window.utilidades.gestion_de_error_desde_respuesta como una función con 
   }.
   retorno false.
 }.
+
+asigno window.utilidades.es_administrador como una función con (autentificacion) donde {
+  desacoplo constantes { permisos } a partir de autentificacion.
+  creo permisos_coincidentes como permisos filtrado por una función con (permiso) donde {
+    retorno permiso.nombre es igual que "permiso de administración".
+  }.
+  retorno permisos_coincidentes.length.
+}.

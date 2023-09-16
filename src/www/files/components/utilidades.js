@@ -79,3 +79,21 @@ throw error;
 }
 
 };
+window.utilidades.es_administrador = function( autentificacion ) {try {
+const { permisos
+} = autentificacion;
+const permisos_coincidentes = Castelog.metodos.un_filtrado_por(permisos, function( permiso ) {try {
+return permiso.nombre === "permiso de administración";
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+}, null, null);
+return permisos_coincidentes.length;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+};

@@ -108,7 +108,10 @@
     font-size: 9px;
     cursor: pointer;
 }
-
+.input_para_checkbox_1 {
+    min-width: auto;
+    padding: 0;
+}
 
 
 
@@ -177,6 +180,8 @@ hr {
 .win7 input.inputfile {
     border: 1px solid #888;
     background-color: white;
+    font-family: Roboto;
+    font-size: 12px;
     border-radius: 2pt;
     width: 100%;
     cursor: pointer;

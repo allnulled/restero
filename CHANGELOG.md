@@ -176,3 +176,17 @@ Pero todavía...
 
 - [✔] Cambiado nombre del readme.
 - [✔] Unificada la información del readme + reference
+
+**Versión `v0.0.21`.** *El 15 de septiembre de 2023 a las 18:39pm.*
+
+- [✔] existe operación de importar ficheros Excel
+  - [✔] en el back:
+    - [✔] persiste el fichero
+    - [✔] lee el fichero
+    - [✔] importa datos
+  - [✔] en el front:
+    - [✔] se permite un fileinput
+    - [✔] se envían los datos
+- [✔] existe operación de exportar ficheros Excel
+  - [✔] en el back
+  - [✔] en el front

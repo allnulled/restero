@@ -1,0 +1,110 @@
+asigno window.PaginaDeImportarExportarDatos como un componente vue2 con nombre "PaginaDeImportarExportarDatos" con plantilla {
+  <div class="PaginaDeImportarExportarDatos Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Importar/Exportar datos</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-if="root.esquema" class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'}]"></BreadcrumbGenerico>
+        <h5>Importar/Exportar datos</h5>
+        <div style="padding: 3px; padding-top: 0px;">
+          <section class="tabs">
+            <menu role="tablist">
+              <button role="tab" :aria-selected="seccion_seleccionada === 'importar'" v-on:click="() => seleccionar_seccion('importar')">Importar</button>
+              <button role="tab" :aria-selected="seccion_seleccionada === 'exportar'" v-on:click="() => seleccionar_seccion('exportar')">Exportar</button>
+            </menu>
+            <article role="tabpanel" :hidden="seccion_seleccionada !== 'importar'">
+              <h5>Importar datos masivamente</h5>
+              <p>Selecciona el fichero (.ods | .xlsx | .xls):</p>
+              <input type="file" class="inputfile" ref="importacion_de_datos" />
+              <div class="text_align_right" style="padding-top: 4px;">
+                <button v-on:click="importar_datos_de_fichero">Importar datos de fichero</button>
+              </div>
+            </article>
+            <article role="tabpanel" :hidden="seccion_seleccionada !== 'exportar'">
+              <h5>Exportar datos masivamente</h5>
+              <p>Selecciona las tablas que quieres exportar:</p>
+              <ul>
+                <li v-for="tabla, tabla_index in root.esquema" v-bind:key="'exportar-tabla-' + tabla_index">
+                  <input type="checkbox" class="input_para_checkbox_1" :id="'input-de-exportar-tabla-' + tabla.tabla" :value="tabla.tabla" v-model="tablas_seleccionadas" />
+                  <label :for="'input-de-exportar-tabla-' + tabla.tabla">{{ tabla.tabla }}</label>
+                </li>
+              </ul>
+              <div class="text_align_right">
+                <button v-on:click="exportar_datos_a_fichero">Exportar datos a fichero</button>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      retorno {
+        tablas_seleccionadas: [],
+        seccion_seleccionada: 'importar'
+      }.
+    }.
+    propiedad methods como {
+        seleccionar_seccion: una función con (seccion) donde {
+          asigno this.seccion_seleccionada como seccion.
+        },
+        importar_datos_de_fichero: una función asíncrona donde {
+          creo fichero como this.$refs.importacion_de_datos.files[0].
+          creo datos_de_formulario como un nuevo FormData().
+          hago datos_de_formulario.append("fichero", fichero).
+          creo respuesta_de_subida como asíncronamente una petición http
+            con url "/api/v1/db/import/excel"
+            con método "POST"
+            con cuerpo datos_de_formulario
+            con cabeceras {
+              "Content-Type": "multipart/form-data",
+              authorization: this.root.token_de_sesion
+            }.
+          si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_de_subida, this) {
+            
+          }.
+        },
+        exportar_datos_a_fichero: una función asíncrona donde {
+          creo formulario como document.createElement("form").
+          asigno formulario.style.display como "none".
+          asigno formulario.method como "POST".
+          asigno formulario.action como "/api/v1/db/export/excel".
+          creo entrada_de_token como document.createElement("input").
+          asigno entrada_de_token.type como "text".
+          asigno entrada_de_token.name como "authorization".
+          asigno entrada_de_token.value como this.root.token_de_sesion.
+          creo entrada_de_tablas como document.createElement("input").
+          asigno entrada_de_tablas.type como "text".
+          asigno entrada_de_tablas.name como "tablas".
+          asigno entrada_de_tablas.value como this.tablas_seleccionadas textualizado.
+          hago document.body.appendChild(formulario).
+          hago formulario.appendChild(entrada_de_tablas).
+          hago formulario.appendChild(entrada_de_token).
+          hago formulario.submit().
+          hago formulario.remove().
+        }
+    }.
+  }.
+}.

@@ -17,6 +17,7 @@ Ejecutable como documento HTML5
     <script src="./components/PaginaDePanelDeConfiguraciones.component.js"></script>
     <script src="./components/PaginaDeLogin.component.js"></script>
     <script src="./components/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
+    <script src="./components/PaginaDeImportarExportarDatos.component.js"></script>
 </head>
 <body><div id="app"></div></body>.
 
@@ -654,6 +655,11 @@ asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
     propiedad path como "/configuraciones".
     propiedad name como "PanelDeConfiguraciones".
     propiedad component como PaginaDePanelDeConfiguraciones.
+    propiedad props como {}.
+}, {
+    propiedad path como "/importar_exportar_datos".
+    propiedad name como "PaginaDeImportarExportarDatos".
+    propiedad component como PaginaDeImportarExportarDatos.
     propiedad props como {}.
 }, {
     propiedad path como "/".
