@@ -112,6 +112,18 @@
     min-width: auto;
     padding: 0;
 }
+.texto_resaltado_para_copiar {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #999;
+    border-radius: 2pt;
+    overflow-wrap: break-word;
+}
+.texto_monoespaciado {
+    font-family: monospace;
+}
 
 
 

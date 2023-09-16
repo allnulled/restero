@@ -21,18 +21,18 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
         <h5>Inicio</h5>
         <ul>
           <li>
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/administracion')">
-              Panel de administración
+            <span class="como_link" v-on:click="() => abrir_pagina_de('/configuraciones')">
+              Configuraciones
             </span>
           </li>
           <li v-if="$window.utilidades.es_administrador(root.autentificacion)">
             <span class="como_link" v-on:click="() => abrir_pagina_de('/importar_exportar_datos')">
-              Importar/Exportar datos
+              Importar o exportar datos
             </span>
           </li>
           <li>
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/configuraciones')">
-              Configuraciones
+            <span class="como_link" v-on:click="() => abrir_pagina_de('/administracion')">
+              Panel de administración
             </span>
           </li>
         </ul>
