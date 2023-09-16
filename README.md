@@ -1,5 +1,7 @@
 # restero
 
+Despliega aplicaciones REST basadas en ficheros HQL (Hyper Query Language). 
+
 ## Índice
 
 1. [Instalación](#instalación)
