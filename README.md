@@ -267,13 +267,13 @@ Los **autorizadores** o *authorizers* son un conjunto de hiperatributos que nos 
 
 Función:
 
-> No permite **actualizar datos** de dicha tabla **a nadie**.
+> No permite **actualizar datos** (UPDATE) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_actualizable
+  @tiene_autorizador: no_actualizable
 */ ( ... );
 ```
 
@@ -282,13 +282,13 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **eliminar datos** de dicha tabla **a nadie**.
+> No permite **eliminar datos** (DELETE) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_eliminable
+  @tiene_autorizador: no_eliminable
 */ ( ... );
 ```
 
@@ -297,13 +297,13 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **insertar datos** de dicha tabla **a nadie**.
+> No permite **insertar datos** (INSERT) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_insertable
+  @tiene_autorizador: no_insertable
 */ ( ... );
 ```
 
@@ -312,13 +312,13 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **insertar, actualizar ni eliminar datos** de dicha tabla **a nadie**.
+> No permite **insertar, actualizar ni eliminar datos** (INSERT UPDATE DELETE) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_modificable
+  @tiene_autorizador: no_modificable
 */ ( ... );
 ```
 
@@ -327,13 +327,13 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **seleccionar datos** de dicha tabla **a nadie**.
+> No permite **seleccionar datos** (SELECT) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_seleccionable
+  @tiene_autorizador: no_seleccionable
 */ ( ... );
 ```
 
@@ -341,13 +341,13 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **seleccionar, insertar, actualizar ni eliminar datos** de dicha tabla **a nadie**.
+> No permite **seleccionar, insertar, actualizar ni eliminar datos** (SELECT INSERT UPDATE DELETE) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_usable
+  @tiene_autorizador: no_usable
 */ ( ... );
 ```
 
@@ -355,13 +355,13 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **seleccionar ciertas columnas** de dicha tabla **a nadie**.
+> No permite **seleccionar ciertas columnas** (SELECT) de dicha tabla **a nadie**.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @no_visibles_columnas: columna1, columna2, columna3
+  @tiene_autorizador: no_visibles_columnas: columna1, columna2, columna3
 */ ( ... );
 ```
 
@@ -369,13 +369,13 @@ CREATE TABLE x /*
 
 Función:
 
-> Solo permite **actualizar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+> Solo permite **actualizar un dato** (UPDATE) de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
 */ ( ... );
 ```
 
@@ -383,13 +383,13 @@ CREATE TABLE x /*
 
 Función:
 
-> Solo permite **eliminar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+> Solo permite **eliminar un dato** (DELETE) de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @solo_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ ( ... );
 ```
 
@@ -397,13 +397,13 @@ CREATE TABLE x /*
 
 Función:
 
-> Solo permite **insertar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+> Solo permite **insertar un dato** (INSERT) de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
 */ ( ... );
 ```
 
@@ -411,13 +411,13 @@ CREATE TABLE x /*
 
 Función:
 
-> Solo permite **seleccionar un dato** de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+> Solo permite **seleccionar un dato** (SELECT) de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
 
 Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @solo_seleccionable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_seleccionable_por_mismo_usuario: id_usuario
 */ ( ... );
 ```
 
@@ -431,7 +431,7 @@ Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @incluir: insert | update | delete | setfile: { "permiso" : "permiso de administrar" }
+  @tiene_autorizador: incluir: insert | update | delete | setfile: { "permiso" : "permiso de administrar" }
 */ ( ... );
 ```
 
@@ -445,7 +445,7 @@ Ejemplo:
 
 ```sql
 CREATE TABLE x /*
-  @excluir: insert | update | delete | setfile: { "permiso" : "permiso de no molestar" }
+  @tiene_autorizador: excluir: insert | update | delete | setfile: { "permiso" : "permiso de no molestar" }
 */ ( ... );
 ```
 
@@ -453,7 +453,7 @@ CREATE TABLE x /*
 
 Función:
 
-> No permite **actualizar datos** de dicha columna **a nadie**.
+> No permite **actualizar datos** (UPDATE) de dicha columna **a nadie**.
 
 Ejemplo:
 
@@ -469,7 +469,7 @@ CREATE TABLE x (
 
 Función:
 
-> No permite **insertar datos** en dicha columna **a nadie**.
+> No permite **insertar datos** (INSERT) en dicha columna **a nadie**.
 
 Ejemplo:
 
@@ -485,7 +485,7 @@ CREATE TABLE x (
 
 Función:
 
-> No permite **insertar ni actualizar datos** de dicha columna **a nadie**.
+> No permite **insertar ni actualizar datos** (INSERT UPDATE) de dicha columna **a nadie**.
 
 Ejemplo:
 
@@ -501,7 +501,7 @@ CREATE TABLE x (
 
 Función:
 
-> Permite **insertar y actualizar datos** de dicha columna solo a los usuarios que reúnan alguno de los `permisos`, `grupos` o `usuarios` especificados como parámetro.
+> Permite **insertar y actualizar datos** (INSERT UPDATE) de dicha columna solo a los usuarios que reúnan alguno de los `permisos`, `grupos` o `usuarios` especificados como parámetro.
 
 Ejemplo:
 
