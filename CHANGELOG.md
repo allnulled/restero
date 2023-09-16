@@ -190,3 +190,11 @@ Pero todavía...
 - [✔] existe operación de exportar ficheros Excel
   - [✔] en el back
   - [✔] en el front
+
+**Versión `v0.0.22`.** *El 16 de septiembre de 2023 a las 16:19pm.*
+
+- [✔] configuraciones » datos de sesión mejor presentado
+
+**Versión `v0.0.23`.** *El 16 de septiembre de 2023 a las 17:10pm.*
+
+- [✔] [BUG] arreglado bug en la documentación sobre los autorizadores
