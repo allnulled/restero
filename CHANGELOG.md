@@ -198,3 +198,7 @@ Pero todavía...
 **Versión `v0.0.23`.** *El 16 de septiembre de 2023 a las 17:10pm.*
 
 - [✔] [BUG] arreglado bug en la documentación sobre los autorizadores
+
+**Versión `v0.0.24`.** *El 16 de septiembre de 2023 a las 17:13pm.*
+
+- [✔] [BUG] arreglado bug en la documentación en el índice
