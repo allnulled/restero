@@ -7,39 +7,39 @@
 1. [Versiones](#versiones)
 1. [Objetivo](#objetivo)
 1. [Carpetas y ficheros](#introducción)
-1. [El proceso de configuración manual](#el-proceso-de-)
-1. [El proceso de despliegue](#el-proceso-de-)
-1. [El proceso de tests](#el-proceso-de-)
+1. [El proceso de configuración manual](#el-proceso-de-configuración-manual)
+1. [El proceso de despliegue](#el-proceso-de-despliegue)
+1. [El proceso de tests](#el-proceso-de-tests)
 1. [Peticiones disponibles](#peticiones-disponibles)
-   1. [Ejemplo de «login»](#ejemplo-de-login)
-   1. [Ejemplo de «logout»](#ejemplo-de-login)
-   1. [Ejemplo de «select»](#ejemplo-de-login)
-   1. [Ejemplo de «insert»](#ejemplo-de-login)
-   1. [Ejemplo de «update»](#ejemplo-de-login)
-   1. [Ejemplo de «delete»](#ejemplo-de-login)
-   1. [Ejemplo de «getfile»](#ejemplo-de-login)
-   1. [Ejemplo de «setfile»](#ejemplo-de-login)
+   1. Ejemplo de `login`
+   1. Ejemplo de `logout`
+   1. Ejemplo de `select`
+   1. Ejemplo de `insert`
+   1. Ejemplo de `update`
+   1. Ejemplo de `delete`
+   1. Ejemplo de `getfile`
+   1. Ejemplo de `setfile`
 1. [Los hiperatributos](#los-hiperatributos)
 1. [Los autorizadores](#los-autorizadores)
-   1. [Autorizador de tabla: `no_actualizable`](#)
-   1. [Autorizador de tabla: `no_eliminable`](#)
-   1. [Autorizador de tabla: `no_insertable`](#)
-   1. [Autorizador de tabla: `no_modificable`](#)
-   1. [Autorizador de tabla: `no_seleccionable`](#)
-   1. [Autorizador de tabla: `no_usable`](#)
-   1. [Autorizador de tabla: `no_visibles_columnas`](#)
-   1. [Autorizador de tabla: `solo_actualizable_por_mismo_usuario`](#)
-   1. [Autorizador de tabla: `solo_eliminable_por_mismo_usuario`](#)
-   1. [Autorizador de tabla: `solo_insertable_por_mismo_usuario`](#)
-   1. [Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`](#)
-   1. [Autorizador de tabla: `incluir`](#)
-   1. [Autorizador de tabla: `excluir`](#)
-   1. [Autorizador de columna: `no_actualizable`](#)
-   1. [Autorizador de columna: `no_insertable`](#)
-   1. [Autorizador de columna: `no_modificable`](#)
-   1. [Autorizador de columna: `solo_modificable_por`](#)
+   1. Autorizador de tabla: `no_actualizable`
+   1. Autorizador de tabla: `no_eliminable`
+   1. Autorizador de tabla: `no_insertable`
+   1. Autorizador de tabla: `no_modificable`
+   1. Autorizador de tabla: `no_seleccionable`
+   1. Autorizador de tabla: `no_usable`
+   1. Autorizador de tabla: `no_visibles_columnas`
+   1. Autorizador de tabla: `solo_actualizable_por_mismo_usuario`
+   1. Autorizador de tabla: `solo_eliminable_por_mismo_usuario`
+   1. Autorizador de tabla: `solo_insertable_por_mismo_usuario`
+   1. Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`
+   1. Autorizador de tabla: `incluir`
+   1. Autorizador de tabla: `excluir`
+   1. Autorizador de columna: `no_actualizable`
+   1. Autorizador de columna: `no_insertable`
+   1. Autorizador de columna: `no_modificable`
+   1. Autorizador de columna: `solo_modificable_por`
 1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
-   1. [Comando `restero generar`](#)
+   1. Comando `restero generar`
 
 
 ## Instalación
