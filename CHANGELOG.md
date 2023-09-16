@@ -202,3 +202,7 @@ Pero todavía...
 **Versión `v0.0.24`.** *El 16 de septiembre de 2023 a las 17:13pm.*
 
 - [✔] [BUG] arreglado bug en la documentación en el índice
+
+**Versión `v0.0.25`.** *El 16 de septiembre de 2023 a las 17:16pm.*
+
+- [✔] Titulo introductorio en el readme
