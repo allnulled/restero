@@ -307,7 +307,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Fichero /*\n  @tiene_fichero: fichero\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  fichero VARCHAR(512),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\n\nCREATE TABLE Fichero /*\n  @tiene_fichero: fichero\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  fichero VARCHAR(512),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Fichero_de_problema_propuesto",
@@ -364,7 +364,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Fichero_de_problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_fichero INTEGER,\n  id_problema_propuesto INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),\n  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\nCREATE TABLE Fichero_de_problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_fichero INTEGER,\n  id_problema_propuesto INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),\n  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Voto",
