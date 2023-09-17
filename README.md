@@ -49,7 +49,7 @@ Despliega aplicaciones REST basadas en ficheros HQL (Hyper Query Language).
 **Paso 1.** Descárgate el proyecto entero con:
 
 ```sh
-git clone https://github.com/allnulled/hql-deployer.git .
+git clone https://github.com/allnulled/restero.git .
 ```
 
 **Paso 2.** Instala las dependencias automáticamente con el comando:
@@ -69,7 +69,7 @@ Para usar la línea de comandos para generar el proyecto, puedes consultar la se
 
 **Paso 1.** Crea y coloca el script en [HQL](https://github.com/allnulled/h-query-language) en el fichero `src/configurations/db.sql`.
 
-**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`. Modifica también el fichero de migracion inicial si escaece, en `src/configurations/db.migracion.sql`, que se ejecutará en caso que la base de datos deba crearse.
+**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`. Modifica también el fichero de migracion inicial si escaece, en `src/configurations/db/migrations/migracion.sql`, que se ejecutará en caso que la base de datos deba crearse.
 
 **Paso 3.** Despliega la aplicación con el comando:
 
@@ -140,8 +140,8 @@ Los ficheros relacionados con la base de datos son:
 
   - `src/configurations/db.sql`
   - `src/configurations/db.sql.json`
-  - `src/configurations/db.migracion.sql`
-  - `src/configurations/db.migracion.test.sql`
+  - `src/configurations/db/migrations/migracion.sql`
+  - `src/configurations/db/migrations/migracion.test.sql`
 
 El fichero de la aplicación estática y sus componentes son:
 
@@ -150,25 +150,27 @@ El fichero de la aplicación estática y sus componentes son:
 
 ## El proceso de configuración manual
 
-El **proceso de configuración manual** del `hql-deployer` está pensado para ser rápido, sencillo pero potente, y consiste en:
+El **proceso de configuración manual** del `restero` está pensado para ser rápido, sencillo pero potente, y consiste en:
 
-  - `src/configurations/db.sql`: diseñar la base de datos que queremos desplegar.
-  - `src/configurations/db.migracion.sql`: elaborar la migración inicial en todos los entornos.
-  - `src/configurations/db.migracion.test.sql`: elaborar la migración inicial en el entorno de test.
+  - `src/configurations/db.sql`: diseñar la base de datos que finalmente queremos desplegar.
+  - `src/configurations/db/migrations/migracion.sql`: elaborar la migración inicial en todos los entornos.
+  - `src/configurations/db/migrations/migracion.test.sql`: elaborar la migración inicial en el entorno de test.
   - `src/configurations/settings.json`: establecer los valores de configuración global preferidos.
+  - `src/configurations/db/db.ejs.sql`: diseñar la base de datos que queremos desplegar, pero a través de plantillas. Si escribes algo en este fichero a través de la plantilla ejs, el siguiente fichero `db.sql` se sobreescribirá con ello. Si no escribes nada, en cambio, valdrá lo que haya escrito en el `db.sql` directamente. Por defecto, no escribe nada. Este fichero permite desplegar la base de datos como si fueran módulos, y así componer la base de datos, pero su uso es opcional y por defecto está desactivado, solo hay comentarios de plantilla pero no imprime nada.
 
 Si nos faltan controladores o autorizadores para completar nuestra aplicación, deberemos programarlos en:
 
   - `src/controllers`: para los nuevos controladores
   - `src/authorizers`: para los nuevos autorizadores
+  - `src/authorizers/columns`: para los nuevos autorizadores, pero referidos a las columnas
 
 Después, utilizarlos en la aplicación, sea vía el script `db.sql` y sus hiper-atributos, o sea vía editando el fichero de `src/utilities/desplegar_servidor.js`.
 
-Situar los ficheros en estas carpetas nos permitirá acceder a ellos tal que: `deployer.controllers.mi_controlador` y `deployer.authorizers.mi_autorizador`, y los autorizadores funcionarán correctamente si son llamados desde el script `db.sql`.
+Situar los ficheros en estas carpetas nos permitirá acceder a ellos tal que: `deployer.controllers.mi_controlador` y `deployer.authorizers.mi_autorizador`, o `deployer.authorizers.columns.mi_otro_autorizador`, y así los autorizadores funcionarán correctamente si son llamados desde el script `db.sql`.
 
 ## El proceso de despliegue
 
-El **proceso de despliegue** del `hql-deployer` se inicia tan rápidamente como:
+El **proceso de despliegue** del `restero` se inicia tan rápidamente como:
 
 ```sh
 npm start
@@ -181,7 +183,7 @@ node src/deployer.js
 ```
 
 
-El **proceso de despliegue** del `hql-deployer` está programado en el `src/deployer.js` y consiste, por este orden, en:
+El **proceso de despliegue** del `restero` está programado en el `src/deployer.js` y consiste, por este orden, en:
 
   - *Cargar configuraciones*: carga los ficheros de `src/configurations`
   - *Cargar utilidades*: carga los ficheros de `src/utilities`
@@ -192,7 +194,7 @@ El **proceso de despliegue** del `hql-deployer` está programado en el `src/depl
 
 ## El proceso de tests
 
-El **proceso de tests** del `hql-deployer` se inicia tan rápidamente como:
+El **proceso de tests** del `restero` se inicia tan rápidamente como:
 
 ```sh
 npm test
@@ -210,7 +212,7 @@ Pasará los tests en 1 por proceso, y finalmente listará los resultados obtenid
 
 Las peticiones generalmente aceptan un `HTTP header` con el que se le facilita el token de sesión al servidor: el clásico `authorization`. De esta forma, el servidor puede autentificar la petición, y pasar los filtros especificados correspondientemente.
 
-A continuación se listan las principales acciones que se pueden hacer vía petición HTTP con el servidor desplegado por `hql-deployer`.
+A continuación se listan las principales acciones que se pueden hacer vía petición HTTP con el servidor desplegado por `restero`.
 
 #### Ejemplo de **«login»**
   - `[POST] /api/v1/login?nombre=admin&contrasenya=admin`
@@ -524,7 +526,7 @@ A continuación se explican los comandos que permite la interfaz.
 #### Comando `restero generar`
 
 - Argumento `salida`:
-   - `--salida {ruta}`: **Opcional**. Por defecto: `.`. Especifica el directorio en el que se copiará el proyecto inicial del `hql-deployer`.
+   - `--salida {ruta}`: **Opcional**. Por defecto: `.`. Especifica el directorio en el que se copiará el proyecto inicial del `restero`.
 
 Ejemplo:
 

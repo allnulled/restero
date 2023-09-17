@@ -206,3 +206,16 @@ Pero todavía...
 **Versión `v0.0.25`.** *El 16 de septiembre de 2023 a las 17:16pm.*
 
 - [✔] Titulo introductorio en el readme
+
+**Versión `v0.0.26`.** *El 17 de septiembre de 2023 a las 08:48pm.*
+
+- [✔] La base de datos se puede montar vía plantilla ejs y sus módulos en lugar de un script sql en crudo, opcionalmente.
+  - [✔] Si imprimes algo por el fichero de plantilla ejs de configurations/db/db.ejs.sql entonces se sobreescribe configurations/db.sql
+    - [✔] Que es la semilla de su json y de la estructura de la base de datos final
+- [✔] Las migraciones se han deslocalizado para dejar sólo el script de la base de datos final en configurations. A configurations/migrations
+
+**Versión `v0.0.27`.** *El 17 de septiembre de 2023 a las 09:11pm.*
+
+- [✔] Corregido README de varias cosas
+  - [✔] Actualizado la deslocalización de las migraciones en el README
+  - [✔] Eliminado el fichero de REFERENCE
