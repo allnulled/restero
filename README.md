@@ -1,6 +1,6 @@
 # restero
 
-Despliega aplicaciones REST basadas en ficheros HQL (Hyper Query Language). 
+Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](https://github.com/allnulled/h-query-language). 
 
 ## Índice
 
@@ -69,24 +69,30 @@ Para usar la línea de comandos para generar el proyecto, puedes consultar la se
 
 **Paso 1.** Crea y coloca el script en [HQL](https://github.com/allnulled/h-query-language) en el fichero `src/configurations/db.sql`.
 
-**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`. Modifica también el fichero de migracion inicial si escaece, en `src/configurations/db/migrations/migracion.sql`, que se ejecutará en caso que la base de datos deba crearse.
+**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`.
 
-**Paso 3.** Despliega la aplicación con el comando:
+**Paso 3.** Revisa también el fichero de migración inicial si escaece, en `src/configurations/db/migrations/migracion.sql` que se ejecutará automáticamente en caso que la base de datos deba crearse.
+
+También está el fichero vecino `migracion.test.sql` que se ejecutará en caso de que el booleano `DB_TEST_MIGRATION` en `src/configurations/settings.json` esté en `true`.
+
+**Paso 4.** Despliega la aplicación con el comando:
 
 ```sh
 npm start
 ```
 
-Este comando creará la base de datos si la primera tabla del script no existe, y aplicará la migración inicial. De lo contrario, obviará estos pasos, y continuará la ejecución del despliegue del servidor.
+Este comando creará la base de datos si la primera tabla del script no existe (`Usuario`), y aplicará la migración inicial. La de tests en caso de que esté activada en el `configurations/settings.json`. Si la tal primera tabla está creada, obviará estos pasos, y continuará la ejecución del despliegue del servidor.
 
-**Paso 4.** Ya puedes hacer todas las operaciones CRUD automáticamente mediante HTTP, por ejemplo:
+**Paso 5.** Ya puedes hacer todas las operaciones CRUD automáticamente mediante HTTP, por ejemplo:
 
   - `/api/v1/insert/Usuario?nombre=Alicia&domicilio=El país de las villas de Mara`
   - `/api/v1/update/Usuario?id=1&nombre=Bob`
   - `/api/v1/select/Usuario?`
   - `/api/v1/delete/Usuario?id=1`
 
-Nótese que las operaciones de UPDATE y DELETE requieren siempre del campo `id`. De lo contrario, darán error. Esto invalida poder usar múltiples `PRIMARY KEY` en una tabla, de momento.
+Precisamente, `Usuario` es una tabla que viene bloqueada por un autorizador `no_usable`. Pero si sacáramos este autorizador, estaría disponible.
+
+Nótese que las operaciones de UPDATE y DELETE requieren siempre del campo `id`. De lo contrario, darán error. Esto invalida poder usar múltiples `PRIMARY KEY` en una tabla, de momento. Esto último se debe a limitaciones del `sqlite`, porque otras como `mysql` sí lo ofrecen independientemente en su sintaxis (véase `MULTIPLE KEY` de `mysql`, pero no de `sqlite`).
 
 También puedes usar `login` y `logout` así:
 
@@ -142,6 +148,7 @@ Los ficheros relacionados con la base de datos son:
   - `src/configurations/db.sql.json`
   - `src/configurations/db/migrations/migracion.sql`
   - `src/configurations/db/migrations/migracion.test.sql`
+  - `src/configurations/db/db.ejs.sql`
 
 El fichero de la aplicación estática y sus componentes son:
 
@@ -153,9 +160,12 @@ El fichero de la aplicación estática y sus componentes son:
 El **proceso de configuración manual** del `restero` está pensado para ser rápido, sencillo pero potente, y consiste en:
 
   - `src/configurations/db.sql`: diseñar la base de datos que finalmente queremos desplegar.
-  - `src/configurations/db/migrations/migracion.sql`: elaborar la migración inicial en todos los entornos.
+  - `src/configurations/db/migrations/migracion.sql`: elaborar la migración inicial en todos los entornos. Esto se ejecuta si la base de datos debe crearse. La base de datos debe crearse si la primera tabla no está seleccionable. `Usuario` es la primera tabla, y `autorizacion.ejs.sql` es el primer módulo a cargar siempre.
   - `src/configurations/db/migrations/migracion.test.sql`: elaborar la migración inicial en el entorno de test.
-  - `src/configurations/settings.json`: establecer los valores de configuración global preferidos.
+  - `src/configurations/settings.json`: establecer los valores de configuración global preferidos. A continuación se listan los valores prestablecidos de la aplicación.
+      - `APP_PORT`: `5046`. El puerto en el que el servidor se desplegará.
+      - `DB_RESET`: `true`. Esto significa que cada vez que reinicies el sistema, las tablas se destruirán y se volverán a crear en función del script en `src/configurations/db.sql`, y consecuentemente se ejecutará la migración inicial en `src/configurations/migrations/migracion.sql`.
+      - `DB_TEST_MIGRATION`: `false`. Ejecutará, en caso de que se esté migrando inicialmente la aplicación, el fichero en `src/configurations/migrations/migracion.test.sql`.
   - `src/configurations/db/db.ejs.sql`: diseñar la base de datos que queremos desplegar, pero a través de plantillas. Si escribes algo en este fichero a través de la plantilla ejs, el siguiente fichero `db.sql` se sobreescribirá con ello. Si no escribes nada, en cambio, valdrá lo que haya escrito en el `db.sql` directamente. Por defecto, no escribe nada. Este fichero permite desplegar la base de datos como si fueran módulos, y así componer la base de datos, pero su uso es opcional y por defecto está desactivado, solo hay comentarios de plantilla pero no imprime nada.
 
 Si nos faltan controladores o autorizadores para completar nuestra aplicación, deberemos programarlos en:
@@ -166,7 +176,7 @@ Si nos faltan controladores o autorizadores para completar nuestra aplicación, 
 
 Después, utilizarlos en la aplicación, sea vía el script `db.sql` y sus hiper-atributos, o sea vía editando el fichero de `src/utilities/desplegar_servidor.js`.
 
-Situar los ficheros en estas carpetas nos permitirá acceder a ellos tal que: `deployer.controllers.mi_controlador` y `deployer.authorizers.mi_autorizador`, o `deployer.authorizers.columns.mi_otro_autorizador`, y así los autorizadores funcionarán correctamente si son llamados desde el script `db.sql`.
+Situar los ficheros en estas carpetas nos permitirá acceder a ellos tal que: `deployer.controllers.mi_controlador` y `deployer.authorizers.mi_autorizador`, o `deployer.authorizers.columns.mi_otro_autorizador` en el caso de autorizadores de columna, y así los autorizadores funcionarán correctamente si son llamados desde el script `db.sql`.
 
 ## El proceso de despliegue
 

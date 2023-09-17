@@ -219,3 +219,9 @@ Pero todavía...
 - [✔] Corregido README de varias cosas
   - [✔] Actualizado la deslocalización de las migraciones en el README
   - [✔] Eliminado el fichero de REFERENCE
+
+**Versión `v0.0.28`.** *El 17 de septiembre de 2023 a las 09:35pm.*
+
+- [✔] Corregido README de varias cosas
+  - [✔] Separados pasos de creación y de migración
+  - [✔] Otros matices
