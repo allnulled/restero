@@ -97,3 +97,4 @@ throw error;
 }
 
 };
+window.utilidades.gestor_de_hooks = window.generar_gestor_de_hooks(  );

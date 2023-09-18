@@ -42,6 +42,9 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Autorizador de columna: `solo_modificable_por`
 1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
    1. Comando `restero generar`
+1. [Hooks](#hooks)
+   1. Hooks en el servidor
+   1. Hooks en la aplicación de usuario
 
 
 ## Instalación
@@ -273,6 +276,8 @@ Las carpetas internas originales son:
   - `src/authorizers/`: donde residen los autorizadores.
   - `src/configurations/`: donde residen ficheros considerados «de configuraciones».
   - `src/controllers/`: donde residen los controladores nuevos.
+  - `src/dependencies/`: donde residen las dependencias.
+  - `src/hooks/`: donde residen las hooks.
   - `src/parsers/`: donde residen los parsers.
   - `src/uploads/`: donde residen los ficheros subidos por los usuarios.
   - `src/utilities/`: donde residen los ficheros utilizados por el servidor.
@@ -280,10 +285,19 @@ Las carpetas internas originales son:
 
 Los ficheros que cargan carpetas son:
 
-  - `src/authorizers/index.js`
+  - `src/authorizers/index.js`: donde
   - `src/configurations/index.js`
   - `src/controllers/index.js`
   - `src/utilities/index.js`
+
+El fichero de hooks del servidor es:
+
+  - `src/hooks/hooks.js`
+
+El fichero de hooks de la aplicación de usuario es:
+
+  - `src/www/files/hooks/hooks.js`
+  - `src/www/files/hooks/hooks.calo`
 
 El fichero que carga la aplicación es:
 
@@ -347,8 +361,10 @@ node src/deployer.js
 
 El **proceso de despliegue** del `restero` está programado en el `src/deployer.js` y consiste, por este orden, en:
 
+  - *Cargar dependencias*: carga los ficheros de `src/dependencies`
   - *Cargar configuraciones*: carga los ficheros de `src/configurations`
   - *Cargar utilidades*: carga los ficheros de `src/utilities`
+  - *Cargar hooks*: carga los ficheros de `src/hooks/hooks.js`
   - *Cargar controladores*: carga los ficheros de `src/controllers`
   - *Cargar autorizadores*: carga los ficheros de `src/authorizers`
   - *Desplegar base de datos*: carga una primera conexión, y luego resetea y migra la base de datos, si escaese.
@@ -721,3 +737,18 @@ Ejemplo:
 restero generar --directorio app
 ```
 
+## Hooks
+
+Los *hooks* son formas dinámicas de integrar código externo en la aplicación. Con ellos, podemos modular nuestro desarollo y hacerlo incremental, además de reducir el número de ficheros necesariamente implicados para integrar código externo: sólo un fichero `hooks.js`.
+
+Los *hooks* están presentes tanto en el backend/servidor, como en el frontend/aplicación de usuario.
+
+#### Hooks en el back
+
+El fichero `src/hooks/hooks.js`
+
+#### Hooks en el front
+
+El fichero `src/www/files/hooks/hooks.calo`.
+
+O directamente el fichero `src/www/files/hooks/hooks.js`.

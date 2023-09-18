@@ -9,7 +9,9 @@ Ejecutable como documento HTML5
     <link rel="stylesheet" type="text/css" href="./components/win7.scoped.css" />
     <link rel="stylesheet" type="text/css" href="./components/theme.css" />
     <script src="./components/calo.js"></script>
-    <script src="./components/utilidades.js"></script>
+    <script src="./dependencies/generar_gestor_de_hooks.js"></script>
+    <script src="./dependencies/utilidades.js"></script>
+    <script src="./hooks/hooks.js"></script>
     <script src="./components/PuertoDeNotificaciones.component.js"></script>
     <script src="./components/BreadcrumbGenerico.component.js"></script>
     <script src="./components/ExploradorDeDatos.component.js"></script>
@@ -23,78 +25,103 @@ Ejecutable como documento HTML5
 </head>
 <body><div id="app"></div></body>.
 
-asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
-    propiedad path como "/login".
-    propiedad name como "Login".
-    propiedad component como PaginaDeLogin.
-    propiedad props como {}.
-}, {
-    propiedad path como "/explorador/:id_de_tabla".
-    propiedad name como "ExploradorDeDatosDeTabla".
-    propiedad component como PaginaDeExploradorDeDatosDeTabla.
-    propiedad props como {}.
-}, {
-    propiedad path como "/formulario/:id_de_tabla/crear".
-    propiedad name como "FormularioDeDatoDeTabla".
-    propiedad component como PaginaDeFormularioDeDatoDeTabla.
-    propiedad props como { modalidad: "crear" }.
-}, {
-    propiedad path como "/formulario/:id_de_tabla/id/:id_de_fila".
-    propiedad name como "FormularioDeDatoDeTabla".
-    propiedad component como PaginaDeFormularioDeDatoDeTabla.
-    propiedad props como { modalidad: "editar" }.
-}, {
-    propiedad path como "/administracion".
-    propiedad name como "PanelDeAdministracion".
-    propiedad component como PaginaDePanelDeAdministracion.
-    propiedad props como {}.
-}, {
-    propiedad path como "/configuraciones".
-    propiedad name como "PanelDeConfiguraciones".
-    propiedad component como PaginaDePanelDeConfiguraciones.
-    propiedad props como {}.
-}, {
-    propiedad path como "/importar_exportar_datos".
-    propiedad name como "PaginaDeImportarExportarDatos".
-    propiedad component como PaginaDeImportarExportarDatos.
-    propiedad props como {}.
-}, {
-    propiedad path como "/".
-    propiedad name como "Inicio".
-    propiedad component como PaginaDeInicio.
-    propiedad props como {}.
-}] con traducciones {
-    propiedad es como {}.
-    propiedad en como {}.
-    propiedad ca como {}.
-} con plantilla {
-  <div class="App Component Castelog-app win7">
-    <div v-if="token_de_sesion">
-      <router-view :root="this"></router-view>
+creo main como una función asíncrona donde {
+
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:iniciar").
+
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:precargar:rutas").
+
+  creo rutas como [{
+      propiedad path como "/login".
+      propiedad name como "Login".
+      propiedad component como PaginaDeLogin.
+      propiedad props como {}.
+  }, {
+      propiedad path como "/explorador/:id_de_tabla".
+      propiedad name como "ExploradorDeDatosDeTabla".
+      propiedad component como PaginaDeExploradorDeDatosDeTabla.
+      propiedad props como {}.
+  }, {
+      propiedad path como "/formulario/:id_de_tabla/crear".
+      propiedad name como "FormularioDeDatoDeTabla".
+      propiedad component como PaginaDeFormularioDeDatoDeTabla.
+      propiedad props como { modalidad: "crear" }.
+  }, {
+      propiedad path como "/formulario/:id_de_tabla/id/:id_de_fila".
+      propiedad name como "FormularioDeDatoDeTabla".
+      propiedad component como PaginaDeFormularioDeDatoDeTabla.
+      propiedad props como { modalidad: "editar" }.
+  }, {
+      propiedad path como "/administracion".
+      propiedad name como "PanelDeAdministracion".
+      propiedad component como PaginaDePanelDeAdministracion.
+      propiedad props como {}.
+  }, {
+      propiedad path como "/configuraciones".
+      propiedad name como "PanelDeConfiguraciones".
+      propiedad component como PaginaDePanelDeConfiguraciones.
+      propiedad props como {}.
+  }, {
+      propiedad path como "/importar_exportar_datos".
+      propiedad name como "PaginaDeImportarExportarDatos".
+      propiedad component como PaginaDeImportarExportarDatos.
+      propiedad props como {}.
+  }, {
+      propiedad path como "/".
+      propiedad name como "Inicio".
+      propiedad component como PaginaDeInicio.
+      propiedad props como {}.
+  }].
+
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:postcargar:rutas", { rutas }).
+
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:precargar:aplicacion", { rutas }).
+
+  asigno window.App como una aplicación vue2 con nombre "App" con rutas rutas con traducciones {
+      propiedad es como {}.
+      propiedad en como {}.
+      propiedad ca como {}.
+  } con plantilla {
+    <div class="App Component Castelog-app win7">
+      <div v-if="token_de_sesion">
+        <router-view :root="this"></router-view>
+      </div>
+      <div v-else>
+        <PaginaDeLogin :root="this" />
+      </div>
+      <PuertoDeNotificaciones :root="this" />
     </div>
-    <div v-else>
-      <PaginaDeLogin :root="this" />
-    </div>
-    <PuertoDeNotificaciones :root="this" />
-  </div>
-} con estilos {
-    html {}
-    body {}
-    .Component {}
-    .App {}
-} con lógica {
-  retorno {
-    método data donde {
-      retorno {
-        esquema: undefined,
-        token_de_sesion: undefined
+  } con estilos {
+      html {}
+      body {}
+      .Component {}
+      .App {}
+  } con lógica {
+    retorno {
+      método data donde {
+        retorno {
+          esquema: undefined,
+          token_de_sesion: undefined
+        }.
       }.
+      propiedad methods como {}.
+      propiedad watch como {}.
+      método beforeMount donde {
+        asigno this.$window como window.
+      }.
+      método mounted donde {}.
     }.
-    propiedad methods como {}.
-    propiedad watch como {}.
-    método beforeMount donde {
-      asigno this.$window como window.
-    }.
-    método mounted donde {}.
-  }.
-} montada en "#app".
+  } montada en "#app".
+
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:postcargar:aplicacion", { rutas }).
+  
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:iniciada", { rutas }).
+
+} en errores {
+
+  imprimo error.
+  lanzo error.
+
+}.
+
+hago main().

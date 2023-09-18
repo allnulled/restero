@@ -54,3 +54,5 @@ asigno window.utilidades.es_administrador como una función con (autentificacion
   }.
   retorno permisos_coincidentes.length.
 }.
+
+asigno window.utilidades.gestor_de_hooks como window.generar_gestor_de_hooks().

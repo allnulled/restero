@@ -233,8 +233,15 @@ Pero todavía...
 
 **Versión `v0.0.30`.** *El 18 de septiembre de 2023 a las 19:44am.*
 
-- [✔] Extendido `hooks`:
+- [✔] Extendido `hooks` para el backend:
   - [✔] vía a) `deployer.dependencies.generar_gestor_de_hooks`
   - [✔] vía b) `deployer.utilities.gestor_de_hooks.agregar_hook`
   - [✔] vía c) `deployer.utilities.gestor_de_hooks.usar_hook`
   - [✔] vía d) `hooks/hooks.js`
+  - [✔] en el README
+- [✔] Extendido `hooks` para el frontend:
+  - [✔] vía a) `window.generar_gestor_de_hooks`
+  - [✔] vía b) `window.utilidades.gestor_de_hooks.agregar_hook`
+  - [✔] vía c) `window.utilidades.gestor_de_hooks.usar_hook`
+  - [✔] vía d) `src/www/files/hooks/hooks.js`
+  - [✔] en el README

@@ -1,0 +1,3 @@
+hago window.utilidades.gestor_de_hooks.agregar_hook("app:iniciada", una función donde {
+    imprimo "app.iniciada ok!".
+}).
