@@ -42,6 +42,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Autorizador de columna: `solo_modificable_por`
 1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
    1. Comando `restero generar`
+   1. Comando `restero generar:seeder`
 1. [Hooks](#hooks)
    1. Hooks en el servidor
    1. Hooks en la aplicación de usuario
@@ -736,6 +737,19 @@ Ejemplo:
 ```sh
 restero generar --directorio app
 ```
+
+#### Comando `restero generar:seeder`
+
+El *seeder* o *semillero* es un proyecto que va a tener una carpeta `input` y otra `output`, y luego un fichero `seeder.sh` y `seeder.bat` que pondrá lo del uno en el otro, cruzado con los ficheros base del proyecto `restero` original.
+
+- Argumento `salida`:
+   - `--salida {directorio}`; **Requerido**. Especifica el fichero sobre el cual se crearán las carpetas de `input` y `output` y el fichero de `seeder.sh`.
+
+```sh
+restero generar:seeder --salida .
+```
+
+Usar `bash seeder.sh` posteriormente para generar el directorio `output` a partir del `input`. Sirve para crear proyectos desde 0 limpiamente, incorporando solo los ficheros cambiados. Solo funcionará si `restero` está disponible como comando global de la línea de comandos.
 
 ## Hooks
 

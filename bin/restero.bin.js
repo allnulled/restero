@@ -39,6 +39,19 @@ if(comando === "generar") {
         console.log("[*] Reseteada base de datos");
     }
     console.log("[*] Finalizado comando -restero generar-");
+} else if(comando === "generar:seeder") {
+    console.log("[*] Iniciado comando -restero generar:seeder-");
+    const directorio_seeder = path.resolve(__dirname + "/seeder");
+    const arg_salida = argumentos.output || argumentos.salida || false;
+    if(!arg_salida) {
+        throw new Error("Se requiere argumento --salida o --output para comando «restero generar:seeder»");
+    }
+    const salida_final = path.resolve(arg_salida);
+    fs.copySync(directorio_seeder, salida_final);
+    console.log("[*] Copiado directorio seeder...");
+    console.log("[*]    - de: " + directorio_seeder);
+    console.log("[*]    - a:  " + salida_final);
+    console.log("[*] Finalizado comando -restero generar:seeder-");
 } else {
     throw new Error(`Comando no reconocido para «restero»: «${comando}»`);
 }

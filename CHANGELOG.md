@@ -245,3 +245,11 @@ Pero todavía...
   - [✔] vía c) `window.utilidades.gestor_de_hooks.usar_hook`
   - [✔] vía d) `src/www/files/hooks/hooks.js`
   - [✔] en el README
+
+**Versión `v0.0.31`.** *El 18 de septiembre de 2023 a las 21:56am.*
+- [✔] Comando `restero generar:seeder`
+  - [✔] en el binario
+  - [✔] en el README
+
+
+
