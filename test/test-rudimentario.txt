@@ -2,7 +2,20 @@ Test 1: login. De admin-admin :S
 
     http://127.0.0.1:5046/api/v1/login?nombre=admin&contrasenya=admin
 
-Test 2: imprime la autentificacion por consola (línea comentada en el código, el utilities/controlador_de_operaciones):
+Test 2: logout.
+
+    http://127.0.0.1:5046/api/v1/logout?token_de_sesion=J45ID21FAS23KLN...
+
+Test 3: select.
 
     http://127.0.0.1:5046/api/v1/select/Usuario?authorization=3ABIII7T3WYN8I8PTL7PBSKGVMV9FMZL5Q9WN4N5GHW85V4H0J7G1S4DUD0KMKMTJ7IU4S6LRMKXDUYEFL6I43UMSUU1L1BHDLP1
+
+Test 4: insert.
+
+    http://127.0.0.1:5046/api/v1/insert/Usuario?nombre=xxxxx&contrasenya=xxxxx&authorization=3ABIII7T3WYN8I8PTL7PBSKGVMV9FMZL5Q9WN4N5GHW85V4H0J7G1S4DUD0KMKMTJ7IU4S6LRMKXDUYEFL6I43UMSUU1L1BHDLP1
+  
+
+#### Ejemplo de **«login»**
+
+#### Ejemplo de **«logout»**
 

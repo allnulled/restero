@@ -111,6 +111,158 @@ El modo en que esto se consigue es añadiendo unas notaciones con comentarios en
 
 ## Carpetas y ficheros
 
+El árbol de ficheros base es el que sigue:
+
+```
+.
+├── bin
+│   └── restero.bin.js
+├── CHANGELOG.md
+├── package.json
+├── package-lock.json
+├── README.md
+├── src
+│   ├── authorizers
+│   │   ├── columns
+│   │   │   ├── no_actualizable.js
+│   │   │   ├── no_insertable.js
+│   │   │   ├── no_modificable.js
+│   │   │   └── solo_modificable_por.js
+│   │   ├── espera_segundos.js
+│   │   ├── excluir.js
+│   │   ├── incluir.js
+│   │   ├── index.js
+│   │   ├── mientras_clave_multiple.js
+│   │   ├── no_actualizable.js
+│   │   ├── no_eliminable.js
+│   │   ├── no_insertable.js
+│   │   ├── no_modificable.js
+│   │   ├── no_seleccionable.js
+│   │   ├── no_usable.js
+│   │   ├── no_visibles_columnas.js
+│   │   ├── solo_actualizable_por_mismo_usuario.js
+│   │   ├── solo_eliminable_por_mismo_usuario.js
+│   │   ├── solo_insertable_por_mismo_usuario.js
+│   │   └── solo_seleccionable_por_mismo_usuario.js
+│   ├── configurations
+│   │   ├── db
+│   │   │   ├── db.ejs.sql
+│   │   │   ├── migrations
+│   │   │   │   ├── migracion.sql
+│   │   │   │   └── migracion.test.sql
+│   │   │   └── modules
+│   │   │       ├── asamblea.ejs.sql
+│   │   │       ├── autorizacion.ejs.sql
+│   │   │       └── ficheros.ejs.sql
+│   │   ├── db.instancia.sqlite
+│   │   ├── db.sql
+│   │   ├── db.sql.json
+│   │   ├── index.js
+│   │   └── settings.json
+│   ├── controllers
+│   │   └── index.js
+│   ├── deployer.js
+│   ├── parsers
+│   │   ├── h-query-language.js
+│   │   └── h-query-language.pegjs
+│   ├── uploads
+│   ├── utilities
+│   │   ├── controlador_de_esquema.js
+│   │   ├── controlador_de_export_xlsx.js
+│   │   ├── controlador_de_import_xlsx.js
+│   │   ├── controlador_de_login.js
+│   │   ├── controlador_de_logout.js
+│   │   ├── controlador_de_operacion.js
+│   │   ├── controlador_de_shutdown.js
+│   │   ├── desplegar_base_de_datos.js
+│   │   ├── desplegar_servidor.js
+│   │   ├── gestionar_operacion_getfile.js
+│   │   ├── gestionar_operacion_setfile.js
+│   │   ├── gestor_de_error_de_peticion.js
+│   │   ├── gestor_de_shutdown.js
+│   │   ├── importar_datos_masivos.js
+│   │   ├── index.js
+│   │   ├── leer_fichero_excel.js
+│   │   ├── middleware_de_autentificacion.js
+│   │   ├── middleware_de_autorizadores.js
+│   │   ├── middleware_de_parametros.js
+│   │   ├── middleware_de_solo_administradores.js
+│   │   ├── obtener_autentificacion.js
+│   │   ├── obtener_conexion_de_base_de_datos.js
+│   │   ├── obtener_parametro.js
+│   │   ├── obtener_string_aleatorio.js
+│   │   ├── obtener_string_partido_en_dos.js
+│   │   ├── parsear_propiedades_como_json.js
+│   │   ├── preparar_delete.js
+│   │   ├── preparar_insert.js
+│   │   ├── preparar_select.js
+│   │   └── preparar_update.js
+│   └── www
+│       └── files
+│           ├── components
+│           │   ├── BreadcrumbGenerico.component.calo
+│           │   ├── BreadcrumbGenerico.component.js
+│           │   ├── calo.calo
+│           │   ├── calo.js
+│           │   ├── ExploradorDeDatos.component.calo
+│           │   ├── ExploradorDeDatos.component.js
+│           │   ├── PaginaDeExploradorDeDatosDeTabla.component.calo
+│           │   ├── PaginaDeExploradorDeDatosDeTabla.component.js
+│           │   ├── PaginaDeFormularioDeTabla.component.calo
+│           │   ├── PaginaDeFormularioDeTabla.component.js
+│           │   ├── PaginaDeImportarExportarDatos.component.calo
+│           │   ├── PaginaDeImportarExportarDatos.component.js
+│           │   ├── PaginaDeInicio.component.calo
+│           │   ├── PaginaDeInicio.component.js
+│           │   ├── PaginaDeLogin.component.calo
+│           │   ├── PaginaDeLogin.component.js
+│           │   ├── PaginaDePanelDeAdministracion.component.calo
+│           │   ├── PaginaDePanelDeAdministracion.component.js
+│           │   ├── PaginaDePanelDeConfiguraciones.component.calo
+│           │   ├── PaginaDePanelDeConfiguraciones.component.js
+│           │   ├── PuertoDeNotificaciones.component.calo
+│           │   ├── PuertoDeNotificaciones.component.js
+│           │   ├── sea.jpg
+│           │   ├── theme.css
+│           │   ├── utilidades.calo
+│           │   ├── utilidades.js
+│           │   └── win7.scoped.css
+│           ├── index.1.calo
+│           ├── index.1.html
+│           ├── index.1.js
+│           ├── index.html
+│           ├── prueba.calo
+│           └── prueba.js
+├── test
+│   ├── test-rudimentario.txt
+│   ├── unit
+│   │   ├── feature
+│   │   │   ├── analisis.test.js
+│   │   │   ├── incluir.test.js
+│   │   │   ├── login.test.js
+│   │   │   ├── logout.test.js
+│   │   │   ├── no_visibles_columnas.test.js
+│   │   │   ├── reset.test.js
+│   │   │   ├── select_order.test.js
+│   │   │   ├── select_page.test.js
+│   │   │   ├── select_search.test.js
+│   │   │   ├── solo_actualizable_por_mismo_usuario.test.js
+│   │   │   ├── solo_eliminable_por_mismo_usuario.test.js
+│   │   │   ├── solo_insertable_por_mismo_usuario.test.js
+│   │   │   ├── solo_seleccionable_por_mismo_usuario.test.js
+│   │   │   ├── volcan_1.png
+│   │   │   └── volcan_2.png
+│   │   ├── test.resultados.json
+│   │   ├── test.sh
+│   │   └── test.utilidades.js
+│   ├── uno.ods
+│   ├── uno.xlsx
+│   └── uno.xml
+└── tree.txt
+
+18 directories, 126 files
+```
+
 Las carpetas originales son:
 
   - `src`: donde reside el código fuente del desplegador.
@@ -241,15 +393,17 @@ A continuación se listan las principales acciones que se pueden hacer vía peti
       - `String_2`: operación: `=, !=, <, >, <=, >=, IS NULL, IS NOT NULL, LIKE, NOT LIKE, IN, NOT IN`
       - `String_3`: valor comparativo.
     - `order`: `«Array{Array{String,String}}»` con las reglas de ordenación
-    - `page`: `«Number»` con el número de página
-    - `items`: `«Number»` con el número de ítems
+      - `String_1`: columna sujeto.
+      - `String_2`: operación: `ASC, DESC`
+    - `page`: `«Number»` con el número de página, por defecto 1.
+    - `items`: `«Number»` con el número de ítems, por defecto 20.
 
 #### Ejemplo de **«insert»**
-  - `[POST] /api/v1/insert/Usuario?item={"nombre":"Pepito de los Palotes"}`
+  - `[POST] /api/v1/insert/Usuario?nombre=xxxxx`
     - `...item`: `«Object»` con el ítem a insertar. Se pasan como parámetros directos, no como un objeto.
 
 #### Ejemplo de **«update»**
-  - `[POST] /api/v1/update/Usuario?id=1&item={"nombre":"Pepito de los Palotes"}`
+  - `[POST] /api/v1/update/Usuario?id=1&nombre=xxxxx&contrasenya=xxxxx&correo=xxxxx@xxxx.xxx`
     - `id`: `«Number»` con el identificador del ítem a actualizar
     - `...item`: `«Object»` con los campos del ítem a actualizar. Se pasan como parámetros directos, no como un objeto.
 
@@ -263,7 +417,7 @@ A continuación se listan las principales acciones que se pueden hacer vía peti
     - `columna`: `«String»` con la columna que apunta al fichero
 
 #### Ejemplo de **«setfile»**
-  - `[POST] /api/v1/setfile/Usuario?id=1&columna=fichero`
+  - `[POST] /api/v1/setfile/Fichero?id=1&columna=fichero`
     - `id`: `«Number»` con el identificador del ítem a actualizar
     - `columna`: `«String»` con la columna que apunta al fichero
     - `fichero`: `«File»` con el fichero en sí

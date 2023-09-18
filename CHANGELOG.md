@@ -225,3 +225,8 @@ Pero todavía...
 - [✔] Corregido README de varias cosas
   - [✔] Separados pasos de creación y de migración
   - [✔] Otros matices
+
+**Versión `v0.0.29`.** *El 18 de septiembre de 2023 a las 09:19am.*
+
+- [✔] Ampliado README
+  - [✔] Añadido tree.txt y comando `npm run build-tree`
