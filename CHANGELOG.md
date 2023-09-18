@@ -230,3 +230,11 @@ Pero todavía...
 
 - [✔] Ampliado README
   - [✔] Añadido tree.txt y comando `npm run build-tree`
+
+**Versión `v0.0.30`.** *El 18 de septiembre de 2023 a las 19:44am.*
+
+- [✔] Extendido `hooks`:
+  - [✔] vía a) `deployer.dependencies.generar_gestor_de_hooks`
+  - [✔] vía b) `deployer.utilities.gestor_de_hooks.agregar_hook`
+  - [✔] vía c) `deployer.utilities.gestor_de_hooks.usar_hook`
+  - [✔] vía d) `hooks/hooks.js`
