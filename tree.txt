@@ -60,6 +60,8 @@
 │   ├── deployer.js
 │   ├── hooks
 │   │   └── hooks.js
+│   ├── logs
+│   │   └── 2023-09-19.12-53-30.089.log
 │   ├── parsers
 │   │   ├── hyper-query-language.js
 │   │   └── hyper-query-language.pegjs
@@ -74,6 +76,7 @@
 │   │   ├── controlador_de_shutdown.js
 │   │   ├── desplegar_base_de_datos.js
 │   │   ├── desplegar_servidor.js
+│   │   ├── gestionar_log_de_peticion.js
 │   │   ├── gestionar_operacion_getfile.js
 │   │   ├── gestionar_operacion_setfile.js
 │   │   ├── gestor_de_error_de_peticion.js
@@ -84,12 +87,15 @@
 │   │   ├── leer_fichero_excel.js
 │   │   ├── middleware_de_autentificacion.js
 │   │   ├── middleware_de_autorizadores.js
+│   │   ├── middleware_de_log.js
 │   │   ├── middleware_de_parametros.js
 │   │   ├── middleware_de_solo_administradores.js
 │   │   ├── obtener_autentificacion.js
 │   │   ├── obtener_conexion_de_base_de_datos.js
+│   │   ├── obtener_date_como_string.js
 │   │   ├── obtener_parametro.js
 │   │   ├── obtener_string_aleatorio.js
+│   │   ├── obtener_string_padeado.js
 │   │   ├── obtener_string_partido_en_dos.js
 │   │   ├── parsear_propiedades_como_json.js
 │   │   ├── preparar_delete.js
@@ -164,4 +170,4 @@
 │   └── uno.xml
 └── tree.txt
 
-29 directories, 135 files
+30 directories, 140 files

@@ -118,6 +118,179 @@ El modo en que esto se consigue es añadiendo unas notaciones con comentarios en
 El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm run build-tree` (aunque usa el programa de Linux `tree`):
 
 ```
+.
+├── bin
+│   ├── restero.bin.js
+│   └── seeder
+│       ├── input
+│       │   └── src
+│       │       └── configurations
+│       │           └── db
+│       │               ├── db.ejs.sql
+│       │               └── modules
+│       ├── output
+│       └── seeder.sh
+├── CHANGELOG.md
+├── package.json
+├── package-lock.json
+├── README.md
+├── src
+│   ├── authorizers
+│   │   ├── columns
+│   │   │   ├── no_actualizable.js
+│   │   │   ├── no_insertable.js
+│   │   │   ├── no_modificable.js
+│   │   │   └── solo_modificable_por.js
+│   │   ├── espera_segundos.js
+│   │   ├── excluir.js
+│   │   ├── incluir.js
+│   │   ├── index.js
+│   │   ├── mientras_clave_multiple.js
+│   │   ├── no_actualizable.js
+│   │   ├── no_eliminable.js
+│   │   ├── no_insertable.js
+│   │   ├── no_modificable.js
+│   │   ├── no_seleccionable.js
+│   │   ├── no_usable.js
+│   │   ├── no_visibles_columnas.js
+│   │   ├── solo_actualizable_por_mismo_usuario.js
+│   │   ├── solo_eliminable_por_mismo_usuario.js
+│   │   ├── solo_insertable_por_mismo_usuario.js
+│   │   └── solo_seleccionable_por_mismo_usuario.js
+│   ├── configurations
+│   │   ├── db
+│   │   │   ├── db.ejs.sql
+│   │   │   ├── migrations
+│   │   │   │   ├── migracion.sql
+│   │   │   │   └── migracion.test.sql
+│   │   │   └── modules
+│   │   │       ├── asamblea.ejs.sql
+│   │   │       ├── autorizacion.ejs.sql
+│   │   │       └── ficheros.ejs.sql
+│   │   ├── db.instancia.sqlite
+│   │   ├── db.sql
+│   │   ├── db.sql.json
+│   │   ├── index.js
+│   │   └── settings.json
+│   ├── controllers
+│   │   └── index.js
+│   ├── dependencies
+│   │   ├── generar_gestor_de_hooks.js
+│   │   └── index.js
+│   ├── deployer.js
+│   ├── hooks
+│   │   └── hooks.js
+│   ├── logs
+│   │   └── 2023-09-19.12-53-30.089.log
+│   ├── parsers
+│   │   ├── hyper-query-language.js
+│   │   └── hyper-query-language.pegjs
+│   ├── uploads
+│   ├── utilities
+│   │   ├── controlador_de_esquema.js
+│   │   ├── controlador_de_export_xlsx.js
+│   │   ├── controlador_de_import_xlsx.js
+│   │   ├── controlador_de_login.js
+│   │   ├── controlador_de_logout.js
+│   │   ├── controlador_de_operacion.js
+│   │   ├── controlador_de_shutdown.js
+│   │   ├── desplegar_base_de_datos.js
+│   │   ├── desplegar_servidor.js
+│   │   ├── gestionar_log_de_peticion.js
+│   │   ├── gestionar_operacion_getfile.js
+│   │   ├── gestionar_operacion_setfile.js
+│   │   ├── gestor_de_error_de_peticion.js
+│   │   ├── gestor_de_hooks.js
+│   │   ├── gestor_de_shutdown.js
+│   │   ├── importar_datos_masivos.js
+│   │   ├── index.js
+│   │   ├── leer_fichero_excel.js
+│   │   ├── middleware_de_autentificacion.js
+│   │   ├── middleware_de_autorizadores.js
+│   │   ├── middleware_de_log.js
+│   │   ├── middleware_de_parametros.js
+│   │   ├── middleware_de_solo_administradores.js
+│   │   ├── obtener_autentificacion.js
+│   │   ├── obtener_conexion_de_base_de_datos.js
+│   │   ├── obtener_date_como_string.js
+│   │   ├── obtener_parametro.js
+│   │   ├── obtener_string_aleatorio.js
+│   │   ├── obtener_string_padeado.js
+│   │   ├── obtener_string_partido_en_dos.js
+│   │   ├── parsear_propiedades_como_json.js
+│   │   ├── preparar_delete.js
+│   │   ├── preparar_insert.js
+│   │   ├── preparar_select.js
+│   │   └── preparar_update.js
+│   └── www
+│       └── files
+│           ├── components
+│           │   ├── BreadcrumbGenerico.component.calo
+│           │   ├── BreadcrumbGenerico.component.js
+│           │   ├── calo.calo
+│           │   ├── calo.js
+│           │   ├── ExploradorDeDatos.component.calo
+│           │   ├── ExploradorDeDatos.component.js
+│           │   ├── PaginaDeExploradorDeDatosDeTabla.component.calo
+│           │   ├── PaginaDeExploradorDeDatosDeTabla.component.js
+│           │   ├── PaginaDeFormularioDeTabla.component.calo
+│           │   ├── PaginaDeFormularioDeTabla.component.js
+│           │   ├── PaginaDeImportarExportarDatos.component.calo
+│           │   ├── PaginaDeImportarExportarDatos.component.js
+│           │   ├── PaginaDeInicio.component.calo
+│           │   ├── PaginaDeInicio.component.js
+│           │   ├── PaginaDeLogin.component.calo
+│           │   ├── PaginaDeLogin.component.js
+│           │   ├── PaginaDePanelDeAdministracion.component.calo
+│           │   ├── PaginaDePanelDeAdministracion.component.js
+│           │   ├── PaginaDePanelDeConfiguraciones.component.calo
+│           │   ├── PaginaDePanelDeConfiguraciones.component.js
+│           │   ├── PuertoDeNotificaciones.component.calo
+│           │   ├── PuertoDeNotificaciones.component.js
+│           │   ├── sea.jpg
+│           │   ├── theme.css
+│           │   └── win7.scoped.css
+│           ├── dependencies
+│           │   ├── generar_gestor_de_hooks.js
+│           │   ├── utilidades.calo
+│           │   └── utilidades.js
+│           ├── hooks
+│           │   ├── hooks.calo
+│           │   └── hooks.js
+│           ├── index.1.calo
+│           ├── index.1.html
+│           ├── index.1.js
+│           ├── index.html
+│           ├── prueba.calo
+│           └── prueba.js
+├── test
+│   ├── test-rudimentario.txt
+│   ├── unit
+│   │   ├── feature
+│   │   │   ├── analisis.test.js
+│   │   │   ├── incluir.test.js
+│   │   │   ├── login.test.js
+│   │   │   ├── logout.test.js
+│   │   │   ├── no_visibles_columnas.test.js
+│   │   │   ├── reset.test.js
+│   │   │   ├── select_order.test.js
+│   │   │   ├── select_page.test.js
+│   │   │   ├── select_search.test.js
+│   │   │   ├── solo_actualizable_por_mismo_usuario.test.js
+│   │   │   ├── solo_eliminable_por_mismo_usuario.test.js
+│   │   │   ├── solo_insertable_por_mismo_usuario.test.js
+│   │   │   ├── solo_seleccionable_por_mismo_usuario.test.js
+│   │   │   ├── volcan_1.png
+│   │   │   └── volcan_2.png
+│   │   ├── test.resultados.json
+│   │   ├── test.sh
+│   │   └── test.utilidades.js
+│   ├── uno.ods
+│   ├── uno.xlsx
+│   └── uno.xml
+└── tree.txt
+
+30 directories, 140 files
 ```
 
 Las carpetas originales son:
