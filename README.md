@@ -115,12 +115,21 @@ El modo en que esto se consigue es añadiendo unas notaciones con comentarios en
 
 ## Carpetas y ficheros
 
-El árbol de ficheros base es el que sigue:
+El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm run build-tree` (aunque usa el programa de Linux `tree`):
 
 ```
 .
 ├── bin
-│   └── restero.bin.js
+│   ├── restero.bin.js
+│   └── seeder
+│       ├── input
+│       │   └── src
+│       │       └── configurations
+│       │           └── db
+│       │               ├── db.ejs.sql
+│       │               └── modules
+│       ├── output
+│       └── seeder.sh
 ├── CHANGELOG.md
 ├── package.json
 ├── package-lock.json
@@ -165,10 +174,15 @@ El árbol de ficheros base es el que sigue:
 │   │   └── settings.json
 │   ├── controllers
 │   │   └── index.js
+│   ├── dependencies
+│   │   ├── generar_gestor_de_hooks.js
+│   │   └── index.js
 │   ├── deployer.js
+│   ├── hooks
+│   │   └── hooks.js
 │   ├── parsers
-│   │   ├── h-query-language.js
-│   │   └── h-query-language.pegjs
+│   │   ├── hyper-query-language.js
+│   │   └── hyper-query-language.pegjs
 │   ├── uploads
 │   ├── utilities
 │   │   ├── controlador_de_esquema.js
@@ -183,6 +197,7 @@ El árbol de ficheros base es el que sigue:
 │   │   ├── gestionar_operacion_getfile.js
 │   │   ├── gestionar_operacion_setfile.js
 │   │   ├── gestor_de_error_de_peticion.js
+│   │   ├── gestor_de_hooks.js
 │   │   ├── gestor_de_shutdown.js
 │   │   ├── importar_datos_masivos.js
 │   │   ├── index.js
@@ -228,9 +243,14 @@ El árbol de ficheros base es el que sigue:
 │           │   ├── PuertoDeNotificaciones.component.js
 │           │   ├── sea.jpg
 │           │   ├── theme.css
-│           │   ├── utilidades.calo
-│           │   ├── utilidades.js
 │           │   └── win7.scoped.css
+│           ├── dependencies
+│           │   ├── generar_gestor_de_hooks.js
+│           │   ├── utilidades.calo
+│           │   └── utilidades.js
+│           ├── hooks
+│           │   ├── hooks.calo
+│           │   └── hooks.js
 │           ├── index.1.calo
 │           ├── index.1.html
 │           ├── index.1.js
@@ -264,7 +284,8 @@ El árbol de ficheros base es el que sigue:
 │   └── uno.xml
 └── tree.txt
 
-18 directories, 126 files
+29 directories, 135 files
+
 ```
 
 Las carpetas originales son:
@@ -392,6 +413,8 @@ Pasará los tests en 1 por proceso, y finalmente listará los resultados obtenid
 Las peticiones generalmente aceptan un `HTTP header` con el que se le facilita el token de sesión al servidor: el clásico `authorization`. De esta forma, el servidor puede autentificar la petición, y pasar los filtros especificados correspondientemente.
 
 A continuación se listan las principales acciones que se pueden hacer vía petición HTTP con el servidor desplegado por `restero`.
+
+Los métodos `GET` o `POST` son indiferentemente usados, y los parámetros se recogen, primero por `request.body`, y si no por `request.query`. Esto es actualmente así, pero los parámetros de `request.query` no son la forma oficial, y aunque aquí se usan a modo explicativo (y funcione), no es la vía oficial para pasar los parámetros, y en cualquier momento se puede retirar el soporte porque da pie a vulnerabilidades varias. En su lugar, úsense los parámetros de `request.body` pasados vía `POST`: aquí solo uso los de `request.query` para poner un ejemplo de uso rápido (y funcione).
 
 #### Ejemplo de **«login»**
   - `[POST] /api/v1/login?nombre=admin&contrasenya=admin`
@@ -706,6 +729,16 @@ A continuación se explican los comandos que permite la interfaz.
 
 #### Comando `restero generar`
 
+El comando `restero generar` sirve para crear un proyecto `restero` desde cero. Admite 3 parámetros:
+
+  - `--salida {directorio}`: directorio de salida
+  - `--fichero {fichero}`: fichero de entrada
+  - `--directorio {directorio}`: directorio de entrada
+
+A continuación se explican más profundamente.
+
+----
+
 - Argumento `salida`:
    - `--salida {ruta}`: **Opcional**. Por defecto: `.`. Especifica el directorio en el que se copiará el proyecto inicial del `restero`.
 
@@ -730,7 +763,7 @@ restero generar --fichero mydb.sql
 ----
 
 - Argumento `directorio`:
-   - `--directorio {directorio}`: **Opcional**. Por defecto: `undefined`. Especifica las carpetas y ficheros que van a sobreescribir al proyecto original.
+   - `--directorio {directorio}`: **Opcional**. Por defecto: `undefined`. Especifica el directorio que va a sobreescribir al proyecto original. En él podemos poner todos los ficheros que queremos sobreescribir de un proyecto `restero` original.
 
 Ejemplo:
 
@@ -738,12 +771,14 @@ Ejemplo:
 restero generar --directorio app
 ```
 
+----
+
 #### Comando `restero generar:seeder`
 
 El *seeder* o *semillero* es un proyecto que va a tener una carpeta `input` y otra `output`, y luego un fichero `seeder.sh` y `seeder.bat` que pondrá lo del uno en el otro, cruzado con los ficheros base del proyecto `restero` original.
 
 - Argumento `salida`:
-   - `--salida {directorio}`; **Requerido**. Especifica el fichero sobre el cual se crearán las carpetas de `input` y `output` y el fichero de `seeder.sh`.
+   - `--salida {directorio}`; **Requerido**. Especifica el directorio sobre el cual se crearán las carpetas de `input` y `output` y el fichero de `seeder.sh`.
 
 ```sh
 restero generar:seeder --salida .
@@ -759,10 +794,31 @@ Los *hooks* están presentes tanto en el backend/servidor, como en el frontend/a
 
 #### Hooks en el back
 
-El fichero `src/hooks/hooks.js`
+El fichero `src/hooks/hooks.js` está pensado para contener todos los hooks que se van a aplicar en el backend.
+
+**Eventos de hook del ciclo de vida del backend**:
+
+- **`app:iniciar`**: en el `src/deployer.js`.
+- **`app:controladores:precargar`**: en el `src/deployer.js`.
+- **`app:controladores:postcargar`**: en el `src/deployer.js`.
+- **`app:autorizadores:precargar`**: en el `src/deployer.js`.
+- **`app:autorizadores:postcargar`**: en el `src/deployer.js`.
+- **`app:base_de_datos:precargar`**: en el `src/deployer.js`.
+- **`app:base_de_datos:precargar`**: en el `src/deployer.js`.
+- **`app:servidor:precargar`**: en el `src/deployer.js`.
+- **`app:servidor:precargar`**: en el `src/deployer.js`.
+- **`app:iniciada`**: en el `src/deployer.js`.
 
 #### Hooks en el front
 
-El fichero `src/www/files/hooks/hooks.calo`.
+El fichero `src/www/files/hooks/hooks.calo` está pensado para contener todos los hooks que se van a aplicar en el frontend.
 
-O directamente el fichero `src/www/files/hooks/hooks.js`.
+**Eventos de hook del ciclo de vida del frontend**:
+
+- **`app:iniciar`**: en el `src/www/files/index.1.calo`.
+- **`app:precargar:rutas`**: en el `src/www/files/index.1.calo`.
+- **`app:postcargar:rutas`**: en el `src/www/files/index.1.calo`.
+- **`app:precargar:aplicacion`**: en el `src/www/files/index.1.calo`.
+- **`app:postcargar:aplicacion`**: en el `src/www/files/index.1.calo`.
+- **`app:iniciada`**: en el `src/www/files/index.1.calo`.
+

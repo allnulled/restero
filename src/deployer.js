@@ -1,6 +1,6 @@
 const fs = require("fs");
 const sqlstring = require("sqlstring");
-const hql_parser = require(__dirname + "/parsers/h-query-language.js");
+const hql_parser = require(__dirname + "/parsers/hyper-query-language.js");
 
 const main = async function() {
     try {
