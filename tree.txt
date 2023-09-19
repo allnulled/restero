@@ -9,7 +9,8 @@
 │       │               ├── db.ejs.sql
 │       │               └── modules
 │       ├── output
-│       └── seeder.sh
+│       ├── seeder.sh
+│       └── start.sh
 ├── CHANGELOG.md
 ├── package.json
 ├── package-lock.json
@@ -170,4 +171,4 @@
 │   └── uno.xml
 └── tree.txt
 
-30 directories, 140 files
+30 directories, 141 files

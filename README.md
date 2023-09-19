@@ -129,7 +129,8 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │       │               ├── db.ejs.sql
 │       │               └── modules
 │       ├── output
-│       └── seeder.sh
+│       ├── seeder.sh
+│       └── start.sh
 ├── CHANGELOG.md
 ├── package.json
 ├── package-lock.json
@@ -290,7 +291,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   └── uno.xml
 └── tree.txt
 
-30 directories, 140 files
+30 directories, 141 files
 ```
 
 Las carpetas originales son:
@@ -791,6 +792,8 @@ restero generar:seeder --salida .
 ```
 
 Usar `bash seeder.sh` posteriormente para generar el directorio `output` a partir del `input`. Sirve para crear proyectos desde 0 limpiamente, incorporando solo los ficheros cambiados. Solo funcionará si `restero` está disponible como comando global de la línea de comandos.
+
+Usar `bash start.sh` posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida. Este comando lo puedes repetir rápidamente para regenerar todo el proyecto en base a las modificaciones mínimas del directorio `input`, y probar los cambios lo más rápido posible. Es el comando que usas sin parar cuando estás desarrollando backend, vaya, si estás desarrollando un `input` para `restero`.
 
 ## Hooks
 
