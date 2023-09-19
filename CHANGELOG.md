@@ -254,4 +254,7 @@ Pero todavía...
 **Versión `v0.0.32`.** *El 19 de septiembre de 2023 a las 04:37am.*
 - [✔] Mejor documentados hooks backend y frontend en el README
 
+**Versión `v0.0.32`.** *El 19 de septiembre de 2023 a las 13:01am.*
+- [✔] Servidor ahora tiene logs
+
 

@@ -8,6 +8,7 @@ module.exports = function (deployer) {
             const body_parser = require("body-parser");
             deployer.server = require("http").createServer();
             deployer.app = express(deployer.server);
+            deployer.app.use(deployer.utilities.middleware_de_log);
             deployer.app.use(body_parser.urlencoded({ extended: true }));
             deployer.app.use(body_parser.json({ extended: true }));
             deployer.app.use("/api/v1/login", deployer.utilities.controlador_de_login);
