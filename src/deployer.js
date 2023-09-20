@@ -19,24 +19,24 @@ const main = async function() {
         }
         await deployer.utilities.gestor_de_hooks.usar_hook("app:iniciar");
         Cargar_controladores: {
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:controladores:precargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:precargar:controladores");
             deployer.controllers = await require(__dirname + "/controllers/index.js")(deployer)();
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:controladores:postcargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:postcargar:controladores");
         }
         Cargar_autorizadores: {
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:autorizadores:precargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:precargar:autorizadores");
             deployer.authorizers = await require(__dirname + "/authorizers/index.js")(deployer)();
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:autorizadores:postcargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:postcargar:autorizadores");
         }
         Desplegar_base_de_datos: {
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:base_de_datos:precargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:precargar:base_de_datos");
             await deployer.utilities.desplegar_base_de_datos();
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:base_de_datos:precargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:postcargar:base_de_datos");
         }
         Desplegar_servidor: {
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:servidor:precargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:precargar:servidor");
             await deployer.utilities.desplegar_servidor();
-            await deployer.utilities.gestor_de_hooks.usar_hook("app:servidor:precargar");
+            await deployer.utilities.gestor_de_hooks.usar_hook("app:postcargar:servidor");
         }
         await deployer.utilities.gestor_de_hooks.usar_hook("app:iniciada");
         return deployer;

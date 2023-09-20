@@ -261,4 +261,10 @@ Pero todavía...
 - [✔] Completado `restero generar:seeder` con `start.sh`
   - [✔] Documentado en el README.md
 
+**Versión `v0.0.35`.** *El 20 de septiembre de 2023 a las 11:18am.*
+- [✔] Operadores `IN` y `NOT IN` funcionando en `where` del `select`
+  - [✔] Documentado en el README. Con una frase.
+- [✔] Corregidos nombres de eventos de hooks del backend
+  - [✔] Documentado en el README también
+- [✔] Corregido algún error del README.
 

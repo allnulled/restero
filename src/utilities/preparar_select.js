@@ -49,7 +49,8 @@ module.exports = function (deployer) {
             const reglas_where = parametros.where;
             for(let index_where = 0; index_where < reglas_where.length; index_where++) {
                 const regla_where = reglas_where[index_where];
-                const [subj, op, obj] = regla_where;
+                const [subj, op_crude, obj] = regla_where;
+                const op = op_crude.toLowerCase();
                 if (nombres_de_columnas.indexOf(subj) === -1) {
                     throw new Error("Columna en cláusula «where» no reconocida: «" + subj + "»");
                 }
@@ -60,13 +61,20 @@ module.exports = function (deployer) {
                 }
                 sql += " ";
                 if (["in", "not in"].indexOf(op) !== -1) {
-                    sql += op;
+                    sql += op.toUpperCase();
                     const obj_split = obj.split(";");
+                    if(obj_split.length === 0) {
+                        throw new Error(`Se requieren ítems en el objeto de la regla «where» que usa «${op.toUpperCase()}» en índice «${index_where}» con columna «${subj}»`)
+                    }
+                    sql += " (";
                     for(let index_obj = 0; index_obj < obj_split.length; index_obj++) {
                         const obj_item = obj_split[index_obj];
-                        sql += " ";
-                        sql += deployer.sqlstring.escape(obj);
+                        if(index_obj !== 0) {
+                            sql += ", "
+                        }
+                        sql += deployer.sqlstring.escape(obj_item);
                     }
+                    sql += ")";
                 } else if (["is null", "is not null"].indexOf(op) !== -1) {
                     sql += op;
                 } else {

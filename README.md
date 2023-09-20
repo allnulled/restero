@@ -433,17 +433,32 @@ Los métodos `GET` o `POST` son indiferentemente usados, y los parámetros se re
     - `token_de_sesion`: `«String»` con el token de sesión a cerrar.
 
 #### Ejemplo de **«select»**
-  - `[POST] /api/v1/select/Usuario?where=[["id","=",1]]`
+  - `[POST] /api/v1/select/Usuario?where=[["id",">=",1]]&order=[["id","ASC"]]&page=1&items=20`
     - `search`: `«String»` con el texto a buscar
-    - `where`: `«Array{Array{String,String,String}}»` con las reglas de filtración.
+    - `where`: `«Array{Array{String,String,String}}»` con las reglas de filtración. En notación `JSON`.
       - `String_1`: columna sujeto.
-      - `String_2`: operación: `=, !=, <, >, <=, >=, IS NULL, IS NOT NULL, LIKE, NOT LIKE, IN, NOT IN`
+      - `String_2`: operador. Se permiten los siguientes operadores
+         - `=`
+         - `!=`
+         - `<`
+         - `>`
+         - `<=`
+         - `>=`
+         - `LIKE`
+         - `NOT LIKE`
+         - `IN`
+         - `NOT IN`
+         - `IS NULL`
+         - `IS NOT NULL`
       - `String_3`: valor comparativo.
+        - En el caso de `LIKE` y `NOT LIKE` puedes usar `%` para referirte a texto indefinido. 
+        - En el caso del `IN` y el `NOT IN` puedes pasarle una lista de valores separándolos con `;` simplemente.
+        - En el caso de `IS NULL` e `IS NOT NULL` simplemente se ignorará el tercer parámetro.
     - `order`: `«Array{Array{String,String}}»` con las reglas de ordenación
-      - `String_1`: columna sujeto.
-      - `String_2`: operación: `ASC, DESC`
-    - `page`: `«Number»` con el número de página, por defecto 1.
-    - `items`: `«Number»` con el número de ítems, por defecto 20.
+      - `String_1`: columna sujeto. En notación `JSON`.
+      - `String_2`: operación: `ASC` (por defecto) o `DESC`
+    - `page`: `«Number»` con el número de página, por defecto `1`.
+    - `items`: `«Number»` con el número de ítems, por defecto `20`.
 
 #### Ejemplo de **«insert»**
   - `[POST] /api/v1/insert/Usuario?nombre=xxxxx`
@@ -782,7 +797,7 @@ restero generar --directorio app
 
 #### Comando `restero generar:seeder`
 
-El *seeder* o *semillero* es un proyecto que va a tener una carpeta `input` y otra `output`, y luego un fichero `seeder.sh` y `seeder.bat` que pondrá lo del uno en el otro, cruzado con los ficheros base del proyecto `restero` original.
+El *seeder* o *semillero* es un proyecto que va a tener una carpeta `input` y otra `output`, y luego un fichero `seeder.sh` y `start.sh` que pondrá lo del uno en el otro, cruzado con los ficheros base del proyecto `restero` original, y en el caso de `start.sh` además llamará al `npm start`.
 
 - Argumento `salida`:
    - `--salida {directorio}`; **Requerido**. Especifica el directorio sobre el cual se crearán las carpetas de `input` y `output` y el fichero de `seeder.sh`.
@@ -808,19 +823,19 @@ El fichero `src/hooks/hooks.js` está pensado para contener todos los hooks que 
 **Eventos de hook del ciclo de vida del backend**:
 
 - **`app:iniciar`**: en el `src/deployer.js`.
-- **`app:controladores:precargar`**: en el `src/deployer.js`.
-- **`app:controladores:postcargar`**: en el `src/deployer.js`.
-- **`app:autorizadores:precargar`**: en el `src/deployer.js`.
-- **`app:autorizadores:postcargar`**: en el `src/deployer.js`.
-- **`app:base_de_datos:precargar`**: en el `src/deployer.js`.
-- **`app:base_de_datos:precargar`**: en el `src/deployer.js`.
-- **`app:servidor:precargar`**: en el `src/deployer.js`.
-- **`app:servidor:precargar`**: en el `src/deployer.js`.
+- **`app:precargar:controladores`**: en el `src/deployer.js`.
+- **`app:postcargar:controladores`**: en el `src/deployer.js`.
+- **`app:precargar:autorizadores`**: en el `src/deployer.js`.
+- **`app:postcargar:autorizadores`**: en el `src/deployer.js`.
+- **`app:precargar:base_de_datos`**: en el `src/deployer.js`.
+- **`app:postcargar:base_de_datos`**: en el `src/deployer.js`.
+- **`app:precargar:servidor`**: en el `src/deployer.js`.
+- **`app:postcargar:servidor`**: en el `src/deployer.js`.
 - **`app:iniciada`**: en el `src/deployer.js`.
 
 #### Hooks en el front
 
-El fichero `src/www/files/hooks/hooks.calo` está pensado para contener todos los hooks que se van a aplicar en el frontend.
+El fichero `src/www/files/hooks/hooks.js` (o su versión `.calo`) está pensado para contener todos los hooks que se van a aplicar en el frontend.
 
 **Eventos de hook del ciclo de vida del frontend**:
 
