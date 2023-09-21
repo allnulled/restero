@@ -268,3 +268,6 @@ Pero todavía...
   - [✔] Documentado en el README también
 - [✔] Corregido algún error del README.
 
+**Versión `v0.0.36`.** *El 21 de septiembre de 2023 a las 12:27pm.*
+- [✔] Documentada interfaz de usuario en README.
+
