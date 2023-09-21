@@ -43,6 +43,14 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
 1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
    1. Comando `restero generar`
    1. Comando `restero generar:seeder`
+1. [Interfaz de usuario](#interfaz-de-usuario)
+   1. Imágenes del login
+   1. Imágenes del panel de inicio
+   1. Imágenes del panel de configuraciones
+   1. Imágenes del panel de importaciones y exportaciones
+   1. Imágenes de las secciones de datos
+   1. Imágenes del explorador de datos
+   1. Imágenes del formulario de datos
 1. [Hooks](#hooks)
    1. Hooks en el servidor
    1. Hooks en la aplicación de usuario
@@ -105,7 +113,7 @@ También puedes usar `login` y `logout` así:
 
 ## Versiones
 
-Ir al [CHANGELOG](./CHANGELOG.md) para ver especificidades de cada versión.
+!Ir al [CHANGELOG](./docs/imagenes/CHANGELOG.md) para ver especificidades de cada versión.
 
 ## Objetivo
 
@@ -809,6 +817,50 @@ restero generar:seeder --salida .
 Usar `bash seeder.sh` posteriormente para generar el directorio `output` a partir del `input`. Sirve para crear proyectos desde 0 limpiamente, incorporando solo los ficheros cambiados. Solo funcionará si `restero` está disponible como comando global de la línea de comandos.
 
 Usar `bash start.sh` posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida. Este comando lo puedes repetir rápidamente para regenerar todo el proyecto en base a las modificaciones mínimas del directorio `input`, y probar los cambios lo más rápido posible. Es el comando que usas sin parar cuando estás desarrollando backend, vaya, si estás desarrollando un `input` para `restero`.
+
+## Interfaz de usuario
+
+A continuación se muestran una serie de imágenes de la interfaz de usuario, que puede accederse, una vez se ha iniciado el proyecto con `npm start`, yendo con el navegador a `http://127.0.0.1:5046/index.1.html`.
+
+#### Imágenes del login
+
+![login_1](./docs/imagenes/imagen-1.login.png)
+
+![login_2](./docs/imagenes/imagen-2.login.png)
+
+#### Imágenes del panel de inicio
+
+![inicio](./docs/imagenes/imagen-3.inicio.png)
+
+#### Imágenes del panel de configuraciones
+
+![configuraciones](./docs/imagenes/imagen-4.configuraciones.png)
+
+#### Imágenes del panel de importaciones y exportaciones
+
+![importaciones](./docs/imagenes/imagen-5.importaciones.png)
+
+![exportaciones](./docs/imagenes/imagen-6.exportaciones.png)
+
+#### Imágenes de las secciones de datos
+
+![secciones](./docs/imagenes/imagen-7.secciones.png)
+
+#### Imágenes del explorador de datos
+
+![explorador_de_datos](./docs/imagenes/imagen-7.explorador-de-datos.png)
+
+![explorador_filtros](./docs/imagenes/imagen-8.explorador.filtros.png)
+
+![explorador_orden](./docs/imagenes/imagen-9.explorador.orden.png)
+
+![explorador_pagina](./docs/imagenes/imagen-10.explorador.pagina.png)
+
+#### Imágenes del formulario de datos
+
+![formulario_crear](./docs/imagenes/imagen-11.formulario.crear.png)
+
+![formulario_editar](./docs/imagenes/imagen-11.formulario.editar.png)
 
 ## Hooks
 
