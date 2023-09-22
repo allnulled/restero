@@ -30,7 +30,7 @@ atributo_buscado,
 valor_por_defecto ) {try {
 const etiqueta = atributo_buscado + ":";
 for(let indice_atributo = 0; indice_atributo < tabla.atributos.length; indice_atributo++) {const atributo_iterado = tabla.atributos[ indice_atributo ];
-if(atributo_iterado.startsWith( etiqueta )) {
+if(typeof atributo_iterado === 'string' && atributo_iterado.startsWith( etiqueta )) {
 return atributo_iterado.substr( etiqueta.length ).trim(  );
 }}
 return valor_por_defecto;

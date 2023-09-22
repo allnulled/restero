@@ -271,3 +271,13 @@ Pero todavía...
 **Versión `v0.0.36`.** *El 21 de septiembre de 2023 a las 12:27pm.*
 - [✔] Documentada interfaz de usuario en README.
 
+**Versión `v0.0.37`.** *El 22 de septiembre de 2023 a las 11:55am.*
+- [✔] Integrado parser y ejemplos de hipersubatributos
+  - [✔] ha vuelto a funcionar el front
+    - [✔] contra tablas con hipersubatributos
+  - [✔] ha vuelto a funcionar el back
+    - [✔] contra tablas con hipersubatributos
+  
+Pero todavía no...
+
+- [✖] Están funcionando los hipersubatributos de autorizadores

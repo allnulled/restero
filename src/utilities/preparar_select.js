@@ -17,7 +17,7 @@ module.exports = function (deployer) {
                 return datos_de_columna.sentencia === "columna";
             });
             const atributos_de_columnas_no_visibles = tabla_coincidente.atributos.filter(function(atributo) {
-                return atributo.startsWith("no_visibles_columnas:");
+                return (typeof (atributo) === "string") && atributo.startsWith("no_visibles_columnas:");
             });
             const columnas_no_visibles = [];
             for(let index_atributos_columnas_no_visibles = 0; index_atributos_columnas_no_visibles < atributos_de_columnas_no_visibles.length; index_atributos_columnas_no_visibles++) {

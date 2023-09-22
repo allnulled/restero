@@ -38,8 +38,13 @@ HQL_Hiperatributos =
 HQL_Hiperatributo =
   token1:(___ (__ __)? (__ __)? "@")
   hiperatributo:HQL_Hiperatributo_texto
-    { return hiperatributo }
+  subatributos:HQL_Hipersubatributos?
+    { return subatributos ? [hiperatributo, subatributos] : hiperatributo }
 HQL_Hiperatributo_texto = (!(___).)+ { return text() }
+HQL_Hipersubatributos =
+  subatributos:HQL_Hipersubatributo+ 
+    { return subatributos }
+HQL_Hipersubatributo = ___+ (__ __)* "-" texto:HQL_Hiperatributo_texto { return texto.trim() }
 HQL_Tipos = ("INTEGER"/"integer"/"int"/"VARCHAR"/"varchar"/"TEXT"/"text"/"DATETIME"/"datetime")
 HQL_Sentencia_PRIMARY_KEY =
   token1:(_* ("PRIMARY KEY"/"primary key") _* )

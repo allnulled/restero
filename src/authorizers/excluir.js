@@ -29,7 +29,7 @@ module.exports = function (deployer) {
                 }
             }
         } catch (error) {
-            console.error("Error en «src/authorizers/incluir.js»");
+            console.error("Error en «src/authorizers/excluir.js»");
             console.error(error);
             throw error;
         }

@@ -18,7 +18,7 @@ asigno window.utilidades.busco_atributo_en_tabla como una función con (tabla, a
   creo etiqueta como atributo_buscado + ":".
   desde 0 hasta tabla.atributos.length usando indice_atributo {
     creo atributo_iterado como tabla.atributos[indice_atributo].
-    si atributo_iterado.startsWith(etiqueta) {
+    si atributo_iterado es tipo texto y atributo_iterado.startsWith(etiqueta) {
       retorno atributo_iterado.substr(etiqueta.length).trim().
     }.
   }.

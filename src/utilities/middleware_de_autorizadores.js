@@ -10,7 +10,7 @@ module.exports = function (deployer) {
             }
             const [tabla_coincidente] = tablas_coincidentes;
             const autorizadores_de_tabla = tabla_coincidente.atributos.filter(function (atributo) {
-                return atributo.startsWith("tiene_autorizador:");
+                return (typeof(atributo) === "string") && atributo.startsWith("tiene_autorizador:");
             });
             Itero_autorizadores_de_tabla:
             for(let index_autorizadores_de_tabla = 0; index_autorizadores_de_tabla < autorizadores_de_tabla.length; index_autorizadores_de_tabla++) {
@@ -36,7 +36,7 @@ module.exports = function (deployer) {
                     continue Itero_columnas;
                 }
                 const autorizadores_de_columna = columna.atributos.filter(function(atributo) {
-                    return atributo.startsWith("tiene_autorizador:");
+                    return (typeof (atributo) === "string") && atributo.startsWith("tiene_autorizador:");
                 });
                 Itero_autorizadores_de_columna:
                 for(let index_autorizador = 0; index_autorizador < autorizadores_de_columna.length; index_autorizador++) {

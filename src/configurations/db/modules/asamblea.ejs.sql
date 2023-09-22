@@ -16,6 +16,9 @@ CREATE TABLE Voto /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+  @tiene_autorizadores:
+    - incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
+    - es_administrador
   @no_visibles_columnas: declaracion, notas
   @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion
 */ (

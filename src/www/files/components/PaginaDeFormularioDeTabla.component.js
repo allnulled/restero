@@ -234,7 +234,7 @@ try {
 const columnas_fichero = { 
 };
 for(let indice_atributo = 0; indice_atributo < this.tabla.atributos.length; indice_atributo++) {const atributo = this.tabla.atributos[ indice_atributo ];
-if(atributo.startsWith( "tiene_fichero:" )) {
+if(typeof atributo === 'string' && atributo.startsWith( "tiene_fichero:" )) {
 const columna_fichero = atributo.substr( "tiene_fichero:".length ).trim(  );
 columnas_fichero[ columna_fichero ] = 0;
 }}

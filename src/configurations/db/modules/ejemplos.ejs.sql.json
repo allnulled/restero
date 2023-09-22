@@ -1,0 +1,31 @@
+[
+  {
+    "tabla": "multiples_autorizadores",
+    "atributos": [
+      [
+        "tiene_autorizadores:",
+        [
+          "es_administrador",
+          "incluir : insert | update | delete : { \"permisos\": [ \"permiso de administración\" ] }"
+        ]
+      ]
+    ],
+    "composicion": [
+      {
+        "sentencia": "columna",
+        "columna": "id",
+        "tipo": "INTEGER",
+        "detalles": "PRIMARY KEY AUTOINCREMENT",
+        "atributos": []
+      },
+      {
+        "sentencia": "columna",
+        "columna": "nombre",
+        "tipo": "VARCHAR",
+        "detalles": "(512)",
+        "atributos": []
+      }
+    ],
+    "script": "CREATE TABLE multiples_autorizadores /*\n  @tiene_autorizadores:\n    - es_administrador\n    - incluir : insert | update | delete : { \"permisos\": [ \"permiso de administración\" ] }\n*/ (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    nombre VARCHAR(512)\n);"
+  }
+]

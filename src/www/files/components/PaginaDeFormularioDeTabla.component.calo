@@ -190,7 +190,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           creo columnas_fichero como {}.
           desde 0 hasta this.tabla.atributos.length usando indice_atributo {
             creo atributo como this.tabla.atributos[indice_atributo].
-            si atributo.startsWith("tiene_fichero:") {
+            si atributo es tipo texto y atributo.startsWith("tiene_fichero:") {
               creo columna_fichero como atributo.substr("tiene_fichero:".length).trim().
               asigno columnas_fichero[columna_fichero] como 0.
             }.
