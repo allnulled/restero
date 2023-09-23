@@ -295,3 +295,6 @@ Pero todavía no...
 
 **Versión `v0.0.41`.** *El 22 de septiembre de 2023 a las 13:01pm.*
 - [✔] actualizado árbol de ficheros del README
+
+**Versión `v0.0.42`.** *El 22 de septiembre de 2023 a las 13:03pm.*
+- [✔] actualizado árbol de ficheros del README (de verdad)
