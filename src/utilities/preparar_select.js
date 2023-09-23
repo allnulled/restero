@@ -5,6 +5,7 @@ const operaciones_disponibles = [
 module.exports = function (deployer) {
     return function (tabla, parametros) {
         try {
+            deployer.utilities.tracear("deployer.utilities.preparar_select");
             let sql = "";
             sql += "SELECT";
             const tabla_coincidente = deployer.db.schema.filter(function(datos_de_tabla) {

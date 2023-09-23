@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
+            deployer.utilities.tracear("deployer.utilities.middleware_de_solo_administradores");
             const autentificacion = await deployer.utilities.obtener_autentificacion(request);
             if(!autentificacion) {
                 throw new Error("Operación requiere de autentificación por «middleware_de_solo_administradores»");

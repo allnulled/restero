@@ -1,7 +1,8 @@
 module.exports = function (deployer) {
     return function (request, parametro, valor_por_defecto = undefined) {
         try {
-            if(request.params && (parametro in request.params)) {
+            deployer.utilities.tracear("deployer.utilities.obtener_parametro");
+            if (request.params && (parametro in request.params)) {
                 return request.params[parametro];
             }
             if(request.body && (parametro in request.body)) {

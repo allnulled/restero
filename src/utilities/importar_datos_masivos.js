@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (datos_masivos) {
         try {
+            deployer.utilities.tracear("deployer.utilities.importar_datos_masivos");
             const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
             const esquema = deployer.db.schema;
             const errores = [];

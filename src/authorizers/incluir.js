@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, parametro) {
         try {
+            deployer.utilities.tracear("deployer.authorizers.incluir");
             const { operation, table } = request.params;
             const autentificacion = await deployer.utilities.obtener_autentificacion(request);
             if(!autentificacion) {

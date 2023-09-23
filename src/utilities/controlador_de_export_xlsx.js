@@ -4,6 +4,7 @@ module.exports = function (deployer) {
     const sqlstring = require("sqlstring");
     return async function (request, response, parametro) {
         try {
+            deployer.utilities.tracear("deployer.utilities.controlador_de_export_xlsx");
             const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
             const tablas_a_exportar_json = deployer.utilities.obtener_parametro(request, "tablas");
             const tablas_a_exportar = JSON.parse(tablas_a_exportar_json);

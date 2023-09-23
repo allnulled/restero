@@ -1,7 +1,8 @@
 module.exports = function (deployer) {
     return function (fecha) {
         try {
-            if(!(fecha instanceof Date)) {
+            deployer.utilities.tracear("deployer.utilities.obtener_date_como_string");
+            if (!(fecha instanceof Date)) {
                 throw new Error("Requerido parámetro «fecha» ser instancia de «Date»");
             }
             const anyo = deployer.utilities.obtener_string_padeado(fecha.getFullYear(), 4);

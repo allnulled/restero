@@ -1,5 +1,6 @@
 module.exports = function(deployer) {
     return function (fichero_excel) {
+        deployer.utilities.tracear("deployer.utilities.leer_fichero_excel");
         const reader = require("xlsx");
         const file = reader.readFile(fichero_excel);
         const sheets = file.SheetNames;

@@ -1,6 +1,7 @@
 {
     "APP_PORT": 5046,
     "APP_LOGS": false,
+    "APP_TRACES": true,
     "DB_RESET": true,
     "DB_TEST_MIGRATION": false
 }

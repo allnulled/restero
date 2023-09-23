@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function () {
         try {
+            deployer.utilities.tracear("deployer.utilities.desplegar_base_de_datos");
             const tabla1 = deployer.db.schema[0].tabla;
             if(deployer.settings.DB_RESET === true) {
                 deployer.fs.unlinkSync(__dirname + "/../configurations/db.instancia.sqlite");

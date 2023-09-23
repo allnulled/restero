@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, parametro, columna_id) {
         try {
+            deployer.utilities.tracear("deployer.authorizers.columns.solo_modificable_por");
             const { operation, table } = request.params;
             if (["insert", "update"].indexOf(operation) === -1) {
                 return;

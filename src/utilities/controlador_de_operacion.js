@@ -4,6 +4,7 @@ const multer = require("multer");
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
+            deployer.utilities.tracear("deployer.utilities.controlador_de_operacion");
             const { operation, table } = request.params;
             // console.log(request.hql_authentication);
             if (operation === "select") {

@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, parametro) {
         try {
+            deployer.utilities.tracear("deployer.authorizers.solo_seleccionable_por_mismo_usuario");
             const { operation, table } = request.params;
             if (operation !== "select") {
                 return;

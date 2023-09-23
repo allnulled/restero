@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
+            deployer.utilities.tracear("deployer.utilities.controlador_de_logout");
             const token_de_sesion = deployer.utilities.obtener_parametro(request, "token_de_sesion");
             const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
             const consulta_de_sesiones = deployer.utilities.preparar_select("Sesion", {

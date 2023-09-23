@@ -2,6 +2,7 @@ module.exports = function (deployer) {
     const path = require("path");
     return async function (request, response, table, operation) {
         try {
+            deployer.utilities.tracear("deployer.utilities.gestionar_operacion_getfile");
             const consulta_intermedia_file = deployer.utilities.preparar_select(table, { where: [["id", "=", request.hql_data.id]] });
             const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
             const resultado_select = await conexion.ejecutar(consulta_intermedia_file);

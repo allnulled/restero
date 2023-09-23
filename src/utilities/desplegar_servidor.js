@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 module.exports = function (deployer) {
     return async function () {
         try {
+            deployer.utilities.tracear("deployer.utilities.desplegar_servidor");
             const path = require("path");
             const express = require("express");
             const body_parser = require("body-parser");

@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return function (tabla, parametros) {
         try {
+            deployer.utilities.tracear("deployer.utilities.preparar_insert");
             let sql = "";
             const tabla_coincidente = deployer.db.schema.filter(function (datos_de_tabla) {
                 return tabla === datos_de_tabla.tabla

@@ -3,6 +3,7 @@ module.exports = function (deployer) {
     const path = require("path");
     return async function (request, response, parametro) {
         try {
+            deployer.utilities.tracear("deployer.utilities.controlador_de_import_xlsx");
             let fichero_destino = undefined;
             await new Promise(function (ok, fail) {
                 const uploader = multer({

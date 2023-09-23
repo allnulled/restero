@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, parametro, columna_id) {
         try {
+            deployer.utilities.tracear("deployer.authorizers.columns.no_actualizable");
             const { operation, table } = request.params;
             if(operation !== "update") {
                 return;

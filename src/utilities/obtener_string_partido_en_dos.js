@@ -1,5 +1,6 @@
 module.exports = function (deployer) {
     return function (texto, partidor = ";", trimear = false) {
+        deployer.utilities.tracear("deployer.utilities.obtener_string_partido_en_dos");
         const pos = texto.indexOf(partidor);
         if(pos === -1) {
             if(trimear) {

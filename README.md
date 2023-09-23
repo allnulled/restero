@@ -140,6 +140,21 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │       ├── seeder.sh
 │       └── start.sh
 ├── CHANGELOG.md
+├── docs
+│   └── imagenes
+│       ├── imagen-10.explorador.pagina.png
+│       ├── imagen-11.formulario.crear.png
+│       ├── imagen-11.formulario.editar.png
+│       ├── imagen-1.login.png
+│       ├── imagen-2.login.png
+│       ├── imagen-3.inicio.png
+│       ├── imagen-4.configuraciones.png
+│       ├── imagen-5.importaciones.png
+│       ├── imagen-6.exportaciones.png
+│       ├── imagen-7.explorador-de-datos.png
+│       ├── imagen-7.secciones.png
+│       ├── imagen-8.explorador.filtros.png
+│       └── imagen-9.explorador.orden.png
 ├── package.json
 ├── package-lock.json
 ├── README.md
@@ -150,6 +165,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   │   ├── no_insertable.js
 │   │   │   ├── no_modificable.js
 │   │   │   └── solo_modificable_por.js
+│   │   ├── es_administrador.js
 │   │   ├── espera_segundos.js
 │   │   ├── excluir.js
 │   │   ├── incluir.js
@@ -175,6 +191,8 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   │   └── modules
 │   │   │       ├── asamblea.ejs.sql
 │   │   │       ├── autorizacion.ejs.sql
+│   │   │       ├── ejemplos.ejs.sql
+│   │   │       ├── ejemplos.ejs.sql.json
 │   │   │       └── ficheros.ejs.sql
 │   │   ├── db.instancia.sqlite
 │   │   ├── db.sql
@@ -195,6 +213,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   ├── hyper-query-language.js
 │   │   └── hyper-query-language.pegjs
 │   ├── uploads
+│   │   └── Fichero.1.fichero.calo-logo.png
 │   ├── utilities
 │   │   ├── controlador_de_esquema.js
 │   │   ├── controlador_de_export_xlsx.js
@@ -230,7 +249,8 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   ├── preparar_delete.js
 │   │   ├── preparar_insert.js
 │   │   ├── preparar_select.js
-│   │   └── preparar_update.js
+│   │   ├── preparar_update.js
+│   │   └── tracear.js
 │   └── www
 │       └── files
 │           ├── components
@@ -297,9 +317,10 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   ├── uno.ods
 │   ├── uno.xlsx
 │   └── uno.xml
+├── TODO.md
 └── tree.txt
 
-30 directories, 141 files
+32 directories, 160 files
 ```
 
 Las carpetas originales son:

@@ -1,7 +1,8 @@
 module.exports = function (deployer) {
     return async function (request) {
         try {
-            if(request.hql_authentication) {
+            deployer.utilities.tracear("deployer.utilities.obtener_autentificacion");
+            if (request.hql_authentication) {
                 return request.hql_authentication;
             }
             const token_de_sesion = deployer.utilities.obtener_parametro(request, "authorization", request.headers.authorization || undefined);

@@ -3,6 +3,7 @@ const sqlite3 = require("sqlite3");
 module.exports = function (deployer) {
     return async function () {
         try {
+            deployer.utilities.tracear("deployer.utilities.obtener_conexion_de_base_de_datos");
             if (deployer.db.conexion) {
                 return deployer.db.conexion;
             }

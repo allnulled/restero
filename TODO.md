@@ -1,4 +1,4 @@
-- [ ] Integrar múltiples hipersubatributos en el back y en el front.
+- [x] Integrar múltiples hipersubatributos en el back y en el front.
     - [x] Hacer que no falle lo anterior
-    - [ ] Hacer que sí funcionen los hipersubatributos de «tiene_autorizadores» como middleware
-        - [ ] en el fichero «src/utilities/middleware_de_autorizadores.js»
+    - [x] Hacer que sí funcionen los hipersubatributos de «tiene_autorizadores» como middleware
+        - [x] en el fichero «src/utilities/middleware_de_autorizadores.js»

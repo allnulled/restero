@@ -3,6 +3,7 @@ module.exports = function (deployer) {
     const path = require("path");
     return async function (request, response, table, operation) {
         try {
+            deployer.utilities.tracear("deployer.utilities.gestionar_operacion_setfile");
             await new Promise(function (ok, fail) {
                 const uploader = multer({
                     storage: multer.diskStorage({

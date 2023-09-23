@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
+            deployer.utilities.tracear("deployer.utilities.middleware_de_parametros");
             const { operation, table } = request.params;
             if(["select","insert","update","delete","getfile","setfile"].indexOf(operation) === -1) {
                 throw new Error("Operación no reconocida");

@@ -4,6 +4,7 @@ module.exports = function (deployer) {
     const log_directory = path.resolve(__dirname + "/../logs");
     return async function (request) {
         try {
+            deployer.utilities.tracear("deployer.utilities.gestionar_log_de_peticion");
             const headers = request.headers;
             const ip = request.headers["x-forwarded-for"] || request.socket.remoteAddress;
             const url = request.originalUrl;

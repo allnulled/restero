@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
+            deployer.utilities.tracear("deployer.utilities.middleware_de_autentificacion");
             await deployer.utilities.obtener_autentificacion(request);
             return next();
         } catch (error) {

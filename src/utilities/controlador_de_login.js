@@ -1,6 +1,7 @@
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
+            deployer.utilities.tracear("deployer.utilities.controlador_de_login");
             const nombre = deployer.utilities.obtener_parametro(request, "nombre");
             const contrasenya = deployer.utilities.obtener_parametro(request, "contrasenya");
             const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();

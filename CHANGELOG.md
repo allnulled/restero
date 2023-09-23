@@ -281,3 +281,7 @@ Pero todavía...
 Pero todavía no...
 
 - [✖] Están funcionando los hipersubatributos de autorizadores
+
+**Versión `v0.0.38`.** *El 22 de septiembre de 2023 a las 12:24pm.*
+- [✔] están funcionando los hipersubatributos de «tiene_autorizables»
+- [✔] está funcionando el sistema de traceo «deployer.utilities.tracear» por toda la aplicación

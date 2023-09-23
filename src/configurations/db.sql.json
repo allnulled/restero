@@ -313,10 +313,10 @@
         "tabla": "Multiples_autorizadores",
         "atributos": [
             [
-                "tiene_autorizadores:",
+                "tiene_autorizables:",
                 [
-                    "es_administrador",
-                    "incluir : insert | update | delete : { \"permisos\": [ \"permiso de administración\" ] }"
+                    "tiene_autorizador: es_administrador",
+                    "tiene_autorizador: incluir : insert | update | delete : { \"permisos\": [ \"permiso de administración\" ] }"
                 ]
             ]
         ],
@@ -336,6 +336,6 @@
                 "atributos": []
             }
         ],
-        "script": "\n\nCREATE TABLE Multiples_autorizadores /*\n  @tiene_autorizadores:\n    - es_administrador\n    - incluir : insert | update | delete : { \"permisos\": [ \"permiso de administración\" ] }\n*/ (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    nombre VARCHAR(512)\n);"
+        "script": "\n\nCREATE TABLE Multiples_autorizadores /*\n  @tiene_autorizables:\n    - tiene_autorizador: es_administrador\n    - tiene_autorizador: incluir : insert | update | delete : { \"permisos\": [ \"permiso de administración\" ] }\n*/ (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    nombre VARCHAR(512)\n);"
     }
 ]

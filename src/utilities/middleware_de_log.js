@@ -1,7 +1,8 @@
 module.exports = function (deployer) {
     return async function (request, response, next) {
         try {
-            if(deployer.settings.APP_LOGS) {
+            deployer.utilities.tracear("deployer.utilities.middleware_de_log");
+            if (deployer.settings.APP_LOGS) {
                 await deployer.utilities.gestionar_log_de_peticion(request);
             }
             return next();
