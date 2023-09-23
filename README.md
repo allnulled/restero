@@ -666,6 +666,20 @@ CREATE TABLE x /*
 */ ( ... );
 ```
 
+#### Autorizador de tabla: `solo_modificable_por_mismo_usuario`
+
+Función:
+
+> Solo permite **insertar, actualizar y eliminar un dato** (INSERT UPDATE DELETE) de dicha tabla cuando el valor de la columna especificada como parámetro del dato (o fila) en cuestión coincide con el **id del usuario** que está operando.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x /*
+  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_usuario
+*/ ( ... );
+```
+
 #### Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`
 
 Función:
@@ -770,6 +784,44 @@ CREATE TABLE x (
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */
 );
+```
+
+#### Usando múltiples autorizables
+
+A menudo te vas a encontrar con que aplicar un *autorizador* o *authorizer* no es suficiente porque necesitas dar varias opciones en lugar de aplicar una sola regla. Por ejemplo, queremos que una tabla «Mensaje» sea modificable para cuando el usuario está implicado por la columna «id_usuario_emisor», cuando está implicado por la columna «id_usuario_receptor» o cuando el usuario es administrador. En 3 casos diferentes, queremos que el «mensaje» esté modificable. Aquí es cuando viene el uso del **hiperatributo** `tiene_autorizables:` conjugado con **hipersubatributos**. Ejemplo:
+
+Dada la tabla «Mensaje» queremos aplicarle los 3 autorizadores que acabamos de describir, con la lógica relacional de «si no es uno, que sea otro», tendríamos la base de la tabla en `sql` siguiente:
+
+```sql
+CREATE TABLE Mensaje /*
+
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_usuario_emisor INTEGER,
+  id_usuario_receptor INTEGER,
+  contenido VARCHAR(255),
+  FOREIGN KEY (id_usuario_emisor) REFERENCES Usuario (id),
+  FOREIGN KEY (id_usuario_receptor) REFERENCES Usuario (id)
+)
+```
+
+Y con los hipersubatributos para tratar el dato con dicha lógica, entonces, la tabla quedaría así:
+
+
+```sql
+CREATE TABLE Mensaje /*
+  @tiene_autorizables:
+    - @tiene_autorizador: solo_modificable_por_mismo_usuario: id_usuario_emisor
+    - @tiene_autorizador: solo_modificable_por_mismo_usuario: id_usuario_receptor
+    - @tiene_autorizador: es_administrador
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_usuario_emisor INTEGER,
+  id_usuario_receptor INTEGER,
+  contenido VARCHAR(255),
+  FOREIGN KEY (id_usuario_emisor) REFERENCES Usuario (id),
+  FOREIGN KEY (id_usuario_receptor) REFERENCES Usuario (id)
+)
 ```
 
 ## Interfaz de línea de comandos

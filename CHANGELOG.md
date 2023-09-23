@@ -285,3 +285,7 @@ Pero todavía no...
 **Versión `v0.0.38`.** *El 22 de septiembre de 2023 a las 12:24pm.*
 - [✔] están funcionando los hipersubatributos de «tiene_autorizables»
 - [✔] está funcionando el sistema de traceo «deployer.utilities.tracear» por toda la aplicación
+
+**Versión `v0.0.39`.** *El 22 de septiembre de 2023 a las 12:24pm.*
+- [✔] están documentados los hipersubatributos de «tiene_autorizables» en el README
+- [✔] está incorporado el «authorizer»: «solo_modificable_por_mismo_usuario»
