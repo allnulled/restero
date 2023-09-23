@@ -289,3 +289,6 @@ Pero todavía no...
 **Versión `v0.0.39`.** *El 22 de septiembre de 2023 a las 12:24pm.*
 - [✔] están documentados los hipersubatributos de «tiene_autorizables» en el README
 - [✔] está incorporado el «authorizer»: «solo_modificable_por_mismo_usuario»
+
+**Versión `v0.0.40`.** *El 22 de septiembre de 2023 a las 12:53pm.*
+- [✔] están documentados los hipersubatributos de «tiene_autorizables» en el índice del README

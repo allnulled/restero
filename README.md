@@ -33,6 +33,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Autorizador de tabla: `solo_actualizable_por_mismo_usuario`
    1. Autorizador de tabla: `solo_eliminable_por_mismo_usuario`
    1. Autorizador de tabla: `solo_insertable_por_mismo_usuario`
+   1. Autorizador de tabla: `solo_modificable_por_mismo_usuario`
    1. Autorizador de tabla: `solo_seleccionable_por_mismo_usuario`
    1. Autorizador de tabla: `incluir`
    1. Autorizador de tabla: `excluir`
