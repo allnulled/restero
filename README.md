@@ -182,6 +182,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   ├── solo_actualizable_por_mismo_usuario.js
 │   │   ├── solo_eliminable_por_mismo_usuario.js
 │   │   ├── solo_insertable_por_mismo_usuario.js
+│   │   ├── solo_modificable_por_mismo_usuario.js
 │   │   └── solo_seleccionable_por_mismo_usuario.js
 │   ├── configurations
 │   │   ├── db
@@ -321,7 +322,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── TODO.md
 └── tree.txt
 
-32 directories, 160 files
+32 directories, 161 files
 ```
 
 Las carpetas originales son:

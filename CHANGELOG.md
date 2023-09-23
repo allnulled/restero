@@ -292,3 +292,6 @@ Pero todavía no...
 
 **Versión `v0.0.40`.** *El 22 de septiembre de 2023 a las 12:53pm.*
 - [✔] están documentados los hipersubatributos de «tiene_autorizables» en el índice del README
+
+**Versión `v0.0.41`.** *El 22 de septiembre de 2023 a las 13:01pm.*
+- [✔] actualizado árbol de ficheros del README
