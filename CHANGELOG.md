@@ -302,3 +302,6 @@ Pero todavía no...
 **Versión `v0.0.43`.** *El 25 de septiembre de 2023 a las 10:33am.*
 - [✔] usable como API de Node.js
   - [✔] documentado en el README
+
+**Versión `v0.0.44`.** *El 25 de septiembre de 2023 a las 10:40am.*
+- [✔] corregido typo en README indice
