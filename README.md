@@ -52,6 +52,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Imágenes de las secciones de datos
    1. Imágenes del explorador de datos
    1. Imágenes del formulario de datos
+1. [Interfaz de API de Node.js](#interfaz-de-api-de-node.js)
 1. [Hooks](#hooks)
    1. Hooks en el servidor
    1. Hooks en la aplicación de usuario
@@ -160,6 +161,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── package-lock.json
 ├── README.md
 ├── src
+│   ├── api.js
 │   ├── authorizers
 │   │   ├── columns
 │   │   │   ├── no_actualizable.js
@@ -322,7 +324,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── TODO.md
 └── tree.txt
 
-32 directories, 161 files
+32 directories, 162 files
 ```
 
 Las carpetas originales son:
@@ -936,6 +938,18 @@ A continuación se muestran una serie de imágenes de la interfaz de usuario, qu
 ![formulario_crear](./docs/imagenes/imagen-11.formulario.crear.png)
 
 ![formulario_editar](./docs/imagenes/imagen-11.formulario.editar.png)
+
+## Interfaz de API de Node.js
+
+Para usar `restero` desde la interfaz de programación de Node.js, desde la versión `v0.0.43`, puede hacerse así:
+
+```js
+const restero = require("restero");
+const deployer_function = restero.deployer;
+const deployer = await deployer_function();
+```
+
+En ese momento, el desplegador ya estará ejecutado, y el servidor estará a la escucha de peticiones, y toda la API de `restero` estará disponible a través del objeto `deployer`.
 
 ## Hooks
 

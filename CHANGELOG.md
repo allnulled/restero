@@ -298,3 +298,7 @@ Pero todavía no...
 
 **Versión `v0.0.42`.** *El 22 de septiembre de 2023 a las 13:03pm.*
 - [✔] actualizado árbol de ficheros del README (de verdad)
+
+**Versión `v0.0.43`.** *El 25 de septiembre de 2023 a las 10:33am.*
+- [✔] usable como API de Node.js
+  - [✔] documentado en el README

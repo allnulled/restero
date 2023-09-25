@@ -1,9 +1,8 @@
-const fs = require("fs");
-const sqlstring = require("sqlstring");
-const hql_parser = require(__dirname + "/parsers/hyper-query-language.js");
-
 const main = async function() {
     try {
+        const fs = require("fs");
+        const sqlstring = require("sqlstring");
+        const hql_parser = require(__dirname + "/parsers/hyper-query-language.js");
         const deployer = { fs, sqlstring, hql_parser };
         Cargar_dependencias: {
             deployer.dependencies = await require(__dirname + "/dependencies/index.js")(deployer)();
