@@ -52,7 +52,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Imágenes de las secciones de datos
    1. Imágenes del explorador de datos
    1. Imágenes del formulario de datos
-1. [Interfaz de API de Node.js](#interfaz-de-api-de-node.js)
+1. [Interfaz de API de Node.js](#interfaz-de-api-de-nodejs)
 1. [Hooks](#hooks)
    1. Hooks en el servidor
    1. Hooks en la aplicación de usuario
