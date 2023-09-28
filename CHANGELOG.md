@@ -319,3 +319,7 @@ Pero todavía no...
   - [✔] VARCHAR pinta input type=text
   - [✔] TEXT pinta textarea
   - [✔] en formulario de crear y en el de editar
+
+**Versión `v0.0.47`.** *El 28 de septiembre de 2023 a las 22:30pm.*
+- [✔] el hiperatributo «es_opcion: ... | ... | ...» está disponible
+  - [✔] se pinta un select con sus options en el formulario

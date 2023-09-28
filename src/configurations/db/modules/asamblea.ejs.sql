@@ -25,7 +25,9 @@ CREATE TABLE Voto /*
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   id_votacion INTEGER,
-  sentido VARCHAR(32),
+  sentido VARCHAR(32) /*
+    @es_opcion: Afirmativo | Negativo
+  */,
   declaracion VARCHAR(256) /*
     @nombre_humano: Declaración
   */,

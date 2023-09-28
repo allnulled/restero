@@ -25,6 +25,17 @@ asigno window.utilidades.busco_atributo_en_tabla como una función con (tabla, a
   retorno valor_por_defecto.
 }.
 
+asigno window.utilidades.busco_atributo_en_columna como una función con (columna, atributo_buscado, valor_por_defecto) donde {
+  creo etiqueta como atributo_buscado + ":".
+  desde 0 hasta columna.atributos.length usando indice_atributo {
+    creo atributo_iterado como columna.atributos[indice_atributo].
+    si atributo_iterado es tipo texto y atributo_iterado.startsWith(etiqueta) {
+      retorno atributo_iterado.substr(etiqueta.length).trim().
+    }.
+  }.
+  retorno valor_por_defecto.
+}.
+
 asigno window.utilidades.texto_humanizado_de_columna como una función con (esquema, tabla_id, columna_id) donde {
   desacoplo constantes [ tabla ] a partir de esquema filtrado con (item) donde retorno item.tabla es igual que tabla_id.
   desacoplo constantes [ columna ] a partir de tabla.composicion filtrado con (item) donde retorno item.sentencia es igual que "columna" y item.columna es igual que columna_id.

@@ -40,6 +40,21 @@ throw error;
 }
 
 };
+window.utilidades.busco_atributo_en_columna = function( columna,
+atributo_buscado,
+valor_por_defecto ) {try {
+const etiqueta = atributo_buscado + ":";
+for(let indice_atributo = 0; indice_atributo < columna.atributos.length; indice_atributo++) {const atributo_iterado = columna.atributos[ indice_atributo ];
+if(typeof atributo_iterado === 'string' && atributo_iterado.startsWith( etiqueta )) {
+return atributo_iterado.substr( etiqueta.length ).trim(  );
+}}
+return valor_por_defecto;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+};
 window.utilidades.texto_humanizado_de_columna = function( esquema,
 tabla_id,
 columna_id ) {try {
