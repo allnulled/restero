@@ -30,9 +30,6 @@ CREATE TABLE Voto /*
     @nombre_humano: Declaración
   */,
   notas VARCHAR(256),
-  un_usuario_por_votacion VARCHAR(128) UNIQUE /*
-    @nombre_humano: Un usuario por votación
-  */,
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id),
   FOREIGN KEY (id_votacion) REFERENCES Votacion (id)
 );

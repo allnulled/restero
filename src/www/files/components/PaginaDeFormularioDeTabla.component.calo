@@ -21,10 +21,10 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Administración',link:'/administracion'},{texto:'Explorador',link:'/explorador/'+tabla_id}]"></BreadcrumbGenerico>
         <h5>{{ $window.utilidades.texto_humanizado(tabla_id) }}: {{ $route.params.id_de_fila || "nuevo" }}</h5>
         <div v-if="fila" style="padding: 4px; padding-top: 0px;">
-          <div class="" v-for="columna, columna_index in fila" v-bind:key="'formulario-columna-'+columna_index">
+          <div class="" v-for="columna, columna_index in columnas_locales" v-bind:key="'formulario-columna-'+columna_index">
             <div class="columna_del_formulario">
               <div v-if="columna_index === 'id'">
-                <label>ID: <span>{{ columna }}</span></label>
+                <label>ID: <span>{{ fila[columna_index] }}</span></label>
               </div>
               <div v-else-if="columna_index in columnas_foraneas">
                 <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
@@ -41,7 +41,21 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
               </div>
               <div v-else>
                 <div>{{ $window.utilidades.texto_humanizado_de_columna(root.esquema, tabla_id, columna_index) }}:</div>
-                <textarea v-model="fila[columna_index]"></textarea>
+                <template v-if="columna.tipo === 'VARCHAR'">
+                  <input class="entrada_de_formulario" type="text" v-model="fila[columna_index]" />
+                </template>
+                <template v-else-if="columna.tipo === 'INTEGER'">
+                  <input class="entrada_de_formulario" type="number" v-model="fila[columna_index]" />
+                </template>
+                <template v-else-if="columna.tipo === 'REAL'">
+                  <input class="entrada_de_formulario" type="number" v-model="fila[columna_index]" />
+                </template>
+                <template v-else-if="columna.tipo === 'DATETIME'">
+                  <input class="entrada_de_formulario" type="date" v-model="fila[columna_index]" />
+                </template>
+                <template v-else>
+                  <textarea class="entrada_de_formulario" v-model="fila[columna_index]"></textarea>
+                </template>
               </div>
             </div>
           </div>
@@ -59,7 +73,21 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
                 <ExploradorDeDatos :root="root" es-seleccionable="1" :id-de-tabla="columnas_foraneas[columna_index].tabla_foranea" :al-cambiar="v => fila_nueva[columna_index] = v[0]" />
               </div>
               <div v-else>
-                <textarea v-model="fila_nueva[columna_index]"></textarea>
+                <template v-if="columna.tipo === 'VARCHAR'">
+                  <input class="entrada_de_formulario" type="text" v-model="fila[columna_index]" />
+                </template>
+                <template v-else-if="columna.tipo === 'INTEGER'">
+                  <input class="entrada_de_formulario" type="number" v-model="fila[columna_index]" />
+                </template>
+                <template v-else-if="columna.tipo === 'REAL'">
+                  <input class="entrada_de_formulario" type="number" v-model="fila[columna_index]" />
+                </template>
+                <template v-else-if="columna.tipo === 'DATETIME'">
+                  <input class="entrada_de_formulario" type="date" v-model="fila[columna_index]" />
+                </template>
+                <template v-else>
+                  <textarea class="entrada_de_formulario" v-model="fila[columna_index]"></textarea>
+                </template>
               </div>
             </div>
           </div>

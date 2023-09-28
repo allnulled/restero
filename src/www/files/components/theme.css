@@ -137,6 +137,10 @@ button.boton_de_identificador_en_tabla {
     min-width: 40px !important;
 }
 
+.entrada_de_formulario {
+    width: 100%;
+    max-width: 100%;
+}
 
 
 ul,li {

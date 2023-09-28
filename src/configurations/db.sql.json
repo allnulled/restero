@@ -428,15 +428,6 @@
                 "atributos": []
             },
             {
-                "sentencia": "columna",
-                "columna": "un_usuario_por_votacion",
-                "tipo": "VARCHAR",
-                "detalles": "(128) UNIQUE",
-                "atributos": [
-                    "nombre_humano: Un usuario por votación"
-                ]
-            },
-            {
                 "sentencia": "clave foránea",
                 "columna": "id_usuario",
                 "tabla_foranea": "Usuario",
@@ -449,7 +440,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Voto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n  @tiene_autorizadores:\n    - incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n    - es_administrador\n  @no_visibles_columnas: declaracion, notas\n  @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_votacion INTEGER,\n  sentido VARCHAR(32),\n  declaracion VARCHAR(256) /*\n    @nombre_humano: Declaración\n  */,\n  notas VARCHAR(256),\n  un_usuario_por_votacion VARCHAR(128) UNIQUE /*\n    @nombre_humano: Un usuario por votación\n  */,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id)\n);"
+        "script": "\n\nCREATE TABLE Voto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n  @tiene_autorizadores:\n    - incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n    - es_administrador\n  @no_visibles_columnas: declaracion, notas\n  @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_votacion INTEGER,\n  sentido VARCHAR(32),\n  declaracion VARCHAR(256) /*\n    @nombre_humano: Declaración\n  */,\n  notas VARCHAR(256),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id)\n);"
     },
     {
         "tabla": "Comentario",
