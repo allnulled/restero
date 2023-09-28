@@ -325,3 +325,6 @@ Pero todavía no...
   - [✔] se pinta un select con sus options en el formulario
   - [✔] documentado en README
 - [✔] también documentado @es_fichero en README
+
+**Versión `v0.0.48`.** *El 28 de septiembre de 2023 a las 22:30pm.*
+- [✔] documentado en índice @es_fichero y @es_opcion como hiperatributos de columna en README

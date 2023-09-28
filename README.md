@@ -22,7 +22,8 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Ejemplo de `getfile`
    1. Ejemplo de `setfile`
 1. [Los hiperatributos](#los-hiperatributos)
-
+   1. Hiperatributo de columna: `es_fichero`
+   1. Hiperatributo de columna: `es_opcion`
 1. [Los autorizadores](#los-autorizadores)
    1. Autorizador de tabla: `no_actualizable`
    1. Autorizador de tabla: `no_eliminable`
