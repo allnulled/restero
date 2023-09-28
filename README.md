@@ -22,6 +22,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Ejemplo de `getfile`
    1. Ejemplo de `setfile`
 1. [Los hiperatributos](#los-hiperatributos)
+
 1. [Los autorizadores](#los-autorizadores)
    1. Autorizador de tabla: `no_actualizable`
    1. Autorizador de tabla: `no_eliminable`
@@ -521,6 +522,38 @@ Los métodos `GET` o `POST` son indiferentemente usados, y los parámetros se re
 ## Los hiperatributos
 
 Los **hiperatributos** son parámetros que se asocian a tablas o columnas dentro del script de creación de base de datos, siguiendo la sintaxis del [**HQL** o Hyper Query Language](https://github.com/allnulled/h-query-language). Estos hiperatributos permiten decirle al desplegador cómo quiere gestionar partes del esquema de datos en distintos aspectos.
+
+#### Hiperatributo de columna: `es_fichero`
+
+Función:
+
+> Convierte en un campo que apunta a un fichero a la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  imagen VARCHAR(255) /*
+    @es_fichero
+  */
+);
+```
+
+#### Hiperatributo de columna: `es_opcion`
+
+Función:
+
+> Convierte en un campo seleccionable de opciones a la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  opcion VARCHAR(255) /*
+    @es_opcion: Sí | No | Posiblemente
+  */
+);
+```
 
 ## Los autorizadores
 
