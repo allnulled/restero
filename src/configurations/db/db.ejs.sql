@@ -3,4 +3,4 @@
 
 <%- include("/db/modules/ficheros.ejs.sql"); %>
 
-<%- include("/db/modules/ejemplos.ejs.sql"); %>
+<%- include("/db/modules/asamblea.ejs.sql"); %>

@@ -45,7 +45,7 @@ HQL_Hipersubatributos =
   subatributos:HQL_Hipersubatributo+ 
     { return subatributos }
 HQL_Hipersubatributo = ___+ (__ __)* "-" texto:HQL_Hiperatributo_texto { return texto.trim() }
-HQL_Tipos = ("INTEGER"/"integer"/"int"/"VARCHAR"/"varchar"/"TEXT"/"text"/"DATETIME"/"datetime")
+HQL_Tipos = ("INTEGER"/"integer"/"int"/"VARCHAR"/"varchar"/"TEXT"/"text"/"DATETIME"/"datetime"/"REAL"/"real"/"BLOB"/"blob")
 HQL_Sentencia_PRIMARY_KEY =
   token1:(_* ("PRIMARY KEY"/"primary key") _* )
   token3:(_* "(" _*)

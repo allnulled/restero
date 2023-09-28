@@ -305,3 +305,8 @@ Pero todavía no...
 
 **Versión `v0.0.44`.** *El 25 de septiembre de 2023 a las 10:40am.*
 - [✔] corregido typo en README indice
+
+**Versión `v0.0.45`.** *El 28 de septiembre de 2023 a las 19:49am.*
+- [✔] arregladas las multilíneas por defecto de las columnas del explorador de datos
+  - [✔] si overflowea el texto de una columna, se trunca con elipsis a los 175px aprox.
+  - [✔] también se muestra como «title» el texto completo.

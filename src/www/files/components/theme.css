@@ -125,8 +125,17 @@
     font-family: monospace;
 }
 
+.contenido_de_columna {
+    display: inline-block;
+    max-width: 175px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
-
+button.boton_de_identificador_en_tabla {
+    min-width: 40px !important;
+}
 
 
 
