@@ -1,5 +1,5 @@
 CREATE TABLE Usuario /*
-  @tiene_autorizador: no_usable
+  @tiene_autorizador: es_administrador
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE Grupo_de_usuario /*
 );
 
 CREATE TABLE Sesion /*
-  @tiene_autorizador: no_usable
+  @tiene_autorizador: es_administrador
   @nombre_humano: Sesión
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

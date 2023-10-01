@@ -22,6 +22,7 @@ Ejecutable como documento HTML5
     <script src="./components/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
     <script src="./components/PaginaDeImportarExportarDatos.component.js"></script>
     <script src="./components/PaginaDeFormularioDeTabla.component.js"></script>
+    <script src="./dependencies/rutas.js"></script>
 </head>
 <body><div id="app"></div></body>.
 
@@ -29,55 +30,9 @@ creo main como una función asíncrona donde {
 
   hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:iniciar").
 
-  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:precargar:rutas").
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:precargar:aplicacion").
 
-  creo rutas como [{
-      propiedad path como "/login".
-      propiedad name como "Login".
-      propiedad component como PaginaDeLogin.
-      propiedad props como {}.
-  }, {
-      propiedad path como "/explorador/:id_de_tabla".
-      propiedad name como "ExploradorDeDatosDeTabla".
-      propiedad component como PaginaDeExploradorDeDatosDeTabla.
-      propiedad props como {}.
-  }, {
-      propiedad path como "/formulario/:id_de_tabla/crear".
-      propiedad name como "FormularioDeDatoDeTabla".
-      propiedad component como PaginaDeFormularioDeDatoDeTabla.
-      propiedad props como { modalidad: "crear" }.
-  }, {
-      propiedad path como "/formulario/:id_de_tabla/id/:id_de_fila".
-      propiedad name como "FormularioDeDatoDeTabla".
-      propiedad component como PaginaDeFormularioDeDatoDeTabla.
-      propiedad props como { modalidad: "editar" }.
-  }, {
-      propiedad path como "/administracion".
-      propiedad name como "PanelDeAdministracion".
-      propiedad component como PaginaDePanelDeAdministracion.
-      propiedad props como {}.
-  }, {
-      propiedad path como "/configuraciones".
-      propiedad name como "PanelDeConfiguraciones".
-      propiedad component como PaginaDePanelDeConfiguraciones.
-      propiedad props como {}.
-  }, {
-      propiedad path como "/importar_exportar_datos".
-      propiedad name como "PaginaDeImportarExportarDatos".
-      propiedad component como PaginaDeImportarExportarDatos.
-      propiedad props como {}.
-  }, {
-      propiedad path como "/".
-      propiedad name como "Inicio".
-      propiedad component como PaginaDeInicio.
-      propiedad props como {}.
-  }].
-
-  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:postcargar:rutas", { rutas }).
-
-  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:precargar:aplicacion", { rutas }).
-
-  asigno window.App como una aplicación vue2 con nombre "App" con rutas rutas con traducciones {
+  asigno window.App como una aplicación vue2 con nombre "App" con rutas window.rutas_de_aplicacion con traducciones {
       propiedad es como {}.
       propiedad en como {}.
       propiedad ca como {}.

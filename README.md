@@ -58,7 +58,15 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
 1. [Hooks](#hooks)
    1. Hooks en el servidor
    1. Hooks en la aplicación de usuario
-
+1. [Guía de desarollo](#guía-de-desarrollo)
+   1. Índice
+   1. Prerrequisitos
+   1. Guía de desarrollo del backend
+      1. Crear el proyecto
+      1. Ejecutar el proyecto
+      1. Modificar el proyecto
+      1. Modificaciones avanzadas
+   1. Guía de desarrollo del frontend
 
 ## Instalación
 
@@ -1015,9 +1023,103 @@ El fichero `src/www/files/hooks/hooks.js` (o su versión `.calo`) está pensado 
 **Eventos de hook del ciclo de vida del frontend**:
 
 - **`app:iniciar`**: en el `src/www/files/index.1.calo`.
-- **`app:precargar:rutas`**: en el `src/www/files/index.1.calo`.
-- **`app:postcargar:rutas`**: en el `src/www/files/index.1.calo`.
 - **`app:precargar:aplicacion`**: en el `src/www/files/index.1.calo`.
 - **`app:postcargar:aplicacion`**: en el `src/www/files/index.1.calo`.
 - **`app:iniciada`**: en el `src/www/files/index.1.calo`.
 
+----
+
+# Guía de desarrollo
+
+Esta guía es una ayuda para el desarrollador de aplicaciones con `restero` tanto del backend como del frontend.
+
+## Índice
+
+1. [Prerrequisitos](#prerrequisitos)
+1. [Guía de desarrollo del backend](#guía-de-desarollo-del-backend)
+   1. [Crear el proyecto](#crear-el-proyecto)
+   1. [Ejecutar el proyecto](#ejecutar-el-proyecto)
+   1. [Modificar el proyecto](#modificar-el-proyecto)
+   1. [Modificaciones avanzadas](#modificaciones-avanzadas)
+1. [Guía de desarrollo del frontend](#guía-de-desarrollo-del-frontend)
+
+## Prerrequisitos
+
+ - Tener instalados `npm` y `node`
+ - Tener instalado `castelog` y su plugin de Visual Studio Code
+ - Tener instalado `restero`
+
+
+## Guía de desarrollo del backend
+
+Antes de crear el frontend, debemos crear un servidor que se ajuste a nuestros requerimientos.
+
+### Crear el proyecto
+
+Para crear un nuevo proyecto desde cero, en una carpeta nueva, ejecuta:
+
+```sh
+restero generar:seeder --salida .
+```
+
+### Ejecutar el proyecto
+
+Para ejecutar el proyecto, ejecuta:
+
+```sh
+bash start.sh
+```
+
+Esto regenerará los ficheros de la carpeta `output` que es donde se guarda el proyecto. Esta regeneración tendrá en cuenta los ficheros de dentro de la carpeta `input`. Además, el comando ejecutará el proyecto que hay en `output`, es decir, levantará el servidor.
+
+Si solo quieres regenerar el proyecto y no arrancarlo, puedes ejecutar en su lugar:
+
+```sh
+bash seeder.sh
+```
+
+En caso de usar Windows, deberías adaptar estos comandos y scripts para que funcionen con algo como `batch` en lugar de `bash`. Lo siento, pero de momento no está adaptado para desarrollar en Windows.
+
+### Modificar el proyecto
+
+Una vez has entendido hasta aquí, ahora se trata de modificar los ficheros de la carpeta `input` para que sobreescriban a los ficheros de la carpeta `output` de forma que creen el proyecto que nosotros deseamos. De esta forma, en la carpeta `input` vemos todas las modificaciones que se hacen en `output` para que funcione como deseamos. Y esto es común tanto en el backend como en el frontend.
+
+Los primeros ficheros que te interesa sobreescribir son:
+
+- **`src/configurations/db.sql`**: este fichero es por si quieres escribir la base de datos final directamente. No se recomienda editar este fichero directamente, sino editar el siguiente en su lugar.
+- **`src/configurations/db/db.ejs.sql`**: este fichero genera al anterior. Se recomienda componer el diseño de la base de datos a través de este fichero.
+- **`src/configurations/db/modules/*.ejs.sql`**: estos ficheros sirven como módulos que puedes incorporar en el diseño de la base de datos del fichero anterior, desde el cual mediante el `include` de las plantillas `ejs` puedes ir componiendo la base de datos. Mirar los ejemplos será de gran ayuda.
+- **`src/configurations/db/migrations/migracion.sql`**: este último fichero te permitirá ejecutar una migración (a modo de `seeder` de la base de datos), en el cual teóricamente insertas los primeros datos. Para insertar ficheros, ten en cuenta que los ficheros se guardan en `src/uploads` bajo la forma: *`{tabla}.{id}.{columna}.{nombre del fichero}`*. Sabiendo esto, puedes incluir los ficheros, y en el campo de la base de datos que `@es_fichero` solo tendrá que aparecer el `{nombre del fichero}`.
+
+Principalmente, los ficheros que te interesa editar para el backend son estos.
+
+### Modificaciones avanzadas
+
+Si quieres ir más allá en tu desarrollo, seguramente quieras: 
+
+- Crear nuevos **`authorizers`**
+- Crear nuevos **`controllers`**
+- Introducir nuevos **`hooks`**
+- Ampliar las **`dependencies`**
+- Ampliar las **`utilities`** accesibles desde el `deployer`
+- Incorporar nuevos **`parsers`**
+- Alterar las configuraciones de **`src/configurations/settings.json`**
+- Alterar el ciclo de despliegue del **`src/deployer.js`**
+
+Para ello, solo tienes que añadir las modificaciones en la carpeta `input`.
+
+*Nota: Si ves que es muy molesto el proceso de separar los ficheros que alteras del proyecto inicial y editarlos mediante la carpeta `input`, desecha todo, y céntrate en la carpeta `output` y su comando `npm start` para ejecutar el proyecto, y olvida el resto de ficheros y carpetas generados por el `seeder`.*
+
+Para editar estos ficheros, lo mejor es que te fijes en otros del mismo grupo.
+
+## Guía de desarrollo del frontend
+
+Para modificar el frontend, los ficheros que te interesan son:
+
+ - **`src/www/files/dependencies/rutas.calo`**: este fichero contiene las rutas que va a identificar la aplicación del frontend. Te interesará seguramente ampliarlo, y compilarlo para alterar al que realmente se usa: `src/www/files/dependencies/rutas.js`.
+ - **`src/www/files/components/*`**: estos ficheros son los componentes de la aplicación. Te interesará seguramente ampliar la lista, crear nuevos componentes. Esta es su carpeta.
+ - **`src/www/files/index.1.calo`**: este fichero contiene el código principal de la aplicación. Te interesará editarlo para incorporar en la ejecución nuevos componentes. Sobre todo, en la parte donde se incluyen los `<script>` y `<link>`.
+
+Principalmente, alterando estos ficheros ya puedes crear nuevas pantallas para la aplicación del frontend.
+
+Ahora sí, deberías estar listo para meterte en el desarrollo de aplicaciones `restero`.

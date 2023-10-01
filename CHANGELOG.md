@@ -328,3 +328,8 @@ Pero todavía no...
 
 **Versión `v0.0.48`.** *El 28 de septiembre de 2023 a las 22:30pm.*
 - [✔] documentado en índice @es_fichero y @es_opcion como hiperatributos de columna en README
+
+**Versión `v0.0.49`.** *El 1 de octubre de 2023 a las 05:56am.*
+- [✔] ampliado README con la guía de desarrollo.
+  - [✔] Para backend
+  - [✔] Para frontend

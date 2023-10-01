@@ -1,0 +1,41 @@
+asigno window.rutas_de_aplicacion como [{
+    propiedad path como "/login".
+    propiedad name como "Login".
+    propiedad component como PaginaDeLogin.
+    propiedad props como {}.
+}, {
+    propiedad path como "/explorador/:id_de_tabla".
+    propiedad name como "ExploradorDeDatosDeTabla".
+    propiedad component como PaginaDeExploradorDeDatosDeTabla.
+    propiedad props como {}.
+}, {
+    propiedad path como "/formulario/:id_de_tabla/crear".
+    propiedad name como "FormularioDeDatoDeTabla".
+    propiedad component como PaginaDeFormularioDeDatoDeTabla.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/formulario/:id_de_tabla/id/:id_de_fila".
+    propiedad name como "FormularioDeDatoDeTabla".
+    propiedad component como PaginaDeFormularioDeDatoDeTabla.
+    propiedad props como { modalidad: "editar" }.
+}, {
+    propiedad path como "/administracion".
+    propiedad name como "PanelDeAdministracion".
+    propiedad component como PaginaDePanelDeAdministracion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/configuraciones".
+    propiedad name como "PanelDeConfiguraciones".
+    propiedad component como PaginaDePanelDeConfiguraciones.
+    propiedad props como {}.
+}, {
+    propiedad path como "/importar_exportar_datos".
+    propiedad name como "PaginaDeImportarExportarDatos".
+    propiedad component como PaginaDeImportarExportarDatos.
+    propiedad props como {}.
+}, {
+    propiedad path como "/".
+    propiedad name como "Inicio".
+    propiedad component como PaginaDeInicio.
+    propiedad props como {}.
+}].
