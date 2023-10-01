@@ -2,7 +2,7 @@
     {
         "tabla": "Usuario",
         "atributos": [
-            "tiene_autorizador: no_usable"
+            "tiene_autorizador: es_administrador"
         ],
         "composicion": [
             {
@@ -41,7 +41,7 @@
                 "atributos": []
             }
         ],
-        "script": "CREATE TABLE Usuario /*\n  @tiene_autorizador: no_usable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
+        "script": "CREATE TABLE Usuario /*\n  @tiene_autorizador: es_administrador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
     },
     {
         "tabla": "Grupo",
@@ -232,7 +232,7 @@
     {
         "tabla": "Sesion",
         "atributos": [
-            "tiene_autorizador: no_usable",
+            "tiene_autorizador: es_administrador",
             "nombre_humano: Sesión"
         ],
         "composicion": [
@@ -268,7 +268,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Sesion /*\n  @tiene_autorizador: no_usable\n  @nombre_humano: Sesión\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER NOT NULL UNIQUE /*\n    @nombre_humano: ID de usuario\n  */,\n  token_de_sesion VARCHAR(128) /*\n    @nombre_humano: Token de sesión\n  */,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Sesion /*\n  @tiene_autorizador: es_administrador\n  @nombre_humano: Sesión\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER NOT NULL UNIQUE /*\n    @nombre_humano: ID de usuario\n  */,\n  token_de_sesion VARCHAR(128) /*\n    @nombre_humano: Token de sesión\n  */,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Fichero",

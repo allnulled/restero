@@ -142,13 +142,12 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── bin
 │   ├── restero.bin.js
 │   └── seeder
+│       ├── develop.sh
 │       ├── input
 │       │   └── src
 │       │       └── configurations
 │       │           └── db
-│       │               ├── db.ejs.sql
-│       │               └── modules
-│       ├── output
+│       │               └── db.ejs.sql
 │       ├── seeder.sh
 │       └── start.sh
 ├── CHANGELOG.md
@@ -221,8 +220,6 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   ├── deployer.js
 │   ├── hooks
 │   │   └── hooks.js
-│   ├── logs
-│   │   └── 2023-09-19.12-53-30.089.log
 │   ├── parsers
 │   │   ├── hyper-query-language.js
 │   │   └── hyper-query-language.pegjs
@@ -295,6 +292,8 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │           │   └── win7.scoped.css
 │           ├── dependencies
 │           │   ├── generar_gestor_de_hooks.js
+│           │   ├── rutas.calo
+│           │   ├── rutas.js
 │           │   ├── utilidades.calo
 │           │   └── utilidades.js
 │           ├── hooks
@@ -334,7 +333,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── TODO.md
 └── tree.txt
 
-32 directories, 162 files
+29 directories, 164 files
 ```
 
 Las carpetas originales son:
@@ -936,6 +935,8 @@ restero generar:seeder --salida .
 Usar `bash seeder.sh` posteriormente para generar el directorio `output` a partir del `input`. Sirve para crear proyectos desde 0 limpiamente, incorporando solo los ficheros cambiados. Solo funcionará si `restero` está disponible como comando global de la línea de comandos.
 
 Usar `bash start.sh` posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida. Este comando lo puedes repetir rápidamente para regenerar todo el proyecto en base a las modificaciones mínimas del directorio `input`, y probar los cambios lo más rápido posible. Es el comando que usas sin parar cuando estás desarrollando backend, vaya, si estás desarrollando un `input` para `restero`.
+
+Usar `bash develop.sh` posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida, automáticamente escuchando cambios en `input`. Este comando requiere de `npx` y de `nodemon` instalados en la línea de comandos. Se usa `npx nodemon --watch input --exec 'bash start.sh`, por lo cual solo está adaptado para Linux también.
 
 ## Interfaz de usuario
 

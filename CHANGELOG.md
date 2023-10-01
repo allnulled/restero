@@ -333,3 +333,6 @@ Pero todavía no...
 - [✔] ampliado README con la guía de desarrollo.
   - [✔] Para backend
   - [✔] Para frontend
+
+**Versión `v0.0.50`.** *El 1 de octubre de 2023 a las 15:08pm.*
+- [✔] comando del seeder `develop.sh` con `nodemon` usando `npx`

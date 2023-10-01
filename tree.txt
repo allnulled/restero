@@ -2,13 +2,12 @@
 ├── bin
 │   ├── restero.bin.js
 │   └── seeder
+│       ├── develop.sh
 │       ├── input
 │       │   └── src
 │       │       └── configurations
 │       │           └── db
-│       │               ├── db.ejs.sql
-│       │               └── modules
-│       ├── output
+│       │               └── db.ejs.sql
 │       ├── seeder.sh
 │       └── start.sh
 ├── CHANGELOG.md
@@ -81,8 +80,6 @@
 │   ├── deployer.js
 │   ├── hooks
 │   │   └── hooks.js
-│   ├── logs
-│   │   └── 2023-09-19.12-53-30.089.log
 │   ├── parsers
 │   │   ├── hyper-query-language.js
 │   │   └── hyper-query-language.pegjs
@@ -155,6 +152,8 @@
 │           │   └── win7.scoped.css
 │           ├── dependencies
 │           │   ├── generar_gestor_de_hooks.js
+│           │   ├── rutas.calo
+│           │   ├── rutas.js
 │           │   ├── utilidades.calo
 │           │   └── utilidades.js
 │           ├── hooks
@@ -194,4 +193,4 @@
 ├── TODO.md
 └── tree.txt
 
-32 directories, 162 files
+29 directories, 164 files
