@@ -336,3 +336,7 @@ Pero todavía no...
 
 **Versión `v0.0.50`.** *El 1 de octubre de 2023 a las 15:08pm.*
 - [✔] comando del seeder `develop.sh` con `nodemon` usando `npx`
+
+**Versión `v0.0.51`.** *El 2 de octubre de 2023 a las 12:56pm.*
+- [✔] actualizado parser HQL para saltos de línea tipo Windows \r\n
+

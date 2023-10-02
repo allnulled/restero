@@ -68,6 +68,6 @@ HQL_Sentencia_CREATE_COLUMN_o_FOREIGN_KEY_o_PRIMARY_KEY_n =
     { return sentencia }
 HQL_Id = [A-Za-z_] [A-Za-z0-9_$]* { return text() }
 HQL_Id_n = _* "," _* id:HQL_Id { return id }
-___ = "\r" / "\n" {}
+___ = "\r\n" / "\r" / "\n" {}
 __ = "\t" / " " {}
 _ = __ / ___ {}
