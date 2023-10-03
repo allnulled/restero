@@ -1,7 +1,11 @@
+<%
+const autoincrement_word = deployer.settings.DB_DRIVER === "sqlite" ? "AUTOINCREMENT" : deployer.settings.DB_DRIVER === "mysql" ? "AUTO_INCREMENT" : "undefined";
+%>
+
 CREATE TABLE Usuario /*
   @tiene_autorizador: es_administrador
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   domicilio VARCHAR(1024),
   correo VARCHAR (512),
@@ -11,7 +15,7 @@ CREATE TABLE Usuario /*
 CREATE TABLE Grupo /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   descripcion TEXT
 );
@@ -19,7 +23,7 @@ CREATE TABLE Grupo /*
 CREATE TABLE Permiso /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   descripcion TEXT
 );
@@ -27,7 +31,7 @@ CREATE TABLE Permiso /*
 CREATE TABLE Permiso_de_grupo /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   id_permiso INTEGER,
   id_grupo INTEGER,
   FOREIGN KEY (id_grupo) REFERENCES Grupo (id),
@@ -37,7 +41,7 @@ CREATE TABLE Permiso_de_grupo /*
 CREATE TABLE Permiso_de_usuario /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   id_permiso INTEGER,
   id_usuario INTEGER,
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id),
@@ -47,7 +51,7 @@ CREATE TABLE Permiso_de_usuario /*
 CREATE TABLE Grupo_de_usuario /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   id_usuario INTEGER,
   id_grupo INTEGER,
   FOREIGN KEY (id_grupo) REFERENCES Grupo (id),
@@ -58,7 +62,7 @@ CREATE TABLE Sesion /*
   @tiene_autorizador: es_administrador
   @nombre_humano: Sesión
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   id_usuario INTEGER NOT NULL UNIQUE /*
     @nombre_humano: ID de usuario
   */,

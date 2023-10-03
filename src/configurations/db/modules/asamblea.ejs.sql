@@ -1,15 +1,38 @@
-CREATE TABLE Fichero_de_problema_propuesto /*
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+<%
+const autoincrement_word = deployer.settings.DB_DRIVER === "sqlite" ? "AUTOINCREMENT" : deployer.settings.DB_DRIVER === "mysql" ? "AUTO_INCREMENT" : "undefined";
+%>
+
+CREATE TABLE Ciclo_democratico /*
+  @nombre_humano: Ciclo democrático
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
+  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
+*/  (
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
+  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+  nombre VARCHAR(128),
+  etapa_de_ciclo_actual INTEGER DEFAULT 1,
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_usuario_creador INTEGER /*
+    @nombre_humano: Id de usuario creador
+  */,
+  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)
+);
+
+CREATE TABLE Votacion /*
+  @nombre_humano: Votación
+  @tiene_autorizador: no_modificable
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  id_fichero INTEGER,
-  id_problema_propuesto INTEGER,
-  id_usuario INTEGER,
-  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),
-  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),
-  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
+  nombre VARCHAR(2048),
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  estado VARCHAR(32),
+  resultado TEXT
 );
 
 CREATE TABLE Voto /*
@@ -22,7 +45,7 @@ CREATE TABLE Voto /*
   @no_visibles_columnas: declaracion, notas
   @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   id_usuario INTEGER,
   id_votacion INTEGER,
   sentido VARCHAR(32) /*
@@ -42,7 +65,7 @@ CREATE TABLE Comentario /*
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
   @tiene_padre: id_comentario_padre
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   id_usuario INTEGER ,
   id_votacion INTEGER,
   id_comentario_padre INTEGER,
@@ -52,25 +75,12 @@ CREATE TABLE Comentario /*
   FOREIGN KEY (id_comentario_padre) REFERENCES Comentario (id)
 );
 
-CREATE TABLE Votacion /*
-  @nombre_humano: Votación
-  @tiene_autorizador: no_modificable
-*/ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nombre VARCHAR(2048),
-  descripcion TEXT /*
-    @nombre_humano: Descripción
-  */,
-  estado VARCHAR(32),
-  resultado TEXT
-);
-
 CREATE TABLE Problema_propuesto /*
   @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -89,7 +99,7 @@ CREATE TABLE Problema_destacado /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -98,7 +108,7 @@ CREATE TABLE Problema_destacado /*
   id_problema_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
-  FOREIGN KEY (id_problema_original) REFERENCES Problema (id)
+  FOREIGN KEY (id_problema_original) REFERENCES Problema_propuesto (id)
 );
 
 CREATE TABLE Solucion_propuesta /*
@@ -107,7 +117,7 @@ CREATE TABLE Solucion_propuesta /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -117,7 +127,7 @@ CREATE TABLE Solucion_propuesta /*
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
   FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),
-  FOREIGN KEY (id_problema_original) REFERENCES Problema (id)
+  FOREIGN KEY (id_problema_original) REFERENCES Problema_destacado (id)
 );
 
 CREATE TABLE Solucion_destacada /*
@@ -126,7 +136,7 @@ CREATE TABLE Solucion_destacada /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -135,7 +145,7 @@ CREATE TABLE Solucion_destacada /*
   id_solucion_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
-  FOREIGN KEY (id_solucion_original) REFERENCES Solucion (id)
+  FOREIGN KEY (id_solucion_original) REFERENCES Solucion_propuesta (id)
 );
 
 CREATE TABLE Implementacion_propuesta /*
@@ -144,7 +154,7 @@ CREATE TABLE Implementacion_propuesta /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -163,7 +173,7 @@ CREATE TABLE Implementacion_destacada /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -172,13 +182,29 @@ CREATE TABLE Implementacion_destacada /*
   id_implementacion_original INTEGER,
   id_ciclo_democratico INTEGER,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
-  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion (id)
+  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_propuesta (id)
+);
+
+CREATE TABLE Modificacion_de_ley /*
+  @nombre_humano: Modificación de ley
+  @tiene_autorizador: no_modificable
+*/  (
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
+  nombre VARCHAR(2048),
+  uuid VARCHAR(128),
+  descripcion TEXT /*
+    @nombre_humano: Descripción
+  */,
+  id_implementacion_original INTEGER,
+  id_ciclo_democratico INTEGER,
+  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
+  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)
 );
 
 CREATE TABLE Ley /*
   @tiene_autorizador: no_modificable
 */ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
   descripcion TEXT /*
@@ -192,47 +218,11 @@ CREATE TABLE Ley /*
   FOREIGN KEY (id_ley_padre) REFERENCES Ley (id)
 );
 
-CREATE TABLE Modificacion_de_ley /*
-  @nombre_humano: Modificación de ley
-  @tiene_autorizador: no_modificable
-*/  (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nombre VARCHAR(2048),
-  uuid VARCHAR(128),
-  descripcion TEXT /*
-    @nombre_humano: Descripción
-  */,
-  id_implementacion_original INTEGER,
-  id_ciclo_democratico INTEGER,
-  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),
-  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)
-);
-
-CREATE TABLE Ciclo_democratico /*
-  @nombre_humano: Ciclo democrático
-  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador
-  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
-  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
-*/  (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-  nombre VARCHAR(128),
-  etapa_de_ciclo_actual INTEGER DEFAULT 1,
-  descripcion TEXT /*
-    @nombre_humano: Descripción
-  */,
-  id_usuario_creador INTEGER /*
-    @nombre_humano: Id de usuario creador
-  */,
-  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)
-);
-
 CREATE TABLE Pulsion_democratica /*
   @nombre_humano: Pulsión democrática
   @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
 */  (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   especificacion TEXT /*
     @nombre_humano: Especificación
   */,
@@ -247,4 +237,18 @@ CREATE TABLE Pulsion_democratica /*
     @nombre_humano: Id de ciclo democrático
   */,
   FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)
+);
+
+CREATE TABLE Fichero_de_problema_propuesto /*
+  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
+*/ (
+  id INTEGER PRIMARY KEY <%=autoincrement_word%>,
+  id_fichero INTEGER,
+  id_problema_propuesto INTEGER,
+  id_usuario INTEGER,
+  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),
+  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
 );

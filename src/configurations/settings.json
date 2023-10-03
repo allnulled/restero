@@ -3,5 +3,11 @@
     "APP_LOGS": false,
     "APP_TRACES": true,
     "DB_RESET": true,
-    "DB_TEST_MIGRATION": false
+    "DB_TEST_MIGRATION": false,
+    "DB_DRIVER": "mysql",
+    "DB_HOST": "127.0.0.1",
+    "DB_PORT": 3306,
+    "DB_USER": "root",
+    "DB_PASSWORD": "toor",
+    "DB_NAME": "testing_restero"
 }

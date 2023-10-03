@@ -343,3 +343,6 @@ Pero todavía no...
 **Versión `v0.0.52`.** *El 3 de octubre de 2023 a las 21:36pm.*
 - [✔] actualizados comandos Linux para Windows también
 
+**Versión `v0.0.53`.** *El 3 de octubre de 2023 a las 22:28pm.*
+- [✔] soporte para mysql mediante deployer.settings.DB_DRIVER
+

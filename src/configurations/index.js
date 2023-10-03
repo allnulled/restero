@@ -2,6 +2,7 @@ module.exports = function(deployer) {
     return async function() {
         try {
             deployer.db = {};
+            deployer.settings = require(__dirname + "/settings.json");
             Generar_base_de_datos_via_plantillas: {
                 const ejs = require("ejs");
                 const fs = require("fs");
@@ -10,7 +11,7 @@ module.exports = function(deployer) {
                     break Generar_base_de_datos_via_plantillas;
                 }
                 const db_ejs = fs.readFileSync(plantilla_padre).toString();
-                const output = await ejs.render(db_ejs, {}, { root: __dirname });
+                const output = await ejs.render(db_ejs, { deployer }, { root: __dirname });
                 if (output.trim().length === 0) {
                     break Generar_base_de_datos_via_plantillas;
                 }
@@ -19,7 +20,6 @@ module.exports = function(deployer) {
             const db_contents = deployer.fs.readFileSync(__dirname + "/db.sql").toString();
             deployer.db.schema = deployer.hql_parser.parse(db_contents);
             deployer.fs.writeFileSync(__dirname + "/db.sql.json", JSON.stringify(deployer.db.schema, null, 4), "utf8");
-            deployer.settings = require(__dirname + "/settings.json");
         } catch(error) {
             console.error("Error en «src/configurations/index.js»");
             console.error(error);

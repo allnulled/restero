@@ -4,7 +4,7 @@ module.exports = function (deployer) {
             deployer.utilities.tracear("deployer.utilities.desplegar_base_de_datos");
             const tabla1 = deployer.db.schema[0].tabla;
             if(deployer.settings.DB_RESET === true) {
-                deployer.fs.unlinkSync(__dirname + "/../configurations/db.instancia.sqlite");
+                await deployer.utilities.resetear_base_de_datos();
             }
             const conexion = await deployer.utilities.obtener_conexion_de_base_de_datos();
             try {
