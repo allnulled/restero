@@ -340,3 +340,6 @@ Pero todavía no...
 **Versión `v0.0.51`.** *El 2 de octubre de 2023 a las 12:56pm.*
 - [✔] actualizado parser HQL para saltos de línea tipo Windows \r\n
 
+**Versión `v0.0.52`.** *El 3 de octubre de 2023 a las 21:36pm.*
+- [✔] actualizados comandos Linux para Windows también
+

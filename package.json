@@ -1,6 +1,6 @@
 {
   "name": "restero",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Despliega aplicaciones REST basadas en ficheros HQL (Hyper Query Language).",
   "main": "src/api.js",
   "bin": {
@@ -10,7 +10,8 @@
     "build-parser": "pegjs -o src/parsers/hyper-query-language.js src/parsers/hyper-query-language.pegjs",
     "build-tree": "tree -I node_modules . > tree.txt",
     "start": "node src/deployer.js",
-    "test": "cd test/unit && bash test.sh"
+    "test": "cd test/unit && bash test.sh",
+    "test:windows": "cd test/unit && call test.bat"
   },
   "dependencies": {
     "axios": "^1.4.0",

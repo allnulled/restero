@@ -1,0 +1,1 @@
+npx nodemon --watch input --exec 'call start.bat'

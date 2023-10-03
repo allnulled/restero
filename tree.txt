@@ -2,13 +2,16 @@
 ├── bin
 │   ├── restero.bin.js
 │   └── seeder
+│       ├── develop.bat
 │       ├── develop.sh
 │       ├── input
 │       │   └── src
 │       │       └── configurations
 │       │           └── db
 │       │               └── db.ejs.sql
+│       ├── seeder.bat
 │       ├── seeder.sh
+│       ├── start.bat
 │       └── start.sh
 ├── CHANGELOG.md
 ├── docs
@@ -26,8 +29,8 @@
 │       ├── imagen-7.secciones.png
 │       ├── imagen-8.explorador.filtros.png
 │       └── imagen-9.explorador.orden.png
+├── npm-shrinkwrap.json
 ├── package.json
-├── package-lock.json
 ├── README.md
 ├── src
 │   ├── api.js
@@ -167,30 +170,28 @@
 │           └── prueba.js
 ├── test
 │   ├── test-rudimentario.txt
-│   ├── unit
-│   │   ├── feature
-│   │   │   ├── analisis.test.js
-│   │   │   ├── incluir.test.js
-│   │   │   ├── login.test.js
-│   │   │   ├── logout.test.js
-│   │   │   ├── no_visibles_columnas.test.js
-│   │   │   ├── reset.test.js
-│   │   │   ├── select_order.test.js
-│   │   │   ├── select_page.test.js
-│   │   │   ├── select_search.test.js
-│   │   │   ├── solo_actualizable_por_mismo_usuario.test.js
-│   │   │   ├── solo_eliminable_por_mismo_usuario.test.js
-│   │   │   ├── solo_insertable_por_mismo_usuario.test.js
-│   │   │   ├── solo_seleccionable_por_mismo_usuario.test.js
-│   │   │   ├── volcan_1.png
-│   │   │   └── volcan_2.png
-│   │   ├── test.resultados.json
-│   │   ├── test.sh
-│   │   └── test.utilidades.js
-│   ├── uno.ods
-│   ├── uno.xlsx
-│   └── uno.xml
+│   └── unit
+│       ├── feature
+│       │   ├── analisis.test.js
+│       │   ├── incluir.test.js
+│       │   ├── login.test.js
+│       │   ├── logout.test.js
+│       │   ├── no_visibles_columnas.test.js
+│       │   ├── reset.test.js
+│       │   ├── select_order.test.js
+│       │   ├── select_page.test.js
+│       │   ├── select_search.test.js
+│       │   ├── solo_actualizable_por_mismo_usuario.test.js
+│       │   ├── solo_eliminable_por_mismo_usuario.test.js
+│       │   ├── solo_insertable_por_mismo_usuario.test.js
+│       │   ├── solo_seleccionable_por_mismo_usuario.test.js
+│       │   ├── volcan_1.png
+│       │   └── volcan_2.png
+│       ├── test.bat
+│       ├── test.resultados.json
+│       ├── test.sh
+│       └── test.utilidades.js
 ├── TODO.md
 └── tree.txt
 
-29 directories, 164 files
+29 directories, 165 files

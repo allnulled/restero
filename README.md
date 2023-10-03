@@ -142,13 +142,16 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── bin
 │   ├── restero.bin.js
 │   └── seeder
+│       ├── develop.bat
 │       ├── develop.sh
 │       ├── input
 │       │   └── src
 │       │       └── configurations
 │       │           └── db
 │       │               └── db.ejs.sql
+│       ├── seeder.bat
 │       ├── seeder.sh
+│       ├── start.bat
 │       └── start.sh
 ├── CHANGELOG.md
 ├── docs
@@ -166,8 +169,8 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │       ├── imagen-7.secciones.png
 │       ├── imagen-8.explorador.filtros.png
 │       └── imagen-9.explorador.orden.png
+├── npm-shrinkwrap.json
 ├── package.json
-├── package-lock.json
 ├── README.md
 ├── src
 │   ├── api.js
@@ -307,33 +310,31 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │           └── prueba.js
 ├── test
 │   ├── test-rudimentario.txt
-│   ├── unit
-│   │   ├── feature
-│   │   │   ├── analisis.test.js
-│   │   │   ├── incluir.test.js
-│   │   │   ├── login.test.js
-│   │   │   ├── logout.test.js
-│   │   │   ├── no_visibles_columnas.test.js
-│   │   │   ├── reset.test.js
-│   │   │   ├── select_order.test.js
-│   │   │   ├── select_page.test.js
-│   │   │   ├── select_search.test.js
-│   │   │   ├── solo_actualizable_por_mismo_usuario.test.js
-│   │   │   ├── solo_eliminable_por_mismo_usuario.test.js
-│   │   │   ├── solo_insertable_por_mismo_usuario.test.js
-│   │   │   ├── solo_seleccionable_por_mismo_usuario.test.js
-│   │   │   ├── volcan_1.png
-│   │   │   └── volcan_2.png
-│   │   ├── test.resultados.json
-│   │   ├── test.sh
-│   │   └── test.utilidades.js
-│   ├── uno.ods
-│   ├── uno.xlsx
-│   └── uno.xml
+│   └── unit
+│       ├── feature
+│       │   ├── analisis.test.js
+│       │   ├── incluir.test.js
+│       │   ├── login.test.js
+│       │   ├── logout.test.js
+│       │   ├── no_visibles_columnas.test.js
+│       │   ├── reset.test.js
+│       │   ├── select_order.test.js
+│       │   ├── select_page.test.js
+│       │   ├── select_search.test.js
+│       │   ├── solo_actualizable_por_mismo_usuario.test.js
+│       │   ├── solo_eliminable_por_mismo_usuario.test.js
+│       │   ├── solo_insertable_por_mismo_usuario.test.js
+│       │   ├── solo_seleccionable_por_mismo_usuario.test.js
+│       │   ├── volcan_1.png
+│       │   └── volcan_2.png
+│       ├── test.bat
+│       ├── test.resultados.json
+│       ├── test.sh
+│       └── test.utilidades.js
 ├── TODO.md
 └── tree.txt
 
-29 directories, 164 files
+29 directories, 165 files
 ```
 
 Las carpetas originales son:
@@ -443,16 +444,28 @@ El **proceso de despliegue** del `restero` está programado en el `src/deployer.
 
 ## El proceso de tests
 
-El **proceso de tests** del `restero` se inicia tan rápidamente como:
+El **proceso de tests** del `restero` se inicia tan rápidamente, en Linux, como:
 
 ```sh
 npm test
 ```
 
-O también serviría, por equivalencia (puedes usar «bat» en lugar de «bash» en Windows):
+Para Windows tienes:
+
+```sh
+npm test:windows
+```
+
+O también serviría, por equivalencia, en Linux:
 
 ```sh
 cd test/unit && bash test.sh
+```
+
+Y en Windows serviría igualmente:
+
+```sh
+cd test/unit && call test.bat
 ```
 
 Pasará los tests en 1 por proceso, y finalmente listará los resultados obtenidos por pantalla en colores y en una tabla.
@@ -932,11 +945,11 @@ El *seeder* o *semillero* es un proyecto que va a tener una carpeta `input` y ot
 restero generar:seeder --salida .
 ```
 
-Usar `bash seeder.sh` posteriormente para generar el directorio `output` a partir del `input`. Sirve para crear proyectos desde 0 limpiamente, incorporando solo los ficheros cambiados. Solo funcionará si `restero` está disponible como comando global de la línea de comandos.
+Usar `bash seeder.sh` en Linux o `call seeder.bat` en Windows, posteriormente para generar el directorio `output` a partir del `input`. Sirve para crear proyectos desde 0 limpiamente, incorporando solo los ficheros cambiados. Solo funcionará si `restero` está disponible como comando global de la línea de comandos.
 
-Usar `bash start.sh` posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida. Este comando lo puedes repetir rápidamente para regenerar todo el proyecto en base a las modificaciones mínimas del directorio `input`, y probar los cambios lo más rápido posible. Es el comando que usas sin parar cuando estás desarrollando backend, vaya, si estás desarrollando un `input` para `restero`.
+Usar `bash start.sh` en Linux o `call start.bat` en Windows, posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida. Este comando lo puedes repetir rápidamente para regenerar todo el proyecto en base a las modificaciones mínimas del directorio `input`, y probar los cambios lo más rápido posible. Es el comando que usas sin parar cuando estás desarrollando backend, vaya, si estás desarrollando un `input` para `restero`.
 
-Usar `bash develop.sh` posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida, automáticamente escuchando cambios en `input`. Este comando requiere de `npx` y de `nodemon` instalados en la línea de comandos. Se usa `npx nodemon --watch input --exec 'bash start.sh`, por lo cual solo está adaptado para Linux también.
+Usar `bash develop.sh` en Linux o `call develop.bat` en Windows, posteriormente para generar el directorio `output` de nuevo, y además ejecutar `npm start` desde el proyecto de salida, automáticamente escuchando cambios en `input`. Este comando requiere de `npx` y de `nodemon` instalados en la línea de comandos. Se usa `npx nodemon --watch input --exec 'bash start.sh` o `npx nodemon --watch input --exec 'call start.bat'`, por lo cual solo está adaptado para Linux y Windows también.
 
 ## Interfaz de usuario
 
@@ -1046,9 +1059,9 @@ Esta guía es una ayuda para el desarrollador de aplicaciones con `restero` tant
 
 ## Prerrequisitos
 
- - Tener instalados `npm` y `node`
- - Tener instalado `castelog` y su plugin de Visual Studio Code
- - Tener instalado `restero`
+ - Tener instalados [`npm` y `node`](https://nodejs.org/es/download)
+ - Tener instalado [`castelog`](https://github.com/allnulled/castelog) y su plugin de Visual Studio Code
+ - Tener instalado [`restero`](https://github.com/allnulled/restero)
 
 
 ## Guía de desarrollo del backend
@@ -1065,10 +1078,16 @@ restero generar:seeder --salida .
 
 ### Ejecutar el proyecto
 
-Para ejecutar el proyecto, ejecuta:
+Para ejecutar el proyecto, ejecuta, en entornos Linux:
 
 ```sh
 bash start.sh
+```
+
+O en Windows:
+
+```sh
+call start.bat
 ```
 
 Esto regenerará los ficheros de la carpeta `output` que es donde se guarda el proyecto. Esta regeneración tendrá en cuenta los ficheros de dentro de la carpeta `input`. Además, el comando ejecutará el proyecto que hay en `output`, es decir, levantará el servidor.
@@ -1079,7 +1098,13 @@ Si solo quieres regenerar el proyecto y no arrancarlo, puedes ejecutar en su lug
 bash seeder.sh
 ```
 
-En caso de usar Windows, deberías adaptar estos comandos y scripts para que funcionen con algo como `batch` en lugar de `bash`. Lo siento, pero de momento no está adaptado para desarrollar en Windows.
+O en Windows:
+
+```sh
+call seeder.bat
+```
+
+
 
 ### Modificar el proyecto
 
