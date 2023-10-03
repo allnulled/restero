@@ -26,11 +26,15 @@ if(comando === "generar") {
         console.log("[*] Copiado fichero de base de datos");
     }
     Resetear_settings: {
-        const ruta_a_settings = path.resolve(directorio_salida, "src/configurations/settings.json");
-        const settings = require(ruta_a_settings);
-        settings.DB_RESET = false;
-        settings.DB_TEST_MIGRATION = false;
-        fs.writeFileSync(ruta_a_settings, JSON.stringify(settings), "utf8");
+        const environments = ["default", "development", "testing", "production"];
+        for(let index_env = 0; index_env < environments.length; index_env++) {
+            const environment = environments[index_env];
+            const ruta_a_settings = path.resolve(directorio_salida, `src/configurations/settings.${environment}.json`);
+            const settings = require(ruta_a_settings);
+            settings.DB_RESET = false;
+            settings.DB_TEST_MIGRATION = false;
+            fs.writeFileSync(ruta_a_settings, JSON.stringify(settings), "utf8");
+        }
         console.log("[*] Reseteadas configuraciones");
     }
     Resetear_base_de_datos: {

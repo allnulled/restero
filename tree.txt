@@ -74,7 +74,10 @@
 │   │   ├── db.sql
 │   │   ├── db.sql.json
 │   │   ├── index.js
-│   │   └── settings.json
+│   │   ├── settings.default.json
+│   │   ├── settings.development.json
+│   │   ├── settings.production.json
+│   │   └── settings.testing.json
 │   ├── controllers
 │   │   └── index.js
 │   ├── dependencies
@@ -124,6 +127,7 @@
 │   │   ├── preparar_insert.js
 │   │   ├── preparar_select.js
 │   │   ├── preparar_update.js
+│   │   ├── resetear_base_de_datos.js
 │   │   └── tracear.js
 │   └── www
 │       └── files
@@ -194,4 +198,4 @@
 ├── TODO.md
 └── tree.txt
 
-29 directories, 165 files
+29 directories, 169 files

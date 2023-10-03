@@ -346,3 +346,6 @@ Pero todavía no...
 **Versión `v0.0.53`.** *El 3 de octubre de 2023 a las 22:28pm.*
 - [✔] soporte para mysql mediante deployer.settings.DB_DRIVER
 
+**Versión `v0.0.54`.** *El 3 de octubre de 2023 a las 23:00pm.*
+- [✔] soporte para distintos entornos de ejecución: `default`, `development`, `testing` y `production`.
+

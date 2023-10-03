@@ -93,11 +93,11 @@ Para usar la línea de comandos para generar el proyecto, puedes consultar la se
 
 **Paso 1.** Crea y coloca el script en [HQL](https://github.com/allnulled/h-query-language) en el fichero `src/configurations/db.sql`.
 
-**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.json`.
+**Paso 2.** Revisa las configuraciones del *deployer* en el fichero `src/configurations/settings.{entorno}.json`.
 
 **Paso 3.** Revisa también el fichero de migración inicial si escaece, en `src/configurations/db/migrations/migracion.sql` que se ejecutará automáticamente en caso que la base de datos deba crearse.
 
-También está el fichero vecino `migracion.test.sql` que se ejecutará en caso de que el booleano `DB_TEST_MIGRATION` en `src/configurations/settings.json` esté en `true`.
+También está el fichero vecino `migracion.test.sql` que se ejecutará en caso de que el booleano `DB_TEST_MIGRATION` en `src/configurations/settings.{entorno}.json` esté en `true`.
 
 **Paso 4.** Despliega la aplicación con el comando:
 
@@ -105,7 +105,7 @@ También está el fichero vecino `migracion.test.sql` que se ejecutará en caso 
 npm start
 ```
 
-Este comando creará la base de datos si la primera tabla del script no existe (`Usuario`), y aplicará la migración inicial. La de tests en caso de que esté activada en el `configurations/settings.json`. Si la tal primera tabla está creada, obviará estos pasos, y continuará la ejecución del despliegue del servidor.
+Este comando creará la base de datos si la primera tabla del script no existe (`Usuario`), y aplicará la migración inicial. La de tests en caso de que esté activada en el `configurations/settings.{entorno}.json`. Si la tal primera tabla está creada, obviará estos pasos, y continuará la ejecución del despliegue del servidor.
 
 **Paso 5.** Ya puedes hacer todas las operaciones CRUD automáticamente mediante HTTP, por ejemplo:
 
@@ -214,7 +214,10 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   ├── db.sql
 │   │   ├── db.sql.json
 │   │   ├── index.js
-│   │   └── settings.json
+│   │   ├── settings.default.json
+│   │   ├── settings.development.json
+│   │   ├── settings.production.json
+│   │   └── settings.testing.json
 │   ├── controllers
 │   │   └── index.js
 │   ├── dependencies
@@ -264,6 +267,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │   │   ├── preparar_insert.js
 │   │   ├── preparar_select.js
 │   │   ├── preparar_update.js
+│   │   ├── resetear_base_de_datos.js
 │   │   └── tracear.js
 │   └── www
 │       └── files
@@ -334,7 +338,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── TODO.md
 └── tree.txt
 
-29 directories, 165 files
+29 directories, 169 files
 ```
 
 Las carpetas originales son:
@@ -349,7 +353,7 @@ Las carpetas internas originales son:
   - `src/controllers/`: donde residen los controladores nuevos.
   - `src/dependencies/`: donde residen las dependencias.
   - `src/hooks/`: donde residen las hooks.
-  - `src/logs/`: donde residen los logs del servidor, que se irán generando automáticamente si se activa en `src/configurations/settings.json` el flag `APP_LOGS`. Por defecto desactivado.
+  - `src/logs/`: donde residen los logs del servidor, que se irán generando automáticamente si se activa en `src/configurations/settings.{entorno}.json` el flag `APP_LOGS`. Por defecto desactivado.
   - `src/parsers/`: donde residen los parsers.
   - `src/uploads/`: donde residen los ficheros subidos por los usuarios.
   - `src/utilities/`: donde residen los ficheros utilizados por el servidor.
@@ -400,10 +404,18 @@ El **proceso de configuración manual** del `restero` está pensado para ser rá
   - `src/configurations/db.sql`: diseñar la base de datos que finalmente queremos desplegar.
   - `src/configurations/db/migrations/migracion.sql`: elaborar la migración inicial en todos los entornos. Esto se ejecuta si la base de datos debe crearse. La base de datos debe crearse si la primera tabla no está seleccionable. `Usuario` es la primera tabla, y `autorizacion.ejs.sql` es el primer módulo a cargar siempre.
   - `src/configurations/db/migrations/migracion.test.sql`: elaborar la migración inicial en el entorno de test.
-  - `src/configurations/settings.json`: establecer los valores de configuración global preferidos. A continuación se listan los valores prestablecidos de la aplicación.
+  - `src/configurations/settings.*.json`: establecer los valores de configuración global preferidos. A continuación se listan los valores prestablecidos de la aplicación.
       - `APP_PORT`: `5046`. El puerto en el que el servidor se desplegará.
+      - `APP_LOGS`: `false`. Activa o desactiva el registro de los logs de las peticiones que se hacen al servidor.
+      - `APP_TRACES`: `true`, Activa o desactiva la traza de llamadas de métodos de la aplicación por consola.
       - `DB_RESET`: `true`. Esto significa que cada vez que reinicies el sistema, las tablas se destruirán y se volverán a crear en función del script en `src/configurations/db.sql`, y consecuentemente se ejecutará la migración inicial en `src/configurations/migrations/migracion.sql`.
       - `DB_TEST_MIGRATION`: `false`. Ejecutará, en caso de que se esté migrando inicialmente la aplicación, el fichero en `src/configurations/migrations/migracion.test.sql`.
+      - `DB_DRIVER`: `"sqlite"`. Elige el motor de base de datos. Debe ser o `sqlite` o `mysql`.
+      - `DB_HOST`: `"127.0.0.1"`. En caso de escoger el driver de base de datos `mysql`. El servidor al cual atacar.
+      - `DB_PORT`: `3306`. En caso de escoger el driver de base de datos `mysql`. El puerto del servidor al cual atacar.
+      - `DB_USER`: `"root"`. En caso de escoger el driver de base de datos `mysql`. El usuario con el que entrar en la base de datos.
+      - `DB_PASSWORD`: `"toor"`. En caso de escoger el driver de base de datos `mysql`. La contraseña con la que entrar en la base de datos.
+      - `DB_NAME`: `"testing_restero"`. En caso de escoger el driver de base de datos `mysql`. El nombre de la base de datos a la cual atacar.
   - `src/configurations/db/db.ejs.sql`: diseñar la base de datos que queremos desplegar, pero a través de plantillas. Si escribes algo en este fichero a través de la plantilla ejs, el siguiente fichero `db.sql` se sobreescribirá con ello. Si no escribes nada, en cambio, valdrá lo que haya escrito en el `db.sql` directamente. Por defecto, no escribe nada. Este fichero permite desplegar la base de datos como si fueran módulos, y así componer la base de datos, pero su uso es opcional y por defecto está desactivado, solo hay comentarios de plantilla pero no imprime nada.
 
 Si nos faltan controladores o autorizadores para completar nuestra aplicación, deberemos programarlos en:
@@ -1129,7 +1141,11 @@ Si quieres ir más allá en tu desarrollo, seguramente quieras:
 - Ampliar las **`dependencies`**
 - Ampliar las **`utilities`** accesibles desde el `deployer`
 - Incorporar nuevos **`parsers`**
-- Alterar las configuraciones de **`src/configurations/settings.json`**
+- Alterar las configuraciones de:
+   - **`src/configurations/settings.default.json`**
+   - **`src/configurations/settings.development.json`**
+   - **`src/configurations/settings.testing.json`**
+   - **`src/configurations/settings.production.json`**
 - Alterar el ciclo de despliegue del **`src/deployer.js`**
 
 Para ello, solo tienes que añadir las modificaciones en la carpeta `input`.

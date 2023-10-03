@@ -2,7 +2,11 @@ module.exports = function(deployer) {
     return async function() {
         try {
             deployer.db = {};
-            deployer.settings = require(__dirname + "/settings.json");
+            let environment = "default";
+            if(process.env.NODE_ENV) {
+                environment = process.env.NODE_ENV
+            }
+            deployer.settings = require(__dirname + "/settings.${environment}.json");
             Generar_base_de_datos_via_plantillas: {
                 const ejs = require("ejs");
                 const fs = require("fs");

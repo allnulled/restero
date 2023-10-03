@@ -4,7 +4,7 @@
     "APP_TRACES": true,
     "DB_RESET": true,
     "DB_TEST_MIGRATION": false,
-    "DB_DRIVER": "mysql",
+    "DB_DRIVER": "sqlite",
     "DB_HOST": "127.0.0.1",
     "DB_PORT": 3306,
     "DB_USER": "root",
