@@ -361,3 +361,6 @@ Pero todavía no...
 
 **Versión `v0.0.58`.** *El 4 de octubre de 2023 a las 11:55am.*
 - [✔] [BUG] arreglado restero.bin.js para estilizar jsons para settings
+
+**Versión `v0.0.59`.** *El 4 de octubre de 2023 a las 12:01pm.*
+- [✔] [BUG] arreglado db.ejs.sql para que no escriba nada
