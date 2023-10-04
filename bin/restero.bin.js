@@ -33,7 +33,7 @@ if(comando === "generar") {
             const settings = require(ruta_a_settings);
             settings.DB_RESET = false;
             settings.DB_TEST_MIGRATION = false;
-            fs.writeFileSync(ruta_a_settings, JSON.stringify(settings), "utf8");
+            fs.writeFileSync(ruta_a_settings, JSON.stringify(settings, null, 4), "utf8");
         }
         console.log("[*] Reseteadas configuraciones");
     }

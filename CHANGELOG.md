@@ -358,3 +358,6 @@ Pero todavía no...
 
 **Versión `v0.0.57`.** *El 4 de octubre de 2023 a las 11:51am.*
 - [✔] [UI] componente BreadcrumbGenerico acepta miga.onclick en lugar de miga.link
+
+**Versión `v0.0.58`.** *El 4 de octubre de 2023 a las 11:55am.*
+- [✔] [BUG] arreglado restero.bin.js para estilizar jsons para settings
