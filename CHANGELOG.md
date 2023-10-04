@@ -364,3 +364,6 @@ Pero todavía no...
 
 **Versión `v0.0.59`.** *El 4 de octubre de 2023 a las 12:01pm.*
 - [✔] [BUG] arreglado db.ejs.sql para que no escriba nada
+
+**Versión `v0.0.60`.** *El 4 de octubre de 2023 a las 12:13pm.*
+- [✔] limpiado src/configurations/db.sql para que solo meta el modulo de autorizacion por defecto
