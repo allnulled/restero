@@ -5,7 +5,10 @@ asigno window.BreadcrumbGenerico como un componente vue2 con nombre "BreadcrumbG
         <span v-if="miga_index !== 0">
            » 
         </span>
-        <span class="como_link_claro" v-on:click="() => $router.history.push(miga.link)">
+        <span v-if="miga.link" class="como_link_claro" v-on:click="() => $router.history.push(miga.link)">
+          {{ miga.texto }}
+        </span>
+        <span v-else-if="miga.onclick" class="como_link_claro" v-on:click="miga.onclick">
           {{ miga.texto }}
         </span>
       </span>
