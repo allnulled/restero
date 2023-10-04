@@ -349,3 +349,7 @@ Pero todavía no...
 **Versión `v0.0.54`.** *El 3 de octubre de 2023 a las 23:00pm.*
 - [✔] soporte para distintos entornos de ejecución: `default`, `development`, `testing` y `production`.
 
+**Versión `v0.0.55`.** *El 4 de octubre de 2023 a las 09:37am.*
+- [✔] soporte para restricciones de unicidad en sintaxis HQL (v0.0.17)
+  - [✔] permite sintaxis `CONSTRAINT c4 UNIQUE (c1, c2, c3)`
+

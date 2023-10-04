@@ -16,8 +16,29 @@ HQL_Composicion_de_tabla =
     { return [].concat([sentencia1]).concat(sentenciaN); }
 HQL_Sentencia_CREATE_COLUMN_o_FOREIGN_KEY_o_PRIMARY_KEY_1 =
   HQL_Sentencia_FOREIGN_KEY /
+  HQL_Sentencia_CONSTRAINT_UNIQUE /
   HQL_Sentencia_CREATE_COLUMN / 
   HQL_Sentencia_PRIMARY_KEY
+HQL_Sentencia_CONSTRAINT_UNIQUE = 
+  token1:(_*)
+  token2:"CONSTRAINT"
+  token3:(_+)
+  columna:HQL_Id
+  token4:(_+)
+  token5:"UNIQUE"
+  token6:(_* "(")
+  columnas_implicadas:HQL_Id_list
+  token7:(_* ")" _*)
+    { return { sentencia: "restricción única", columna, columnas_implicadas } }
+HQL_Id_list =
+  columna:HQL_Id
+  columnas:HQL_Id_postcoma+
+    { return [].concat([ columna ]).concat(columnas) }
+HQL_Id_postcoma =
+  token1:","
+  token2:_*
+  id:HQL_Id
+    { return id }
 HQL_Sentencia_CREATE_COLUMN = 
   token1:(_*)
   columna:HQL_Id
