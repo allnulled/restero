@@ -353,3 +353,5 @@ Pero todavía no...
 - [✔] soporte para restricciones de unicidad en sintaxis HQL (v0.0.17)
   - [✔] permite sintaxis `CONSTRAINT c4 UNIQUE (c1, c2, c3)`
 
+**Versión `v0.0.56`.** *El 4 de octubre de 2023 a las 11:45am.*
+- [✔] [BUG] arreglado import de settings.{environment}.json

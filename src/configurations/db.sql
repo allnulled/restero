@@ -4,7 +4,7 @@
 CREATE TABLE Usuario /*
   @tiene_autorizador: es_administrador
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   domicilio VARCHAR(1024),
   correo VARCHAR (512),
@@ -14,7 +14,7 @@ CREATE TABLE Usuario /*
 CREATE TABLE Grupo /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   descripcion TEXT
 );
@@ -22,7 +22,7 @@ CREATE TABLE Grupo /*
 CREATE TABLE Permiso /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
   descripcion TEXT
 );
@@ -30,7 +30,7 @@ CREATE TABLE Permiso /*
 CREATE TABLE Permiso_de_grupo /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_permiso INTEGER,
   id_grupo INTEGER,
   FOREIGN KEY (id_grupo) REFERENCES Grupo (id),
@@ -40,7 +40,7 @@ CREATE TABLE Permiso_de_grupo /*
 CREATE TABLE Permiso_de_usuario /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_permiso INTEGER,
   id_usuario INTEGER,
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id),
@@ -50,7 +50,7 @@ CREATE TABLE Permiso_de_usuario /*
 CREATE TABLE Grupo_de_usuario /*
   @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   id_grupo INTEGER,
   FOREIGN KEY (id_grupo) REFERENCES Grupo (id),
@@ -61,7 +61,7 @@ CREATE TABLE Sesion /*
   @tiene_autorizador: es_administrador
   @nombre_humano: Sesión
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER NOT NULL UNIQUE /*
     @nombre_humano: ID de usuario
   */,
@@ -79,7 +79,7 @@ CREATE TABLE Fichero /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   fichero VARCHAR(512),
   FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
@@ -94,7 +94,7 @@ CREATE TABLE Ciclo_democratico /*
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
 */  (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
   nombre VARCHAR(128),
   etapa_de_ciclo_actual INTEGER DEFAULT 1,
@@ -111,7 +111,7 @@ CREATE TABLE Votacion /*
   @nombre_humano: Votación
   @tiene_autorizador: no_modificable
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -130,7 +130,7 @@ CREATE TABLE Voto /*
   @no_visibles_columnas: declaracion, notas
   @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER,
   id_votacion INTEGER,
   sentido VARCHAR(32) /*
@@ -150,7 +150,7 @@ CREATE TABLE Comentario /*
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
   @tiene_padre: id_comentario_padre
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_usuario INTEGER ,
   id_votacion INTEGER,
   id_comentario_padre INTEGER,
@@ -165,7 +165,7 @@ CREATE TABLE Problema_propuesto /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -184,7 +184,7 @@ CREATE TABLE Problema_destacado /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -202,7 +202,7 @@ CREATE TABLE Solucion_propuesta /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -221,7 +221,7 @@ CREATE TABLE Solucion_destacada /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -239,7 +239,7 @@ CREATE TABLE Implementacion_propuesta /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -258,7 +258,7 @@ CREATE TABLE Implementacion_destacada /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   descripcion TEXT /*
     @nombre_humano: Descripción
@@ -274,7 +274,7 @@ CREATE TABLE Modificacion_de_ley /*
   @nombre_humano: Modificación de ley
   @tiene_autorizador: no_modificable
 */  (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
   descripcion TEXT /*
@@ -289,7 +289,7 @@ CREATE TABLE Modificacion_de_ley /*
 CREATE TABLE Ley /*
   @tiene_autorizador: no_modificable
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(2048),
   uuid VARCHAR(128),
   descripcion TEXT /*
@@ -307,7 +307,7 @@ CREATE TABLE Pulsion_democratica /*
   @nombre_humano: Pulsión democrática
   @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {"permisos":["permiso de administración"]}
 */  (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   especificacion TEXT /*
     @nombre_humano: Especificación
   */,
@@ -329,7 +329,7 @@ CREATE TABLE Fichero_de_problema_propuesto /*
   @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario
   @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario
 */ (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_fichero INTEGER,
   id_problema_propuesto INTEGER,
   id_usuario INTEGER,

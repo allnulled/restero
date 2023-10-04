@@ -9,7 +9,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -41,7 +41,7 @@
                 "atributos": []
             }
         ],
-        "script": "CREATE TABLE Usuario /*\n  @tiene_autorizador: es_administrador\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
+        "script": "CREATE TABLE Usuario /*\n  @tiene_autorizador: es_administrador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  domicilio VARCHAR(1024),\n  correo VARCHAR (512),\n  contrasenya VARCHAR(512)\n);"
     },
     {
         "tabla": "Grupo",
@@ -53,7 +53,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -71,7 +71,7 @@
                 "atributos": []
             }
         ],
-        "script": "\n\nCREATE TABLE Grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
+        "script": "\n\nCREATE TABLE Grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
     },
     {
         "tabla": "Permiso",
@@ -83,7 +83,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -101,7 +101,7 @@
                 "atributos": []
             }
         ],
-        "script": "\n\nCREATE TABLE Permiso /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
+        "script": "\n\nCREATE TABLE Permiso /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(256) UNIQUE NOT NULL,\n  descripcion TEXT\n);"
     },
     {
         "tabla": "Permiso_de_grupo",
@@ -113,7 +113,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -143,7 +143,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Permiso_de_grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_permiso INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
+        "script": "\n\nCREATE TABLE Permiso_de_grupo /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
     },
     {
         "tabla": "Permiso_de_usuario",
@@ -155,7 +155,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -185,7 +185,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Permiso_de_usuario /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_permiso INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
+        "script": "\n\nCREATE TABLE Permiso_de_usuario /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_permiso INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_permiso) REFERENCES Permiso (id)\n);"
     },
     {
         "tabla": "Grupo_de_usuario",
@@ -197,7 +197,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -227,7 +227,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Grupo_de_usuario /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_usuario INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Grupo_de_usuario /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_grupo INTEGER,\n  FOREIGN KEY (id_grupo) REFERENCES Grupo (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Sesion",
@@ -240,7 +240,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -268,7 +268,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Sesion /*\n  @tiene_autorizador: es_administrador\n  @nombre_humano: Sesión\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_usuario INTEGER NOT NULL UNIQUE /*\n    @nombre_humano: ID de usuario\n  */,\n  token_de_sesion VARCHAR(128) /*\n    @nombre_humano: Token de sesión\n  */,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Sesion /*\n  @tiene_autorizador: es_administrador\n  @nombre_humano: Sesión\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER NOT NULL UNIQUE /*\n    @nombre_humano: ID de usuario\n  */,\n  token_de_sesion VARCHAR(128) /*\n    @nombre_humano: Token de sesión\n  */,\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Fichero",
@@ -283,7 +283,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -307,7 +307,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\n\n\nCREATE TABLE Fichero /*\n  @tiene_fichero: fichero\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_usuario INTEGER,\n  fichero VARCHAR(512),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\n\n\nCREATE TABLE Fichero /*\n  @tiene_fichero: fichero\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  fichero VARCHAR(512),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Ciclo_democratico",
@@ -323,7 +323,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -372,7 +372,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\n\n\nCREATE TABLE Ciclo_democratico /*\n  @nombre_humano: Ciclo democrático\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  nombre VARCHAR(128),\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER /*\n    @nombre_humano: Id de usuario creador\n  */,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
+        "script": "\n\n\n\nCREATE TABLE Ciclo_democratico /*\n  @nombre_humano: Ciclo democrático\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,\n  nombre VARCHAR(128),\n  etapa_de_ciclo_actual INTEGER DEFAULT 1,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER /*\n    @nombre_humano: Id de usuario creador\n  */,\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Votacion",
@@ -385,7 +385,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -419,7 +419,7 @@
                 "atributos": []
             }
         ],
-        "script": "\n\nCREATE TABLE Votacion /*\n  @nombre_humano: Votación\n  @tiene_autorizador: no_modificable\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  estado VARCHAR(32),\n  resultado TEXT\n);"
+        "script": "\n\nCREATE TABLE Votacion /*\n  @nombre_humano: Votación\n  @tiene_autorizador: no_modificable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  estado VARCHAR(32),\n  resultado TEXT\n);"
     },
     {
         "tabla": "Voto",
@@ -442,7 +442,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -497,7 +497,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Voto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n  @tiene_autorizadores:\n    - incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n    - es_administrador\n  @no_visibles_columnas: declaracion, notas\n  @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_usuario INTEGER,\n  id_votacion INTEGER,\n  sentido VARCHAR(32) /*\n    @es_opcion: Afirmativo | Negativo\n  */,\n  declaracion VARCHAR(256) /*\n    @nombre_humano: Declaración\n  */,\n  notas VARCHAR(256),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id)\n);"
+        "script": "\n\nCREATE TABLE Voto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n  @tiene_autorizadores:\n    - incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n    - es_administrador\n  @no_visibles_columnas: declaracion, notas\n  @mientras_clave_multiple: un_usuario_por_votacion = id_usuario + id_votacion\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER,\n  id_votacion INTEGER,\n  sentido VARCHAR(32) /*\n    @es_opcion: Afirmativo | Negativo\n  */,\n  declaracion VARCHAR(256) /*\n    @nombre_humano: Declaración\n  */,\n  notas VARCHAR(256),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id)\n);"
     },
     {
         "tabla": "Comentario",
@@ -512,7 +512,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -562,7 +562,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Comentario /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n  @tiene_padre: id_comentario_padre\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_usuario INTEGER ,\n  id_votacion INTEGER,\n  id_comentario_padre INTEGER,\n  comentario VARCHAR(2048),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id),\n  FOREIGN KEY (id_comentario_padre) REFERENCES Comentario (id)\n);"
+        "script": "\n\nCREATE TABLE Comentario /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n  @tiene_padre: id_comentario_padre\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_usuario INTEGER ,\n  id_votacion INTEGER,\n  id_comentario_padre INTEGER,\n  comentario VARCHAR(2048),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_votacion) REFERENCES Votacion (id),\n  FOREIGN KEY (id_comentario_padre) REFERENCES Comentario (id)\n);"
     },
     {
         "tabla": "Problema_propuesto",
@@ -576,7 +576,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -631,7 +631,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  notas_del_administrador TEXT /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  id_usuario_creador INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  notas_del_administrador TEXT /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  id_usuario_creador INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Problema_destacado",
@@ -645,7 +645,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -698,7 +698,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Problema_destacado /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_problema_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_problema_original) REFERENCES Problema_propuesto (id)\n);"
+        "script": "\n\nCREATE TABLE Problema_destacado /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_problema_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_problema_original) REFERENCES Problema_propuesto (id)\n);"
     },
     {
         "tabla": "Solucion_propuesta",
@@ -713,7 +713,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -772,7 +772,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Solucion_propuesta /*\n  @nombre_humano: Solución propuesta\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_problema_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),\n  FOREIGN KEY (id_problema_original) REFERENCES Problema_destacado (id)\n);"
+        "script": "\n\nCREATE TABLE Solucion_propuesta /*\n  @nombre_humano: Solución propuesta\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_problema_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),\n  FOREIGN KEY (id_problema_original) REFERENCES Problema_destacado (id)\n);"
     },
     {
         "tabla": "Solucion_destacada",
@@ -787,7 +787,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -840,7 +840,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Solucion_destacada /*\n  @nombre_humano: Solución destacada\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_solucion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_solucion_original) REFERENCES Solucion_propuesta (id)\n);"
+        "script": "\n\nCREATE TABLE Solucion_destacada /*\n  @nombre_humano: Solución destacada\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_solucion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_solucion_original) REFERENCES Solucion_propuesta (id)\n);"
     },
     {
         "tabla": "Implementacion_propuesta",
@@ -855,7 +855,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -914,7 +914,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Implementacion_propuesta /*\n  @nombre_humano: Implementación propuesta\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_solucion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),\n  FOREIGN KEY (id_solucion_original) REFERENCES Solucion_destacada (id)\n);"
+        "script": "\n\nCREATE TABLE Implementacion_propuesta /*\n  @nombre_humano: Implementación propuesta\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_solucion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_usuario_creador) REFERENCES Usuario (id),\n  FOREIGN KEY (id_solucion_original) REFERENCES Solucion_destacada (id)\n);"
     },
     {
         "tabla": "Implementacion_destacada",
@@ -929,7 +929,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -982,7 +982,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Implementacion_destacada /*\n  @nombre_humano: Implementación destacada\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_propuesta (id)\n);"
+        "script": "\n\nCREATE TABLE Implementacion_destacada /*\n  @nombre_humano: Implementación destacada\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario_creador\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario_creador\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_usuario_creador INTEGER,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_propuesta (id)\n);"
     },
     {
         "tabla": "Modificacion_de_ley",
@@ -995,7 +995,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -1048,7 +1048,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Modificacion_de_ley /*\n  @nombre_humano: Modificación de ley\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
+        "script": "\n\nCREATE TABLE Modificacion_de_ley /*\n  @nombre_humano: Modificación de ley\n  @tiene_autorizador: no_modificable\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_implementacion_original INTEGER,\n  id_ciclo_democratico INTEGER,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id)\n);"
     },
     {
         "tabla": "Ley",
@@ -1060,7 +1060,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -1126,7 +1126,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Ley /*\n  @tiene_autorizador: no_modificable\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_modificacion_de_ley_original INTEGER,\n  id_implementacion_original INTEGER,\n  id_ley_padre INTEGER,\n  FOREIGN KEY (id_modificacion_de_ley_original) REFERENCES Modificacion_de_ley (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id),\n  FOREIGN KEY (id_ley_padre) REFERENCES Ley (id)\n);"
+        "script": "\n\nCREATE TABLE Ley /*\n  @tiene_autorizador: no_modificable\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  nombre VARCHAR(2048),\n  uuid VARCHAR(128),\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  id_modificacion_de_ley_original INTEGER,\n  id_implementacion_original INTEGER,\n  id_ley_padre INTEGER,\n  FOREIGN KEY (id_modificacion_de_ley_original) REFERENCES Modificacion_de_ley (id),\n  FOREIGN KEY (id_implementacion_original) REFERENCES Implementacion_destacada (id),\n  FOREIGN KEY (id_ley_padre) REFERENCES Ley (id)\n);"
     },
     {
         "tabla": "Pulsion_democratica",
@@ -1139,7 +1139,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -1186,7 +1186,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Pulsion_democratica /*\n  @nombre_humano: Pulsión democrática\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  especificacion TEXT /*\n    @nombre_humano: Especificación\n  */,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  notas_especificas TEXT /*\n    @tiene_autorizador: no_insertable\n    @tiene_autorizador: no_actualizable\n  */,\n  id_ciclo_democratico INTEGER /*\n    @nombre_humano: Id de ciclo democrático\n  */,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
+        "script": "\n\nCREATE TABLE Pulsion_democratica /*\n  @nombre_humano: Pulsión democrática\n  @tiene_autorizador: incluir: insert | update | delete | getfile | setfile: {\"permisos\":[\"permiso de administración\"]}\n*/  (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  especificacion TEXT /*\n    @nombre_humano: Especificación\n  */,\n  descripcion TEXT /*\n    @nombre_humano: Descripción\n  */,\n  notas_especificas TEXT /*\n    @tiene_autorizador: no_insertable\n    @tiene_autorizador: no_actualizable\n  */,\n  id_ciclo_democratico INTEGER /*\n    @nombre_humano: Id de ciclo democrático\n  */,\n  FOREIGN KEY (id_ciclo_democratico) REFERENCES Ciclo_democratico (id)\n);"
     },
     {
         "tabla": "Fichero_de_problema_propuesto",
@@ -1200,7 +1200,7 @@
                 "sentencia": "columna",
                 "columna": "id",
                 "tipo": "INTEGER",
-                "detalles": "PRIMARY KEY AUTO_INCREMENT",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
                 "atributos": []
             },
             {
@@ -1243,6 +1243,6 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Fichero_de_problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTO_INCREMENT,\n  id_fichero INTEGER,\n  id_problema_propuesto INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),\n  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Fichero_de_problema_propuesto /*\n  @tiene_autorizador: solo_insertable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_actualizable_por_mismo_usuario: id_usuario\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  id_fichero INTEGER,\n  id_problema_propuesto INTEGER,\n  id_usuario INTEGER,\n  FOREIGN KEY (id_fichero) REFERENCES Fichero (id),\n  FOREIGN KEY (id_problema_propuesto) REFERENCES Problema_propuesto (id),\n  FOREIGN KEY (id_usuario) REFERENCES Usuario (id)\n);"
     }
 ]
