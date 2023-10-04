@@ -367,3 +367,6 @@ Pero todavía no...
 
 **Versión `v0.0.60`.** *El 4 de octubre de 2023 a las 12:13pm.*
 - [✔] limpiado src/configurations/db.sql para que solo meta el modulo de autorizacion por defecto
+
+**Versión `v0.0.61`.** *El 4 de octubre de 2023 a las 12:17pm.*
+- [✔] [BUG] versión nueva por error al subir a npm
