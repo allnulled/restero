@@ -1,3 +1,4 @@
+node ./preparar_test.js
 node ./feature/reset.test.js
 node ./feature/login.test.js
 node ./feature/logout.test.js
@@ -11,3 +12,4 @@ node ./feature/select_order.test.js
 node ./feature/select_page.test.js
 node ./feature/incluir.test.js
 node ./feature/analisis.test.js
+node ./resetear_test.js

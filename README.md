@@ -331,6 +331,9 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 │       │   ├── solo_seleccionable_por_mismo_usuario.test.js
 │       │   ├── volcan_1.png
 │       │   └── volcan_2.png
+│       ├── preparar_test.js
+│       ├── preparation
+│       ├── resetear_test.js
 │       ├── test.bat
 │       ├── test.resultados.json
 │       ├── test.sh
@@ -338,7 +341,7 @@ El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm ru
 ├── TODO.md
 └── tree.txt
 
-29 directories, 169 files
+30 directories, 171 files
 ```
 
 Las carpetas originales son:

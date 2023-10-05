@@ -370,3 +370,6 @@ Pero todavía no...
 
 **Versión `v0.0.61`.** *El 4 de octubre de 2023 a las 12:17pm.*
 - [✔] [BUG] versión nueva por error al subir a npm
+
+**Versión `v0.0.62`.** *El 5 de octubre de 2023 a las 11:03am.*
+- [✔] [BUG] arreglados tests para funcionar pese a un setup dado
