@@ -1,5 +1,5 @@
 
-// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n    <title>Interfaz de usuario</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/win7.scoped.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/theme.css\" />\n    <script src=\"./components/calo.js\"></script>\n    <script src=\"./dependencies/generar_gestor_de_hooks.js\"></script>\n    <script src=\"./dependencies/utilidades.js\"></script>\n    <script src=\"./hooks/hooks.js\"></script>\n    <script src=\"./components/PuertoDeNotificaciones.component.js\"></script>\n    <script src=\"./components/BreadcrumbGenerico.component.js\"></script>\n    <script src=\"./components/ExploradorDeDatos.component.js\"></script>\n    <script src=\"./components/PaginaDeInicio.component.js\"></script>\n    <script src=\"./components/PaginaDePanelDeAdministracion.component.js\"></script>\n    <script src=\"./components/PaginaDePanelDeConfiguraciones.component.js\"></script>\n    <script src=\"./components/PaginaDeLogin.component.js\"></script>\n    <script src=\"./components/PaginaDeExploradorDeDatosDeTabla.component.js\"></script>\n    <script src=\"./components/PaginaDeImportarExportarDatos.component.js\"></script>\n    <script src=\"./components/PaginaDeFormularioDeTabla.component.js\"></script>\n    <script src=\"./dependencies/rutas.js\"></script>\n</head>","body":"<body><div id=\"app\"></div></body>"}}
+// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n    <title>Interfaz de usuario</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/win7.scoped.2.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/theme.css\" />\n    <script src=\"./components/calo.js\"></script>\n    <script src=\"./dependencies/generar_gestor_de_hooks.js\"></script>\n    <script src=\"./dependencies/utilidades.js\"></script>\n    <script src=\"./hooks/hooks.js\"></script>\n    <script src=\"./components/PuertoDeNotificaciones.component.js\"></script>\n    <script src=\"./components/BreadcrumbGenerico.component.js\"></script>\n    <script src=\"./components/ExploradorDeDatos.component.js\"></script>\n    <script src=\"./components/PaginaDeInicio.component.js\"></script>\n    <script src=\"./components/PaginaDePanelDeAdministracion.component.js\"></script>\n    <script src=\"./components/PaginaDePanelDeConfiguraciones.component.js\"></script>\n    <script src=\"./components/PaginaDeLogin.component.js\"></script>\n    <script src=\"./components/PaginaDeExploradorDeDatosDeTabla.component.js\"></script>\n    <script src=\"./components/PaginaDeImportarExportarDatos.component.js\"></script>\n    <script src=\"./components/PaginaDeFormularioDeTabla.component.js\"></script>\n    <script src=\"./dependencies/rutas.js\"></script>\n</head>","body":"<body><div id=\"app\"></div></body>"}}
 
 const main = async function() {try {
 (await window.utilidades.gestor_de_hooks.usar_hook( "app:iniciar" ));
@@ -52,10 +52,10 @@ ca:{
 },
   "#app");
 (await window.utilidades.gestor_de_hooks.usar_hook( "app:postcargar:aplicacion",
-{ rutas
+{ rutas_de_aplicacion
 } ));
 (await window.utilidades.gestor_de_hooks.usar_hook( "app:iniciada",
-{ rutas
+{ rutas_de_aplicacion
 } ));
 } catch(error) {
 console.log(error);

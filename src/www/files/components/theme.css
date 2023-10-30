@@ -213,4 +213,13 @@ hr {
 }
 .win7 img.inputfileimage {
     width: 100%;
+    max-height: 100px;
+}
+.win7 .inputtype {
+    background-color: #333;
+    color: white;
+    text-transform: uppercase;
+    padding: 2px;
+    font-size: 9px;
+    border-radius: 4pt;
 }

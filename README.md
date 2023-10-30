@@ -24,6 +24,8 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
 1. [Los hiperatributos](#los-hiperatributos)
    1. Hiperatributo de columna: `es_fichero`
    1. Hiperatributo de columna: `es_opcion`
+   1. Hiperatributo de columna: `fijar_dia_de_creacion`
+   1. Hiperatributo de columna: `fijar_momento_de_creacion`
 1. [Los autorizadores](#los-autorizadores)
    1. Autorizador de tabla: `no_actualizable`
    1. Autorizador de tabla: `no_eliminable`
@@ -43,6 +45,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Autorizador de columna: `no_insertable`
    1. Autorizador de columna: `no_modificable`
    1. Autorizador de columna: `solo_modificable_por`
+   1. Usando múltiples autorizables
 1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
    1. Comando `restero generar`
    1. Comando `restero generar:seeder`
@@ -559,19 +562,19 @@ Los métodos `GET` o `POST` son indiferentemente usados, y los parámetros se re
 
 Los **hiperatributos** son parámetros que se asocian a tablas o columnas dentro del script de creación de base de datos, siguiendo la sintaxis del [**HQL** o Hyper Query Language](https://github.com/allnulled/h-query-language). Estos hiperatributos permiten decirle al desplegador cómo quiere gestionar partes del esquema de datos en distintos aspectos.
 
-#### Hiperatributo de columna: `es_fichero`
+#### Hiperatributo de tabla: `tiene_fichero`
 
 Función:
 
-> Convierte en un campo que apunta a un fichero a la columna indicada.
-
+> Convierte en un campo que apunta a un fichero a la columna indicada en el parámetro.
+  
 Ejemplo:
 
 ```sql
-CREATE TABLE x (
-  imagen VARCHAR(255) /*
-    @es_fichero
-  */
+CREATE TABLE x /*
+  @tiene_fichero: fichero
+*/ (
+  fichero VARCHAR(255) 
 );
 ```
 
@@ -587,6 +590,38 @@ Ejemplo:
 CREATE TABLE x (
   opcion VARCHAR(255) /*
     @es_opcion: Sí | No | Posiblemente
+  */
+);
+```
+
+#### Hiperatributo de columna: `fijar_dia_de_creacion`
+
+Función:
+
+> Al insertar, coloca la fecha (`año-mes-día`) en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  fecha DATETIME /*
+    @fijar_dia_de_creacion
+  */
+);
+```
+
+#### Hiperatributo de columna: `fijar_momento_de_creacion`
+
+Función:
+
+> Al insertar, coloca la fecha (`año-mes-día hora:minuto:segundo`) en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  fecha DATETIME /*
+    @fijar_momento_de_creacion
   */
 );
 ```
@@ -1130,7 +1165,7 @@ Los primeros ficheros que te interesa sobreescribir son:
 - **`src/configurations/db.sql`**: este fichero es por si quieres escribir la base de datos final directamente. No se recomienda editar este fichero directamente, sino editar el siguiente en su lugar.
 - **`src/configurations/db/db.ejs.sql`**: este fichero genera al anterior. Se recomienda componer el diseño de la base de datos a través de este fichero.
 - **`src/configurations/db/modules/*.ejs.sql`**: estos ficheros sirven como módulos que puedes incorporar en el diseño de la base de datos del fichero anterior, desde el cual mediante el `include` de las plantillas `ejs` puedes ir componiendo la base de datos. Mirar los ejemplos será de gran ayuda.
-- **`src/configurations/db/migrations/migracion.sql`**: este último fichero te permitirá ejecutar una migración (a modo de `seeder` de la base de datos), en el cual teóricamente insertas los primeros datos. Para insertar ficheros, ten en cuenta que los ficheros se guardan en `src/uploads` bajo la forma: *`{tabla}.{id}.{columna}.{nombre del fichero}`*. Sabiendo esto, puedes incluir los ficheros, y en el campo de la base de datos que `@es_fichero` solo tendrá que aparecer el `{nombre del fichero}`.
+- **`src/configurations/db/migrations/migracion.sql`**: este último fichero te permitirá ejecutar una migración (a modo de `seeder` de la base de datos), en el cual teóricamente insertas los primeros datos. Para insertar ficheros, ten en cuenta que los ficheros se guardan en `src/uploads` bajo la forma: *`{tabla}.{id}.{columna}.{nombre del fichero}`*. Sabiendo esto, puedes incluir los ficheros, y en la columna de la base de datos cuya tabla `@tiene_fichero: {columna}` solo tendrá que aparecer el `{nombre del fichero}`.
 
 Principalmente, los ficheros que te interesa editar para el backend son estos.
 

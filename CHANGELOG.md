@@ -373,3 +373,11 @@ Pero todavía no...
 
 **Versión `v0.0.62`.** *El 5 de octubre de 2023 a las 11:03am.*
 - [✔] [BUG] arreglados tests para funcionar pese a un setup dado
+
+**Versión `v0.0.63`.** *El 30 de octubre de 2023 a las 13:21pm.*
+- [✔] Soporte para tipos SQL: DATE, TIME, DATETIME, TIMESTAMP
+- [✔] Soporte en UI (admin panel) para tipos SQL: DATE (type=date), TIME (type=time), DATETIME (type=datetime-local), TIMESTAMP (type=datetime-local)
+- [✔] Imágenes en UI (admin panel) con límite de altura.
+- [✔] Tipos en BD aparecen en UI (admin panel).
+- [✔] Soporte para autorizador de columna: @tiene_autorizador: fijar_momento_de_creacion
+- [✔] Soporte para autorizador de columna: @tiene_autorizador: fijar_dia_de_creacion

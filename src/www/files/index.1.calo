@@ -6,7 +6,7 @@ Ejecutable como documento HTML5
     <title>Interfaz de usuario</title>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./components/win7.scoped.css" />
+    <link rel="stylesheet" type="text/css" href="./components/win7.scoped.2.css" />
     <link rel="stylesheet" type="text/css" href="./components/theme.css" />
     <script src="./components/calo.js"></script>
     <script src="./dependencies/generar_gestor_de_hooks.js"></script>
@@ -68,9 +68,9 @@ creo main como una función asíncrona donde {
     }.
   } montada en "#app".
 
-  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:postcargar:aplicacion", { rutas }).
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:postcargar:aplicacion", { rutas_de_aplicacion }).
   
-  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:iniciada", { rutas }).
+  hago asíncronamente window.utilidades.gestor_de_hooks.usar_hook("app:iniciada", { rutas_de_aplicacion }).
 
 } en errores {
 
