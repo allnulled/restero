@@ -34,6 +34,26 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDeImportarExportarDatos.
     propiedad props como {}.
 }, {
+    propiedad path como "/blog/ver/posts".
+    propiedad name como "PaginaDeBlogParaVerPosts".
+    propiedad component como PaginaDeBlogParaVerPosts.
+    propiedad props como {}.
+}, {
+    propiedad path como "/blog/ver/post/:id".
+    propiedad name como "PaginaDeBlogParaVerPost".
+    propiedad component como PaginaDeBlogParaVerPost.
+    propiedad props como {}.
+}, {
+    propiedad path como "/blog/crear/post".
+    propiedad name como "PaginaDeBlogParaEditarPost".
+    propiedad component como PaginaDeBlogParaEditarPost.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/blog/editar/post/:id".
+    propiedad name como "PaginaDeBlogParaEditarPost".
+    propiedad component como PaginaDeBlogParaEditarPost.
+    propiedad props como { modalidad: "editar" }.
+}, {
     propiedad path como "/".
     propiedad name como "Inicio".
     propiedad component como PaginaDeInicio.

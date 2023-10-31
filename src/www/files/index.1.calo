@@ -6,22 +6,25 @@ Ejecutable como documento HTML5
     <title>Interfaz de usuario</title>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./components/win7.scoped.2.css" />
-    <link rel="stylesheet" type="text/css" href="./components/theme.css" />
-    <script src="./components/calo.js"></script>
+    <link rel="stylesheet" type="text/css" href="./components/win7/win7.scoped.2.css" />
+    <link rel="stylesheet" type="text/css" href="./components/theme/theme.css" />
+    <script src="./components/calo/calo.js"></script>
     <script src="./dependencies/generar_gestor_de_hooks.js"></script>
     <script src="./dependencies/utilidades.js"></script>
     <script src="./hooks/hooks.js"></script>
-    <script src="./components/PuertoDeNotificaciones.component.js"></script>
-    <script src="./components/BreadcrumbGenerico.component.js"></script>
-    <script src="./components/ExploradorDeDatos.component.js"></script>
-    <script src="./components/PaginaDeInicio.component.js"></script>
-    <script src="./components/PaginaDePanelDeAdministracion.component.js"></script>
-    <script src="./components/PaginaDePanelDeConfiguraciones.component.js"></script>
-    <script src="./components/PaginaDeLogin.component.js"></script>
-    <script src="./components/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
-    <script src="./components/PaginaDeImportarExportarDatos.component.js"></script>
-    <script src="./components/PaginaDeFormularioDeTabla.component.js"></script>
+    <script src="./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js"></script>
+    <script src="./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js"></script>
+    <script src="./components/ExploradorDeDatos/ExploradorDeDatos.component.js"></script>
+    <script src="./components/PaginaDeInicio/PaginaDeInicio.component.js"></script>
+    <script src="./components/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js"></script>
+    <script src="./components/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js"></script>
+    <script src="./components/PaginaDeLogin/PaginaDeLogin.component.js"></script>
+    <script src="./components/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
+    <script src="./components/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js"></script>
+    <script src="./components/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js"></script>
+    <script src="./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js"></script>
+    <script src="./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js"></script>
+    <script src="./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js"></script>
     <script src="./dependencies/rutas.js"></script>
 </head>
 <body><div id="app"></div></body>.
@@ -56,7 +59,8 @@ creo main como una función asíncrona donde {
       método data donde {
         retorno {
           esquema: undefined,
-          token_de_sesion: undefined
+          token_de_sesion: undefined,
+          autentificacion: undefined
         }.
       }.
       propiedad methods como {}.

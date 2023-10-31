@@ -2,7 +2,7 @@
 
 
 CREATE TABLE Usuario /*
-  @tiene_autorizador: es_administrador
+  @tiene_autorizador: no_visibles_columnas: contrasenya,correo
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre VARCHAR(256) UNIQUE NOT NULL,
@@ -92,7 +92,8 @@ CREATE TABLE Post_de_blog /*
     - @tiene_autorizador: no_eliminable
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  titulo VARCHAR(255),
+  titulo VARCHAR(255) UNIQUE,
+  subtitulo VARCHAR(255),
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
@@ -104,7 +105,9 @@ CREATE TABLE Post_de_blog /*
   contenido TEXT /*
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
-  id_de_autor INTEGER,
+  id_de_autor INTEGER /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */,
   FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)
 );
 
@@ -124,7 +127,9 @@ CREATE TABLE Comentario_de_post_de_blog /*
   contenido TEXT /*
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
-  id_de_autor INTEGER,
+  id_de_autor INTEGER /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */,
   id_de_comentario INTEGER,
   id_de_post_de_blog INTEGER,
   FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),

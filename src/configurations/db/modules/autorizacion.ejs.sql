@@ -3,7 +3,7 @@ const autoincrement_word = deployer.settings.DB_DRIVER === "sqlite" ? "AUTOINCRE
 %>
 
 CREATE TABLE Usuario /*
-  @tiene_autorizador: es_administrador
+  @tiene_autorizador: no_visibles_columnas: contrasenya,correo
 */ (
   id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   nombre VARCHAR(256) UNIQUE NOT NULL,

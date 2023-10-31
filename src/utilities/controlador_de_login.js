@@ -10,7 +10,7 @@ module.exports = function (deployer) {
                     ["nombre", "=", nombre],
                     ["contrasenya", "=", contrasenya]
                 ]
-            });
+            }, true);
             const usuarios_coincidentes = await conexion.ejecutar(consulta_de_usuarios);
             if(!usuarios_coincidentes.length) {
                 throw new Error(`Usuario no reconocido por nombre «${nombre}» y contraseña «${contrasenya}»`)
@@ -20,7 +20,7 @@ module.exports = function (deployer) {
                 where: [
                     ["id_usuario", "=", usuario_coincidente.id]
                 ]
-            });
+            }, true);
             const sesiones_coincidentes = await conexion.ejecutar(consulta_de_sesiones);
             let token_de_sesion_activo = undefined;
             if (sesiones_coincidentes.length !== 0) {
@@ -32,7 +32,7 @@ module.exports = function (deployer) {
                         id_usuario: usuario_coincidente.id,
                         token_de_sesion: nuevo_token
                     }
-                });
+                }, true);
                 await conexion.ejecutar(consulta_de_insercion_de_sesion);
                 token_de_sesion_activo = nuevo_token;
             }

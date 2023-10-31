@@ -41,6 +41,30 @@ component:PaginaDeImportarExportarDatos,
 props:{ 
 }
 },
+{ path:"/blog/ver/posts",
+name:"PaginaDeBlogParaVerPosts",
+component:PaginaDeBlogParaVerPosts,
+props:{ 
+}
+},
+{ path:"/blog/ver/post/:id",
+name:"PaginaDeBlogParaVerPost",
+component:PaginaDeBlogParaVerPost,
+props:{ 
+}
+},
+{ path:"/blog/crear/post",
+name:"PaginaDeBlogParaEditarPost",
+component:PaginaDeBlogParaEditarPost,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/blog/editar/post/:id",
+name:"PaginaDeBlogParaEditarPost",
+component:PaginaDeBlogParaEditarPost,
+props:{ modalidad:"editar"
+}
+},
 { path:"/",
 name:"Inicio",
 component:PaginaDeInicio,

@@ -223,3 +223,66 @@ hr {
     font-size: 9px;
     border-radius: 4pt;
 }
+
+.ver_post {
+    border: 1px solid #333;   
+}
+.lista_de_posts {
+
+}
+.lista_de_posts > .post_en_lista {
+    border: 1px solid #333;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+.lista_de_posts > .post_en_lista:hover {
+    background-color: #DDDDDD;
+}
+.ver_post > .titulo_de_post,
+.lista_de_posts > .post_en_lista > .titulo_de_post {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 4px;
+    text-align: center;
+}
+.ver_post > .subtitulo_de_post,
+.lista_de_posts > .post_en_lista > .subtitulo_de_post {
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    padding: 4px;
+    text-align: justify;
+}
+.ver_post > .contenido_de_post,
+.lista_de_posts > .post_en_lista > .contenido_de_post {
+    font-size: 10px;
+    padding: 4px;
+    text-align: justify;
+}
+.ver_post .autor_de_post,
+.lista_de_posts > .post_en_lista .autor_de_post {
+    color: #666;
+    text-align: left;
+    font-size: 8px;
+    white-space: nowrap;
+    padding: 4px;
+}
+.ver_post .fecha_de_creacion_de_post,
+.lista_de_posts > .post_en_lista .fecha_de_creacion_de_post {
+    color: #666;
+    text-align: right;
+    font-size: 8px;
+    white-space: nowrap;
+    padding: 4px;
+}
+.panel_de_botones_superior {
+    padding: 4px;
+    text-align: right;
+    border: 1px solid #333;
+    margin-bottom: 4px;
+}
+.panel_principal {
+    padding: 8px;
+    padding-top: 6px;
+}

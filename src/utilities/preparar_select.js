@@ -3,7 +3,7 @@ const operaciones_disponibles = [
 ]
 
 module.exports = function (deployer) {
-    return function (tabla, parametros) {
+    return function (tabla, parametros, sin_restricciones = false) {
         try {
             deployer.utilities.tracear("deployer.utilities.preparar_select");
             let sql = "";
@@ -14,24 +14,28 @@ module.exports = function (deployer) {
             if(typeof tabla_coincidente === "undefined") {
                 throw new Error("Tipo de dato no reconocido: «" + tabla + "»");
             }
+            const nombres_de_columnas = [];
+            const columnas_no_visibles = [];
             const datos_de_columnas = tabla_coincidente.composicion.filter(function(datos_de_columna) {
                 return datos_de_columna.sentencia === "columna";
             });
             const atributos_de_columnas_no_visibles = tabla_coincidente.atributos.filter(function(atributo) {
-                return (typeof (atributo) === "string") && atributo.startsWith("no_visibles_columnas:");
+                return (typeof (atributo) === "string") && atributo.startsWith("tiene_autorizador: no_visibles_columnas:");
             });
-            const columnas_no_visibles = [];
-            for(let index_atributos_columnas_no_visibles = 0; index_atributos_columnas_no_visibles < atributos_de_columnas_no_visibles.length; index_atributos_columnas_no_visibles++) {
-                const atributo_de_columna_no_visible = atributos_de_columnas_no_visibles[index_atributos_columnas_no_visibles];
-                const tmp1 = atributo_de_columna_no_visible.split(":");
-                tmp1.shift();
-                const columnas_no_visibles_concretas = tmp1.join(":").split(",");
-                for(let index_columnas_concretas = 0; index_columnas_concretas < columnas_no_visibles_concretas.length; index_columnas_concretas++) {
-                    const columna_concreta = columnas_no_visibles_concretas[index_columnas_concretas];
-                    columnas_no_visibles.push(columna_concreta.trim());
+            if(!sin_restricciones) {
+                Aplicando_restricciones_de_visibilidad:
+                for(let index_atributos_columnas_no_visibles = 0; index_atributos_columnas_no_visibles < atributos_de_columnas_no_visibles.length; index_atributos_columnas_no_visibles++) {
+                    const atributo_de_columna_no_visible = atributos_de_columnas_no_visibles[index_atributos_columnas_no_visibles];
+                    const tmp1 = atributo_de_columna_no_visible.split(":");
+                    tmp1.shift(); // tiene_autorizador:
+                    tmp1.shift(); // no_visibles_columnas:
+                    const columnas_no_visibles_concretas = tmp1.join(":").split(",");
+                    for(let index_columnas_concretas = 0; index_columnas_concretas < columnas_no_visibles_concretas.length; index_columnas_concretas++) {
+                        const columna_concreta = columnas_no_visibles_concretas[index_columnas_concretas];
+                        columnas_no_visibles.push(columna_concreta.trim());
+                    }
                 }
             }
-            const nombres_de_columnas = [];
             Seleccionando_los_campos:
             for(let index_columnas = 0; index_columnas < datos_de_columnas.length; index_columnas++) {
                 const datos_de_columna = datos_de_columnas[index_columnas];
@@ -77,7 +81,7 @@ module.exports = function (deployer) {
                     }
                     sql += ")";
                 } else if (["is null", "is not null"].indexOf(op) !== -1) {
-                    sql += op;
+                    sql += op.toUpperCase();
                 } else {
                     sql += op;
                     sql += " ";

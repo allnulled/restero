@@ -11,16 +11,22 @@ module.exports = function (deployer) {
                 const objeto_parametrico = JSON.parse(parametro);
                 const { usuarios, grupos, permisos } = objeto_parametrico;
                 let autorizado = false;
-                if (usuarios) {
+                if (Array.isArray(usuarios)) {
                     autorizado = autorizado || (usuarios.indexOf(autentificacion.usuario.nombre) !== -1);
+                } else if(typeof usuarios !== "undefined") {
+                    throw new Error("El parámetro «usuarios» del autorizador de columna «solo_modificable_por» debe ser un array");
                 }
-                if (grupos) {
+                if (Array.isArray(grupos)) {
                     const esta_en_grupo = autentificacion.grupos.filter(grupo => grupos.indexOf(grupo.nombre) !== -1);
                     autorizado = autorizado || esta_en_grupo.length;
+                } else if (typeof usuarios !== "undefined") {
+                    throw new Error("El parámetro «grupos» del autorizador de columna «solo_modificable_por» debe ser un array");
                 }
-                if (permisos) {
+                if (Array.isArray(permisos)) {
                     const esta_en_permiso = autentificacion.permisos.filter(permiso => permisos.indexOf(permiso.nombre) !== -1);
                     autorizado = autorizado || esta_en_permiso.length;
+                } else if (typeof usuarios !== "undefined") {
+                    throw new Error("El parámetro «permisos» del autorizador de columna «solo_modificable_por» debe ser un array");
                 }
                 if (!autorizado) {
                     request.hql_data.item[columna_id] = null;

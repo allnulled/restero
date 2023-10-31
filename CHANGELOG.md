@@ -381,3 +381,15 @@ Pero todavía no...
 - [✔] Tipos en BD aparecen en UI (admin panel).
 - [✔] Soporte para autorizador de columna: @tiene_autorizador: fijar_momento_de_creacion
 - [✔] Soporte para autorizador de columna: @tiene_autorizador: fijar_dia_de_creacion
+
+**Versión `v0.0.64`.** *El 30 de octubre de 2023 a las 13:43pm.*
+- [✔] Compartimentados por carpetas los componentes del UI.
+- [✔] Componente PaginaDeBlogParaVerPosts:
+- [✔] Componente PaginaDeBlogParaVerPost:
+- [✔] Componente PaginaDeBlogParaEditarPost:
+
+**Versión `v0.0.65`.** *El 31 de octubre de 2023 a las 12:42pm.*
+- [✔] Componente PaginaDeBlogParaVerPost soporta comentarios:
+  - [✔] Con paginación
+  - [✔] Con creación
+- [✔] Blog de UI (admin panel) funcionando mínimamente.

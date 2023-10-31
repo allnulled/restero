@@ -22,7 +22,7 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Ejemplo de `getfile`
    1. Ejemplo de `setfile`
 1. [Los hiperatributos](#los-hiperatributos)
-   1. Hiperatributo de columna: `es_fichero`
+   1. Hiperatributo de columna: `tiene_fichero`
    1. Hiperatributo de columna: `es_opcion`
    1. Hiperatributo de columna: `fijar_dia_de_creacion`
    1. Hiperatributo de columna: `fijar_momento_de_creacion`
@@ -138,215 +138,6 @@ El modo en que esto se consigue es añadiendo unas notaciones con comentarios en
 
 ## Carpetas y ficheros
 
-El árbol de ficheros base es el que sigue, y que podemos actualizar con `npm run build-tree` (aunque usa el programa de Linux `tree`):
-
-```
-.
-├── bin
-│   ├── restero.bin.js
-│   └── seeder
-│       ├── develop.bat
-│       ├── develop.sh
-│       ├── input
-│       │   └── src
-│       │       └── configurations
-│       │           └── db
-│       │               └── db.ejs.sql
-│       ├── seeder.bat
-│       ├── seeder.sh
-│       ├── start.bat
-│       └── start.sh
-├── CHANGELOG.md
-├── docs
-│   └── imagenes
-│       ├── imagen-10.explorador.pagina.png
-│       ├── imagen-11.formulario.crear.png
-│       ├── imagen-11.formulario.editar.png
-│       ├── imagen-1.login.png
-│       ├── imagen-2.login.png
-│       ├── imagen-3.inicio.png
-│       ├── imagen-4.configuraciones.png
-│       ├── imagen-5.importaciones.png
-│       ├── imagen-6.exportaciones.png
-│       ├── imagen-7.explorador-de-datos.png
-│       ├── imagen-7.secciones.png
-│       ├── imagen-8.explorador.filtros.png
-│       └── imagen-9.explorador.orden.png
-├── npm-shrinkwrap.json
-├── package.json
-├── README.md
-├── src
-│   ├── api.js
-│   ├── authorizers
-│   │   ├── columns
-│   │   │   ├── no_actualizable.js
-│   │   │   ├── no_insertable.js
-│   │   │   ├── no_modificable.js
-│   │   │   └── solo_modificable_por.js
-│   │   ├── es_administrador.js
-│   │   ├── espera_segundos.js
-│   │   ├── excluir.js
-│   │   ├── incluir.js
-│   │   ├── index.js
-│   │   ├── mientras_clave_multiple.js
-│   │   ├── no_actualizable.js
-│   │   ├── no_eliminable.js
-│   │   ├── no_insertable.js
-│   │   ├── no_modificable.js
-│   │   ├── no_seleccionable.js
-│   │   ├── no_usable.js
-│   │   ├── no_visibles_columnas.js
-│   │   ├── solo_actualizable_por_mismo_usuario.js
-│   │   ├── solo_eliminable_por_mismo_usuario.js
-│   │   ├── solo_insertable_por_mismo_usuario.js
-│   │   ├── solo_modificable_por_mismo_usuario.js
-│   │   └── solo_seleccionable_por_mismo_usuario.js
-│   ├── configurations
-│   │   ├── db
-│   │   │   ├── db.ejs.sql
-│   │   │   ├── migrations
-│   │   │   │   ├── migracion.sql
-│   │   │   │   └── migracion.test.sql
-│   │   │   └── modules
-│   │   │       ├── asamblea.ejs.sql
-│   │   │       ├── autorizacion.ejs.sql
-│   │   │       ├── ejemplos.ejs.sql
-│   │   │       ├── ejemplos.ejs.sql.json
-│   │   │       └── ficheros.ejs.sql
-│   │   ├── db.instancia.sqlite
-│   │   ├── db.sql
-│   │   ├── db.sql.json
-│   │   ├── index.js
-│   │   ├── settings.default.json
-│   │   ├── settings.development.json
-│   │   ├── settings.production.json
-│   │   └── settings.testing.json
-│   ├── controllers
-│   │   └── index.js
-│   ├── dependencies
-│   │   ├── generar_gestor_de_hooks.js
-│   │   └── index.js
-│   ├── deployer.js
-│   ├── hooks
-│   │   └── hooks.js
-│   ├── parsers
-│   │   ├── hyper-query-language.js
-│   │   └── hyper-query-language.pegjs
-│   ├── uploads
-│   │   └── Fichero.1.fichero.calo-logo.png
-│   ├── utilities
-│   │   ├── controlador_de_esquema.js
-│   │   ├── controlador_de_export_xlsx.js
-│   │   ├── controlador_de_import_xlsx.js
-│   │   ├── controlador_de_login.js
-│   │   ├── controlador_de_logout.js
-│   │   ├── controlador_de_operacion.js
-│   │   ├── controlador_de_shutdown.js
-│   │   ├── desplegar_base_de_datos.js
-│   │   ├── desplegar_servidor.js
-│   │   ├── gestionar_log_de_peticion.js
-│   │   ├── gestionar_operacion_getfile.js
-│   │   ├── gestionar_operacion_setfile.js
-│   │   ├── gestor_de_error_de_peticion.js
-│   │   ├── gestor_de_hooks.js
-│   │   ├── gestor_de_shutdown.js
-│   │   ├── importar_datos_masivos.js
-│   │   ├── index.js
-│   │   ├── leer_fichero_excel.js
-│   │   ├── middleware_de_autentificacion.js
-│   │   ├── middleware_de_autorizadores.js
-│   │   ├── middleware_de_log.js
-│   │   ├── middleware_de_parametros.js
-│   │   ├── middleware_de_solo_administradores.js
-│   │   ├── obtener_autentificacion.js
-│   │   ├── obtener_conexion_de_base_de_datos.js
-│   │   ├── obtener_date_como_string.js
-│   │   ├── obtener_parametro.js
-│   │   ├── obtener_string_aleatorio.js
-│   │   ├── obtener_string_padeado.js
-│   │   ├── obtener_string_partido_en_dos.js
-│   │   ├── parsear_propiedades_como_json.js
-│   │   ├── preparar_delete.js
-│   │   ├── preparar_insert.js
-│   │   ├── preparar_select.js
-│   │   ├── preparar_update.js
-│   │   ├── resetear_base_de_datos.js
-│   │   └── tracear.js
-│   └── www
-│       └── files
-│           ├── components
-│           │   ├── BreadcrumbGenerico.component.calo
-│           │   ├── BreadcrumbGenerico.component.js
-│           │   ├── calo.calo
-│           │   ├── calo.js
-│           │   ├── ExploradorDeDatos.component.calo
-│           │   ├── ExploradorDeDatos.component.js
-│           │   ├── PaginaDeExploradorDeDatosDeTabla.component.calo
-│           │   ├── PaginaDeExploradorDeDatosDeTabla.component.js
-│           │   ├── PaginaDeFormularioDeTabla.component.calo
-│           │   ├── PaginaDeFormularioDeTabla.component.js
-│           │   ├── PaginaDeImportarExportarDatos.component.calo
-│           │   ├── PaginaDeImportarExportarDatos.component.js
-│           │   ├── PaginaDeInicio.component.calo
-│           │   ├── PaginaDeInicio.component.js
-│           │   ├── PaginaDeLogin.component.calo
-│           │   ├── PaginaDeLogin.component.js
-│           │   ├── PaginaDePanelDeAdministracion.component.calo
-│           │   ├── PaginaDePanelDeAdministracion.component.js
-│           │   ├── PaginaDePanelDeConfiguraciones.component.calo
-│           │   ├── PaginaDePanelDeConfiguraciones.component.js
-│           │   ├── PuertoDeNotificaciones.component.calo
-│           │   ├── PuertoDeNotificaciones.component.js
-│           │   ├── sea.jpg
-│           │   ├── theme.css
-│           │   └── win7.scoped.css
-│           ├── dependencies
-│           │   ├── generar_gestor_de_hooks.js
-│           │   ├── rutas.calo
-│           │   ├── rutas.js
-│           │   ├── utilidades.calo
-│           │   └── utilidades.js
-│           ├── hooks
-│           │   ├── hooks.calo
-│           │   └── hooks.js
-│           ├── index.1.calo
-│           ├── index.1.html
-│           ├── index.1.js
-│           ├── index.html
-│           ├── prueba.calo
-│           └── prueba.js
-├── test
-│   ├── test-rudimentario.txt
-│   └── unit
-│       ├── feature
-│       │   ├── analisis.test.js
-│       │   ├── incluir.test.js
-│       │   ├── login.test.js
-│       │   ├── logout.test.js
-│       │   ├── no_visibles_columnas.test.js
-│       │   ├── reset.test.js
-│       │   ├── select_order.test.js
-│       │   ├── select_page.test.js
-│       │   ├── select_search.test.js
-│       │   ├── solo_actualizable_por_mismo_usuario.test.js
-│       │   ├── solo_eliminable_por_mismo_usuario.test.js
-│       │   ├── solo_insertable_por_mismo_usuario.test.js
-│       │   ├── solo_seleccionable_por_mismo_usuario.test.js
-│       │   ├── volcan_1.png
-│       │   └── volcan_2.png
-│       ├── preparar_test.js
-│       ├── preparation
-│       ├── resetear_test.js
-│       ├── test.bat
-│       ├── test.resultados.json
-│       ├── test.sh
-│       └── test.utilidades.js
-├── TODO.md
-└── tree.txt
-
-30 directories, 171 files
-```
-
 Las carpetas originales son:
 
   - `src`: donde reside el código fuente del desplegador.
@@ -367,10 +158,10 @@ Las carpetas internas originales son:
 
 Los ficheros que cargan carpetas son:
 
-  - `src/authorizers/index.js`: donde
-  - `src/configurations/index.js`
-  - `src/controllers/index.js`
-  - `src/utilities/index.js`
+  - `src/authorizers/index.js`: donde se cargan los autorizadores.
+  - `src/configurations/index.js`: donde se cargan las configuraciones.
+  - `src/controllers/index.js`: donde se cargan los controladores.
+  - `src/utilities/index.js`: donde se cargan las utilidades.
 
 El fichero de hooks del servidor es:
 
@@ -594,6 +385,22 @@ CREATE TABLE x (
 );
 ```
 
+#### Hiperatributo de columna: `fijar_id_de_usuario`
+
+Función:
+
+> Al insertar, coloca el id del usuario en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  id_de_usuario DATETIME /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */
+);
+```
+
 #### Hiperatributo de columna: `fijar_dia_de_creacion`
 
 Función:
@@ -605,7 +412,7 @@ Ejemplo:
 ```sql
 CREATE TABLE x (
   fecha DATETIME /*
-    @fijar_dia_de_creacion
+    @tiene_autorizador: fijar_dia_de_creacion
   */
 );
 ```
@@ -621,7 +428,7 @@ Ejemplo:
 ```sql
 CREATE TABLE x (
   fecha DATETIME /*
-    @fijar_momento_de_creacion
+    @tiene_autorizador: fijar_momento_de_creacion
   */
 );
 ```
