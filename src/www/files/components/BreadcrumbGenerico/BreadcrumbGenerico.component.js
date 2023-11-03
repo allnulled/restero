@@ -24,13 +24,11 @@ default:[  ]
 }
 },
 data() {try {
+console.log('[DEBUG]', "BreadcrumbGenerico.data");
 return { 
 };
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 };},
   null);

@@ -148,6 +148,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
       }
     }.
     método data() donde {
+      debugo "PaginaDeFormularioDeDatoDeTabla.data".
       retorno {
         tabla: false,
         tabla_id: this.$route.params.id_de_tabla,
@@ -162,6 +163,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
     }.
     propiedad methods como {
       método asíncrono buscar_fila () donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.buscar_fila".
         creo respuesta_fila como asíncronamente una petición http
           con url `/api/v1/select/${this.tabla_id}`
           con método "POST"
@@ -171,8 +173,9 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           con cabeceras { authorization: this.root.token_de_sesion }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_fila, this).
         asigno this.fila como respuesta_fila.data.resultado[0].
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono guardar_fila () donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.guardar_fila".
         creo respuesta_guardar como asíncronamente una petición http
           con url `/api/v1/update/${this.tabla_id}`
           con método "POST"
@@ -183,8 +186,9 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           con cabeceras { authorization: this.root.token_de_sesion }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_guardar, this).
         hago asíncronamente this.buscar_fila().
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono crear_fila () donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.crear_fila".
         creo respuesta_crear como asíncronamente una petición http
           con url `/api/v1/insert/${this.tabla_id}`
           con método "POST"
@@ -192,11 +196,10 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             ...incluyo this.fila_nueva
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
-        si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_crear, this) {
-          hago this.$router.history.push(`/explorador/${this.tabla_id}`).
-        }.
-      }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_crear, this).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono eliminar_fila () donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.eliminar_fila".
         creo respuesta_eliminar como asíncronamente una petición http
           con url `/api/v1/delete/${this.tabla_id}`
           con método "POST"
@@ -204,11 +207,10 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             id: this.$route.params.id_de_fila
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
-        si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_eliminar, this) {
-          hago this.$router.history.push(`/explorador/${this.tabla_id}`).
-        }.
-      }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_eliminar, this).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono cambiar_fichero (columna_index, evento) donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.cambiar_fichero".
         hago this.desactualizar_imagen(columna_index).
         creo datos_de_formulario como un nuevo FormData().
         creo ficheros_seleccionados como evento.target.files.
@@ -224,12 +226,11 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             "Content-Type": "multipart/form-data",
             authorization: this.root.token_de_sesion
           }.
-        si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_cambiar, this) {
-          
-        }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_cambiar, this).
         hago asíncronamente this.actualizar_imagen(columna_index).
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método cargar_metadatos_de_tabla donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.cargar_metadatos_de_tabla".
         asigno this.tabla como this.root.esquema.filter(una lambda con (tabla) donde retorno tabla.tabla es igual que this.tabla_id)[0].
         asigno this.columnas_locales como un hecho donde {
           creo columnas_locales como {}.
@@ -262,12 +263,14 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           }.
           retorno columnas_fichero.
         }.
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método desactualizar_imagen con (columna_index) donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.desactualizar_imagen".
         asigno this.columnas_fichero_cargando[columna_index] como true.
         hago this.$forceUpdate(true).
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método actualizar_imagen con (columna_index) donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.actualizar_imagen".
         retorno una nueva Promise(una lambda con (ok) donde {
           hago setTimeout(una lambda donde {
             asigno this.columnas_fichero_cargando[columna_index] como false.
@@ -275,17 +278,20 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
             retorno ok().
           }, 1000).
         }).
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono refrescar_imagen con (columna_index) donde {
+        debugo "PaginaDeFormularioDeDatoDeTabla.refrescar_imagen".
         hago asíncronamente this.desactualizar_imagen(columna_index).
         hago asíncronamente this.actualizar_imagen(columna_index).
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono beforeMount donde {
+      debugo "PaginaDeFormularioDeDatoDeTabla.beforeMount".
       hago this.cargar_metadatos_de_tabla().
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
     método asíncrono mounted donde {
+      debugo "PaginaDeFormularioDeDatoDeTabla.mounted".
       hago asíncronamente this.buscar_fila().
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

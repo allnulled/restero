@@ -27,6 +27,7 @@ required:true
 }
 },
 data(  ) {try {
+console.log('[DEBUG]', "PuertoDeNotificaciones.data");
 return { notificaciones:[  ]
 };
 } catch(error) {
@@ -36,6 +37,10 @@ throw error;
 
 },
 methods:{ agregar_notificacion( notificacion ) {try {
+console.log('[DEBUG]', "PuertoDeNotificaciones.agregar_notificacion");
+if((!(typeof notificacion === 'object'))) {
+throw new Error( "Se requiere que el parámetro «notificacion» sea tipo objeto en «PuertoDeNotificaciones.agregar_notificacion»" );
+}
 const nueva_notificacion = Object.assign( { 
 },
 notificacion,
@@ -44,16 +49,27 @@ notificacion,
 this.notificaciones.push(nueva_notificacion)
 this.$forceUpdate( true );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 cerrar_notificacion( notificacion ) {try {
+console.log('[DEBUG]', "PuertoDeNotificaciones.cerrar_notificacion");
 const indice_notificacion = this.notificaciones.indexOf( notificacion );
 this.notificaciones.splice( indice_notificacion,
 1 );
 this.$forceUpdate( true );
+} catch(error) {
+this.$window.$notificaciones.notificar_error( error );}
+},
+notificar_error( error ) {try {
+console.log('[DEBUG]', "PuertoDeNotificaciones.notificar_error");
+const objeto_de_error = Object.assign( { 
+},
+{ name:error.name,
+message:error.message,
+stack:error.stack
+} );
+this.agregar_notificacion( objeto_de_error );
+console.log(error);
 } catch(error) {
 console.log(error);
 throw error;
@@ -62,6 +78,7 @@ throw error;
 }
 },
 mounted() {try {
+console.log('[DEBUG]', "PuertoDeNotificaciones.mounted");
 this.$window.$notificaciones = this;
 } catch(error) {
 console.log(error);

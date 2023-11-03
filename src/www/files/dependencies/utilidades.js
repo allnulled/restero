@@ -84,7 +84,7 @@ throw error;
 };
 window.utilidades.gestion_de_error_desde_respuesta = function( respuesta ) {try {
 if(respuesta.data.error === true) {
-window.$notificaciones.agregar_notificacion( respuesta.data );
+throw new Error( respuesta.data.message );
 return true;
 }
 return false;

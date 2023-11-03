@@ -258,24 +258,30 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
       }
     }.
     método data() donde {
+        debugo "ExploradorDeDatos.data".
       retorno this.obtener_datos({}).
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
-      agregar_filtro: una función donde {
+      método agregar_filtro donde {
+        debugo "ExploradorDeDatos.agregar_filtro".
         apendizo ["","=",""] en this.filtros.
-      },
-      agregar_orden: una función donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método agregar_orden donde {
+        debugo "ExploradorDeDatos.agregar_orden".
         apendizo ["","ASC"] en this.ordenes.
-      },
-      alternar_panel_de_busqueda_avanzada: una función donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método alternar_panel_de_busqueda_avanzada donde {
+        debugo "ExploradorDeDatos.alternar_panel_de_busqueda_avanzada".
         asigno this.esta_mostrando_panel_de_busqueda_avanzada como no this.esta_mostrando_panel_de_busqueda_avanzada.
         hago this.$forceUpdate(true).
-      },
-      alternar_panel_normal: una función donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método alternar_panel_normal donde {
+        debugo "ExploradorDeDatos.alternar_panel_normal".
         asigno this.esta_mostrando_panel_normal como no this.esta_mostrando_panel_normal.
         hago this.$forceUpdate(true).
-      },
-      buscar: una función asíncrona donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono buscar donde {
+        debugo "ExploradorDeDatos.buscar".
         creo respuesta_busqueda como asíncronamente una petición http
           con url "/api/v1/select/" + this.tabla_id
           con método "POST"
@@ -291,33 +297,40 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
         asigno this.pagina_actual como this.pagina.
         asigno this.filas como respuesta_busqueda.data.resultado.
         hago this.$forceUpdate(true).
-      },
-      buscar_pagina: una función con (pagina) donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método buscar_pagina con (pagina) donde {
+        debugo "ExploradorDeDatos.buscar_pagina".
         si pagina es tipo número asigno this.pagina como pagina.
         si pagina es igual que "««" asigno this.pagina como 1.
         si pagina es igual que "«" decremento this.pagina.
         si pagina es igual que "»" incremento this.pagina.
         retorno this.buscar().
-      },
-      buscar_texto: una función donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método buscar_texto donde {
+        debugo "ExploradorDeDatos.buscar_texto".
         asigno this.pagina como 1.
         retorno this.buscar().
-      },
-      ir_a_fila: una función con (index_fila) donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método ir_a_fila con (index_fila) donde {
+        debugo "ExploradorDeDatos.ir_a_fila".
         hago this.$router.history.push(`/formulario/${this.tabla.tabla}/id/${index_fila}`).
-      },
-      ir_a_crear_fila: una función con () donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método ir_a_crear_fila con () donde {
+        debugo "ExploradorDeDatos.ir_a_crear_fila".
         hago this.$router.history.push(`/formulario/${this.tabla.tabla}/crear`).
-      },
-      ir_a_pagina_anterior: una función con () donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método ir_a_pagina_anterior con () donde {
+        debugo "ExploradorDeDatos.ir_a_pagina_anterior".
         decremento this.pagina en 1.
         retorno this.buscar().
-      },
-      ir_a_pagina_inicial: una función con () donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método ir_a_pagina_inicial con () donde {
+        debugo "ExploradorDeDatos.ir_a_pagina_inicial".
         asigno this.pagina como 1.
         retorno this.buscar().
-      },
-      obtener_datos: una función con (base o en su defecto {}) donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método obtener_datos con (base o en su defecto {}) donde {
+        debugo "ExploradorDeDatos.obtener_datos".
         retorno base extendido por {
           seleccionados: (this.seleccionPorDefecto + "").split(","),
           tabla: false,
@@ -335,12 +348,14 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
           columnas_de_fila: undefined,
           operadores_de_filtro: ["=","!=","<","<=",">=",">","IS NULL","IS NOT NULL","LIKE","NOT LIKE","IN","NOT IN"]
         }.
-      },
-      seleccionar_panel_de_busqueda_avanzada_sobre: una función con (subpanel) donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método seleccionar_panel_de_busqueda_avanzada_sobre con (subpanel) donde {
+        debugo "ExploradorDeDatos.seleccionar_panel_de_busqueda_avanzada_sobre".
         asigno this.esta_mostrando_panel_de_busqueda_avanzada_sobre como subpanel.
         hago this.$forceUpdate(true).
-      },
-      seleccionar_fila: una función con (fila_id_num) donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método seleccionar_fila con (fila_id_num) donde {
+        debugo "ExploradorDeDatos.seleccionar_fila".
         creo fila_id como "" + fila_id_num.
         creo posicion como this.seleccionados.indexOf(fila_id).
         si posicion no es igual que 0-1 {
@@ -356,20 +371,23 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
           hago this.seleccionados.push(fila_id).
         }.
         hago this.alCambiar(this.seleccionados, this).
-      },
-      esta_fila_seleccionada: una función con (fila_id) donde {
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método esta_fila_seleccionada con (fila_id) donde {
+        debugo "ExploradorDeDatos.esta_fila_seleccionada".
         creo posicion como this.seleccionados.indexOf("" + fila_id).
         retorno posicion no es igual que 0-1.
-      }
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     propiedad watch como {
-      filas: una función con (nuevo_valor) donde {
+      método filas con (nuevo_valor) donde {
+        debugo "ExploradorDeDatos.watch.filas".
         si nuevo_valor es tipo lista y nuevo_valor.length {
           asigno this.columnas_de_fila como un conjunto de claves del objeto nuevo_valor[0].
         }.
-      }
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono mounted donde {
+        debugo "ExploradorDeDatos.mounted".
       asigno this.tabla como this.$window.utilidades.busco_tabla_en_esquema(this.root.esquema, this.tabla_id).
       hago asíncronamente this.buscar().
     }.

@@ -28,9 +28,10 @@ asigno window.BreadcrumbGenerico como un componente vue2 con nombre "BreadcrumbG
       }
     }.
     método data donde {
+      debugo "BreadcrumbGenerico.data".
       retorno {
         
       }.
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

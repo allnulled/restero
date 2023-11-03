@@ -30,25 +30,40 @@ asigno window.PuertoDeNotificaciones como un componente vue2 con nombre "PuertoD
       }
     }.
     método data() donde {
+      debugo "PuertoDeNotificaciones.data".
       retorno {
         notificaciones: []
       }.
     }.
     propiedad methods como {
       método agregar_notificacion (notificacion) donde {
+        debugo "PuertoDeNotificaciones.agregar_notificacion".
+        si notificacion no es tipo objeto lanzo un nuevo Error("Se requiere que el parámetro «notificacion» sea tipo objeto en «PuertoDeNotificaciones.agregar_notificacion»").
         creo nueva_notificacion como Object.assign({}, notificacion, {
           id: un texto aleatorio de 10 caracteres
         }).
         apendizo nueva_notificacion en this.notificaciones.
         hago this.$forceUpdate(true).
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método cerrar_notificacion (notificacion) donde {
+        debugo "PuertoDeNotificaciones.cerrar_notificacion".
         creo indice_notificacion como this.notificaciones.indexOf(notificacion).
         hago this.notificaciones.splice(indice_notificacion, 1).
         hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método notificar_error con (error) donde {
+        debugo "PuertoDeNotificaciones.notificar_error".
+        creo objeto_de_error como Object.assign({}, {
+          name: error.name,
+          message: error.message,
+          stack: error.stack
+        }).
+        hago this.agregar_notificacion(objeto_de_error).
+        imprimo error.
       }.
     }.
     método mounted donde {
+      debugo "PuertoDeNotificaciones.mounted".
       asigno this.$window.$notificaciones como this.
     }.
   }.

@@ -1,5 +1,5 @@
-asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "PaginaDeBlogParaVerPosts" con plantilla {
-  <div class="PaginaDeBlogParaVerPosts Component">
+asigno window.PaginaDeForoParaVerPosts como un componente vue2 con nombre "PaginaDeForoParaVerPosts" con plantilla {
+  <div class="PaginaDeForoParaVerPosts Component">
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -10,21 +10,25 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
               <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
             </td>
             <td>
-              <span class="">Blog</span>
+              <span class="">Tema de foro</span>
             </td>
             </tr>
           </tbody>
           </table>
         </div>
       </div>
-      <div v-if="root.esquema" class="window-body">
-        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'}]"></BreadcrumbGenerico>
-        <h5>Blog</h5>
+      <div class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Foro',link:'/foro/ver/temas'}]"></BreadcrumbGenerico>
+        <h5>Tema de foro</h5>
         <div class="panel_principal" style="">
-          <div class="panel_de_botones_superior" v-if="es_administrador">
+          <div class="panel_de_botones_superior">
             <button v-on:click="() => ir_a_crear_post()">Crear post</button>
           </div>
-          <template v-if="posts_del_blog.length">
+          <div class="" style="border: 1px solid #333; margin-bottom: 4px;">
+            <h5>{{ tema_de_posts.titulo }}</h5>
+            <div style="color: #666; padding: 8px; padding-top: 4px;">{{ tema_de_posts.descripcion }}</div>
+          </div>
+          <template v-if="posts_del_foro.length">
             <div class="panel_de_botones_superior">
               <table>
                 <tr>
@@ -45,19 +49,19 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
               </table>
             </div>
             <div class="lista_de_posts">
-              <template v-for="post, post_index in posts_del_blog">
-                <div class="post_en_lista" v-bind:key="'blog-post-' + post_index" v-on:click="() => ir_a_post(post_index)">
+              <template v-for="post, post_index in posts_del_foro">
+                <div class="post_en_lista" v-bind:key="'foro-post-post-' + post_index" v-on:click="() => ir_a_post(post_index)">
                   <div class="titulo_de_post">
-                  {{ post.titulo }}
+                    {{ post.titulo }}
                   </div>
-                  <div class="subtitulo_de_post" v-if="post.subtitulo">
-                  {{ post.subtitulo }}
+                  <div class="subtitulo_de_post">
+                    {{ post.subtitulo }}
                   </div>
-                  <div class="autor_de_post">
-                    Escrito el {{ post.fecha_de_creacion }} por «{{ autores[post.id_de_autor].nombre }}»
+                  <div class="autor_de_post" v-if="autores_de_posts[post.id_de_autor]">
+                    Escrito el {{ post.fecha_de_creacion }} por «{{ autores_de_posts[post.id_de_autor].nombre }}»
                   </div>
                   <div class="contenido_de_post" v-if="post.contenido">
-                    {{ post.contenido.substr(0, 50) }}...
+                    {{ post.contenido.substring(0, 50) }}...
                   </div>
                 </div>
               </template>
@@ -83,7 +87,7 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
             </div>
           </template>
           <div v-else>
-            No hay posts en el blog.
+            No hay posts en este tema del foro.
           </div>
         </div>
       </div>
@@ -92,90 +96,83 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
 } con lógica {
   retorno {
     propiedad props como {
-        root: {
+      root: {
         type: Object,
         required: true
       }
     }.
     método data donde {
-      debugo "PaginaDeBlogParaVerPosts.data".
+      debugo "PaginaDeForoParaVerPosts.data".
       retorno {
         pagina: 1,
-        es_administrador: false,
-        posts_del_blog: [],
-        autores: {}
+        tema_de_posts: {},
+        posts_del_foro: [],
+        autores_de_posts: {}
       }.
     }.
     propiedad methods como {
-      método ir_a_crear_post donde {
-        debugo "PaginaDeBlogParaVerPosts.ir_a_crear_post".
-        hago this.$router.history.push("/blog/crear/post").
-      } en errores hago this.$window.$notificaciones.notificar_error(error).
-      método ir_a_post con (post_index) donde {
-        debugo "PaginaDeBlogParaVerPosts.ir_a_post".
-        creo post como this.posts_del_blog[post_index].
-        hago this.$router.history.push(`/blog/ver/post/${post.id}`).
+      método asíncrono ir_a_crear_post donde {
+        hago this.$router.history.push("/foro/crear/post/para/tema/" + this.tema_de_posts.id).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_principio_de_paginacion donde {
-        debugo "PaginaDeBlogParaVerPosts.ir_a_principio_de_paginacion".
+        debugo "PaginaDeForoParaVerPosts.ir_a_principio_de_paginacion".
         asigno this.pagina como 1.
-        creo resultado como asíncronamente this.obtener_datos().
+        creo resultado como asíncronamente this.obtener_posts().
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_anterior_de_paginacion donde {
-        debugo "PaginaDeBlogParaVerPosts.ir_a_anterior_de_paginacion".
+        debugo "PaginaDeForoParaVerPosts.ir_a_anterior_de_paginacion".
         si this.pagina es igual que 1 retorno.
         decremento this.pagina.
-        creo resultado como asíncronamente this.obtener_datos().
+        creo resultado como asíncronamente this.obtener_posts().
         hago this.$forceUpdate(true).
-        si resultado es igual que 0 incremento this.pagina.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_posterior_de_paginacion donde {
-        debugo "PaginaDeBlogParaVerPosts.ir_a_posterior_de_paginacion".
+        debugo "PaginaDeForoParaVerPosts.ir_a_posterior_de_paginacion".
         incremento this.pagina.
-        creo resultado como asíncronamente this.obtener_datos().
-        hago this.$forceUpdate(true).
+        creo resultado como asíncronamente this.obtener_posts().
         si resultado es igual que 0 decremento this.pagina.
+        hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
-      método asíncrono obtener_datos donde {
-        debugo "PaginaDeBlogParaVerPosts.obtener_datos".
+      método ir_a_post con (post_index) donde {
+        debugo "PaginaDeForoParaVerPosts.ir_a_post".
+        creo post como this.posts_del_foro[post_index].
+        hago this.$router.history.push("/foro/ver/post/" + post.id).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_posts donde {
+        debugo "PaginaDeForoParaVerPosts.obtener_posts".
+        ###############################################
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/select/Post_de_blog"
+          con url "/api/v1/select/Post_de_foro"
           con método "POST"
           con cuerpo {
-            order: [
-              ["id", "desc"]
+            where: [
+              ["id_de_tema", "=", this.$route.params.id]
             ] textualizado,
-            page: this.pagina
+            page: this.pagina,
+            order: [
+              ["id", "DESC"]
+            ] textualizado
           }
           con cabeceras {
             authorization: this.root.token_de_sesion
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
-        si respuesta_1.data.resultado.length es igual que 0 retorno 0.
-        creo datos_1 como respuesta_1.data.resultado.sort(una función con (a, b) donde {
-          si a.id es menor que b.id {
-            retorno 1.
-          }.
-          si a.id es mayor que b.id {
-            retorno 0-1.
-          }.
-          retorno 0.
-        }).
-        creo ids_de_autores como datos_1.map(una función con (post_de_blog) donde {
-          retorno post_de_blog.id_de_autor.
-        }).reduce(una función con (salida, id_de_autor) donde {
-          si salida.indexOf(id_de_autor) es igual que 0-1 {
-            hago salida.push(id_de_autor).
+        creo datos_1 como respuesta_1.data.resultado.
+        si datos_1.length es igual que 0 retorno 0.
+        creo ids_de_autores como datos_1.reduce(una función con (salida, post) donde {
+          si salida.indexOf(post.id_de_autor) es igual que 0-1 {
+            hago salida.push(post.id_de_autor).
           }.
           retorno salida.
         }, []).
+        ###############################################
         creo respuesta_2 como asíncronamente una petición http
           con url "/api/v1/select/Usuario"
           con método "POST"
           con cuerpo {
             where: [
-              ["id", "in", ids_de_autores.join(";")]
+              ["id", "IN", ids_de_autores.join(";")]
             ] textualizado
           }
           con cabeceras {
@@ -183,29 +180,34 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_2, this).
         creo datos_2 como respuesta_2.data.resultado.
-        creo datos_2_mapeado como datos_2.reduce(una función con (salida, autor) donde {
+        creo datos_de_autores como datos_2.reduce(una función con (salida, autor) donde {
           asigno salida[autor.id] como autor.
           retorno salida.
         }, {}).
-        asigno this.posts_del_blog como datos_1.
-        asigno this.autores como datos_2_mapeado.
-        retorno this.posts_del_blog.length.
+        ###############################################
+        creo respuesta_3 como asíncronamente una petición http
+          con url "/api/v1/select/Tema_de_foro"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_3, this).
+        creo dato_3 como respuesta_3.data.resultado[0].
+        ###############################################
+        asigno this.autores_de_posts como datos_de_autores.
+        asigno this.posts_del_foro como datos_1.
+        asigno this.tema_de_posts como dato_3.
+        hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
-    método asíncrono mounted donde {
-      debugo "PaginaDeBlogParaVerPosts.mounted".
-      en proceso averiguar_si_es_administrador {
-        asigno this.es_administrador como this.root.autentificacion.permisos.reduce(una función con (salida, permiso) donde {
-            si permiso.nombre es igual que "permiso de administración" {
-              retorno true.
-            }.
-            retorno salida.
-          }, false).
-      }.
-      en proceso obtener_datos {
-        hago asíncronamente this.obtener_datos().
-      }.
-      hago this.$forceUpdate(true).
+    método mounted donde {
+      debugo "PaginaDeForoParaVerPosts.mounted".
+      hago this.obtener_posts().
     } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

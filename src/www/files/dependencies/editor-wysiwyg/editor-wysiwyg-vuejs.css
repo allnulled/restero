@@ -1,0 +1,45 @@
+.EditorWysiwygVuejs {
+
+}
+.EditorWysiwygVuejs .editor_wysiwyg_panel_de_botones {
+    text-align: right;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_textarea_editor {
+    width: 100%;
+    resize: vertical;
+    min-height: 100px;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_visualizador {
+    border: 1px solid #333;
+    min-height: 20px;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_item_de_guia {
+    border: 1px solid #333;
+    padding: 4px;
+    margin-bottom: 4px;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_titulo {
+    font-size: 15px;
+    text-decoration: underline;
+    padding-bottom: 4px;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_ejemplo {
+    font-size: 10px;
+    font-family: monospace;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_contenedor_de_panel_de_marcas {
+    display: block;
+    position: relative;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_panel_de_marcas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+}
+.EditorWysiwygVuejs .editor_wysiwyg_boton_de_marca {
+    display: block;
+    width: 100%;
+}

@@ -1,5 +1,5 @@
-asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "PaginaDeBlogParaVerPost" con plantilla {
-  <div class="PaginaDeBlogParaVerPost Component">
+asigno window.PaginaDeForoParaVerPost como un componente vue2 con nombre "PaginaDeForoParaVerPost" con plantilla {
+  <div class="PaginaDeForoParaVerPost Component">
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -17,21 +17,21 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
           </table>
         </div>
       </div>
-      <div class="window-body">
-        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Blog',link:'/blog/ver/posts'}]"></BreadcrumbGenerico>
+      <div class="window-body" v-if="post_del_foro">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Foro',link:'/foro/ver/temas'},{texto:'Tema',link:'/foro/ver/tema/'+this.post_del_foro.id_de_tema}]"></BreadcrumbGenerico>
         <h5>Ver post</h5>
         <div class="panel_principal">
           <div class="panel_de_botones_superior" v-if="es_administrador">
             <button v-on:click="() => ir_a_editar_post()">Editar post</button>
           </div>
           <div class="ver_post">
-            <div class="titulo_de_post">{{ post_del_blog.titulo }}</div>
-            <div class="subtitulo_de_post">{{ post_del_blog.subtitulo }}</div>
+            <div class="titulo_de_post">{{ post_del_foro.titulo }}</div>
+            <div class="subtitulo_de_post">{{ post_del_foro.subtitulo }}</div>
             <div class="autor_de_post">
-              Escrito el {{ post_del_blog.fecha_de_creacion }} por {{ autor.nombre }}
+              Escrito el {{ post_del_foro.fecha_de_creacion }} por {{ autor.nombre }}
             </div>
             <div class="contenido_de_post">
-              <div>{{ post_del_blog.contenido }}</div>
+              <div>{{ post_del_foro.contenido }}</div>
             </div>
           </div>
           <div class="panel_de_comentarios" style="margin-top: 4px;">
@@ -74,7 +74,7 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
                       Escrito el {{ comentario.fecha_de_creacion }} por {{ autores_de_comentarios[comentario.id_de_autor].nombre }}
                     </div>
                     <div class="contenido_de_post">
-                      <div v-html="$window.Editor_wysiwyg_vuejs_parser.parse(comentario.contenido)"></div>
+                      <div>{{ comentario.contenido }}</div>
                     </div>
                   </div>
                 </template>
@@ -94,10 +94,10 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
       }
     }.
     método data donde {
-      debugo "PaginaDeBlogParaVerPost.data".
+      debugo "PaginaDeForoParaVerPost.data".
       retorno {
         es_administrador: false,
-        post_del_blog: {},
+        post_del_foro: {},
         autor: {},
         pagina_de_comentarios: 1,
         comentarios: [],
@@ -106,24 +106,24 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
         esta_creando_comentario: false,
         nuevo_comentario: ""
       }.
-    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
     propiedad methods como {
       método abrir_creador_de_comentarios donde {
-        debugo "PaginaDeBlogParaVerPost.abrir_creador_de_comentarios".
+        debugo "PaginaDeForoParaVerPost.abrir_creador_de_comentarios".
         asigno this.esta_mostrando_creador_de_comentario como true.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método cerrar_creador_de_comentarios donde {
-        debugo "PaginaDeBlogParaVerPost.cerrar_creador_de_comentarios".
+        debugo "PaginaDeForoParaVerPost.cerrar_creador_de_comentarios".
         asigno this.esta_mostrando_creador_de_comentario como false.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono crear_comentario donde {
-        debugo "PaginaDeBlogParaVerPost.crear_comentario".
+        debugo "PaginaDeForoParaVerPost.crear_comentario".
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/insert/Comentario_de_post_de_blog"
+          con url "/api/v1/insert/Comentario_de_post_de_foro"
           con método "POST"
           con cuerpo {
             ...incluyo {
-              id_de_post_de_blog: this.$route.params.id,
+              id_de_post_de_foro: this.$route.params.id,
               contenido: this.nuevo_comentario
             }
           }
@@ -138,30 +138,30 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método ir_a_editar_post donde {
-        debugo "PaginaDeBlogParaVerPost.ir_a_editar_post".
-        hago this.$router.history.push("/blog/editar/post/" + this.$route.params.id).
+        debugo "PaginaDeForoParaVerPost.ir_a_editar_post".
+        hago this.$router.history.push("/foro/editar/post/" + this.$route.params.id).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_principio_de_comentarios donde {
-        debugo "PaginaDeBlogParaVerPost.ir_a_principio_de_comentarios".
+        debugo "PaginaDeForoParaVerPost.ir_a_principio_de_comentarios".
         asigno this.pagina_de_comentarios como 1.
         hago asíncronamente this.obtener_comentarios().
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_anterior_de_comentarios donde {
-        debugo "PaginaDeBlogParaVerPost.ir_a_anterior_de_comentarios".
+        debugo "PaginaDeForoParaVerPost.ir_a_anterior_de_comentarios".
         si this.pagina_de_comentarios es igual que 1 retorno.
         decremento this.pagina_de_comentarios.
         hago asíncronamente this.obtener_comentarios().
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_siguiente_de_comentarios donde {
-        debugo "PaginaDeBlogParaVerPost.ir_a_siguiente_de_comentarios".
+        debugo "PaginaDeForoParaVerPost.ir_a_siguiente_de_comentarios".
         incremento this.pagina_de_comentarios.
         creo resultados como asíncronamente this.obtener_comentarios().
         si resultados es igual que 0 decremento this.pagina_de_comentarios.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono obtener_post donde {
-        debugo "PaginaDeBlogParaVerPost.obtener_post".
+        debugo "PaginaDeForoParaVerPost.obtener_post".
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/select/Post_de_blog"
+          con url "/api/v1/select/Post_de_foro"
           con método "POST"
           con cuerpo {
             where: [
@@ -186,18 +186,19 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_2, this).
         creo dato_2 como respuesta_2.data.resultado[0].
-        asigno this.post_del_blog como dato_1.
+        asigno this.post_del_foro como dato_1.
         asigno this.autor como dato_2.
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono obtener_comentarios donde {
-        debugo "PaginaDeBlogParaVerPost.obtener_comentarios".
+        debugo "PaginaDeForoParaVerPost.obtener_comentarios".
+        #########################################################
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/select/Comentario_de_post_de_blog"
+          con url "/api/v1/select/Comentario_de_post_de_foro"
           con método "POST"
           con cuerpo {
             where: [
-              ["id_de_post_de_blog", "=", this.$route.params.id]
+              ["id_de_post_de_foro", "=", this.$route.params.id]
             ] textualizado,
             order: [
               ["id", "desc"]
@@ -216,6 +217,7 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
           }.
           retorno salida.
         }, []).
+        #########################################################
         creo respuesta_2 como asíncronamente una petición http
           con url "/api/v1/select/Usuario"
           con método "POST"
@@ -239,7 +241,7 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono mounted donde {
-      debugo "PaginaDeBlogParaVerPost.mounted".
+      debugo "PaginaDeForoParaVerPost.mounted".
       en proceso averiguar_si_es_administrador {
         asigno this.es_administrador como this.root.autentificacion.permisos.reduce(una función con (salida, permiso) donde {
             si permiso.nombre es igual que "permiso de administración" {
@@ -254,6 +256,6 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
       en proceso obtener_comentarios {
         hago this.obtener_comentarios().
       }.
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

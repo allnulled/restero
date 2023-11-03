@@ -39,17 +39,19 @@ asigno window.PaginaDePanelDeAdministracion como un componente vue2 con nombre "
       }
     }.
     método data donde {
+      debugo "PaginaDePanelDeAdministracion.data".
       retorno {
         esquema: false
       }.
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
       método abrir_pagina_de(pagina) donde {
+        debugo "PaginaDePanelDeAdministracion.abrir_pagina_de".
         hago this.$router.history.push(pagina).
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono mounted donde {
       
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

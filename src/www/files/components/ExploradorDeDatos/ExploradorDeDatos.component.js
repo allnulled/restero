@@ -273,52 +273,43 @@ throw error;
 }
 },
 data(  ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.data");
 return this.obtener_datos( { 
 } );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-methods:{ agregar_filtro:function() {try {
+methods:{ agregar_filtro() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.agregar_filtro");
 this.filtros.push([ "",
 "=",
 "" ])
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-agregar_orden:function() {try {
+agregar_orden() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.agregar_orden");
 this.ordenes.push([ "",
 "ASC" ])
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-alternar_panel_de_busqueda_avanzada:function() {try {
+alternar_panel_de_busqueda_avanzada() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.alternar_panel_de_busqueda_avanzada");
 this.esta_mostrando_panel_de_busqueda_avanzada = (!(this.esta_mostrando_panel_de_busqueda_avanzada));
 this.$forceUpdate( true );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-alternar_panel_normal:function() {try {
+alternar_panel_normal() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.alternar_panel_normal");
 this.esta_mostrando_panel_normal = (!(this.esta_mostrando_panel_normal));
 this.$forceUpdate( true );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-buscar:async function() {try {
+async buscar() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.buscar");
 const respuesta_busqueda = (await Castelog.metodos.una_peticion_http("/api/v1/select/" + this.tabla_id, "POST", { search:this.busqueda,
 where:JSON.stringify(this.filtros, null, 2),
 order:JSON.stringify(this.ordenes, null, 2),
@@ -332,12 +323,10 @@ this.pagina_actual = this.pagina;
 this.filas = respuesta_busqueda.data.resultado;
 this.$forceUpdate( true );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-buscar_pagina:function( pagina ) {try {
+buscar_pagina( pagina ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.buscar_pagina");
 if(typeof pagina === 'number') {
 this.pagina = pagina;
 }
@@ -352,56 +341,44 @@ this.pagina += 1;
 }
 return this.buscar(  );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-buscar_texto:function() {try {
+buscar_texto() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.buscar_texto");
 this.pagina = 1;
 return this.buscar(  );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-ir_a_fila:function( index_fila ) {try {
+ir_a_fila( index_fila ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.ir_a_fila");
 this.$router.history.push( `/formulario/${this.tabla.tabla}/id/${index_fila}` );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-ir_a_crear_fila:function(  ) {try {
+ir_a_crear_fila(  ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.ir_a_crear_fila");
 this.$router.history.push( `/formulario/${this.tabla.tabla}/crear` );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-ir_a_pagina_anterior:function(  ) {try {
+ir_a_pagina_anterior(  ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.ir_a_pagina_anterior");
 this.pagina -= 1;
 return this.buscar(  );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-ir_a_pagina_inicial:function(  ) {try {
+ir_a_pagina_inicial(  ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.ir_a_pagina_inicial");
 this.pagina = 1;
 return this.buscar(  );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-obtener_datos:function( base = { 
+obtener_datos( base = { 
 } ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.obtener_datos");
 return Object.assign(base, { seleccionados:( this.seleccionPorDefecto + "" ).split( "," ),
 tabla:false,
 tabla_id:this.idDeTabla || this.$route.params.id_de_tabla,
@@ -430,21 +407,17 @@ operadores_de_filtro:[ "=",
 "NOT IN" ]
 } );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-seleccionar_panel_de_busqueda_avanzada_sobre:function( subpanel ) {try {
+seleccionar_panel_de_busqueda_avanzada_sobre( subpanel ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.seleccionar_panel_de_busqueda_avanzada_sobre");
 this.esta_mostrando_panel_de_busqueda_avanzada_sobre = subpanel;
 this.$forceUpdate( true );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-seleccionar_fila:function( fila_id_num ) {try {
+seleccionar_fila( fila_id_num ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.seleccionar_fila");
 const fila_id = "" + fila_id_num;
 const posicion = this.seleccionados.indexOf( fila_id );
 if((!(posicion === 0 - 1))) {
@@ -464,33 +437,27 @@ this.seleccionados.push( fila_id );
 this.alCambiar( this.seleccionados,
 this );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-esta_fila_seleccionada:function( fila_id ) {try {
+esta_fila_seleccionada( fila_id ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.esta_fila_seleccionada");
 const posicion = this.seleccionados.indexOf( "" + fila_id );
 return (!(posicion === 0 - 1));
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 },
-watch:{ filas:function( nuevo_valor ) {try {
+watch:{ filas( nuevo_valor ) {try {
+console.log('[DEBUG]', "ExploradorDeDatos.watch.filas");
 if(Array.isArray(nuevo_valor) && nuevo_valor.length) {
 this.columnas_de_fila = Object.keys(nuevo_valor[ 0 ]);
 }
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 },
 async mounted() {try {
+console.log('[DEBUG]', "ExploradorDeDatos.mounted");
 this.tabla = this.$window.utilidades.busco_tabla_en_esquema( this.root.esquema,
 this.tabla_id );
 (await this.buscar(  ));

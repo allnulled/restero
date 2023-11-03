@@ -30,13 +30,11 @@ required:true
 }
 },
 data() {try {
+console.log('[DEBUG]', "PaginaDeExploradorDeDatosDeTabla.data");
 return { 
 };
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 };},
   null);

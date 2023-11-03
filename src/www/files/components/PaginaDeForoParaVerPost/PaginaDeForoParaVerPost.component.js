@@ -1,6 +1,6 @@
 
-window.PaginaDeBlogParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeBlogParaVerPost",
-  "<div class=\"PaginaDeBlogParaVerPost Component\">"
+window.PaginaDeForoParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeForoParaVerPost",
+  "<div class=\"PaginaDeForoParaVerPost Component\">"
  + "    <div class=\"window\">"
  + "      <div class=\"title-bar\">"
  + "        <div class=\"title-bar-text\">"
@@ -18,21 +18,21 @@ window.PaginaDeBlogParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeBl
  + "          </table>"
  + "        </div>"
  + "      </div>"
- + "      <div class=\"window-body\">"
- + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Blog',link:'/blog/ver/posts'}]\"></BreadcrumbGenerico>"
+ + "      <div class=\"window-body\" v-if=\"post_del_foro\">"
+ + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Foro',link:'/foro/ver/temas'},{texto:'Tema',link:'/foro/ver/tema/'+this.post_del_foro.id_de_tema}]\"></BreadcrumbGenerico>"
  + "        <h5>Ver post</h5>"
  + "        <div class=\"panel_principal\">"
  + "          <div class=\"panel_de_botones_superior\" v-if=\"es_administrador\">"
  + "            <button v-on:click=\"() => ir_a_editar_post()\">Editar post</button>"
  + "          </div>"
  + "          <div class=\"ver_post\">"
- + "            <div class=\"titulo_de_post\">{{ post_del_blog.titulo }}</div>"
- + "            <div class=\"subtitulo_de_post\">{{ post_del_blog.subtitulo }}</div>"
+ + "            <div class=\"titulo_de_post\">{{ post_del_foro.titulo }}</div>"
+ + "            <div class=\"subtitulo_de_post\">{{ post_del_foro.subtitulo }}</div>"
  + "            <div class=\"autor_de_post\">"
- + "              Escrito el {{ post_del_blog.fecha_de_creacion }} por {{ autor.nombre }}"
+ + "              Escrito el {{ post_del_foro.fecha_de_creacion }} por {{ autor.nombre }}"
  + "            </div>"
  + "            <div class=\"contenido_de_post\">"
- + "              <div>{{ post_del_blog.contenido }}</div>"
+ + "              <div>{{ post_del_foro.contenido }}</div>"
  + "            </div>"
  + "          </div>"
  + "          <div class=\"panel_de_comentarios\" style=\"margin-top: 4px;\">"
@@ -75,7 +75,7 @@ window.PaginaDeBlogParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeBl
  + "                      Escrito el {{ comentario.fecha_de_creacion }} por {{ autores_de_comentarios[comentario.id_de_autor].nombre }}"
  + "                    </div>"
  + "                    <div class=\"contenido_de_post\">"
- + "                      <div v-html=\"$window.Editor_wysiwyg_vuejs_parser.parse(comentario.contenido)\"></div>"
+ + "                      <div>{{ comentario.contenido }}</div>"
  + "                    </div>"
  + "                  </div>"
  + "                </template>"
@@ -91,9 +91,9 @@ required:true
 }
 },
 data() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.data");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.data");
 return { es_administrador:false,
-post_del_blog:{ 
+post_del_foro:{ 
 },
 autor:{ 
 },
@@ -106,24 +106,27 @@ esta_creando_comentario:false,
 nuevo_comentario:""
 };
 } catch(error) {
-this.$window.$notificaciones.notificar_error( error );}
+console.log(error);
+throw error;
+}
+
 },
 methods:{ abrir_creador_de_comentarios() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.abrir_creador_de_comentarios");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.abrir_creador_de_comentarios");
 this.esta_mostrando_creador_de_comentario = true;
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
 cerrar_creador_de_comentarios() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.cerrar_creador_de_comentarios");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.cerrar_creador_de_comentarios");
 this.esta_mostrando_creador_de_comentario = false;
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
 async crear_comentario() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.crear_comentario");
-const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/insert/Comentario_de_post_de_blog", "POST", { 
-...({ id_de_post_de_blog:this.$route.params.id,
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.crear_comentario");
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/insert/Comentario_de_post_de_foro", "POST", { 
+...({ id_de_post_de_foro:this.$route.params.id,
 contenido:this.nuevo_comentario
 } )
 }, { authorization:this.root.token_de_sesion
@@ -139,20 +142,20 @@ this.$forceUpdate( true );
 this.$window.$notificaciones.notificar_error( error );}
 },
 ir_a_editar_post() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.ir_a_editar_post");
-this.$router.history.push( "/blog/editar/post/" + this.$route.params.id );
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.ir_a_editar_post");
+this.$router.history.push( "/foro/editar/post/" + this.$route.params.id );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
 async ir_a_principio_de_comentarios() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.ir_a_principio_de_comentarios");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.ir_a_principio_de_comentarios");
 this.pagina_de_comentarios = 1;
 (await this.obtener_comentarios(  ));
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
 async ir_a_anterior_de_comentarios() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.ir_a_anterior_de_comentarios");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.ir_a_anterior_de_comentarios");
 if(this.pagina_de_comentarios === 1) {
 return;
 }
@@ -162,7 +165,7 @@ this.pagina_de_comentarios -= 1;
 this.$window.$notificaciones.notificar_error( error );}
 },
 async ir_a_siguiente_de_comentarios() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.ir_a_siguiente_de_comentarios");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.ir_a_siguiente_de_comentarios");
 this.pagina_de_comentarios += 1;
 const resultados = (await this.obtener_comentarios(  ));
 if(resultados === 0) {
@@ -172,8 +175,8 @@ this.pagina_de_comentarios -= 1;
 this.$window.$notificaciones.notificar_error( error );}
 },
 async obtener_post() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.obtener_post");
-const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Post_de_blog", "POST", { where:JSON.stringify([ [ "id",
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.obtener_post");
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Post_de_foro", "POST", { where:JSON.stringify([ [ "id",
 "=",
 this.$route.params.id ] ], null, 2)
 }, { authorization:this.root.token_de_sesion
@@ -189,15 +192,15 @@ dato_1.id_de_autor ] ], null, 2)
 this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_2,
 this );
 const dato_2 = respuesta_2.data.resultado[ 0 ];
-this.post_del_blog = dato_1;
+this.post_del_foro = dato_1;
 this.autor = dato_2;
 this.$forceUpdate( true );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
 async obtener_comentarios() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.obtener_comentarios");
-const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Comentario_de_post_de_blog", "POST", { where:JSON.stringify([ [ "id_de_post_de_blog",
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.obtener_comentarios");
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Comentario_de_post_de_foro", "POST", { where:JSON.stringify([ [ "id_de_post_de_foro",
 "=",
 this.$route.params.id ] ], null, 2),
 order:JSON.stringify([ [ "id",
@@ -252,7 +255,7 @@ this.$window.$notificaciones.notificar_error( error );}
 }
 },
 async mounted() {try {
-console.log('[DEBUG]', "PaginaDeBlogParaVerPost.mounted");
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.mounted");
 averiguar_si_es_administrador: {
 this.es_administrador = this.root.autentificacion.permisos.reduce( function( salida,
 permiso ) {try {
@@ -275,10 +278,7 @@ obtener_comentarios: {
 this.obtener_comentarios(  );}
 
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 };},
   null);

@@ -61,50 +61,52 @@ asigno window.PaginaDeImportarExportarDatos como un componente vue2 con nombre "
       }
     }.
     método data donde {
+      debugo "PaginaDeImportarExportarDatos.data".
       retorno {
         tablas_seleccionadas: [],
         seccion_seleccionada: 'importar'
       }.
     }.
     propiedad methods como {
-        seleccionar_seccion: una función con (seccion) donde {
-          asigno this.seccion_seleccionada como seccion.
-        },
-        importar_datos_de_fichero: una función asíncrona donde {
-          creo fichero como this.$refs.importacion_de_datos.files[0].
-          creo datos_de_formulario como un nuevo FormData().
-          hago datos_de_formulario.append("fichero", fichero).
-          creo respuesta_de_subida como asíncronamente una petición http
-            con url "/api/v1/db/import/excel"
-            con método "POST"
-            con cuerpo datos_de_formulario
-            con cabeceras {
-              "Content-Type": "multipart/form-data",
-              authorization: this.root.token_de_sesion
-            }.
-          si no this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_de_subida, this) {
-            
+      método seleccionar_seccion con (seccion) donde {
+        debugo "PaginaDeImportarExportarDatos.seleccionar_seccion".
+        asigno this.seccion_seleccionada como seccion.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono importar_datos_de_fichero donde {
+        debugo "PaginaDeImportarExportarDatos.importar_datos_de_fichero".
+        creo fichero como this.$refs.importacion_de_datos.files[0].
+        creo datos_de_formulario como un nuevo FormData().
+        hago datos_de_formulario.append("fichero", fichero).
+        creo respuesta_de_subida como asíncronamente una petición http
+          con url "/api/v1/db/import/excel"
+          con método "POST"
+          con cuerpo datos_de_formulario
+          con cabeceras {
+            "Content-Type": "multipart/form-data",
+            authorization: this.root.token_de_sesion
           }.
-        },
-        exportar_datos_a_fichero: una función asíncrona donde {
-          creo formulario como document.createElement("form").
-          asigno formulario.style.display como "none".
-          asigno formulario.method como "POST".
-          asigno formulario.action como "/api/v1/db/export/excel".
-          creo entrada_de_token como document.createElement("input").
-          asigno entrada_de_token.type como "text".
-          asigno entrada_de_token.name como "authorization".
-          asigno entrada_de_token.value como this.root.token_de_sesion.
-          creo entrada_de_tablas como document.createElement("input").
-          asigno entrada_de_tablas.type como "text".
-          asigno entrada_de_tablas.name como "tablas".
-          asigno entrada_de_tablas.value como this.tablas_seleccionadas textualizado.
-          hago document.body.appendChild(formulario).
-          hago formulario.appendChild(entrada_de_tablas).
-          hago formulario.appendChild(entrada_de_token).
-          hago formulario.submit().
-          hago formulario.remove().
-        }
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_de_subida, this).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono exportar_datos_a_fichero donde {
+        debugo "PaginaDeImportarExportarDatos.exportar_datos_a_fichero".
+        creo formulario como document.createElement("form").
+        asigno formulario.style.display como "none".
+        asigno formulario.method como "POST".
+        asigno formulario.action como "/api/v1/db/export/excel".
+        creo entrada_de_token como document.createElement("input").
+        asigno entrada_de_token.type como "text".
+        asigno entrada_de_token.name como "authorization".
+        asigno entrada_de_token.value como this.root.token_de_sesion.
+        creo entrada_de_tablas como document.createElement("input").
+        asigno entrada_de_tablas.type como "text".
+        asigno entrada_de_tablas.name como "tablas".
+        asigno entrada_de_tablas.value como this.tablas_seleccionadas textualizado.
+        hago document.body.appendChild(formulario).
+        hago formulario.appendChild(entrada_de_tablas).
+        hago formulario.appendChild(entrada_de_token).
+        hago formulario.submit().
+        hago formulario.remove().
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
   }.
 }.

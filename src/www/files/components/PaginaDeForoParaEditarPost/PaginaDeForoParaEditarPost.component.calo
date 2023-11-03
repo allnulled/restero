@@ -1,5 +1,5 @@
-asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "PaginaDeBlogParaEditarPost" con plantilla {
-  <div class="PaginaDeBlogParaEditarPost Component">
+asigno window.PaginaDeForoParaEditarPost como un componente vue2 con nombre "PaginaDeForoParaEditarPost" con plantilla {
+  <div class="PaginaDeForoParaEditarPost Component">
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -18,7 +18,7 @@ asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "Pag
         </div>
       </div>
       <div v-if="root.esquema" class="window-body">
-        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Blog',link:'/blog/ver/posts'}]"></BreadcrumbGenerico>
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Foro',link:'/foro/ver/temas'},{texto:'Tema',link:'/foro/ver/tema/'+(this.post.id_de_tema || this.$route.params.tema)}]"></BreadcrumbGenerico>
         <h5>{{ modalidad === "crear" ? "Crear" : "Editar" }} post</h5>
         <div class="panel_principal">
           <div class="">
@@ -54,7 +54,6 @@ asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "Pag
       }
     }.
     método data donde {
-      debugo "PaginaDeBlogParaEditarPost.data".
       retorno {
         es_administrador: false,
         post: {}
@@ -62,11 +61,12 @@ asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "Pag
     }.
     propiedad methods como {
       método asíncrono crear_post donde {
-        debugo "PaginaDeBlogParaEditarPost.crear_post".
+        debugo "PaginaDeForoParaEditarPost.crear_post".
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/insert/Post_de_blog"
+          con url "/api/v1/insert/Post_de_foro"
           con método "POST"
           con cuerpo {
+            id_de_tema: (this.$route.params.tema o this.post.id_de_tema),
             ...incluyo this.post
           }
           con cabeceras {
@@ -74,12 +74,12 @@ asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "Pag
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
         imprimo respuesta_1.
-        hago this.$router.history.push("/blog/ver/posts").
+        hago this.$router.history.push("/foro/ver/tema/" + (this.$route.params.tema o this.post.id_de_tema)).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono guardar_post donde {
-        debugo "PaginaDeBlogParaEditarPost.guardar_post".
+        debugo "PaginaDeForoParaEditarPost.guardar_post".
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/update/Post_de_blog/" + this.$route.params.id
+          con url "/api/v1/update/Post_de_foro/" + this.$route.params.id
           con método "POST"
           con cuerpo {
             id: this.$route.params.id,
@@ -90,15 +90,15 @@ asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "Pag
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
         imprimo respuesta_1.
-        hago this.$router.history.push("/blog/ver/post/" + this.post.id).
+        hago this.$router.history.push("/foro/ver/post/" + this.post.id).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono mounted donde {
-      debugo "PaginaDeBlogParaEditarPost.mounted".
+      debugo "PaginaDeForoParaEditarPost.mounted".
       si this.modalidad es igual que "editar" {
         creo post_id como this.$route.params.id.
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/select/Post_de_blog"
+          con url "/api/v1/select/Post_de_foro"
           con método "POST"
           con cuerpo {
             where: [

@@ -151,6 +151,7 @@ throw error;
 }
 },
 data(  ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.data");
 return { tabla:false,
 tabla_id:this.$route.params.id_de_tabla,
 fila:false,
@@ -173,6 +174,7 @@ throw error;
 
 },
 methods:{ async buscar_fila(  ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.buscar_fila");
 const respuesta_fila = (await Castelog.metodos.una_peticion_http(`/api/v1/select/${this.tabla_id}`, "POST", { where:JSON.stringify([ [ "id",
 "=",
 this.$route.params.id_de_fila ] ], null, 2)
@@ -182,12 +184,10 @@ this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_fila,
 this );
 this.fila = respuesta_fila.data.resultado[ 0 ];
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 async guardar_fila(  ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.guardar_fila");
 const respuesta_guardar = (await Castelog.metodos.una_peticion_http(`/api/v1/update/${this.tabla_id}`, "POST", { id:this.$route.params.id_de_fila,
 
 ...(this.fila )
@@ -197,42 +197,32 @@ this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_guardar,
 this );
 (await this.buscar_fila(  ));
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 async crear_fila(  ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.crear_fila");
 const respuesta_crear = (await Castelog.metodos.una_peticion_http(`/api/v1/insert/${this.tabla_id}`, "POST", { 
 ...(this.fila_nueva )
 }, { authorization:this.root.token_de_sesion
 }, null, null));
-if((!(this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_crear,
-this )))) {
-this.$router.history.push( `/explorador/${this.tabla_id}` );
-}
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_crear,
+this );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 async eliminar_fila(  ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.eliminar_fila");
 const respuesta_eliminar = (await Castelog.metodos.una_peticion_http(`/api/v1/delete/${this.tabla_id}`, "POST", { id:this.$route.params.id_de_fila
 }, { authorization:this.root.token_de_sesion
 }, null, null));
-if((!(this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_eliminar,
-this )))) {
-this.$router.history.push( `/explorador/${this.tabla_id}` );
-}
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_eliminar,
+this );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 async cambiar_fichero( columna_index,
 evento ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.cambiar_fichero");
 this.desactualizar_imagen( columna_index );
 const datos_de_formulario = new FormData(  );
 const ficheros_seleccionados = evento.target.files;
@@ -246,18 +236,14 @@ fichero_seleccionado );
 const respuesta_cambiar = (await Castelog.metodos.una_peticion_http(`/api/v1/setfile/${this.tabla_id}`, "POST", datos_de_formulario, { "Content-Type":"multipart/form-data",
 authorization:this.root.token_de_sesion
 }, null, null));
-if((!(this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_cambiar,
-this )))) {
-
-}
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_cambiar,
+this );
 (await this.actualizar_imagen( columna_index ));
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 cargar_metadatos_de_tabla() {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.cargar_metadatos_de_tabla");
 this.tabla = this.root.esquema.filter( ( tabla ) => {try {
 return tabla.tabla === this.tabla_id;
 } catch(error) {
@@ -310,21 +296,17 @@ throw error;
 }
 })();
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 desactualizar_imagen( columna_index ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.desactualizar_imagen");
 this.columnas_fichero_cargando[ columna_index ] = true;
 this.$forceUpdate( true );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 actualizar_imagen( columna_index ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.actualizar_imagen");
 return new Promise( ( ok ) => {try {
 setTimeout( () => {try {
 this.columnas_fichero_cargando[ columna_index ] = false;
@@ -344,36 +326,27 @@ throw error;
 
 } );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 async refrescar_imagen( columna_index ) {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.refrescar_imagen");
 (await this.desactualizar_imagen( columna_index ));
 (await this.actualizar_imagen( columna_index ));
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 },
 async beforeMount() {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.beforeMount");
 this.cargar_metadatos_de_tabla(  );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 async mounted() {try {
+console.log('[DEBUG]', "PaginaDeFormularioDeDatoDeTabla.mounted");
 (await this.buscar_fila(  ));
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 };},
   null);

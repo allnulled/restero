@@ -33,27 +33,36 @@ asigno window.PaginaDeLogin como un componente vue2 con nombre "PaginaDeLogin" c
       }
     }.
     método data() donde {
+      debugo "PaginaDeLogin.data".
       retorno {
         nombre: "",
         contrasenya: ""
       }.
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
       método asíncrono loguearse () donde {
+        debugo "PaginaDeLogin.loguearse".
         hago this.$router.history.push("/").
         creo respuesta_login como asíncronamente una petición http
           con url "/api/v1/login"
           con método "POST"
-          con cuerpo { nombre: this.nombre, contrasenya: this.contrasenya }.
+          con cuerpo {
+            nombre: this.nombre,
+            contrasenya: this.contrasenya
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_login, this).
         asigno this.root.token_de_sesion como respuesta_login.data.token_de_sesion_activo.
         asigno this.root.autentificacion como respuesta_login.data.autentificacion.
         creo respuesta_esquema como asíncronamente una petición http
           con url "/api/v1/db/schema"
           con método "POST"
           con cuerpo {}
-          con cabeceras { authorization: this.root.token_de_sesion }.
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_esquema, this).
         asigno this.root.esquema como respuesta_esquema.data.esquema.
-      }.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
   }.
 }.

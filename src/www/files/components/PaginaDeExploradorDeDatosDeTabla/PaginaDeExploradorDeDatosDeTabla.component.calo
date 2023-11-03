@@ -33,7 +33,8 @@ asigno window.PaginaDeExploradorDeDatosDeTabla como un componente vue2 con nombr
       }
     }.
     método data donde {
+      debugo "PaginaDeExploradorDeDatosDeTabla.data".
       retorno {}.
-    }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

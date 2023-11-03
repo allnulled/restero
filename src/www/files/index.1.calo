@@ -8,9 +8,12 @@ Ejecutable como documento HTML5
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="./components/win7/win7.scoped.2.css" />
     <link rel="stylesheet" type="text/css" href="./components/theme/theme.css" />
+    <link rel="stylesheet" type="text/css" href="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.css" />
     <script src="./components/calo/calo.js"></script>
     <script src="./dependencies/generar_gestor_de_hooks.js"></script>
     <script src="./dependencies/utilidades.js"></script>
+    <script src="./dependencies/editor-wysiwyg/wysiwyg-parser.js"></script>
+    <script src="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.js"></script>
     <script src="./hooks/hooks.js"></script>
     <script src="./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js"></script>
     <script src="./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js"></script>
@@ -25,6 +28,10 @@ Ejecutable como documento HTML5
     <script src="./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js"></script>
     <script src="./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js"></script>
     <script src="./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js"></script>
+    <script src="./components/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js"></script>
+    <script src="./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
+    <script src="./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
+    <script src="./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
     <script src="./dependencies/rutas.js"></script>
 </head>
 <body><div id="app"></div></body>.

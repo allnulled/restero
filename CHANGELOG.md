@@ -392,4 +392,10 @@ Pero todavía no...
 - [✔] Componente PaginaDeBlogParaVerPost soporta comentarios:
   - [✔] Con paginación
   - [✔] Con creación
-- [✔] Blog de UI (admin panel) funcionando mínimamente.
+- [✔] Blog de UI funcionando mínimamente.
+
+**Versión `v0.0.66`.** *El 3 de noviembre de 2023 a las 11:43am.*
+- [✔] Blog de UI funcionando mínimamente
+  - [✔] Un montón de detalles funcionando correctamente
+- [✔] Foro de UI funcionando mínimamente
+  - [✔] Un montón de detalles funcionando correctamente

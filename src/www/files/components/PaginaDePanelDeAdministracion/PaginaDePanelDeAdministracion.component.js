@@ -36,21 +36,17 @@ required:true
 }
 },
 data() {try {
+console.log('[DEBUG]', "PaginaDePanelDeAdministracion.data");
 return { esquema:false
 };
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 methods:{ abrir_pagina_de( pagina ) {try {
+console.log('[DEBUG]', "PaginaDePanelDeAdministracion.abrir_pagina_de");
 this.$router.history.push( pagina );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 },
 async mounted() {

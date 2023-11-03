@@ -41,6 +41,36 @@ component:PaginaDeImportarExportarDatos,
 props:{ 
 }
 },
+{ path:"/foro/ver/temas",
+name:"PaginaDeForoParaVerTemas",
+component:PaginaDeForoParaVerTemas,
+props:{ 
+}
+},
+{ path:"/foro/ver/tema/:id",
+name:"PaginaDeForoParaVerPosts",
+component:PaginaDeForoParaVerPosts,
+props:{ 
+}
+},
+{ path:"/foro/ver/post/:id",
+name:"PaginaDeForoParaVerPost",
+component:PaginaDeForoParaVerPost,
+props:{ 
+}
+},
+{ path:"/foro/crear/post/para/tema/:tema",
+name:"PaginaDeForoParaEditarPost",
+component:PaginaDeForoParaEditarPost,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/foro/editar/post/:id",
+name:"PaginaDeForoParaEditarPost",
+component:PaginaDeForoParaEditarPost,
+props:{ modalidad:"editar"
+}
+},
 { path:"/blog/ver/posts",
 name:"PaginaDeBlogParaVerPosts",
 component:PaginaDeBlogParaVerPosts,

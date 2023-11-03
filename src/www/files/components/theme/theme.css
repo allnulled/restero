@@ -129,7 +129,6 @@
     display: inline-block;
     max-width: 175px;
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
 }
 
@@ -265,7 +264,6 @@ hr {
     color: #666;
     text-align: left;
     font-size: 8px;
-    white-space: nowrap;
     padding: 4px;
 }
 .ver_post .fecha_de_creacion_de_post,
@@ -273,7 +271,6 @@ hr {
     color: #666;
     text-align: right;
     font-size: 8px;
-    white-space: nowrap;
     padding: 4px;
 }
 .panel_de_botones_superior {
@@ -285,4 +282,53 @@ hr {
 .panel_principal {
     padding: 8px;
     padding-top: 6px;
+}
+.tema_en_lista {
+    cursor: pointer;
+    border: 1px solid #333;
+    margin-bottom: 4px;
+}
+.tema_en_lista:hover {
+    background-color: #CCC;
+}
+.tema_en_lista > .titulo_de_tema {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 4px;
+}
+.tema_en_lista > .descripcion_de_tema {
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    padding: 4px;
+}
+.post_en_lista {
+    border: 1px solid #333;
+}
+.post_en_lista:hover {
+    background-color: #CCC;
+    margin-bottom: 4px;
+}
+.post_en_lista > .titulo_de_post {
+    padding: 4px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.post_en_lista > .subtitulo_de_post {
+    padding: 4px;
+    font-size: 12px;
+    color: #666;
+    font-weight: bold;
+}
+.post_en_lista > .contenido_de_post {
+    font-size: 10px;
+    padding: 4px;
+    text-align: justify;
+}
+.post_en_lista > .autor_de_post {
+    padding: 4px;
+    font-size: 12px;
+    color: #666;
 }

@@ -27,6 +27,11 @@ window.PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "            </span>"
  + "          </li>"
  + "          <li>"
+ + "            <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/foro/ver/temas')\">"
+ + "              Foro"
+ + "            </span>"
+ + "          </li>"
+ + "          <li>"
  + "            <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/administracion')\">"
  + "              Panel de administración"
  + "            </span>"
@@ -50,21 +55,17 @@ required:true
 }
 },
 data() {try {
+console.log('[DEBUG]', "PaginaDeInicio.data");
 return { esquema:false
 };
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
 methods:{ abrir_pagina_de( pagina ) {try {
+console.log('[DEBUG]', "PaginaDeInicio.abrir_pagina_de");
 this.$router.history.push( pagina );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 },
 async mounted() {

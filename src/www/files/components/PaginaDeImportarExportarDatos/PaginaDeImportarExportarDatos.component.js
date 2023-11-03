@@ -58,6 +58,7 @@ required:true
 }
 },
 data() {try {
+console.log('[DEBUG]', "PaginaDeImportarExportarDatos.data");
 return { tablas_seleccionadas:[  ],
 seccion_seleccionada:'importar'
 };
@@ -67,15 +68,14 @@ throw error;
 }
 
 },
-methods:{ seleccionar_seccion:function( seccion ) {try {
+methods:{ seleccionar_seccion( seccion ) {try {
+console.log('[DEBUG]', "PaginaDeImportarExportarDatos.seleccionar_seccion");
 this.seccion_seleccionada = seccion;
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-importar_datos_de_fichero:async function() {try {
+async importar_datos_de_fichero() {try {
+console.log('[DEBUG]', "PaginaDeImportarExportarDatos.importar_datos_de_fichero");
 const fichero = this.$refs.importacion_de_datos.files[ 0 ];
 const datos_de_formulario = new FormData(  );
 datos_de_formulario.append( "fichero",
@@ -83,17 +83,13 @@ fichero );
 const respuesta_de_subida = (await Castelog.metodos.una_peticion_http("/api/v1/db/import/excel", "POST", datos_de_formulario, { "Content-Type":"multipart/form-data",
 authorization:this.root.token_de_sesion
 }, null, null));
-if((!(this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_de_subida,
-this )))) {
-
-}
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_de_subida,
+this );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 },
-exportar_datos_a_fichero:async function() {try {
+async exportar_datos_a_fichero() {try {
+console.log('[DEBUG]', "PaginaDeImportarExportarDatos.exportar_datos_a_fichero");
 const formulario = document.createElement( "form" );
 formulario.style.display = "none";
 formulario.method = "POST";
@@ -112,10 +108,7 @@ formulario.appendChild( entrada_de_token );
 formulario.submit(  );
 formulario.remove(  );
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.$window.$notificaciones.notificar_error( error );}
 }
 }
 };},

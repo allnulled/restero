@@ -9,7 +9,7 @@ CREATE TABLE Post_de_blog /*
     - @tiene_autorizador: no_eliminable
 */ (
   id INTEGER PRIMARY KEY <%=autoincrement_word%>,
-  titulo VARCHAR(255) UNIQUE,
+  titulo VARCHAR(255) UNIQUE NOT NULL,
   subtitulo VARCHAR(255),
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
@@ -19,7 +19,7 @@ CREATE TABLE Post_de_blog /*
   tags VARCHAR(1024) /*
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
-  contenido TEXT /*
+  contenido TEXT NOT NULL /*
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
   id_de_autor INTEGER /*
@@ -41,7 +41,7 @@ CREATE TABLE Comentario_de_post_de_blog /*
   tags VARCHAR(1024) /*
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
-  contenido TEXT /*
+  contenido TEXT NOT NULL /*
     @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
   */,
   id_de_autor INTEGER /*
