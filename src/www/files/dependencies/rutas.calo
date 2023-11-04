@@ -79,6 +79,21 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDeBlogParaEditarPost.
     propiedad props como { modalidad: "editar" }.
 }, {
+    propiedad path como "/mensajes/inicio".
+    propiedad name como "PaginaDeMensajesParaInicio".
+    propiedad component como PaginaDeMensajesParaInicio.
+    propiedad props como {}.
+}, {
+    propiedad path como "/mensajes/ver/mensaje/:id".
+    propiedad name como "PaginaDeMensajesParaVerMensaje".
+    propiedad component como PaginaDeMensajesParaVerMensaje.
+    propiedad props como {}.
+}, {
+    propiedad path como "/mensajes/crear/mensaje".
+    propiedad name como "PaginaDeMensajesParaCrearMensaje".
+    propiedad component como PaginaDeMensajesParaCrearMensaje.
+    propiedad props como {}.
+}, {
     propiedad path como "/".
     propiedad name como "Inicio".
     propiedad component como PaginaDeInicio.

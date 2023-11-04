@@ -1,0 +1,113 @@
+asigno window.PaginaDeMensajesParaVerMensaje como un componente vue2 con nombre "PaginaDeMensajesParaVerMensaje" con plantilla {
+  <div class="PaginaDeMensajesParaVerMensaje Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Leer mensaje</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-if="root.esquema" class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Mensajes',link:'/mensajes/inicio'}]"></BreadcrumbGenerico>
+        <h5>Leer mensaje</h5>
+        <div class="panel_principal" v-if="mensaje && usuario_origen">
+          <div class="panel_de_botones_superior">
+            <button v-on:click="() => eliminar_mensaje()">🗑 Eliminar mensaje</button>
+          </div>
+          <div class="ver_mensaje">
+            <div class="asunto_de_mensaje">
+              Asunto: {{ mensaje.asunto }}
+            </div>
+            <div class="usuario_origen_de_mensaje">
+              Enviado por: {{ usuario_origen.nombre }}
+            </div>
+            <div class="contenido_de_mensaje">
+              {{ mensaje.contenido }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeMensajesParaVerMensaje.data".
+      retorno {
+        mensaje: undefined,
+        usuario_origen: undefined
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    propiedad methods como {
+      método asíncrono eliminar_mensaje donde {
+        debugo "PaginaDeMensajesParaVerMensaje.eliminar_mensaje".
+        creo confirmacion como this.$window.confirm("¿Seguro que quieres eliminar este mensaje?").
+        si no confirmacion retorno 0.
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/delete/Mensaje_de_mensajeria"
+          con método "POST"
+          con cuerpo {
+            id: this.$route.params.id
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        hago this.$router.history.push("/mensajes/inicio").
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_mensaje donde {
+        debugo "PaginaDeMensajesParaVerMensaje.obtener_mensaje".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Mensaje_de_mensajeria"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        imprimo respuesta_1.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo mensaje como respuesta_1.data.resultado[0].
+        creo id_de_usuario como mensaje.id_de_usuario_origen.
+        creo respuesta_2 como asíncronamente una petición http
+          con url "/api/v1/select/Usuario"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", id_de_usuario]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_2, this).
+        creo usuario_origen como respuesta_2.data.resultado[0].
+        asigno this.mensaje como mensaje.
+        asigno this.usuario_origen como usuario_origen.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtener_mensaje().
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

@@ -20,14 +20,19 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       <div v-if="root.esquema" class="window-body">
         <h5>Inicio</h5>
         <ul>
-          <li>
+          <li v-if="tiene_blog">
             <span class="como_link" v-on:click="() => abrir_pagina_de('/blog/ver/posts')">
               Blog
             </span>
           </li>
-          <li>
+          <li v-if="tiene_foro">
             <span class="como_link" v-on:click="() => abrir_pagina_de('/foro/ver/temas')">
               Foro
+            </span>
+          </li>
+          <li v-if="tiene_mensajeria">
+            <span class="como_link" v-on:click="() => abrir_pagina_de('/mensajes/inicio')">
+              Mensajes
             </span>
           </li>
           <li>
@@ -60,7 +65,9 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
     método data donde {
       debugo "PaginaDeInicio.data".
       retorno {
-        esquema: false
+        tiene_blog: false,
+        tiene_foro: false,
+        tiene_mensajeria: false
       }.
     } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
@@ -70,7 +77,25 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono mounted donde {
-      
+      debugo "PaginaDeInicio.mounted".
+      asigno this.tiene_blog como this.root.esquema.reduce(una función con (salida, tabla) donde {
+        si tabla.tabla es igual que "Post_de_blog" {
+          asigno salida como true.
+        }.
+        retorno salida.
+      }, false).
+      asigno this.tiene_foro como this.root.esquema.reduce(una función con (salida, tabla) donde {
+        si tabla.tabla es igual que "Post_de_foro" {
+          asigno salida como true.
+        }.
+        retorno salida.
+      }, false).
+      asigno this.tiene_mensajeria como this.root.esquema.reduce(una función con (salida, tabla) donde {
+        si tabla.tabla es igual que "Mensaje_de_mensajeria" {
+          asigno salida como true.
+        }.
+        retorno salida.
+      }, false).
     } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

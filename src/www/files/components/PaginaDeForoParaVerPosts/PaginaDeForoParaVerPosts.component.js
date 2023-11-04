@@ -23,7 +23,7 @@ window.PaginaDeForoParaVerPosts = Castelog.metodos.un_componente_vue2("PaginaDeF
  + "        <h5>Tema de foro</h5>"
  + "        <div class=\"panel_principal\" style=\"\">"
  + "          <div class=\"panel_de_botones_superior\">"
- + "            <button v-on:click=\"() => ir_a_crear_post()\">Crear post</button>"
+ + "            <button v-on:click=\"() => ir_a_crear_post()\">➕ Crear post</button>"
  + "          </div>"
  + "          <div class=\"\" style=\"border: 1px solid #333; margin-bottom: 4px;\">"
  + "            <h5>{{ tema_de_posts.titulo }}</h5>"
@@ -63,6 +63,9 @@ window.PaginaDeForoParaVerPosts = Castelog.metodos.un_componente_vue2("PaginaDeF
  + "                  </div>"
  + "                  <div class=\"contenido_de_post\" v-if=\"post.contenido\">"
  + "                    {{ post.contenido.substring(0, 50) }}..."
+ + "                  </div>"
+ + "                  <div class=\"tags_de_post\" v-if=\"post.tags\">"
+ + "                    Tags: {{ post.tags }}"
  + "                  </div>"
  + "                </div>"
  + "              </template>"
@@ -114,7 +117,9 @@ throw error;
 
 },
 methods:{ async ir_a_crear_post() {try {
-this.$router.history.push( "/foro/crear/post/para/tema/" + this.tema_de_posts.id );
+console.log(this.tema_de_posts);
+const id_de_tema = this.tema_de_posts.id || this.$route.params.id;
+this.$router.history.push( "/foro/crear/post/para/tema/" + id_de_tema );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
@@ -157,6 +162,15 @@ this.$window.$notificaciones.notificar_error( error );}
 },
 async obtener_posts() {try {
 console.log('[DEBUG]', "PaginaDeForoParaVerPosts.obtener_posts");
+const respuesta_3 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Tema_de_foro", "POST", { where:JSON.stringify([ [ "id",
+"=",
+this.$route.params.id ] ], null, 2)
+}, { authorization:this.root.token_de_sesion
+}, null, null));
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_3,
+this );
+const dato_3 = respuesta_3.data.resultado[ 0 ];
+this.tema_de_posts = dato_3;
 const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Post_de_foro", "POST", { where:JSON.stringify([ [ "id_de_tema",
 "=",
 this.$route.params.id ] ], null, 2),
@@ -204,17 +218,8 @@ throw error;
 },
 { 
 } );
-const respuesta_3 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Tema_de_foro", "POST", { where:JSON.stringify([ [ "id",
-"=",
-this.$route.params.id ] ], null, 2)
-}, { authorization:this.root.token_de_sesion
-}, null, null));
-this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_3,
-this );
-const dato_3 = respuesta_3.data.resultado[ 0 ];
 this.autores_de_posts = datos_de_autores;
 this.posts_del_foro = datos_1;
-this.tema_de_posts = dato_3;
 this.$forceUpdate( true );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}

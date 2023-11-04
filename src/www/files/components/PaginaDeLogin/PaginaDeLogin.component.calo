@@ -51,8 +51,6 @@ asigno window.PaginaDeLogin como un componente vue2 con nombre "PaginaDeLogin" c
             contrasenya: this.contrasenya
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_login, this).
-        asigno this.root.token_de_sesion como respuesta_login.data.token_de_sesion_activo.
-        asigno this.root.autentificacion como respuesta_login.data.autentificacion.
         creo respuesta_esquema como asíncronamente una petición http
           con url "/api/v1/db/schema"
           con método "POST"
@@ -62,6 +60,8 @@ asigno window.PaginaDeLogin como un componente vue2 con nombre "PaginaDeLogin" c
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_esquema, this).
         asigno this.root.esquema como respuesta_esquema.data.esquema.
+        asigno this.root.token_de_sesion como respuesta_login.data.token_de_sesion_activo.
+        asigno this.root.autentificacion como respuesta_login.data.autentificacion.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
   }.

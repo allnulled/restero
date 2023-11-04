@@ -23,19 +23,19 @@ asigno window.PaginaDeImportarExportarDatos como un componente vue2 con nombre "
         <div style="padding: 3px; padding-top: 0px;">
           <section class="tabs">
             <menu role="tablist">
-              <button role="tab" :aria-selected="seccion_seleccionada === 'importar'" v-on:click="() => seleccionar_seccion('importar')">Importar</button>
-              <button role="tab" :aria-selected="seccion_seleccionada === 'exportar'" v-on:click="() => seleccionar_seccion('exportar')">Exportar</button>
+              <button role="tab" :aria-selected="seccion_seleccionada === 'importar'" v-on:click="() => seleccionar_seccion('importar')">↘ Importar</button>
+              <button role="tab" :aria-selected="seccion_seleccionada === 'exportar'" v-on:click="() => seleccionar_seccion('exportar')">↗ Exportar</button>
             </menu>
             <article role="tabpanel" :hidden="seccion_seleccionada !== 'importar'">
-              <h5>Importar datos masivamente</h5>
+              <h5>↘ Importar datos masivamente</h5>
               <p>Selecciona el fichero (.ods | .xlsx | .xls):</p>
               <input type="file" class="inputfile" ref="importacion_de_datos" />
               <div class="text_align_right" style="padding-top: 4px;">
-                <button v-on:click="importar_datos_de_fichero">Importar datos de fichero</button>
+                <button v-on:click="importar_datos_de_fichero">↘ Importar datos de fichero</button>
               </div>
             </article>
             <article role="tabpanel" :hidden="seccion_seleccionada !== 'exportar'">
-              <h5>Exportar datos masivamente</h5>
+              <h5>↗ Exportar datos masivamente</h5>
               <p>Selecciona las tablas que quieres exportar:</p>
               <ul>
                 <li v-for="tabla, tabla_index in root.esquema" v-bind:key="'exportar-tabla-' + tabla_index">
@@ -44,7 +44,7 @@ asigno window.PaginaDeImportarExportarDatos como un componente vue2 con nombre "
                 </li>
               </ul>
               <div class="text_align_right">
-                <button v-on:click="exportar_datos_a_fichero">Exportar datos a fichero</button>
+                <button v-on:click="exportar_datos_a_fichero">↗ Exportar datos a fichero</button>
               </div>
             </article>
           </section>

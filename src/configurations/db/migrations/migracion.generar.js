@@ -2,7 +2,9 @@ let texto = "";
 
 // POSTS DE BLOG:
 
+Posts_de_blog:
 for(let index = 0; index < 100; index++) {
+    break Posts_de_blog;
     const item = `
 -- Sentencia:
 INSERT INTO Post_de_blog(titulo, subtitulo, contenido, fecha_de_creacion, id_de_autor) VALUES(
@@ -18,7 +20,9 @@ INSERT INTO Post_de_blog(titulo, subtitulo, contenido, fecha_de_creacion, id_de_
 
 // COMENTARIOS DE POSTS DE BLOG:
 
+Comentarios_de_blog:
 for (let index = 0; index < 100; index++) {
+    break Comentarios_de_blog;
     const item = `
 -- Sentencia:
 INSERT INTO Comentario_de_post_de_blog(id_de_post_de_blog, contenido, fecha_de_creacion, id_de_autor) VALUES(
@@ -33,7 +37,9 @@ INSERT INTO Comentario_de_post_de_blog(id_de_post_de_blog, contenido, fecha_de_c
 
 // TEMAS DE FORO:
 
+Temas_de_foro:
 for (let index = 0; index < 100; index++) {
+    break Temas_de_foro;
     const item = `
 -- Sentencia:
 INSERT INTO Tema_de_foro(titulo, descripcion, seccion, tags) VALUES(
@@ -48,12 +54,32 @@ INSERT INTO Tema_de_foro(titulo, descripcion, seccion, tags) VALUES(
 
 // POSTS DE FORO:
 
+Posts_de_foro:
 for (let index = 0; index < 100; index++) {
+    break Posts_de_foro;
     const item = `
 -- Sentencia:
 INSERT INTO Post_de_foro(titulo, subtitulo, contenido, fecha_de_creacion, id_de_autor, id_de_tema) VALUES(
     'Post ${index}',
     'Subtítulo de post ${index}',
+    'Contenido del post ${index}. En algún lugar de la Mancha de cuyo nombre no quiero acordarme residía un tal hidalgo que no sé qué y no sé cuantos bla bla habladurías y letras, muchas letras explicando una historieta larguísima de un tal Quijote.',
+    '05-01-2026 14:50:00',
+    1,
+    1
+);
+`;
+    texto += item;
+}
+
+// MENSAJES DE MENSAJERIA:
+
+Mensajes_de_mensajeria:
+for (let index = 0; index < 100; index++) {
+    break Mensajes_de_mensajeria;
+    const item = `
+-- Sentencia:
+INSERT INTO Mensaje_de_mensajeria(asunto, contenido, fecha_de_creacion, id_de_usuario_origen, id_de_usuario_destino) VALUES(
+    'Asunto ${index}',
     'Contenido del post ${index}. En algún lugar de la Mancha de cuyo nombre no quiero acordarme residía un tal hidalgo que no sé qué y no sé cuantos bla bla habladurías y letras, muchas letras explicando una historieta larguísima de un tal Quijote.',
     '05-01-2026 14:50:00',
     1,

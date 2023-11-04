@@ -9,5 +9,8 @@
     "DB_PORT": 3306,
     "DB_USER": "root",
     "DB_PASSWORD": "toor",
-    "DB_NAME": "testing_restero"
+    "DB_NAME": "testing_restero",
+    "HAS_BLOG": true,
+    "HAS_FORO": true,
+    "HAS_MENSAJERIA": true
 }

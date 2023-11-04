@@ -8,7 +8,7 @@ module.exports = function (deployer) {
             }
             return response.json({
                 esquema
-            })
+            });
         } catch (error) {
             console.error("Error en «src/controllers/shutdown.js»");
             console.error(error);

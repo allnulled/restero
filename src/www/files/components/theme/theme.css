@@ -239,9 +239,10 @@ hr {
 }
 .ver_post > .titulo_de_post,
 .lista_de_posts > .post_en_lista > .titulo_de_post {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
-    color: #333;
+    background-color: #222;
+    color: #FFF;
     padding: 4px;
     text-align: center;
 }
@@ -292,7 +293,7 @@ hr {
     background-color: #CCC;
 }
 .tema_en_lista > .titulo_de_tema {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     color: #333;
     padding: 4px;
@@ -305,14 +306,14 @@ hr {
 }
 .post_en_lista {
     border: 1px solid #333;
+    margin-bottom: 4px;
 }
 .post_en_lista:hover {
     background-color: #CCC;
-    margin-bottom: 4px;
 }
 .post_en_lista > .titulo_de_post {
     padding: 4px;
-    font-size: 18px;
+    font-size: 15px;
     color: #333;
     font-weight: bold;
 }
@@ -331,4 +332,63 @@ hr {
     padding: 4px;
     font-size: 12px;
     color: #666;
+}
+.ver_post > .tags_de_post,
+.post_en_lista > .tags_de_post {
+    color: #888;
+    text-align: left;
+    font-size: 8px;
+    padding: 4px;
+}
+.caja_de_nuevo_comentario {
+    min-height: 100px;
+}
+.panel_de_botones_inferior {
+    padding: 4px;
+    text-align: right;
+    border-top: 1px dashed #333;
+}
+.campo_de_formulario {
+    padding: 4px;
+    padding-bottom: 8px;
+}
+.enunciado_de_campo_de_formulario {
+    
+}
+.tabla_de_mensajes {
+    border-collapse: collapse;
+}
+.tabla_de_mensajes > tr > th {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.tabla_de_mensajes > tr > td {
+    background-color: inherit;
+}
+.fila_de_mensaje {
+    cursor: pointer;
+}
+.fila_de_mensaje:hover {
+    background-color: #CCC;
+}
+.ExploradorDeDatos > div > table {
+    border-collapse: collapse;
+}
+.ver_mensaje {
+    border: 1px solid #333;
+}
+.ver_mensaje > .asunto_de_mensaje {
+    background-color: #222;
+    color: white;
+    font-weight: bold;
+    padding: 4px;
+}
+.ver_mensaje > .usuario_origen_de_mensaje {
+    background-color: #CCC;
+    font-size: 10px;
+    padding: 4px;
+}
+.ver_mensaje > .contenido_de_mensaje {
+    font-size: 10px;
+    padding: 4px;
 }

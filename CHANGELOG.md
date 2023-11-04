@@ -399,3 +399,10 @@ Pero todavía no...
   - [✔] Un montón de detalles funcionando correctamente
 - [✔] Foro de UI funcionando mínimamente
   - [✔] Un montón de detalles funcionando correctamente
+
+**Versión `v0.0.67`.** *El 3 de noviembre de 2023 a las 20:20pm.*
+- [✔] Blog y Foro de UI soportan eliminar comentarios
+
+**Versión `v0.0.68`.** *El 4 de noviembre de 2023 a las 21:59pm.*
+- [✔] Blog, Foro y Mensajería funcionando bien.
+- [✔] Emojis en algunos botones.

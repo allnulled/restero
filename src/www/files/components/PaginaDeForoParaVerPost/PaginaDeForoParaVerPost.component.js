@@ -23,7 +23,8 @@ window.PaginaDeForoParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeFo
  + "        <h5>Ver post</h5>"
  + "        <div class=\"panel_principal\">"
  + "          <div class=\"panel_de_botones_superior\" v-if=\"es_administrador\">"
- + "            <button v-on:click=\"() => ir_a_editar_post()\">Editar post</button>"
+ + "            <button v-on:click=\"() => eliminar_post()\">🗑 Eliminar post</button>"
+ + "            <button v-on:click=\"() => ir_a_editar_post()\">🖊 Editar post</button>"
  + "          </div>"
  + "          <div class=\"ver_post\">"
  + "            <div class=\"titulo_de_post\">{{ post_del_foro.titulo }}</div>"
@@ -34,17 +35,19 @@ window.PaginaDeForoParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeFo
  + "            <div class=\"contenido_de_post\">"
  + "              <div>{{ post_del_foro.contenido }}</div>"
  + "            </div>"
+ + "            <div class=\"tags_de_post\">"
+ + "              <div>Tags: {{ post_del_foro.tags }}</div>"
+ + "            </div>"
  + "          </div>"
  + "          <div class=\"panel_de_comentarios\" style=\"margin-top: 4px;\">"
  + "            <div class=\"ver_post\">"
  + "              <h5>Ver comentarios</h5>"
  + "              <div style=\"padding: 4px; padding-top: 0px;\">"
  + "                <div class=\"panel_de_botones_superior\" style=\"text-align: left;\">"
- + "                  <button style=\"width: 100%;\" v-on:click=\"() => abrir_creador_de_comentarios()\" v-if=\"!esta_mostrando_creador_de_comentario\">Crear comentario</button>"
+ + "                  <button style=\"width: 100%;\" v-on:click=\"() => abrir_creador_de_comentarios()\" v-if=\"!esta_mostrando_creador_de_comentario\">➕ Crear comentario</button>"
  + "                  <div class=\"panel_de_creador_de_comentarios\" v-else>"
  + "                    <button style=\"width: 100%;\" v-on:click=\"() => cerrar_creador_de_comentarios()\">Cerrar</button>"
- + "                    <div>Escribe tu comentario aquí:</div>"
- + "                    <textarea v-model=\"nuevo_comentario\"></textarea>"
+ + "                    <textarea class=\"caja_de_nuevo_comentario\" v-model=\"nuevo_comentario\" placeholder=\"Escribe tu comentario aquí...\"></textarea>"
  + "                    <div style=\"text-align: right;\" v-if=\"!esta_creando_comentario\">"
  + "                      <button v-on:click=\"() => crear_comentario()\">Subir comentario</button>"
  + "                    </div>"
@@ -76,6 +79,9 @@ window.PaginaDeForoParaVerPost = Castelog.metodos.un_componente_vue2("PaginaDeFo
  + "                    </div>"
  + "                    <div class=\"contenido_de_post\">"
  + "                      <div>{{ comentario.contenido }}</div>"
+ + "                    </div>"
+ + "                    <div class=\"panel_de_botones_inferior\" v-if=\"comentario.id_de_autor === root.autentificacion.usuario.id\">"
+ + "                      <button v-on:click=\"() => eliminar_comentario(comentario.id)\">🗑 Eliminar comentario</button>"
  + "                    </div>"
  + "                  </div>"
  + "                </template>"
@@ -111,7 +117,37 @@ throw error;
 }
 
 },
-methods:{ abrir_creador_de_comentarios() {try {
+methods:{ async eliminar_comentario( id_comentario ) {try {
+const confirmacion = this.$window.confirm( "¿Seguro que quieres eliminar este comentario?" );
+if((!(confirmacion))) {
+return;
+}
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/delete/Comentario_de_post_de_foro", "POST", { id:id_comentario
+}, { authorization:this.root.token_de_sesion
+}, null, null));
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_1,
+this );
+(await this.obtener_comentarios(  ));
+this.$forceUpdate( true );
+} catch(error) {
+this.$window.$notificaciones.notificar_error( error );}
+},
+async eliminar_post() {try {
+console.log('[DEBUG]', "PaginaDeForoParaVerPost.eliminar_post");
+const confirmacion = this.$window.confirm( "¿Seguro que quieres eliminar este post? Se eliminarán los comentarios relacionados también." );
+if((!(confirmacion))) {
+return;
+}
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/eliminar_post_de_foro/" + this.post_del_foro.id, "POST", { 
+}, { authorization:this.root.token_de_sesion
+}, null, null));
+this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_1,
+this );
+this.$router.history.push( "/foro/ver/tema/" + this.post_del_foro.id_de_tema );
+} catch(error) {
+this.$window.$notificaciones.notificar_error( error );}
+},
+abrir_creador_de_comentarios() {try {
 console.log('[DEBUG]', "PaginaDeForoParaVerPost.abrir_creador_de_comentarios");
 this.esta_mostrando_creador_de_comentario = true;
 } catch(error) {

@@ -22,7 +22,7 @@ asigno window.PaginaDeForoParaVerPosts como un componente vue2 con nombre "Pagin
         <h5>Tema de foro</h5>
         <div class="panel_principal" style="">
           <div class="panel_de_botones_superior">
-            <button v-on:click="() => ir_a_crear_post()">Crear post</button>
+            <button v-on:click="() => ir_a_crear_post()">➕ Crear post</button>
           </div>
           <div class="" style="border: 1px solid #333; margin-bottom: 4px;">
             <h5>{{ tema_de_posts.titulo }}</h5>
@@ -62,6 +62,9 @@ asigno window.PaginaDeForoParaVerPosts como un componente vue2 con nombre "Pagin
                   </div>
                   <div class="contenido_de_post" v-if="post.contenido">
                     {{ post.contenido.substring(0, 50) }}...
+                  </div>
+                  <div class="tags_de_post" v-if="post.tags">
+                    Tags: {{ post.tags }}
                   </div>
                 </div>
               </template>
@@ -112,7 +115,9 @@ asigno window.PaginaDeForoParaVerPosts como un componente vue2 con nombre "Pagin
     }.
     propiedad methods como {
       método asíncrono ir_a_crear_post donde {
-        hago this.$router.history.push("/foro/crear/post/para/tema/" + this.tema_de_posts.id).
+        imprimo this.tema_de_posts.
+        creo id_de_tema como this.tema_de_posts.id o this.$route.params.id.
+        hago this.$router.history.push("/foro/crear/post/para/tema/" + id_de_tema).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_principio_de_paginacion donde {
         debugo "PaginaDeForoParaVerPosts.ir_a_principio_de_paginacion".
@@ -141,6 +146,21 @@ asigno window.PaginaDeForoParaVerPosts como un componente vue2 con nombre "Pagin
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono obtener_posts donde {
         debugo "PaginaDeForoParaVerPosts.obtener_posts".
+        ###############################################
+        creo respuesta_3 como asíncronamente una petición http
+          con url "/api/v1/select/Tema_de_foro"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_3, this).
+        creo dato_3 como respuesta_3.data.resultado[0].
+        asigno this.tema_de_posts como dato_3.
         ###############################################
         creo respuesta_1 como asíncronamente una petición http
           con url "/api/v1/select/Post_de_foro"
@@ -185,23 +205,8 @@ asigno window.PaginaDeForoParaVerPosts como un componente vue2 con nombre "Pagin
           retorno salida.
         }, {}).
         ###############################################
-        creo respuesta_3 como asíncronamente una petición http
-          con url "/api/v1/select/Tema_de_foro"
-          con método "POST"
-          con cuerpo {
-            where: [
-              ["id", "=", this.$route.params.id]
-            ] textualizado
-          }
-          con cabeceras {
-            authorization: this.root.token_de_sesion
-          }.
-        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_3, this).
-        creo dato_3 como respuesta_3.data.resultado[0].
-        ###############################################
         asigno this.autores_de_posts como datos_de_autores.
         asigno this.posts_del_foro como datos_1.
-        asigno this.tema_de_posts como dato_3.
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.

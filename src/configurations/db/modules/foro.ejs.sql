@@ -3,12 +3,10 @@ const autoincrement_word = deployer.settings.DB_DRIVER === "sqlite" ? "AUTOINCRE
 %>
 
 CREATE TABLE Tema_de_foro /*
-  @tiene_autorizables:
-    - @tiene_autorizador: no_actualizable
-    - @tiene_autorizador: no_eliminable
+  @tiene_autorizador: incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
 */ (
   id INTEGER PRIMARY KEY <%- autoincrement_word %>,
-  titulo VARCHAR(255) NOT NULL,
+  titulo VARCHAR(255) NOT NULL UNIQUE,
   descripcion VARCHAR(255) NOT NULL,
   tags VARCHAR(255),
   seccion VARCHAR(255),
@@ -16,20 +14,18 @@ CREATE TABLE Tema_de_foro /*
 );
 
 CREATE TABLE Post_de_foro /*
-  @tiene_autorizables:
-    - @tiene_autorizador: no_actualizable
-    - @tiene_autorizador: no_eliminable
+  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor
 */ (
   id INTEGER PRIMARY KEY <%- autoincrement_word %>,
-  titulo VARCHAR(255) NOT NULL,
+  titulo VARCHAR(255) NOT NULL UNIQUE,
   subtitulo VARCHAR(512),
   contenido TEXT NOT NULL,
   tags VARCHAR(255),
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
+    @tiene_autorizador: no_modificable
   */,
-  id_de_tema INTEGER,
+  id_de_tema INTEGER NOT NULL,
   id_de_autor INTEGER /*
     @tiene_autorizador: fijar_id_de_usuario
   */,
@@ -37,12 +33,14 @@ CREATE TABLE Post_de_foro /*
   FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)
 );
 
-CREATE TABLE Comentario_de_post_de_foro (
+CREATE TABLE Comentario_de_post_de_foro /*
+  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor
+*/ (
   id INTEGER PRIMARY KEY <%- autoincrement_word %>,
   contenido TEXT,
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
+    @tiene_autorizador: no_modificable
   */,
   id_de_autor INTEGER /*
     @tiene_autorizador: fijar_id_de_usuario

@@ -66,7 +66,7 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
                     <input type="text" v-model="filtro[2]" />
                   </span>
                   <span class="campo_del_filtro">
-                    <button class="w_auto" v-on:click="() => { filtros.splice(filtro_index, 1); $forceUpdate(true); }">Eliminar</button>
+                    <button class="w_auto" v-on:click="() => { filtros.splice(filtro_index, 1); $forceUpdate(true); }">🗑 Eliminar</button>
                   </span>
                 </div>
               </div>
@@ -94,7 +94,7 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
                     </select>
                   </span>
                   <span class="campo_del_orden">
-                    <button class="w_auto" v-on:click="() => { ordenes.splice(orden_index, 1); $forceUpdate(true); }">Eliminar</button>
+                    <button class="w_auto" v-on:click="() => { ordenes.splice(orden_index, 1); $forceUpdate(true); }">🗑 Eliminar</button>
                   </span>
                 </div>
               </div>
@@ -172,7 +172,9 @@ asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDe
                         ✔
                       </span>
                       <span v-else>
+                        <span style="visibility: hidden">
                         ✘
+                        </span>
                       </span>
                     </button>
                   </span>

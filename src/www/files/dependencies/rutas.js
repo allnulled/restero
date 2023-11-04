@@ -95,6 +95,24 @@ component:PaginaDeBlogParaEditarPost,
 props:{ modalidad:"editar"
 }
 },
+{ path:"/mensajes/inicio",
+name:"PaginaDeMensajesParaInicio",
+component:PaginaDeMensajesParaInicio,
+props:{ 
+}
+},
+{ path:"/mensajes/ver/mensaje/:id",
+name:"PaginaDeMensajesParaVerMensaje",
+component:PaginaDeMensajesParaVerMensaje,
+props:{ 
+}
+},
+{ path:"/mensajes/crear/mensaje",
+name:"PaginaDeMensajesParaCrearMensaje",
+component:PaginaDeMensajesParaCrearMensaje,
+props:{ 
+}
+},
 { path:"/",
 name:"Inicio",
 component:PaginaDeInicio,

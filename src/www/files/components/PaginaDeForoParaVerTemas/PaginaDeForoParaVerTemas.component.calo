@@ -41,13 +41,13 @@ asigno window.PaginaDeForoParaVerTemas como un componente vue2 con nombre "Pagin
                 </tr>
               </table>
             </div>
-            <div class="lista_de_temas">
+            <div class="lista_de_posts">
               <template v-for="tema, tema_index in temas_del_foro">
-                <div class="tema_en_lista" v-bind:key="'foro-tema-' + tema_index" v-on:click="() => ir_a_tema(tema_index)">
-                  <div class="titulo_de_tema">
+                <div class="post_en_lista" v-bind:key="'foro-tema-' + tema_index" v-on:click="() => ir_a_tema(tema.id)">
+                  <div class="titulo_de_post">
                     {{ tema.titulo }}
                   </div>
-                  <div class="descripcion_de_tema">
+                  <div class="subtitulo_de_post">
                     {{ tema.descripcion }}
                   </div>
                 </div>
@@ -116,10 +116,9 @@ asigno window.PaginaDeForoParaVerTemas como un componente vue2 con nombre "Pagin
         si resultado es igual que 0 decremento this.pagina.
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
-      método ir_a_tema con (tema_index) donde {
+      método ir_a_tema con (id_tema) donde {
         debugo "PaginaDeForoParaVerPosts.ir_a_tema".
-        creo id_de_tema como this.temas_del_foro[tema_index].id.
-        hago this.$router.history.push(`/foro/ver/tema/${id_de_tema}`).
+        hago this.$router.history.push(`/foro/ver/tema/${id_tema}`).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono obtener_temas donde {
         debugo "PaginaDeForoParaVerPosts.obtener_temas".

@@ -22,7 +22,7 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
         <h5>Blog</h5>
         <div class="panel_principal" style="">
           <div class="panel_de_botones_superior" v-if="es_administrador">
-            <button v-on:click="() => ir_a_crear_post()">Crear post</button>
+            <button v-on:click="() => ir_a_crear_post()">➕ Crear post</button>
           </div>
           <template v-if="posts_del_blog.length">
             <div class="panel_de_botones_superior">
@@ -58,6 +58,9 @@ asigno window.PaginaDeBlogParaVerPosts como un componente vue2 con nombre "Pagin
                   </div>
                   <div class="contenido_de_post" v-if="post.contenido">
                     {{ post.contenido.substr(0, 50) }}...
+                  </div>
+                  <div class="tags_de_post">
+                    Tags: {{ post.tags }}
                   </div>
                 </div>
               </template>

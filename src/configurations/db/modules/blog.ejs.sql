@@ -5,8 +5,7 @@ const autoincrement_word = deployer.settings.DB_DRIVER === "sqlite" ? "AUTOINCRE
 CREATE TABLE Post_de_blog /*
   @tiene_fichero: imagen
   @tiene_autorizables:
-    - @tiene_autorizador: no_actualizable
-    - @tiene_autorizador: no_eliminable
+    - @tiene_autorizador: incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
 */ (
   id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   titulo VARCHAR(255) UNIQUE NOT NULL,
@@ -30,8 +29,7 @@ CREATE TABLE Post_de_blog /*
 
 CREATE TABLE Comentario_de_post_de_blog /*
   @tiene_autorizables:
-    - @tiene_autorizador: no_actualizable
-    - @tiene_autorizador: no_eliminable
+    - @tiene_autorizador: incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
 */ (
   id INTEGER PRIMARY KEY <%=autoincrement_word%>,
   fecha_de_creacion DATETIME /*

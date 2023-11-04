@@ -130,7 +130,7 @@ window.PaginaDeFormularioDeDatoDeTabla = Castelog.metodos.un_componente_vue2("Pa
  + "            </div>"
  + "          </div>"
  + "          <div class=\"columna_del_formulario text_align_right\" v-if=\"modalidad === 'crear'\">"
- + "            <button v-on:click=\"crear_fila\">Crear</button>"
+ + "            <button v-on:click=\"crear_fila\">➕ Crear</button>"
  + "          </div>"
  + "        </div>"
  + "      </div>"

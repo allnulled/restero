@@ -42,13 +42,13 @@ window.PaginaDeForoParaVerTemas = Castelog.metodos.un_componente_vue2("PaginaDeF
  + "                </tr>"
  + "              </table>"
  + "            </div>"
- + "            <div class=\"lista_de_temas\">"
+ + "            <div class=\"lista_de_posts\">"
  + "              <template v-for=\"tema, tema_index in temas_del_foro\">"
- + "                <div class=\"tema_en_lista\" v-bind:key=\"'foro-tema-' + tema_index\" v-on:click=\"() => ir_a_tema(tema_index)\">"
- + "                  <div class=\"titulo_de_tema\">"
+ + "                <div class=\"post_en_lista\" v-bind:key=\"'foro-tema-' + tema_index\" v-on:click=\"() => ir_a_tema(tema.id)\">"
+ + "                  <div class=\"titulo_de_post\">"
  + "                    {{ tema.titulo }}"
  + "                  </div>"
- + "                  <div class=\"descripcion_de_tema\">"
+ + "                  <div class=\"subtitulo_de_post\">"
  + "                    {{ tema.descripcion }}"
  + "                  </div>"
  + "                </div>"
@@ -126,10 +126,9 @@ this.$forceUpdate( true );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
-ir_a_tema( tema_index ) {try {
+ir_a_tema( id_tema ) {try {
 console.log('[DEBUG]', "PaginaDeForoParaVerPosts.ir_a_tema");
-const id_de_tema = this.temas_del_foro[ tema_index ].id;
-this.$router.history.push( `/foro/ver/tema/${id_de_tema}` );
+this.$router.history.push( `/foro/ver/tema/${id_tema}` );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },

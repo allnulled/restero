@@ -3,7 +3,7 @@ Ejecutable como documento HTML5
     con nombre index
     con versión 1
 <head>
-    <title>Interfaz de usuario</title>
+    <title>🌐 Restero | UI</title>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="./components/win7/win7.scoped.2.css" />
@@ -32,6 +32,9 @@ Ejecutable como documento HTML5
     <script src="./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
     <script src="./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
     <script src="./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
+    <script src="./components/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js"></script>
+    <script src="./components/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js"></script>
+    <script src="./components/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js"></script>
     <script src="./dependencies/rutas.js"></script>
 </head>
 <body><div id="app"></div></body>.

@@ -45,14 +45,14 @@ contrasenya:this.contrasenya
 }, null, null, null));
 this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_login,
 this );
-this.root.token_de_sesion = respuesta_login.data.token_de_sesion_activo;
-this.root.autentificacion = respuesta_login.data.autentificacion;
 const respuesta_esquema = (await Castelog.metodos.una_peticion_http("/api/v1/db/schema", "POST", { 
 }, { authorization:this.root.token_de_sesion
 }, null, null));
 this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_esquema,
 this );
 this.root.esquema = respuesta_esquema.data.esquema;
+this.root.token_de_sesion = respuesta_login.data.token_de_sesion_activo;
+this.root.autentificacion = respuesta_login.data.autentificacion;
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 }

@@ -20,22 +20,26 @@ asigno window.PaginaDeBlogParaEditarPost como un componente vue2 con nombre "Pag
       <div v-if="root.esquema" class="window-body">
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Blog',link:'/blog/ver/posts'}]"></BreadcrumbGenerico>
         <h5>{{ modalidad === "crear" ? "Crear" : "Editar" }} post</h5>
-        <div class="panel_principal">
-          <div class="">
-            <div class="">Título del post:</div>
+        <div class="">
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Título del post:</div>
             <input style="width: 100%;" type="text" v-model="post.titulo" />
           </div>
-          <div class="">
-            <div class="">Subtítulo del post: (opcional)</div>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Subtítulo del post: (opcional)</div>
             <input style="width: 100%;" type="text" v-model="post.subtitulo" />
           </div>
-          <div class="">
-            <div class="">Contenido:</div>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Contenido:</div>
             <textarea v-model="post.contenido"></textarea>
           </div>
-          <div>
-            <button v-if="modalidad === 'crear'" v-on:click="() => crear_post()">Crear</button>
-            <button v-else-if="modalidad === 'editar'" v-on:click="() => guardar_post()">Guardar</button>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Tags:</div>
+            <textarea v-model="post.tags"></textarea>
+          </div>
+          <div class="panel_de_botones_inferior">
+            <button v-if="modalidad === 'crear'" v-on:click="() => crear_post()">➕ Crear post</button>
+            <button v-else-if="modalidad === 'editar'" v-on:click="() => guardar_post()">💾 Guardar post</button>
           </div>
         </div>
       </div>

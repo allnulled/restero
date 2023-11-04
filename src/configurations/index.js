@@ -4,7 +4,7 @@ module.exports = function(deployer) {
             deployer.db = {};
             let environment = "default";
             if(process.env.NODE_ENV) {
-                environment = process.env.NODE_ENV
+                environment = process.env.NODE_ENV.toLowerCase();
             }
             deployer.settings = require(__dirname + `/settings.${environment}.json`);
             Generar_base_de_datos_via_plantillas: {
