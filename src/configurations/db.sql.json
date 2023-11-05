@@ -389,7 +389,7 @@
     {
         "tabla": "Comentario_de_post_de_blog",
         "atributos": [
-            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor"
+            "tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor"
         ],
         "composicion": [
             {
@@ -452,7 +452,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Comentario_de_post_de_blog /*\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  tags VARCHAR(1024),\n  contenido TEXT NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_post_de_blog INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_post_de_blog) REFERENCES Post_de_blog (id)\n);"
+        "script": "\n\nCREATE TABLE Comentario_de_post_de_blog /*\n  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  tags VARCHAR(1024),\n  contenido TEXT NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_post_de_blog INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_post_de_blog) REFERENCES Post_de_blog (id)\n);"
     },
     {
         "tabla": "Tema_de_foro",
@@ -716,5 +716,103 @@
             }
         ],
         "script": "\n\n\n\n\n\nCREATE TABLE Mensaje_de_mensajeria /*\n  @tiene_autorizador: no_actualizable\n  @tiene_autorizador: solo_seleccionable_por_mismo_usuario: id_de_usuario_destino\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_usuario_destino\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  asunto VARCHAR(512),\n  contenido TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_usuario_origen INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_usuario_destino INTEGER,\n  FOREIGN KEY (id_de_usuario_origen) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_usuario_destino) REFERENCES Usuario (id)\n);"
+    },
+    {
+        "tabla": "Curso_de_escuela",
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "titulo",
+                "tipo": "VARCHAR",
+                "detalles": "(1024) NOT NULL UNIQUE",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            }
+        ],
+        "script": "\n\n\n\n\n\nCREATE TABLE Curso_de_escuela /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(1024) NOT NULL UNIQUE,\n  descripcion TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */\n);"
+    },
+    {
+        "tabla": "Leccion_de_curso_de_escuela",
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "titulo",
+                "tipo": "VARCHAR",
+                "detalles": "(1024) NOT NULL",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_curso",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contenido_html",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_curso",
+                "tabla_foranea": "Curso_de_escuela",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Leccion_de_curso_de_escuela /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(1024) NOT NULL,\n  descripcion TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_curso INTEGER,\n  contenido_html TEXT,\n  FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)\n);"
     }
 ]

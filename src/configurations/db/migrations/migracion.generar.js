@@ -89,6 +89,33 @@ INSERT INTO Mensaje_de_mensajeria(asunto, contenido, fecha_de_creacion, id_de_us
     texto += item;
 }
 
+// CURSOS Y LECCIONES DE ESCUELA:
+
+Cursos_y_lecciones_de_escuela:
+for (let index = 0; index < 100; index++) {
+    // break Cursos_y_lecciones_de_escuela;
+    const item = `
+-- Sentencia:
+INSERT INTO Curso_de_escuela(titulo, descripcion, fecha_de_creacion) VALUES(
+    'Curso de escuela ${index}',
+    'Descripción del curso de escuela ${index}.',
+    '05-01-2026 14:50:00'
+);
+`;
+    const item2 = `
+    --Sentencia:
+    INSERT INTO Leccion_de_curso_de_escuela(titulo, descripcion, fecha_de_creacion, id_de_curso) VALUES(
+        'Curso de escuela ${index}',
+        'Descripción la lección ${index} del curso de escuela 1.',
+        '05-01-2026 14:50:00',
+        '1',
+        'Contenido de la lección en HTML. <a href="/">Ir a inicio</a>.'
+    );
+`;
+    texto += item;
+    texto += item2;
+}
+
 require("fs").writeFileSync(__dirname + "/migracion.generada.sql", texto, "utf8");
 const migracion_en_texto = require("fs").readFileSync(__dirname + "/migracion.generada.sql").toString();
 const migracion_inicial = require("fs").readFileSync(__dirname + "/migracion.sql").toString();

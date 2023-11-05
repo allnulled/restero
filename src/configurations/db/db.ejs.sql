@@ -13,3 +13,7 @@
 <% if(deployer.settings.HAS_MENSAJERIA) { %>
 <%- include("/db/modules/mensajeria.ejs.sql", { deployer }); %>
 <% } %>
+
+<% if(deployer.settings.HAS_ESCUELA) { %>
+<%- include("/db/modules/escuela.ejs.sql", { deployer }); %>
+<% } %>

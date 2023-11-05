@@ -19,7 +19,10 @@ CREATE TABLE Leccion_de_curso_de_escuela /*
   id INTEGER PRIMARY KEY <%-autoincrement_word%>,
   titulo VARCHAR(1024) NOT NULL,
   descripcion TEXT,
+  fecha_de_creacion DATETIME /*
+    @tiene_autorizador: fijar_momento_de_creacion
+  */,
   id_de_curso INTEGER,
-  contenido TEXT,
+  contenido_html TEXT,
   FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)
 );

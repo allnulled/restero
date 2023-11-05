@@ -108,7 +108,7 @@ CREATE TABLE Post_de_blog /*
 );
 
 CREATE TABLE Comentario_de_post_de_blog /*
-  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor
+  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME /*
@@ -198,4 +198,33 @@ CREATE TABLE Mensaje_de_mensajeria /*
   id_de_usuario_destino INTEGER,
   FOREIGN KEY (id_de_usuario_origen) REFERENCES Usuario (id),
   FOREIGN KEY (id_de_usuario_destino) REFERENCES Usuario (id)
+);
+
+
+
+
+
+CREATE TABLE Curso_de_escuela /*
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo VARCHAR(1024) NOT NULL UNIQUE,
+  descripcion TEXT,
+  fecha_de_creacion DATETIME /*
+    @tiene_autorizador: fijar_momento_de_creacion
+  */
+);
+
+CREATE TABLE Leccion_de_curso_de_escuela /*
+  @tiene_autorizador: incluir: insert | update | delete: {"permisos":["permiso de administración"]}
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo VARCHAR(1024) NOT NULL,
+  descripcion TEXT,
+  fecha_de_creacion DATETIME /*
+    @tiene_autorizador: fijar_momento_de_creacion
+  */,
+  id_de_curso INTEGER,
+  contenido_html TEXT,
+  FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)
 );
