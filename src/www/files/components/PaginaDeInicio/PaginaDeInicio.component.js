@@ -36,6 +36,11 @@ window.PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "              Mensajes"
  + "            </span>"
  + "          </li>"
+ + "          <li v-if=\"tiene_escuela\">"
+ + "            <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/escuela/ver/cursos')\">"
+ + "              Escuela"
+ + "            </span>"
+ + "          </li>"
  + "          <li>"
  + "            <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/administracion')\">"
  + "              Panel de administración"
@@ -63,7 +68,8 @@ data() {try {
 console.log('[DEBUG]', "PaginaDeInicio.data");
 return { tiene_blog:false,
 tiene_foro:false,
-tiene_mensajeria:false
+tiene_mensajeria:false,
+tiene_escuela:false
 };
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
@@ -106,6 +112,19 @@ false );
 this.tiene_mensajeria = this.root.esquema.reduce( function( salida,
 tabla ) {try {
 if(tabla.tabla === "Mensaje_de_mensajeria") {
+salida = true;
+}
+return salida;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+false );
+this.tiene_escuela = this.root.esquema.reduce( function( salida,
+tabla ) {try {
+if(tabla.tabla === "Curso_de_escuela") {
 salida = true;
 }
 return salida;

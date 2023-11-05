@@ -35,6 +35,11 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
               Mensajes
             </span>
           </li>
+          <li v-if="tiene_escuela">
+            <span class="como_link" v-on:click="() => abrir_pagina_de('/escuela/ver/cursos')">
+              Escuela
+            </span>
+          </li>
           <li>
             <span class="como_link" v-on:click="() => abrir_pagina_de('/administracion')">
               Panel de administración
@@ -67,7 +72,8 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       retorno {
         tiene_blog: false,
         tiene_foro: false,
-        tiene_mensajeria: false
+        tiene_mensajeria: false,
+        tiene_escuela: false
       }.
     } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
@@ -92,6 +98,12 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       }, false).
       asigno this.tiene_mensajeria como this.root.esquema.reduce(una función con (salida, tabla) donde {
         si tabla.tabla es igual que "Mensaje_de_mensajeria" {
+          asigno salida como true.
+        }.
+        retorno salida.
+      }, false).
+      asigno this.tiene_escuela como this.root.esquema.reduce(una función con (salida, tabla) donde {
+        si tabla.tabla es igual que "Curso_de_escuela" {
           asigno salida como true.
         }.
         retorno salida.

@@ -22,10 +22,7 @@ window.PaginaDeEscuelaParaVerCursos = Castelog.metodos.un_componente_vue2("Pagin
  + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'}]\"></BreadcrumbGenerico>"
  + "        <h5>Escuela</h5>"
  + "        <div class=\"panel_principal\" style=\"\">"
- + "          <div class=\"panel_de_botones_superior\" v-if=\"es_administrador\">"
- + "            <button v-on:click=\"() => ir_a_crear_post()\">➕ Crear post</button>"
- + "          </div>"
- + "          <template v-if=\"posts_del_blog.length\">"
+ + "          <template v-if=\"cursos_de_escuela.length\">"
  + "            <div class=\"panel_de_botones_superior\">"
  + "              <table>"
  + "                <tr>"
@@ -45,23 +42,20 @@ window.PaginaDeEscuelaParaVerCursos = Castelog.metodos.un_componente_vue2("Pagin
  + "                </tr>"
  + "              </table>"
  + "            </div>"
- + "            <div class=\"lista_de_posts\">"
- + "              <template v-for=\"post, post_index in posts_del_blog\">"
- + "                <div class=\"post_en_lista\" v-bind:key=\"'blog-post-' + post_index\" v-on:click=\"() => ir_a_post(post_index)\">"
- + "                  <div class=\"titulo_de_post\">"
- + "                  {{ post.titulo }}"
+ + "            <div class=\"lista_de_cursos\">"
+ + "              <template v-for=\"curso, curso_index in cursos_de_escuela\">"
+ + "                <div class=\"curso_en_lista\" v-bind:key=\"'blog-curso-' + curso_index\" v-on:click=\"() => ir_a_curso(curso_index)\">"
+ + "                  <div class=\"titulo_de_curso\">"
+ + "                  {{ curso.titulo }}"
  + "                  </div>"
- + "                  <div class=\"subtitulo_de_post\" v-if=\"post.subtitulo\">"
- + "                  {{ post.subtitulo }}"
+ + "                  <div class=\"subtitulo_de_curso\" v-if=\"curso.subtitulo\">"
+ + "                  {{ curso.subtitulo }}"
  + "                  </div>"
- + "                  <div class=\"autor_de_post\">"
- + "                    Escrito el {{ post.fecha_de_creacion }} por «{{ autores[post.id_de_autor].nombre }}»"
+ + "                  <div class=\"fecha_de_creacion_de_curso\">"
+ + "                    Creado el {{ curso.fecha_de_creacion }}"
  + "                  </div>"
- + "                  <div class=\"contenido_de_post\" v-if=\"post.contenido\">"
- + "                    {{ post.contenido.substr(0, 50) }}..."
- + "                  </div>"
- + "                  <div class=\"tags_de_post\">"
- + "                    Tags: {{ post.tags }}"
+ + "                  <div class=\"descripcion_de_curso\" v-if=\"curso.descripcion\">"
+ + "                    {{ curso.descripcion }}"
  + "                  </div>"
  + "                </div>"
  + "              </template>"
@@ -87,7 +81,7 @@ window.PaginaDeEscuelaParaVerCursos = Castelog.metodos.un_componente_vue2("Pagin
  + "            </div>"
  + "          </template>"
  + "          <div v-else>"
- + "            No hay posts en el blog."
+ + "            No hay cursos actualmente."
  + "          </div>"
  + "        </div>"
  + "      </div>"
@@ -101,9 +95,7 @@ data() {try {
 console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.data");
 return { pagina:1,
 es_administrador:false,
-posts_del_blog:[  ],
-autores:{ 
-}
+cursos_de_escuela:[  ]
 };
 } catch(error) {
 console.log(error);
@@ -111,16 +103,10 @@ throw error;
 }
 
 },
-methods:{ ir_a_crear_post() {try {
-console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.ir_a_crear_post");
-this.$router.history.push( "/blog/crear/post" );
-} catch(error) {
-this.$window.$notificaciones.notificar_error( error );}
-},
-ir_a_post( post_index ) {try {
-console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.ir_a_post");
-const post = this.posts_del_blog[ post_index ];
-this.$router.history.push( `/blog/ver/post/${post.id}` );
+methods:{ ir_a_curso( curso_index ) {try {
+console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.ir_a_curso");
+const curso = this.cursos_de_escuela[ curso_index ];
+this.$router.history.push( `/escuela/ver/curso/${curso.id}` );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },
@@ -159,7 +145,7 @@ this.$window.$notificaciones.notificar_error( error );}
 },
 async obtener_datos() {try {
 console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.obtener_datos");
-const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Post_de_blog", "POST", { order:JSON.stringify([ [ "id",
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/api/v1/select/Curso_de_escuela", "POST", { order:JSON.stringify([ [ "id",
 "desc" ] ], null, 2),
 page:this.pagina
 }, { authorization:this.root.token_de_sesion
@@ -169,8 +155,8 @@ this );
 if(respuesta_1.data.resultado.length === 0) {
 return 0;
 }
-this.posts_del_blog = datos_1;
-return this.posts_del_blog.length;
+this.cursos_de_escuela = respuesta_1.data.resultado;
+return this.cursos_de_escuela.length;
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 }

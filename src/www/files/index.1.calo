@@ -35,6 +35,9 @@ Ejecutable como documento HTML5
     <script src="./components/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js"></script>
     <script src="./components/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js"></script>
     <script src="./components/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js"></script>
+    <script src="./components/PaginaDeEscuelaParaVerCursos/PaginaDeEscuelaParaVerCursos.component.js"></script>
+    <script src="./components/PaginaDeEscuelaParaVerCurso/PaginaDeEscuelaParaVerCurso.component.js"></script>
+    <script src="./components/PaginaDeEscuelaParaVerLeccion/PaginaDeEscuelaParaVerLeccion.component.js"></script>
     <script src="./dependencies/rutas.js"></script>
 </head>
 <body><div id="app"></div></body>.

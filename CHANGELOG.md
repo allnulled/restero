@@ -410,3 +410,6 @@ Pero todavía no...
 **Versión `v0.0.69`.** *El 5 de noviembre de 2023 a las 08:47am.*
 - [✔] [BUG] Fixed bug in «blog.ejs.sql»
   - «autorizadores de columna» no adecuados.
+
+**Versión `v0.0.70`.** *El 5 de noviembre de 2023 a las 22:17pm.*
+- [✔] Módulo de Escuela (BD y UI) funcional y securizado

@@ -801,7 +801,7 @@
             },
             {
                 "sentencia": "columna",
-                "columna": "contenido_html",
+                "columna": "contenido",
                 "tipo": "TEXT",
                 "detalles": "",
                 "atributos": []
@@ -813,6 +813,6 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Leccion_de_curso_de_escuela /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(1024) NOT NULL,\n  descripcion TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_curso INTEGER,\n  contenido_html TEXT,\n  FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)\n);"
+        "script": "\n\nCREATE TABLE Leccion_de_curso_de_escuela /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(1024) NOT NULL,\n  descripcion TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_curso INTEGER,\n  contenido TEXT,\n  FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)\n);"
     }
 ]

@@ -1,0 +1,190 @@
+asigno window.PaginaDeEscuelaParaVerCurso como un componente vue2 con nombre "PaginaDeEscuelaParaVerCurso" con plantilla {
+  <div class="PaginaDeEscuelaParaVerCurso Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Ver curso</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body" v-if="curso_de_escuela">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Escuela',link:'/escuela/ver/cursos'}]"></BreadcrumbGenerico>
+        <h5>Ver curso</h5>
+        <div class="panel_principal">
+          <div class="lista_de_cursos">
+            <div class="curso_en_lista nohover">
+              <div class="titulo_de_curso">{{ curso_de_escuela.titulo }}</div>
+              <div class="fecha_de_creacion_de_curso">
+                Escrito el {{ curso_de_escuela.fecha_de_creacion }}
+              </div>
+              <div class="descripcion_de_curso">
+                <div>{{ curso_de_escuela.descripcion }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="panel_de_botones_superior">
+            <table>
+              <tr>
+                <td>
+                  <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
+                </td>
+                <td>
+                  <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
+                </td>
+                <td style="width: 100%; text-align: center;">Página {{ pagina_de_lecciones }}</td>
+                <td>
+                  <button style="min-width: auto;" v-on:click="() => ir_a_posterior_de_paginacion()"> » </button>
+                </td>
+                <td style="display: none;">
+                  <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="panel_principal">
+            <div class="lista_de_lecciones">
+              <div class="leccion_en_lista" v-on:click="() => ir_a_leccion(leccion.id)" v-for="leccion, leccion_index in lecciones_de_curso" v-bind:key="'leccion-' + leccion_index">
+                <div class="titulo_de_leccion">{{ leccion.titulo }}</div>
+                <div class="fecha_de_creacion_de_leccion">
+                  Escrito el {{ leccion.fecha_de_creacion }}
+                </div>
+                <div class="descripcion_de_leccion">
+                  <div>{{ leccion.descripcion }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel_de_botones_superior">
+            <table>
+              <tr>
+                <td>
+                  <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
+                </td>
+                <td>
+                  <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
+                </td>
+                <td style="width: 100%; text-align: center;">Página {{ pagina_de_lecciones }}</td>
+                <td>
+                  <button style="min-width: auto;" v-on:click="() => ir_a_posterior_de_paginacion()"> » </button>
+                </td>
+                <td style="display: none;">
+                  <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeEscuelaParaVerCurso.data".
+      retorno {
+        es_administrador: false,
+        curso_de_escuela: {},
+        lecciones_de_curso: [],
+        pagina_de_lecciones: 1
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono ir_a_leccion con (id_leccion) donde {
+        debugo "PaginaDeEscuelaParaVerCurso.ir_a_leccion".
+        hago this.$router.history.push("/escuela/ver/leccion/" + id_leccion).
+      }.
+      método asíncrono ir_a_principio_de_paginacion donde {
+        debugo "PaginaDeEscuelaParaVerCurso.ir_a_principio_de_paginacion".
+        asigno this.pagina_de_lecciones como 1.
+        hago asíncronamente this.obtener_lecciones().
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_anterior_de_paginacion donde {
+        debugo "PaginaDeEscuelaParaVerCurso.ir_a_anterior_de_paginacion".
+        si this.pagina_de_lecciones es igual que 1 retorno.
+        decremento this.pagina_de_lecciones.
+        hago asíncronamente this.obtener_lecciones().
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_posterior_de_paginacion donde {
+        debugo "PaginaDeEscuelaParaVerCurso.ir_a_posterior_de_paginacion".
+        si this.lecciones_de_curso.length no es igual que 20 retorno.
+        incremento this.pagina_de_lecciones.
+        creo resultados como asíncronamente this.obtener_lecciones().
+        si resultados es igual que 0 decremento this.pagina_de_lecciones.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_curso donde {
+        debugo "PaginaDeEscuelaParaVerCurso.obtener_curso".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Curso_de_escuela"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo dato_1 como respuesta_1.data.resultado[0].
+        asigno this.curso_de_escuela como dato_1.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_lecciones donde {
+        debugo "PaginaDeEscuelaParaVerCurso.obtener_lecciones".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Leccion_de_curso_de_escuela"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id_de_curso", "=", this.$route.params.id]
+            ] textualizado,
+            page: this.pagina_de_lecciones,
+            order: [
+              ["id", "asc"]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo datos_1 como respuesta_1.data.resultado.
+        si datos_1.length es igual que 0 retorno 0.
+        asigno this.lecciones_de_curso como datos_1.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      debugo "PaginaDeEscuelaParaVerCurso.mounted".
+      en proceso averiguar_si_es_administrador {
+        asigno this.es_administrador como this.root.autentificacion.permisos.reduce(una función con (salida, permiso) donde {
+            si permiso.nombre es igual que "permiso de administración" {
+              retorno true.
+            }.
+            retorno salida.
+          }, false).
+      }.
+      en proceso obtener_curso {
+        hago this.obtener_curso().
+      }.
+      en proceso obtener_lecciones {
+        hago this.obtener_lecciones().
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

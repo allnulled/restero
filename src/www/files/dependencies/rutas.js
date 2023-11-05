@@ -113,6 +113,24 @@ component:PaginaDeMensajesParaCrearMensaje,
 props:{ 
 }
 },
+{ path:"/escuela/ver/cursos",
+name:"PaginaDeEscuelaParaVerCursos",
+component:PaginaDeEscuelaParaVerCursos,
+props:{ 
+}
+},
+{ path:"/escuela/ver/curso/:id",
+name:"PaginaDeEscuelaParaVerCurso",
+component:PaginaDeEscuelaParaVerCurso,
+props:{ 
+}
+},
+{ path:"/escuela/ver/leccion/:id",
+name:"PaginaDeEscuelaParaVerLeccion",
+component:PaginaDeEscuelaParaVerLeccion,
+props:{ 
+}
+},
 { path:"/",
 name:"Inicio",
 component:PaginaDeInicio,

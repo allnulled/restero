@@ -89,11 +89,11 @@ INSERT INTO Mensaje_de_mensajeria(asunto, contenido, fecha_de_creacion, id_de_us
     texto += item;
 }
 
-// CURSOS Y LECCIONES DE ESCUELA:
+// CURSOS DE ESCUELA:
 
-Cursos_y_lecciones_de_escuela:
+Cursos_de_escuela:
 for (let index = 0; index < 100; index++) {
-    // break Cursos_y_lecciones_de_escuela;
+    break Cursos_de_escuela;
     const item = `
 -- Sentencia:
 INSERT INTO Curso_de_escuela(titulo, descripcion, fecha_de_creacion) VALUES(
@@ -102,17 +102,25 @@ INSERT INTO Curso_de_escuela(titulo, descripcion, fecha_de_creacion) VALUES(
     '05-01-2026 14:50:00'
 );
 `;
-    const item2 = `
-    --Sentencia:
-    INSERT INTO Leccion_de_curso_de_escuela(titulo, descripcion, fecha_de_creacion, id_de_curso) VALUES(
-        'Curso de escuela ${index}',
-        'Descripción la lección ${index} del curso de escuela 1.',
-        '05-01-2026 14:50:00',
-        '1',
-        'Contenido de la lección en HTML. <a href="/">Ir a inicio</a>.'
-    );
-`;
     texto += item;
+}
+
+// LECCIONES DE CURSOS DE ESCUELA:
+
+Lecciones_de_cursos_de_escuela:
+for (let index = 0; index < 100; index++) {
+    break Lecciones_de_cursos_de_escuela;
+    const item2 = `
+-- Sentencia:
+INSERT INTO Leccion_de_curso_de_escuela(
+    titulo, descripcion, fecha_de_creacion, id_de_curso, contenido) VALUES(
+    'Lección ${index} de curso de escuela 100',
+    'Descripción la lección ${index} del curso de escuela 1.',
+    '05-01-2026 14:50:00',
+    100,
+    'Contenido de la lección en HTML. <a href="/">Ir a inicio</a>.'
+);
+`;
     texto += item2;
 }
 

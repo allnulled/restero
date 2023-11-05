@@ -229,14 +229,20 @@ hr {
 .lista_de_posts {
 
 }
+.lista_de_lecciones > .leccion_en_lista,
+.lista_de_cursos > .curso_en_lista,
 .lista_de_posts > .post_en_lista {
     border: 1px solid #333;
     margin-bottom: 4px;
     cursor: pointer;
 }
+.lista_de_lecciones > .leccion_en_lista:hover,
+.lista_de_cursos > .curso_en_lista:hover,
 .lista_de_posts > .post_en_lista:hover {
     background-color: #DDDDDD;
 }
+.leccion_en_lista > .titulo_de_leccion,
+.curso_en_lista > .titulo_de_curso,
 .ver_post > .titulo_de_post,
 .lista_de_posts > .post_en_lista > .titulo_de_post {
     font-size: 15px;
@@ -254,12 +260,16 @@ hr {
     padding: 4px;
     text-align: justify;
 }
+.leccion_en_lista > .descripcion_de_leccion,
+.curso_en_lista > .descripcion_de_curso,
 .ver_post > .contenido_de_post,
 .lista_de_posts > .post_en_lista > .contenido_de_post {
     font-size: 10px;
     padding: 4px;
     text-align: justify;
 }
+.leccion_en_lista > .fecha_de_creacion_de_leccion,
+.curso_en_lista > .fecha_de_creacion_de_curso,
 .ver_post .autor_de_post,
 .lista_de_posts > .post_en_lista .autor_de_post {
     color: #666;
@@ -307,6 +317,7 @@ hr {
 .post_en_lista {
     border: 1px solid #333;
     margin-bottom: 4px;
+    cursor: pointer;
 }
 .post_en_lista:hover {
     background-color: #CCC;
@@ -391,4 +402,9 @@ hr {
 .ver_mensaje > .contenido_de_mensaje {
     font-size: 10px;
     padding: 4px;
+}
+
+.lista_de_cursos > .curso_en_lista.nohover:hover {
+    background-color: inherit;
+    cursor: default;
 }

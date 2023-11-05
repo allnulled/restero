@@ -1,0 +1,108 @@
+asigno window.PaginaDeEscuelaParaVerLeccion como un componente vue2 con nombre "PaginaDeEscuelaParaVerLeccion" con plantilla {
+  <div class="PaginaDeEscuelaParaVerLeccion Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Ver lección</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body" v-if="leccion">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Escuela',link:'/escuela/ver/cursos'},{texto:'Curso',link:'/escuela/ver/curso/'+leccion.id_de_curso}]"></BreadcrumbGenerico>
+        <h5>Ver lección</h5>
+        <div class="panel_principal">
+          <div class="lista_de_cursos">
+            <div class="curso_en_lista nohover">
+              <div class="titulo_de_curso">{{ leccion.titulo }}</div>
+              <div class="descripcion_de_curso" v-if="curso_de_leccion">
+                Pertenece al curso «{{ curso_de_leccion.titulo }}»
+              </div>
+              <div class="fecha_de_creacion_de_curso">
+                Escrito el {{ leccion.fecha_de_creacion }}
+              </div>
+              <div class="descripcion_de_curso">
+                <div>{{ leccion.descripcion }}</div>
+              </div>
+              <div class="descripcion_de_curso">
+                <div v-html="leccion.contenido"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeEscuelaParaVerLeccion.data".
+      retorno {
+        leccion: false,
+        curso_de_leccion: {}
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono obtener_leccion donde {
+        debugo "PaginaDeEscuelaParaVerLeccion.obtener_leccion".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Leccion_de_curso_de_escuela"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo dato_1 como respuesta_1.data.resultado[0].
+        asigno this.leccion como dato_1.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_curso donde {
+        debugo "PaginaDeEscuelaParaVerLeccion.obtener_curso".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Curso_de_escuela"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.leccion.id_de_curso]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo dato_1 como respuesta_1.data.resultado[0].
+        asigno this.curso_de_leccion como dato_1.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      debugo "PaginaDeEscuelaParaVerLeccion.mounted".
+      en proceso obtener_leccion {
+        hago this.obtener_leccion().
+      }.
+      en proceso obtener_curso {
+        hago this.obtener_curso().
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

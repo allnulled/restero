@@ -1,96 +1,121 @@
-<!DOCTYPE html><html><head>
-    <title>🌐 Restero | UI</title>
-    <meta charset="utf8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./components/win7/win7.scoped.2.css" />
-    <link rel="stylesheet" type="text/css" href="./components/theme/theme.css" />
-    <link rel="stylesheet" type="text/css" href="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.css" />
-    <script src="./components/calo/calo.js"></script>
-    <script src="./dependencies/generar_gestor_de_hooks.js"></script>
-    <script src="./dependencies/utilidades.js"></script>
-    <script src="./dependencies/editor-wysiwyg/wysiwyg-parser.js"></script>
-    <script src="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.js"></script>
-    <script src="./hooks/hooks.js"></script>
-    <script src="./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js"></script>
-    <script src="./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js"></script>
-    <script src="./components/ExploradorDeDatos/ExploradorDeDatos.component.js"></script>
-    <script src="./components/PaginaDeInicio/PaginaDeInicio.component.js"></script>
-    <script src="./components/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js"></script>
-    <script src="./components/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js"></script>
-    <script src="./components/PaginaDeLogin/PaginaDeLogin.component.js"></script>
-    <script src="./components/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
-    <script src="./components/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js"></script>
-    <script src="./components/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js"></script>
-    <script src="./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js"></script>
-    <script src="./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js"></script>
-    <script src="./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js"></script>
-    <script src="./components/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js"></script>
-    <script src="./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
-    <script src="./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
-    <script src="./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
-    <script src="./dependencies/rutas.js"></script>
-</head><body><div id="app"></div><script>
-// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n    <title>🌐 Restero | UI</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/win7/win7.scoped.2.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/theme/theme.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.css\" />\n    &gt;script src=\"./components/calo/calo.js\">&gt;/script>\n    &gt;script src=\"./dependencies/generar_gestor_de_hooks.js\">&gt;/script>\n    &gt;script src=\"./dependencies/utilidades.js\">&gt;/script>\n    &gt;script src=\"./dependencies/editor-wysiwyg/wysiwyg-parser.js\">&gt;/script>\n    &gt;script src=\"./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.js\">&gt;/script>\n    &gt;script src=\"./hooks/hooks.js\">&gt;/script>\n    &gt;script src=\"./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js\">&gt;/script>\n    &gt;script src=\"./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js\">&gt;/script>\n    &gt;script src=\"./components/ExploradorDeDatos/ExploradorDeDatos.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeInicio/PaginaDeInicio.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeLogin/PaginaDeLogin.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js\">&gt;/script>\n    &gt;script src=\"./dependencies/rutas.js\">&gt;/script>\n</head>","body":"<body><div id=\"app\"></div></body>"}}
+<!DOCTYPE html>
+<html>
 
-const main = async function() {try {
-(await window.utilidades.gestor_de_hooks.usar_hook( "app:iniciar" ));
-(await window.utilidades.gestor_de_hooks.usar_hook( "app:precargar:aplicacion" ));
-window.App = Castelog.metodos.una_aplicacion_vue2(
-  "App",
-  "<div class=\"App Component Castelog-app win7\">"
- + "      <div v-if=\"token_de_sesion\">"
- + "        <router-view :root=\"this\"></router-view>"
- + "      </div>"
- + "      <div v-else>"
- + "        <PaginaDeLogin :root=\"this\" />"
- + "      </div>"
- + "      <PuertoDeNotificaciones :root=\"this\" />"
- + "    </div>",
-  function(component) {return { data() {try {
-return { esquema:undefined,
-token_de_sesion:undefined,
-autentificacion:undefined
-};
-} catch(error) {
-console.log(error);
-throw error;
-}
+<head>
+  <title>🌐 Restero | UI</title>
+  <meta charset="utf8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="./components/win7/win7.scoped.2.css" />
+  <link rel="stylesheet" type="text/css" href="./components/theme/theme.css" />
+  <link rel="stylesheet" type="text/css" href="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.css" />
+  <script src="./components/calo/calo.js"></script>
+  <script src="./dependencies/generar_gestor_de_hooks.js"></script>
+  <script src="./dependencies/utilidades.js"></script>
+  <script src="./hooks/hooks.js"></script>
+  <script src="./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js"></script>
+  <script src="./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js"></script>
+  <script src="./components/ExploradorDeDatos/ExploradorDeDatos.component.js"></script>
+  <script src="./components/PaginaDeInicio/PaginaDeInicio.component.js"></script>
+  <script src="./components/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js"></script>
+  <script src="./components/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js"></script>
+  <script src="./components/PaginaDeLogin/PaginaDeLogin.component.js"></script>
+  <script src="./components/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
+  <script src="./components/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js"></script>
+  <script src="./components/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js"></script>
+  <script src="./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js"></script>
+  <script src="./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js"></script>
+  <script src="./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js"></script>
+  <script src="./components/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js"></script>
+  <script src="./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
+  <script src="./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
+  <script src="./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
+  <script src="./components/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js"></script>
+  <script src="./components/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js"></script>
+  <script src="./components/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js"></script>
+  <script src="./components/PaginaDeEscuelaParaVerCursos/PaginaDeEscuelaParaVerCursos.component.js"></script>
+  <script src="./components/PaginaDeEscuelaParaVerCurso/PaginaDeEscuelaParaVerCurso.component.js"></script>
+  <script src="./components/PaginaDeEscuelaParaVerLeccion/PaginaDeEscuelaParaVerLeccion.component.js"></script>
+  <script src="./dependencies/rutas.js"></script>
+</head>
 
-},
-methods:{ 
-},
-watch:{ 
-},
-beforeMount() {try {
-this.$window = window;
-} catch(error) {
-console.log(error);
-throw error;
-}
+<body>
+  <div id="app"></div>
+  <script>
+    // [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n    <title>🌐 Restero | UI</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/win7/win7.scoped.2.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./components/theme/theme.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.css\" />\n    &gt;script src=\"./components/calo/calo.js\">&gt;/script>\n    &gt;script src=\"./dependencies/generar_gestor_de_hooks.js\">&gt;/script>\n    &gt;script src=\"./dependencies/utilidades.js\">&gt;/script>\n    &gt;script src=\"./dependencies/editor-wysiwyg/wysiwyg-parser.js\">&gt;/script>\n    &gt;script src=\"./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.js\">&gt;/script>\n    &gt;script src=\"./hooks/hooks.js\">&gt;/script>\n    &gt;script src=\"./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js\">&gt;/script>\n    &gt;script src=\"./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js\">&gt;/script>\n    &gt;script src=\"./components/ExploradorDeDatos/ExploradorDeDatos.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeInicio/PaginaDeInicio.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeLogin/PaginaDeLogin.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeEscuelaParaVerCursos/PaginaDeEscuelaParaVerCursos.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeEscuelaParaVerCurso/PaginaDeEscuelaParaVerCurso.component.js\">&gt;/script>\n    &gt;script src=\"./components/PaginaDeEscuelaParaVerLeccion/PaginaDeEscuelaParaVerLeccion.component.js\">&gt;/script>\n    &gt;script src=\"./dependencies/rutas.js\">&gt;/script>\n</head>","body":"<body><div id=\"app\"></div></body>"}}
 
-},
-mounted() {
-}
-};},
-  "html {}\n      body {}\n      .Component {}\n      .App {}\n  ",
-  {},
-  window.rutas_de_aplicacion,
-  { es:{ 
-},
-en:{ 
-},
-ca:{ 
-}
-},
-  "#app");
-(await window.utilidades.gestor_de_hooks.usar_hook( "app:postcargar:aplicacion",
-{ rutas_de_aplicacion
-} ));
-(await window.utilidades.gestor_de_hooks.usar_hook( "app:iniciada",
-{ rutas_de_aplicacion
-} ));
-} catch(error) {
-console.log(error);
-throw error;}
-};
-main(  );</script></body></html>
+    const main = async function () {
+      try {
+        (await window.utilidades.gestor_de_hooks.usar_hook("app:iniciar"));
+        (await window.utilidades.gestor_de_hooks.usar_hook("app:precargar:aplicacion"));
+        window.App = Castelog.metodos.una_aplicacion_vue2(
+          "App",
+          "<div class=\"App Component Castelog-app win7\">"
+          + "      <div v-if=\"token_de_sesion\">"
+          + "        <router-view :root=\"this\"></router-view>"
+          + "      </div>"
+          + "      <div v-else>"
+          + "        <PaginaDeLogin :root=\"this\" />"
+          + "      </div>"
+          + "      <PuertoDeNotificaciones :root=\"this\" />"
+          + "    </div>",
+          function (component) {
+            return {
+              data() {
+                try {
+                  return {
+                    esquema: undefined,
+                    token_de_sesion: undefined,
+                    autentificacion: undefined
+                  };
+                } catch (error) {
+                  console.log(error);
+                  throw error;
+                }
+
+              },
+              methods: {
+              },
+              watch: {
+              },
+              beforeMount() {
+                try {
+                  this.$window = window;
+                } catch (error) {
+                  console.log(error);
+                  throw error;
+                }
+
+              },
+              mounted() {
+              }
+            };
+          },
+          "html {}\n      body {}\n      .Component {}\n      .App {}\n  ",
+          {},
+          window.rutas_de_aplicacion,
+          {
+            es: {
+            },
+            en: {
+            },
+            ca: {
+            }
+          },
+          "#app");
+        (await window.utilidades.gestor_de_hooks.usar_hook("app:postcargar:aplicacion",
+          {
+            rutas_de_aplicacion
+          }));
+        (await window.utilidades.gestor_de_hooks.usar_hook("app:iniciada",
+          {
+            rutas_de_aplicacion
+          }));
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    };
+    main();</script>
+</body>
+
+</html>

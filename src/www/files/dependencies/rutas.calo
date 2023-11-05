@@ -94,6 +94,21 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDeMensajesParaCrearMensaje.
     propiedad props como {}.
 }, {
+    propiedad path como "/escuela/ver/cursos".
+    propiedad name como "PaginaDeEscuelaParaVerCursos".
+    propiedad component como PaginaDeEscuelaParaVerCursos.
+    propiedad props como {}.
+}, {
+    propiedad path como "/escuela/ver/curso/:id".
+    propiedad name como "PaginaDeEscuelaParaVerCurso".
+    propiedad component como PaginaDeEscuelaParaVerCurso.
+    propiedad props como {}.
+}, {
+    propiedad path como "/escuela/ver/leccion/:id".
+    propiedad name como "PaginaDeEscuelaParaVerLeccion".
+    propiedad component como PaginaDeEscuelaParaVerLeccion.
+    propiedad props como {}.
+}, {
     propiedad path como "/".
     propiedad name como "Inicio".
     propiedad component como PaginaDeInicio.
