@@ -34,7 +34,7 @@ CREATE TABLE Post_de_foro /*
 );
 
 CREATE TABLE Comentario_de_post_de_foro /*
-  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor
 */ (
   id INTEGER PRIMARY KEY <%- autoincrement_word %>,
   contenido TEXT,

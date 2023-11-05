@@ -89,23 +89,18 @@ CREATE TABLE Fichero /*
 
 CREATE TABLE Post_de_blog /*
   @tiene_fichero: imagen
-  @tiene_autorizables:
-    - @tiene_autorizador: incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
+  @tiene_autorizador: incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   titulo VARCHAR(255) UNIQUE NOT NULL,
   subtitulo VARCHAR(255),
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
+    @tiene_autorizador: no_modificable
   */,
   imagen VARCHAR(255),
-  tags VARCHAR(1024) /*
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
-  */,
-  contenido TEXT NOT NULL /*
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
-  */,
+  tags VARCHAR(1024),
+  contenido TEXT NOT NULL,
   id_de_autor INTEGER /*
     @tiene_autorizador: fijar_id_de_usuario
   */,
@@ -113,27 +108,20 @@ CREATE TABLE Post_de_blog /*
 );
 
 CREATE TABLE Comentario_de_post_de_blog /*
-  @tiene_autorizables:
-    - @tiene_autorizador: incluir: insert | update | delete: { "permisos": ["permiso de administración"] }
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
+    @tiene_autorizador: no_modificable
   */,
-  tags VARCHAR(1024) /*
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
-  */,
-  contenido TEXT NOT NULL /*
-    @tiene_autorizador: solo_modificable_por: {"permisos":["permiso de administración"]}
-  */,
+  tags VARCHAR(1024),
+  contenido TEXT NOT NULL,
   id_de_autor INTEGER /*
     @tiene_autorizador: fijar_id_de_usuario
   */,
-  id_de_comentario INTEGER,
   id_de_post_de_blog INTEGER,
   FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),
-  FOREIGN KEY (id_de_comentario) REFERENCES Comentario_de_post_de_blog (id),
   FOREIGN KEY (id_de_post_de_blog) REFERENCES Post_de_blog (id)
 );
 
@@ -173,7 +161,7 @@ CREATE TABLE Post_de_foro /*
 );
 
 CREATE TABLE Comentario_de_post_de_foro /*
-  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor
 */ (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   contenido TEXT,

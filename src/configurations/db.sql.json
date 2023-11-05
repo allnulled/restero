@@ -313,12 +313,7 @@
         "tabla": "Post_de_blog",
         "atributos": [
             "tiene_fichero: imagen",
-            [
-                "tiene_autorizables:",
-                [
-                    "@tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }"
-                ]
-            ]
+            "tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }"
         ],
         "composicion": [
             {
@@ -349,7 +344,7 @@
                 "detalles": "",
                 "atributos": [
                     "tiene_autorizador: fijar_momento_de_creacion",
-                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
+                    "tiene_autorizador: no_modificable"
                 ]
             },
             {
@@ -364,18 +359,14 @@
                 "columna": "tags",
                 "tipo": "VARCHAR",
                 "detalles": "(1024)",
-                "atributos": [
-                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
-                ]
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "contenido",
                 "tipo": "TEXT",
                 "detalles": "NOT NULL",
-                "atributos": [
-                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
-                ]
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -393,17 +384,12 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\n\n\n\nCREATE TABLE Post_de_blog /*\n  @tiene_fichero: imagen\n  @tiene_autorizables:\n    - @tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) UNIQUE NOT NULL,\n  subtitulo VARCHAR(255),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  imagen VARCHAR(255),\n  tags VARCHAR(1024) /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  contenido TEXT NOT NULL /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
+        "script": "\n\n\n\n\nCREATE TABLE Post_de_blog /*\n  @tiene_fichero: imagen\n  @tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) UNIQUE NOT NULL,\n  subtitulo VARCHAR(255),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  imagen VARCHAR(255),\n  tags VARCHAR(1024),\n  contenido TEXT NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Comentario_de_post_de_blog",
         "atributos": [
-            [
-                "tiene_autorizables:",
-                [
-                    "@tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }"
-                ]
-            ]
+            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor"
         ],
         "composicion": [
             {
@@ -420,7 +406,7 @@
                 "detalles": "",
                 "atributos": [
                     "tiene_autorizador: fijar_momento_de_creacion",
-                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
+                    "tiene_autorizador: no_modificable"
                 ]
             },
             {
@@ -428,18 +414,14 @@
                 "columna": "tags",
                 "tipo": "VARCHAR",
                 "detalles": "(1024)",
-                "atributos": [
-                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
-                ]
+                "atributos": []
             },
             {
                 "sentencia": "columna",
                 "columna": "contenido",
                 "tipo": "TEXT",
                 "detalles": "NOT NULL",
-                "atributos": [
-                    "tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}"
-                ]
+                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -449,13 +431,6 @@
                 "atributos": [
                     "tiene_autorizador: fijar_id_de_usuario"
                 ]
-            },
-            {
-                "sentencia": "columna",
-                "columna": "id_de_comentario",
-                "tipo": "INTEGER",
-                "detalles": "",
-                "atributos": []
             },
             {
                 "sentencia": "columna",
@@ -472,18 +447,12 @@
             },
             {
                 "sentencia": "clave foránea",
-                "columna": "id_de_comentario",
-                "tabla_foranea": "Comentario_de_post_de_blog",
-                "columna_foranea": "id"
-            },
-            {
-                "sentencia": "clave foránea",
                 "columna": "id_de_post_de_blog",
                 "tabla_foranea": "Post_de_blog",
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Comentario_de_post_de_blog /*\n  @tiene_autorizables:\n    - @tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  tags VARCHAR(1024) /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  contenido TEXT NOT NULL /*\n    @tiene_autorizador: solo_modificable_por: {\"permisos\":[\"permiso de administración\"]}\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_comentario INTEGER,\n  id_de_post_de_blog INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_comentario) REFERENCES Comentario_de_post_de_blog (id),\n  FOREIGN KEY (id_de_post_de_blog) REFERENCES Post_de_blog (id)\n);"
+        "script": "\n\nCREATE TABLE Comentario_de_post_de_blog /*\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  tags VARCHAR(1024),\n  contenido TEXT NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_post_de_blog INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_post_de_blog) REFERENCES Post_de_blog (id)\n);"
     },
     {
         "tabla": "Tema_de_foro",
@@ -621,7 +590,7 @@
     {
         "tabla": "Comentario_de_post_de_foro",
         "atributos": [
-            "tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor"
+            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor"
         ],
         "composicion": [
             {
@@ -677,7 +646,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Comentario_de_post_de_foro /*\n  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  contenido TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_post_de_foro INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_post_de_foro) REFERENCES Post_de_foro (id)\n);"
+        "script": "\n\nCREATE TABLE Comentario_de_post_de_foro /*\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  contenido TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_post_de_foro INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_post_de_foro) REFERENCES Post_de_foro (id)\n);"
     },
     {
         "tabla": "Mensaje_de_mensajeria",

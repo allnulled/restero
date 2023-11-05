@@ -406,3 +406,7 @@ Pero todavía no...
 **Versión `v0.0.68`.** *El 4 de noviembre de 2023 a las 21:59pm.*
 - [✔] Blog, Foro y Mensajería funcionando bien.
 - [✔] Emojis en algunos botones.
+
+**Versión `v0.0.69`.** *El 5 de noviembre de 2023 a las 08:47am.*
+- [✔] [BUG] Fixed bug in «blog.ejs.sql»
+  - «autorizadores de columna» no adecuados.
