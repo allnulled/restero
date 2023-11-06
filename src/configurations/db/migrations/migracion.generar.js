@@ -130,7 +130,7 @@ INSERT INTO Leccion_de_curso_de_escuela(
 
 Noticias_de_prensa:
 for (let index = 0; index < 100; index++) {
-    // break Noticias_de_prensa;
+    break Noticias_de_prensa;
     const item = `
 -- Sentencia:
 INSERT INTO Noticia_de_prensa(titulo, subtitulo, contenido, fecha_de_creacion, id_de_autor) VALUES(
