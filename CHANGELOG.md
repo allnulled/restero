@@ -419,3 +419,8 @@ Pero todavía no...
 
 **Versión `v0.0.72`.** *El 6 de noviembre de 2023 a las 12:37pm.*
 - [✔] Setup sin migraciones de varios.
+
+**Versión `v0.0.73`.** *El 6 de noviembre de 2023 a las 19:04pm.*
+- [✔] Botón y página para crear tema en el foro
+- [✔] Botón y página para crear curso en la escuela
+- [✔] Botón y página para crear lección en la escuela
