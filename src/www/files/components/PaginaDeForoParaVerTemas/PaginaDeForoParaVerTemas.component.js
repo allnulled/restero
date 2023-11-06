@@ -22,6 +22,9 @@ window.PaginaDeForoParaVerTemas = Castelog.metodos.un_componente_vue2("PaginaDeF
  + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'}]\"></BreadcrumbGenerico>"
  + "        <h5>Foro</h5>"
  + "        <div class=\"panel_principal\" style=\"\">"
+ + "          <div class=\"panel_de_botones_superior\" v-if=\"es_administrador\">"
+ + "            <button v-on:click=\"() => ir_a_crear_tema_de_foro()\">➕ Crear tema</button>"
+ + "          </div>"
  + "          <template v-if=\"temas_del_foro.length\">"
  + "            <div class=\"panel_de_botones_superior\">"
  + "              <table>"
@@ -88,7 +91,8 @@ required:true
 data() {try {
 console.log('[DEBUG]', "PaginaDeForoParaVerPosts.data");
 return { pagina:1,
-temas_del_foro:[  ]
+temas_del_foro:[  ],
+es_administrador:false
 };
 } catch(error) {
 console.log(error);
@@ -96,7 +100,16 @@ throw error;
 }
 
 },
-methods:{ async ir_a_principio_de_paginacion() {try {
+methods:{ async ir_a_crear_tema_de_foro() {try {
+console.log('[DEBUG]', "PaginaDeForoParaVerPosts.ir_a_crear_tema_de_foro");
+this.$router.history.push( "/foro/crear/tema" );
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+async ir_a_principio_de_paginacion() {try {
 console.log('[DEBUG]', "PaginaDeForoParaVerPosts.ir_a_principio_de_paginacion");
 this.pagina = 1;
 const resultado = (await this.obtener_temas(  ));
@@ -146,11 +159,32 @@ return 0;
 this.temas_del_foro = datos_1;
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
+},
+async averiguar_si_es_administrador() {try {
+this.es_administrador = this.root.autentificacion.permisos.reduce( function( salida,
+permiso ) {try {
+if(permiso.nombre === "permiso de administración") {
+salida = true;
+}
+return salida;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+false );
+} catch(error) {
+console.log(error);
+throw error;
+}
+
 }
 },
-mounted() {try {
+async mounted() {try {
 console.log('[DEBUG]', "PaginaDeForoParaVerPosts.mounted");
-this.obtener_temas(  );
+(await this.obtener_temas(  ));
+(await this.averiguar_si_es_administrador(  ));
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 }

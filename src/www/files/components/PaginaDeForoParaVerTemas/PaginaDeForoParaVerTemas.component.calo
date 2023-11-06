@@ -21,6 +21,9 @@ asigno window.PaginaDeForoParaVerTemas como un componente vue2 con nombre "Pagin
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'}]"></BreadcrumbGenerico>
         <h5>Foro</h5>
         <div class="panel_principal" style="">
+          <div class="panel_de_botones_superior" v-if="es_administrador">
+            <button v-on:click="() => ir_a_crear_tema_de_foro()">➕ Crear tema</button>
+          </div>
           <template v-if="temas_del_foro.length">
             <div class="panel_de_botones_superior">
               <table>
@@ -92,10 +95,15 @@ asigno window.PaginaDeForoParaVerTemas como un componente vue2 con nombre "Pagin
       debugo "PaginaDeForoParaVerPosts.data".
       retorno {
         pagina: 1,
-        temas_del_foro: []
+        temas_del_foro: [],
+        es_administrador: false
       }.
     }.
     propiedad methods como {
+      método asíncrono ir_a_crear_tema_de_foro donde {
+        debugo "PaginaDeForoParaVerPosts.ir_a_crear_tema_de_foro".
+        hago this.$router.history.push("/foro/crear/tema").
+      }.
       método asíncrono ir_a_principio_de_paginacion donde {
         debugo "PaginaDeForoParaVerPosts.ir_a_principio_de_paginacion".
         asigno this.pagina como 1.
@@ -136,10 +144,17 @@ asigno window.PaginaDeForoParaVerTemas como un componente vue2 con nombre "Pagin
         si datos_1.length es igual que 0 retorno 0.
         asigno this.temas_del_foro como datos_1.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono averiguar_si_es_administrador donde {
+        asigno this.es_administrador como this.root.autentificacion.permisos.reduce(una función con (salida, permiso) donde {
+          si permiso.nombre es igual que "permiso de administración" asigno salida como true.
+          retorno salida.
+        }, false).
+      }.
     }.
-    método mounted donde {
+    método asíncrono mounted donde {
       debugo "PaginaDeForoParaVerPosts.mounted".
-      hago this.obtener_temas().
+      hago asíncronamente this.obtener_temas().
+      hago asíncronamente this.averiguar_si_es_administrador().
     } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

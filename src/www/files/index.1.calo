@@ -32,12 +32,15 @@ Ejecutable como documento HTML5
     <script src="./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
     <script src="./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
     <script src="./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
+    <script src="./components/PaginaDeForoParaEditarTema/PaginaDeForoParaEditarTema.component.js"></script>
     <script src="./components/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js"></script>
     <script src="./components/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js"></script>
     <script src="./components/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js"></script>
     <script src="./components/PaginaDeEscuelaParaVerCursos/PaginaDeEscuelaParaVerCursos.component.js"></script>
     <script src="./components/PaginaDeEscuelaParaVerCurso/PaginaDeEscuelaParaVerCurso.component.js"></script>
+    <script src="./components/PaginaDeEscuelaParaEditarCurso/PaginaDeEscuelaParaEditarCurso.component.js"></script>
     <script src="./components/PaginaDeEscuelaParaVerLeccion/PaginaDeEscuelaParaVerLeccion.component.js"></script>
+    <script src="./components/PaginaDeEscuelaParaEditarLeccion/PaginaDeEscuelaParaEditarLeccion.component.js"></script>
     <script src="./components/PaginaDePrensaParaVerNoticias/PaginaDePrensaParaVerNoticias.component.js"></script>
     <script src="./components/PaginaDePrensaParaVerNoticia/PaginaDePrensaParaVerNoticia.component.js"></script>
     <script src="./components/PaginaDePrensaParaEditarNoticia/PaginaDePrensaParaEditarNoticia.component.js"></script>

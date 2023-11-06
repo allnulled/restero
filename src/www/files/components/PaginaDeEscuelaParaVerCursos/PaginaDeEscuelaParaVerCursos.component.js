@@ -22,6 +22,9 @@ window.PaginaDeEscuelaParaVerCursos = Castelog.metodos.un_componente_vue2("Pagin
  + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'}]\"></BreadcrumbGenerico>"
  + "        <h5>Escuela</h5>"
  + "        <div class=\"panel_principal\" style=\"\">"
+ + "          <div class=\"panel_de_botones_superior\" v-if=\"es_administrador\">"
+ + "            <button v-on:click=\"() => ir_a_crear_curso()\">➕ Crear curso</button>"
+ + "          </div>"
  + "          <template v-if=\"cursos_de_escuela.length\">"
  + "            <div class=\"panel_de_botones_superior\">"
  + "              <table>"
@@ -103,7 +106,16 @@ throw error;
 }
 
 },
-methods:{ ir_a_curso( curso_index ) {try {
+methods:{ ir_a_crear_curso() {try {
+console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.ir_a_crear_curso");
+this.$router.history.push( "/escuela/crear/curso" );
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+ir_a_curso( curso_index ) {try {
 console.log('[DEBUG]', "PaginaDeEscuelaParaVerCursos.ir_a_curso");
 const curso = this.cursos_de_escuela[ curso_index ];
 this.$router.history.push( `/escuela/ver/curso/${curso.id}` );

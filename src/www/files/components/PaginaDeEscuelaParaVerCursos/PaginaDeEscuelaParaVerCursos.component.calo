@@ -21,6 +21,9 @@ asigno window.PaginaDeEscuelaParaVerCursos como un componente vue2 con nombre "P
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'}]"></BreadcrumbGenerico>
         <h5>Escuela</h5>
         <div class="panel_principal" style="">
+          <div class="panel_de_botones_superior" v-if="es_administrador">
+            <button v-on:click="() => ir_a_crear_curso()">➕ Crear curso</button>
+          </div>
           <template v-if="cursos_de_escuela.length">
             <div class="panel_de_botones_superior">
               <table>
@@ -103,6 +106,10 @@ asigno window.PaginaDeEscuelaParaVerCursos como un componente vue2 con nombre "P
       }.
     }.
     propiedad methods como {
+      método ir_a_crear_curso donde {
+        debugo "PaginaDeEscuelaParaVerCursos.ir_a_crear_curso".
+        hago this.$router.history.push("/escuela/crear/curso").
+      }.
       método ir_a_curso con (curso_index) donde {
         debugo "PaginaDeEscuelaParaVerCursos.ir_a_curso".
         creo curso como this.cursos_de_escuela[curso_index].

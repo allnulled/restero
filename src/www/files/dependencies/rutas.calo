@@ -59,6 +59,16 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDeForoParaEditarPost.
     propiedad props como { modalidad: "editar" }.
 }, {
+    propiedad path como "/foro/editar/tema".
+    propiedad name como "PaginaDeForoParaEditarTema".
+    propiedad component como PaginaDeForoParaEditarTema.
+    propiedad props como { modalidad: "editar" }.
+}, {
+    propiedad path como "/foro/crear/tema".
+    propiedad name como "PaginaDeForoParaEditarTema".
+    propiedad component como PaginaDeForoParaEditarTema.
+    propiedad props como { modalidad: "crear" }.
+}, {
     propiedad path como "/blog/ver/posts".
     propiedad name como "PaginaDeBlogParaVerPosts".
     propiedad component como PaginaDeBlogParaVerPosts.
@@ -104,10 +114,30 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDeEscuelaParaVerCurso.
     propiedad props como {}.
 }, {
+    propiedad path como "/escuela/crear/curso".
+    propiedad name como "PaginaDeEscuelaParaEditarCurso".
+    propiedad component como PaginaDeEscuelaParaEditarCurso.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/escuela/editar/curso/:id".
+    propiedad name como "PaginaDeEscuelaParaEditarCurso".
+    propiedad component como PaginaDeEscuelaParaEditarCurso.
+    propiedad props como { modalidad: "editar" }.
+}, {
     propiedad path como "/escuela/ver/leccion/:id".
     propiedad name como "PaginaDeEscuelaParaVerLeccion".
     propiedad component como PaginaDeEscuelaParaVerLeccion.
     propiedad props como {}.
+}, {
+    propiedad path como "/escuela/crear/leccion/para/curso/:id_de_curso".
+    propiedad name como "PaginaDeEscuelaParaEditarLeccion".
+    propiedad component como PaginaDeEscuelaParaEditarLeccion.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/escuela/editar/leccion/:id".
+    propiedad name como "PaginaDeEscuelaParaEditarLeccion".
+    propiedad component como PaginaDeEscuelaParaEditarLeccion.
+    propiedad props como { modalidad: "editar" }.
 }, {
     propiedad path como "/prensa/ver/noticias".
     propiedad name como "PaginaDePrensaParaVerNoticias".

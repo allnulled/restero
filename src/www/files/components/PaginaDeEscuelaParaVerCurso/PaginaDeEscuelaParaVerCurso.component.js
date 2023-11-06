@@ -22,6 +22,9 @@ window.PaginaDeEscuelaParaVerCurso = Castelog.metodos.un_componente_vue2("Pagina
  + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Escuela',link:'/escuela/ver/cursos'}]\"></BreadcrumbGenerico>"
  + "        <h5>Ver curso</h5>"
  + "        <div class=\"panel_principal\">"
+ + "          <div class=\"panel_de_botones_superior\" v-if=\"es_administrador\">"
+ + "            <button v-on:click=\"() => ir_a_crear_leccion()\">➕ Crear lección</button>"
+ + "          </div>"
  + "          <div class=\"lista_de_cursos\">"
  + "            <div class=\"curso_en_lista nohover\">"
  + "              <div class=\"titulo_de_curso\">{{ curso_de_escuela.titulo }}</div>"
@@ -52,7 +55,7 @@ window.PaginaDeEscuelaParaVerCurso = Castelog.metodos.un_componente_vue2("Pagina
  + "              </tr>"
  + "            </table>"
  + "          </div>"
- + "          <div class=\"panel_principal\">"
+ + "          <div class=\"\">"
  + "            <div class=\"lista_de_lecciones\" v-if=\"lecciones_de_curso.length\">"
  + "              <div class=\"leccion_en_lista\" v-on:click=\"() => ir_a_leccion(leccion.id)\" v-for=\"leccion, leccion_index in lecciones_de_curso\" v-bind:key=\"'leccion-' + leccion_index\">"
  + "                <div class=\"titulo_de_leccion\">{{ leccion.titulo }}</div>"
@@ -109,7 +112,15 @@ throw error;
 }
 
 },
-methods:{ async ir_a_leccion( id_leccion ) {try {
+methods:{ async ir_a_crear_leccion() {try {
+this.$router.history.push( "/escuela/crear/leccion/para/curso/" + this.$route.params.id );
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+async ir_a_leccion( id_leccion ) {try {
 console.log('[DEBUG]', "PaginaDeEscuelaParaVerCurso.ir_a_leccion");
 this.$router.history.push( "/escuela/ver/leccion/" + id_leccion );
 } catch(error) {

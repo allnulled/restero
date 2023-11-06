@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build-parser": "pegjs -o src/parsers/hyper-query-language.js src/parsers/hyper-query-language.pegjs",
+    "build-html": "cp src/www/files/index.1.html src/www/files/index.html",
     "build-tree": "tree -I node_modules . > tree.txt",
     "build-migration": "node src/configurations/db/migrations/migracion.generar.js",
     "start": "node src/deployer.js",

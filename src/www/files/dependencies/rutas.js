@@ -71,6 +71,18 @@ component:PaginaDeForoParaEditarPost,
 props:{ modalidad:"editar"
 }
 },
+{ path:"/foro/editar/tema",
+name:"PaginaDeForoParaEditarTema",
+component:PaginaDeForoParaEditarTema,
+props:{ modalidad:"editar"
+}
+},
+{ path:"/foro/crear/tema",
+name:"PaginaDeForoParaEditarTema",
+component:PaginaDeForoParaEditarTema,
+props:{ modalidad:"crear"
+}
+},
 { path:"/blog/ver/posts",
 name:"PaginaDeBlogParaVerPosts",
 component:PaginaDeBlogParaVerPosts,
@@ -125,10 +137,34 @@ component:PaginaDeEscuelaParaVerCurso,
 props:{ 
 }
 },
+{ path:"/escuela/crear/curso",
+name:"PaginaDeEscuelaParaEditarCurso",
+component:PaginaDeEscuelaParaEditarCurso,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/escuela/editar/curso/:id",
+name:"PaginaDeEscuelaParaEditarCurso",
+component:PaginaDeEscuelaParaEditarCurso,
+props:{ modalidad:"editar"
+}
+},
 { path:"/escuela/ver/leccion/:id",
 name:"PaginaDeEscuelaParaVerLeccion",
 component:PaginaDeEscuelaParaVerLeccion,
 props:{ 
+}
+},
+{ path:"/escuela/crear/leccion/para/curso/:id_de_curso",
+name:"PaginaDeEscuelaParaEditarLeccion",
+component:PaginaDeEscuelaParaEditarLeccion,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/escuela/editar/leccion/:id",
+name:"PaginaDeEscuelaParaEditarLeccion",
+component:PaginaDeEscuelaParaEditarLeccion,
+props:{ modalidad:"editar"
 }
 },
 { path:"/prensa/ver/noticias",

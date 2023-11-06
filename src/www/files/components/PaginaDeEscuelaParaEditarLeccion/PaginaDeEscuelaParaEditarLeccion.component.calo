@@ -1,5 +1,5 @@
-asigno window.PaginaDeForoParaEditarPost como un componente vue2 con nombre "PaginaDeForoParaEditarPost" con plantilla {
-  <div class="PaginaDeForoParaEditarPost Component">
+asigno window.PaginaDeEscuelaParaEditarLeccion como un componente vue2 con nombre "PaginaDeEscuelaParaEditarLeccion" con plantilla {
+  <div class="PaginaDeEscuelaParaEditarLeccion Component">
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -10,7 +10,7 @@ asigno window.PaginaDeForoParaEditarPost como un componente vue2 con nombre "Pag
                   <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
                 </td>
                 <td>
-                  <span class="">{{ modalidad === "crear" ? "Crear" : "Editar" }} post</span>
+                  <span class="">{{ modalidad === "crear" ? "Crear" : "Editar" }} leccion</span>
                 </td>
               </tr>
             </tbody>
@@ -18,32 +18,28 @@ asigno window.PaginaDeForoParaEditarPost como un componente vue2 con nombre "Pag
         </div>
       </div>
       <div v-if="root.esquema" class="window-body">
-        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Foro',link:'/foro/ver/temas'},{texto:'Tema',link:'/foro/ver/tema/'+(this.post.id_de_tema || this.$route.params.tema)}]"></BreadcrumbGenerico>
-        <h5>{{ modalidad === "crear" ? "Crear" : "Editar" }} post</h5>
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Escuela',link:'/escuela/ver/leccions'}]"></BreadcrumbGenerico>
+        <h5>{{ modalidad === "crear" ? "Crear" : "Editar" }} lección</h5>
         <div class="">
-          <div class="campo_de_formulario" style="display: none;">
-            <div class="enunciado_de_campo_de_formulario">ID de tema:</div>
-            <input style="width: 100%;" type="text" v-model="post.id_de_tema" />
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">ID de curso:</div>
+            <input style="width: 100%;" type="text" v-model="leccion.id_de_curso" disabled="true" />
           </div>
           <div class="campo_de_formulario">
-            <div class="enunciado_de_campo_de_formulario">Título del post:</div>
-            <input style="width: 100%;" type="text" v-model="post.titulo" />
+            <div class="enunciado_de_campo_de_formulario">Título del lección:</div>
+            <input style="width: 100%;" type="text" v-model="leccion.titulo" />
           </div>
           <div class="campo_de_formulario">
-            <div class="enunciado_de_campo_de_formulario">Subtítulo del post: (opcional)</div>
-            <input style="width: 100%;" type="text" v-model="post.subtitulo" />
+            <div class="enunciado_de_campo_de_formulario">Descripción del leccion:</div>
+            <input style="width: 100%;" type="text" v-model="leccion.descripcion" />
           </div>
           <div class="campo_de_formulario">
-            <div class="enunciado_de_campo_de_formulario">Contenido:</div>
-            <textarea v-model="post.contenido" placeholder="Este campo acepta HTML."></textarea>
-          </div>
-          <div class="campo_de_formulario">
-            <div class="enunciado_de_campo_de_formulario">Tags:</div>
-            <textarea v-model="post.tags"></textarea>
+            <div class="enunciado_de_campo_de_formulario">Contenido de la lección:</div>
+            <textarea v-model="leccion.contenido" placeholder="Este campo acepta HTML."></textarea>
           </div>
           <div class="panel_de_botones_inferior">
-            <button v-if="modalidad === 'crear'" v-on:click="() => crear_post()">➕ Crear post</button>
-            <button v-else-if="modalidad === 'editar'" v-on:click="() => guardar_post()">💾 Guardar post</button>
+            <button v-if="modalidad === 'crear'" v-on:click="() => crear_leccion()">➕ Crear lección</button>
+            <button v-else-if="modalidad === 'editar'" v-on:click="() => guardar_leccion()">💾 Guardar lección</button>
           </div>
         </div>
       </div>
@@ -62,56 +58,55 @@ asigno window.PaginaDeForoParaEditarPost como un componente vue2 con nombre "Pag
       }
     }.
     método data donde {
+      debugo "PaginaDeEscuelaParaEditarLeccion.data".
       retorno {
         es_administrador: false,
-        post: {
-          id_de_tema: this.$route.params.tema
-        }
+        leccion: {}
       }.
     }.
     propiedad methods como {
-      método asíncrono crear_post donde {
-        debugo "PaginaDeForoParaEditarPost.crear_post".
+      método asíncrono crear_leccion donde {
+        debugo "PaginaDeEscuelaParaEditarLeccion.rear_leccion".
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/insert/Post_de_foro"
+          con url "/api/v1/insert/Leccion_de_curso_de_escuela"
           con método "POST"
           con cuerpo {
-            ...incluyo this.post
+            ...incluyo this.leccion
           }
           con cabeceras {
             authorization: this.root.token_de_sesion
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
         imprimo respuesta_1.
-        hago this.$router.history.push("/foro/ver/tema/" + (this.$route.params.tema o this.post.id_de_tema)).
+        hago this.$router.history.push("/escuela/ver/curso/" + this.$route.params.id_de_curso).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
-      método asíncrono guardar_post donde {
-        debugo "PaginaDeForoParaEditarPost.guardar_post".
+      método asíncrono guardar_leccion donde {
+        debugo "PaginaDeEscuelaParaEditarLeccion.uardar_leccion".
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/update/Post_de_foro/" + this.$route.params.id
+          con url "/api/v1/update/Leccion_de_curso_de_escuela/" + this.$route.params.id
           con método "POST"
           con cuerpo {
             id: this.$route.params.id,
-            ...incluyo this.post
+            ...incluyo this.leccion
           }
           con cabeceras {
             authorization: this.root.token_de_sesion
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
         imprimo respuesta_1.
-        hago this.$router.history.push("/foro/ver/post/" + this.post.id).
+        hago this.$router.history.push("/escuela/ver/leccion/" + this.leccion.id).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
     método asíncrono mounted donde {
-      debugo "PaginaDeForoParaEditarPost.mounted".
+      debugo "PaginaDeEscuelaParaEditarLeccion.mounted".
       si this.modalidad es igual que "editar" {
-        creo post_id como this.$route.params.id.
+        creo leccion_id como this.$route.params.id.
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/select/Post_de_foro"
+          con url "/api/v1/select/Leccion_de_curso_de_escuela"
           con método "POST"
           con cuerpo {
             where: [
-              [ "id", "=", post_id ]
+              [ "id", "=", leccion_id ]
             ] textualizado
           }
           con cabeceras {
@@ -120,9 +115,11 @@ asigno window.PaginaDeForoParaEditarPost como un componente vue2 con nombre "Pag
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
         creo dato_1 como respuesta_1.data.resultado[0].
         si dato_1 es tipo indefinido retorno.
-        asigno this.post como dato_1.
+        asigno this.leccion como dato_1.
+        hago this.$forceUpdate(true).
       } pero si this.modalidad es igual que "crear" {
-        asigno this.post.id_de_tema como this.$route.params.tema.
+        asigno this.leccion.id_de_curso como this.$route.params.id_de_curso.
+        hago this.$forceUpdate(true).
       }.
     } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.

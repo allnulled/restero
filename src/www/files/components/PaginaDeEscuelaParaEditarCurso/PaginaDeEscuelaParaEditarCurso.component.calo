@@ -1,0 +1,114 @@
+asigno window.PaginaDeEscuelaParaEditarCurso como un componente vue2 con nombre "PaginaDeEscuelaParaEditarCurso" con plantilla {
+  <div class="PaginaDeEscuelaParaEditarCurso Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">{{ modalidad === "crear" ? "Crear" : "Editar" }} curso</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-if="root.esquema" class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Escuela',link:'/escuela/ver/cursos'}]"></BreadcrumbGenerico>
+        <h5>{{ modalidad === "crear" ? "Crear" : "Editar" }} curso</h5>
+        <div class="">
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Título del curso:</div>
+            <input style="width: 100%;" type="text" v-model="curso.titulo" />
+          </div>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Descripción del curso:</div>
+            <input style="width: 100%;" type="text" v-model="curso.descripcion" />
+          </div>
+          <div class="panel_de_botones_inferior">
+            <button v-if="modalidad === 'crear'" v-on:click="() => crear_curso()">➕ Crear curso</button>
+            <button v-else-if="modalidad === 'editar'" v-on:click="() => guardar_curso()">💾 Guardar curso</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      },
+      modalidad: {
+        type: String,
+        default: "crear"
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeEscuelaParaEditarCurso.data".
+      retorno {
+        es_administrador: false,
+        curso: {}
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono crear_curso donde {
+        debugo "PaginaDeEscuelaParaEditarCurso.crear_curso".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/insert/Curso_de_escuela"
+          con método "POST"
+          con cuerpo {
+            ...incluyo this.curso
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        imprimo respuesta_1.
+        hago this.$router.history.push("/escuela/ver/cursos").
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono guardar_curso donde {
+        debugo "PaginaDeEscuelaParaEditarCurso.guardar_curso".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/update/Curso_de_escuela/" + this.$route.params.id
+          con método "POST"
+          con cuerpo {
+            id: this.$route.params.id,
+            ...incluyo this.curso
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        imprimo respuesta_1.
+        hago this.$router.history.push("/escuela/ver/curso/" + this.curso.id).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      debugo "PaginaDeEscuelaParaEditarCurso.mounted".
+      si this.modalidad es igual que "editar" {
+        creo curso_id como this.$route.params.id.
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Curso_de_escuela"
+          con método "POST"
+          con cuerpo {
+            where: [
+              [ "id", "=", curso_id ]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo dato_1 como respuesta_1.data.resultado[0].
+        si dato_1 es tipo indefinido retorno.
+        asigno this.curso como dato_1.
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

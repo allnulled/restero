@@ -21,6 +21,9 @@ asigno window.PaginaDeEscuelaParaVerCurso como un componente vue2 con nombre "Pa
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Escuela',link:'/escuela/ver/cursos'}]"></BreadcrumbGenerico>
         <h5>Ver curso</h5>
         <div class="panel_principal">
+          <div class="panel_de_botones_superior" v-if="es_administrador">
+            <button v-on:click="() => ir_a_crear_leccion()">➕ Crear lección</button>
+          </div>
           <div class="lista_de_cursos">
             <div class="curso_en_lista nohover">
               <div class="titulo_de_curso">{{ curso_de_escuela.titulo }}</div>
@@ -51,7 +54,7 @@ asigno window.PaginaDeEscuelaParaVerCurso como un componente vue2 con nombre "Pa
               </tr>
             </table>
           </div>
-          <div class="panel_principal">
+          <div class="">
             <div class="lista_de_lecciones" v-if="lecciones_de_curso.length">
               <div class="leccion_en_lista" v-on:click="() => ir_a_leccion(leccion.id)" v-for="leccion, leccion_index in lecciones_de_curso" v-bind:key="'leccion-' + leccion_index">
                 <div class="titulo_de_leccion">{{ leccion.titulo }}</div>
@@ -108,6 +111,9 @@ asigno window.PaginaDeEscuelaParaVerCurso como un componente vue2 con nombre "Pa
       }.
     }.
     propiedad methods como {
+      método asíncrono ir_a_crear_leccion donde {
+        hago this.$router.history.push("/escuela/crear/leccion/para/curso/" + this.$route.params.id).
+      }.
       método asíncrono ir_a_leccion con (id_leccion) donde {
         debugo "PaginaDeEscuelaParaVerCurso.ir_a_leccion".
         hago this.$router.history.push("/escuela/ver/leccion/" + id_leccion).

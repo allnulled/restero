@@ -22,7 +22,7 @@ window.PaginaDeForoParaEditarPost = Castelog.metodos.un_componente_vue2("PaginaD
  + "        <BreadcrumbGenerico :root=\"root\" :migas=\"[{texto:'Inicio',link:'/'},{texto:'Foro',link:'/foro/ver/temas'},{texto:'Tema',link:'/foro/ver/tema/'+(this.post.id_de_tema || this.$route.params.tema)}]\"></BreadcrumbGenerico>"
  + "        <h5>{{ modalidad === \"crear\" ? \"Crear\" : \"Editar\" }} post</h5>"
  + "        <div class=\"\">"
- + "          <div class=\"campo_de_formulario\" style=\"display: block;\">"
+ + "          <div class=\"campo_de_formulario\" style=\"display: none;\">"
  + "            <div class=\"enunciado_de_campo_de_formulario\">ID de tema:</div>"
  + "            <input style=\"width: 100%;\" type=\"text\" v-model=\"post.id_de_tema\" />"
  + "          </div>"
