@@ -23,6 +23,8 @@ CREATE TABLE Leccion_de_curso_de_escuela /*
     @tiene_autorizador: fijar_momento_de_creacion
   */,
   id_de_curso INTEGER,
-  contenido TEXT,
+  contenido TEXT /*
+    @tiene_autorizador: solo_html_seguro
+  */,
   FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)
 );

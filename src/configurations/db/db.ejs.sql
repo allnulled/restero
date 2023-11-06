@@ -17,3 +17,7 @@
 <% if(deployer.settings.HAS_ESCUELA) { %>
 <%- include("/db/modules/escuela.ejs.sql", { deployer }); %>
 <% } %>
+
+<% if(deployer.settings.HAS_PRENSA) { %>
+<%- include("/db/modules/prensa.ejs.sql", { deployer }); %>
+<% } %>

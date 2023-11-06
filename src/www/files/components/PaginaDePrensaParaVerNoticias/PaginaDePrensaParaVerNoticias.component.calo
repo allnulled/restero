@@ -1,105 +1,92 @@
-asigno window.PaginaDeMensajesParaInicio como un componente vue2 con nombre "PaginaDeMensajesParaInicio" con plantilla {
-  <div class="PaginaDeMensajesParaInicio Component">
+asigno window.PaginaDePrensaParaVerNoticias como un componente vue2 con nombre "PaginaDePrensaParaVerNoticias" con plantilla {
+  <div class="PaginaDePrensaParaVerNoticias Component">
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-text">
           <table class="">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
-                </td>
-                <td>
-                  <span class="">Mensajes</span>
-                </td>
-              </tr>
-            </tbody>
+          <tbody>
+            <tr>
+            <td>
+              <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+            </td>
+            <td>
+              <span class="">Noticias</span>
+            </td>
+            </tr>
+          </tbody>
           </table>
         </div>
       </div>
-      <div v-if="root.esquema" class="window-body">
+      <div class="window-body">
         <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'}]"></BreadcrumbGenerico>
-        <h5>Mensajes</h5>
-        <div class="panel_principal">
+        <h5>Noticias</h5>
+        <div class="panel_principal" style="">
           <div class="panel_de_botones_superior">
-            <button v-on:click="() => ir_a_redactar_mensaje()">📄 Redactar mensaje</button>
+            <button v-on:click="() => ir_a_crear_noticia()">➕ Crear noticia</button>
           </div>
-          <div class="" v-if="(pagina === 1) && (mensajes.length === 0)">
-            <div>No hay mensajes.</div>
-          </div>
+          <template v-if="noticias_de_prensa.length">
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_posterior_de_paginacion()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="lista_de_posts">
+              <template v-for="noticia, noticia_index in noticias_de_prensa">
+                <div class="post_en_lista" v-bind:key="'foro-noticia-noticia-' + noticia_index" v-on:click="() => ir_a_noticia(noticia.id)">
+                  <div class="titulo_de_post">
+                    {{ noticia.titulo }}
+                  </div>
+                  <div class="subtitulo_de_post">
+                    {{ noticia.subtitulo }}
+                  </div>
+                  <div class="autor_de_post" v-if="autores_de_noticias[noticia.id_de_autor]">
+                    Escrito el {{ noticia.fecha_de_creacion }} por «{{ autores_de_noticias[noticia.id_de_autor].nombre }}»
+                  </div>
+                  <div class="contenido_de_post" v-if="noticia.contenido">
+                    {{ noticia.contenido.substring(0, 50) }}...
+                  </div>
+                  <div class="tags_de_post" v-if="noticia.tags">
+                    Tags: {{ noticia.tags }}
+                  </div>
+                </div>
+              </template>
+            </div>
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_posterior_de_paginacion()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </template>
           <div v-else>
-            <div class="panel_de_botones_superior">
-              <table>
-                <tr>
-                  <td>
-                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
-                  </td>
-                  <td>
-                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
-                  </td>
-                  <td style="width: 100%; text-align: center;">Página {{ pagina }}</td>
-                  <td>
-                    <button style="min-width: auto;" v-on:click="() => ir_a_posterior_de_paginacion()"> » </button>
-                  </td>
-                  <td style="display: none;">
-                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div class="panel_de_mensajes" v-if="mensajes.length">
-              <div class="lista_de_mensajes">
-                <table class="tabla_de_mensajes">
-                  <tr>
-                    <th class="">
-                      ID
-                    </th>
-                    <th class="">
-                      Asunto
-                    </th>
-                    <th class="">
-                      Usuario origen
-                    </th>
-                    <th class="">
-                      Fecha de creación
-                    </th>
-                  </tr>
-                  <tr class="fila_de_mensaje" v-for="mensaje, mensaje_index in mensajes" v-bind:key="'mensajes-mensaje-' + mensaje_index" v-on:click="() => ir_a_ver_mensaje(mensaje.id)">
-                    <td class="mensaje_id">
-                      {{ mensaje.id }}
-                    </td>
-                    <td class="mensaje_asunto">
-                      {{ mensaje.asunto }}
-                    </td>
-                    <td class="mensaje_usuario_origen">
-                      {{ usuarios_de_mensajes[mensaje.id_de_usuario_origen].nombre }}
-                    </td>
-                    <td class="mensaje_fecha_de_creacion">
-                      {{ mensaje.fecha_de_creacion }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <div class="panel_de_botones_superior">
-              <table>
-                <tr>
-                  <td>
-                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
-                  </td>
-                  <td>
-                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
-                  </td>
-                  <td style="width: 100%; text-align: center;">Página {{ pagina }}</td>
-                  <td>
-                    <button style="min-width: auto;" v-on:click="() => ir_a_posterior_de_paginacion()"> » </button>
-                  </td>
-                  <td style="display: none;">
-                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            No hay noticias actualmente.
           </div>
         </div>
       </div>
@@ -114,45 +101,46 @@ asigno window.PaginaDeMensajesParaInicio como un componente vue2 con nombre "Pag
       }
     }.
     método data donde {
-      debugo "PaginaDeMensajesParaInicio.data".
+      debugo "PaginaDePrensaParaVerNoticias.data".
       retorno {
-        mensajes: [],
-        usuarios_de_mensajes: {},
-        pagina: 1
+        pagina: 1,
+        noticias_de_prensa: [],
+        autores_de_noticias: {}
       }.
-    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
     propiedad methods como {
+      método asíncrono ir_a_crear_noticia donde {
+        hago this.$router.history.push("/prensa/crear/noticia").
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_principio_de_paginacion donde {
-        debugo "PaginaDeForoParaVerPosts.ir_a_principio_de_paginacion".
+        debugo "PaginaDePrensaParaVerNoticias.ir_a_principio_de_paginacion".
         asigno this.pagina como 1.
-        creo resultado como asíncronamente this.obtener_mensajes().
+        creo resultado como asíncronamente this.obtener_noticias().
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_anterior_de_paginacion donde {
-        debugo "PaginaDeForoParaVerPosts.ir_a_anterior_de_paginacion".
+        debugo "PaginaDePrensaParaVerNoticias.ir_a_anterior_de_paginacion".
         si this.pagina es igual que 1 retorno.
         decremento this.pagina.
-        creo resultado como asíncronamente this.obtener_mensajes().
+        creo resultado como asíncronamente this.obtener_noticias().
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono ir_a_posterior_de_paginacion donde {
-        debugo "PaginaDeForoParaVerPosts.ir_a_posterior_de_paginacion".
-        si this.mensajes.length no es igual que 20 retorno.
+        debugo "PaginaDePrensaParaVerNoticias.ir_a_posterior_de_paginacion".
         incremento this.pagina.
-        creo resultado como asíncronamente this.obtener_mensajes().
+        creo resultado como asíncronamente this.obtener_noticias().
         si resultado es igual que 0 decremento this.pagina.
         hago this.$forceUpdate(true).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
-      método ir_a_redactar_mensaje donde {
-        debugo "PaginaDeMensajesParaInicio.ir_a_redactar_mensaje".
-        hago this.$router.history.push("/mensajes/crear/mensaje").
-      }.
-      método asíncrono ir_a_ver_mensaje con (id_mensaje) donde {
-        hago this.$router.history.push("/mensajes/ver/mensaje/" + id_mensaje).
-      }.
-      método asíncrono obtener_mensajes donde {
+      método ir_a_noticia con (id_noticia) donde {
+        debugo "PaginaDePrensaParaVerNoticias.ir_a_noticia".
+        hago this.$router.history.push("/prensa/ver/noticia/" + id_noticia).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_noticias donde {
+        debugo "PaginaDePrensaParaVerNoticias.obtener_noticias".
+        ###############################################
         creo respuesta_1 como asíncronamente una petición http
-          con url "/api/v1/select/Mensaje_de_mensajeria"
+          con url "/api/v1/select/Noticia_de_prensa"
           con método "POST"
           con cuerpo {
             page: this.pagina,
@@ -163,36 +151,42 @@ asigno window.PaginaDeMensajesParaInicio como un componente vue2 con nombre "Pag
           con cabeceras {
             authorization: this.root.token_de_sesion
           }.
-        imprimo respuesta_1.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
-        si respuesta_1.data.resultado.length es igual que 0 retorno 0.
-        creo ids_de_usuario como respuesta_1.data.resultado.reduce(una función con (salida, mensaje) donde {
-          si salida.indexOf(mensaje.id_de_usuario_origen) es igual que 0-1 {
-            hago salida.push(mensaje.id_de_usuario_origen).
+        creo datos_1 como respuesta_1.data.resultado.
+        si datos_1.length es igual que 0 retorno 0.
+        creo ids_de_autores como datos_1.reduce(una función con (salida, noticia) donde {
+          si salida.indexOf(noticia.id_de_autor) es igual que 0-1 {
+            hago salida.push(noticia.id_de_autor).
           }.
           retorno salida.
         }, []).
+        ###############################################
         creo respuesta_2 como asíncronamente una petición http
           con url "/api/v1/select/Usuario"
           con método "POST"
           con cuerpo {
             where: [
-              ["id", "IN", ids_de_usuario.join(";")]
+              ["id", "IN", ids_de_autores.join(";")]
             ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
           }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_2, this).
-        creo usuarios como respuesta_2.data.resultado.reduce(una función con (salida, usuario) donde {
-          asigno salida[usuario.id] como usuario.
+        creo datos_2 como respuesta_2.data.resultado.
+        creo datos_de_autores como datos_2.reduce(una función con (salida, autor) donde {
+          asigno salida[autor.id] como autor.
           retorno salida.
         }, {}).
-        asigno this.usuarios_de_mensajes como usuarios.
-        asigno this.mensajes como respuesta_1.data.resultado.
+        ###############################################
+        asigno this.autores_de_noticias como datos_de_autores.
+        asigno this.noticias_de_prensa como datos_1.
         hago this.$forceUpdate(true).
-        retorno this.mensajes.length.
       } en errores hago this.$window.$notificaciones.notificar_error(error).
     }.
-    método asíncrono mounted donde {
-      hago this.obtener_mensajes().
+    método mounted donde {
+      debugo "PaginaDePrensaParaVerNoticias.mounted".
+      hago this.obtener_noticias().
     } en errores hago this.$window.$notificaciones.notificar_error(error).
   }.
 }.

@@ -100,7 +100,9 @@ CREATE TABLE Post_de_blog /*
   */,
   imagen VARCHAR(255),
   tags VARCHAR(1024),
-  contenido TEXT NOT NULL,
+  contenido TEXT NOT NULL /*
+    @tiene_autorizador: solo_html_seguro
+  */,
   id_de_autor INTEGER /*
     @tiene_autorizador: fijar_id_de_usuario
   */,
@@ -146,8 +148,10 @@ CREATE TABLE Post_de_foro /*
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   titulo VARCHAR(255) NOT NULL UNIQUE,
   subtitulo VARCHAR(512),
-  contenido TEXT NOT NULL,
-  tags VARCHAR(255),
+  contenido TEXT NOT NULL /*
+    @tiene_autorizador: solo_html_seguro
+  */,
+  tags VARCHAR(512),
   fecha_de_creacion DATETIME /*
     @tiene_autorizador: fijar_momento_de_creacion
     @tiene_autorizador: no_modificable
@@ -225,6 +229,49 @@ CREATE TABLE Leccion_de_curso_de_escuela /*
     @tiene_autorizador: fijar_momento_de_creacion
   */,
   id_de_curso INTEGER,
-  contenido TEXT,
+  contenido TEXT /*
+    @tiene_autorizador: solo_html_seguro
+  */,
   FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)
+);
+
+
+
+
+
+CREATE TABLE Noticia_de_prensa /*
+  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo VARCHAR(255) NOT NULL,
+  subtitulo VARCHAR(512),
+  contenido TEXT NOT NULL /*
+    @tiene_autorizador: solo_html_seguro
+  */,
+  tags VARCHAR(512),
+  fecha_de_creacion DATETIME /*
+    @tiene_autorizador: fijar_momento_de_creacion
+    @tiene_autorizador: no_modificable
+  */,
+  id_de_autor INTEGER /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */,
+  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)
+);
+
+CREATE TABLE Comentario_de_noticia_de_prensa /*
+  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor
+*/ (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  contenido TEXT,
+  fecha_de_creacion DATETIME /*
+    @tiene_autorizador: fijar_momento_de_creacion
+    @tiene_autorizador: no_modificable
+  */,
+  id_de_autor INTEGER /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */,
+  id_de_noticia INTEGER,
+  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),
+  FOREIGN KEY (id_de_noticia) REFERENCES Noticia_de_prensa (id)
 );

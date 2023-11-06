@@ -366,7 +366,9 @@
                 "columna": "contenido",
                 "tipo": "TEXT",
                 "detalles": "NOT NULL",
-                "atributos": []
+                "atributos": [
+                    "tiene_autorizador: solo_html_seguro"
+                ]
             },
             {
                 "sentencia": "columna",
@@ -384,7 +386,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\n\n\n\nCREATE TABLE Post_de_blog /*\n  @tiene_fichero: imagen\n  @tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) UNIQUE NOT NULL,\n  subtitulo VARCHAR(255),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  imagen VARCHAR(255),\n  tags VARCHAR(1024),\n  contenido TEXT NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
+        "script": "\n\n\n\n\nCREATE TABLE Post_de_blog /*\n  @tiene_fichero: imagen\n  @tiene_autorizador: incluir: insert | update | delete: { \"permisos\": [\"permiso de administración\"] }\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) UNIQUE NOT NULL,\n  subtitulo VARCHAR(255),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  imagen VARCHAR(255),\n  tags VARCHAR(1024),\n  contenido TEXT NOT NULL /*\n    @tiene_autorizador: solo_html_seguro\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Comentario_de_post_de_blog",
@@ -537,13 +539,15 @@
                 "columna": "contenido",
                 "tipo": "TEXT",
                 "detalles": "NOT NULL",
-                "atributos": []
+                "atributos": [
+                    "tiene_autorizador: solo_html_seguro"
+                ]
             },
             {
                 "sentencia": "columna",
                 "columna": "tags",
                 "tipo": "VARCHAR",
-                "detalles": "(255)",
+                "detalles": "(512)",
                 "atributos": []
             },
             {
@@ -585,7 +589,7 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Post_de_foro /*\n  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) NOT NULL UNIQUE,\n  subtitulo VARCHAR(512),\n  contenido TEXT NOT NULL,\n  tags VARCHAR(255),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_tema INTEGER NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_tema) REFERENCES Tema_de_foro (id),\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
+        "script": "\n\nCREATE TABLE Post_de_foro /*\n  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) NOT NULL UNIQUE,\n  subtitulo VARCHAR(512),\n  contenido TEXT NOT NULL /*\n    @tiene_autorizador: solo_html_seguro\n  */,\n  tags VARCHAR(512),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_tema INTEGER NOT NULL,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_tema) REFERENCES Tema_de_foro (id),\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
     },
     {
         "tabla": "Comentario_de_post_de_foro",
@@ -804,7 +808,9 @@
                 "columna": "contenido",
                 "tipo": "TEXT",
                 "detalles": "",
-                "atributos": []
+                "atributos": [
+                    "tiene_autorizador: solo_html_seguro"
+                ]
             },
             {
                 "sentencia": "clave foránea",
@@ -813,6 +819,138 @@
                 "columna_foranea": "id"
             }
         ],
-        "script": "\n\nCREATE TABLE Leccion_de_curso_de_escuela /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(1024) NOT NULL,\n  descripcion TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_curso INTEGER,\n  contenido TEXT,\n  FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)\n);"
+        "script": "\n\nCREATE TABLE Leccion_de_curso_de_escuela /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(1024) NOT NULL,\n  descripcion TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_curso INTEGER,\n  contenido TEXT /*\n    @tiene_autorizador: solo_html_seguro\n  */,\n  FOREIGN KEY (id_de_curso) REFERENCES Curso_de_escuela (id)\n);"
+    },
+    {
+        "tabla": "Noticia_de_prensa",
+        "atributos": [
+            "tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "titulo",
+                "tipo": "VARCHAR",
+                "detalles": "(255) NOT NULL",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "subtitulo",
+                "tipo": "VARCHAR",
+                "detalles": "(512)",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contenido",
+                "tipo": "TEXT",
+                "detalles": "NOT NULL",
+                "atributos": [
+                    "tiene_autorizador: solo_html_seguro"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "tags",
+                "tipo": "VARCHAR",
+                "detalles": "(512)",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion",
+                    "tiene_autorizador: no_modificable"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_autor",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_id_de_usuario"
+                ]
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_autor",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\n\n\n\n\nCREATE TABLE Noticia_de_prensa /*\n  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo VARCHAR(255) NOT NULL,\n  subtitulo VARCHAR(512),\n  contenido TEXT NOT NULL /*\n    @tiene_autorizador: solo_html_seguro\n  */,\n  tags VARCHAR(512),\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id)\n);"
+    },
+    {
+        "tabla": "Comentario_de_noticia_de_prensa",
+        "atributos": [
+            "tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contenido",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion",
+                    "tiene_autorizador: no_modificable"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_autor",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_id_de_usuario"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_noticia",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_autor",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_noticia",
+                "tabla_foranea": "Noticia_de_prensa",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Comentario_de_noticia_de_prensa /*\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  contenido TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_noticia INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_noticia) REFERENCES Noticia_de_prensa (id)\n);"
     }
 ]

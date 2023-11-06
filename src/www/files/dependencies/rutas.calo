@@ -109,6 +109,26 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDeEscuelaParaVerLeccion.
     propiedad props como {}.
 }, {
+    propiedad path como "/prensa/ver/noticias".
+    propiedad name como "PaginaDePrensaParaVerNoticias".
+    propiedad component como PaginaDePrensaParaVerNoticias.
+    propiedad props como {}.
+}, {
+    propiedad path como "/prensa/ver/noticia/:id".
+    propiedad name como "PaginaDePrensaParaVerNoticia".
+    propiedad component como PaginaDePrensaParaVerNoticia.
+    propiedad props como {}.
+}, {
+    propiedad path como "/prensa/crear/noticia".
+    propiedad name como "PaginaDePrensaParaEditarNoticia".
+    propiedad component como PaginaDePrensaParaEditarNoticia.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/prensa/editar/noticia/:id".
+    propiedad name como "PaginaDePrensaParaEditarNoticia".
+    propiedad component como PaginaDePrensaParaEditarNoticia.
+    propiedad props como { modalidad: "editar" }.
+}, {
     propiedad path como "/".
     propiedad name como "Inicio".
     propiedad component como PaginaDeInicio.

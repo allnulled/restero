@@ -52,7 +52,7 @@ asigno window.PaginaDeEscuelaParaVerCurso como un componente vue2 con nombre "Pa
             </table>
           </div>
           <div class="panel_principal">
-            <div class="lista_de_lecciones">
+            <div class="lista_de_lecciones" v-if="lecciones_de_curso.length">
               <div class="leccion_en_lista" v-on:click="() => ir_a_leccion(leccion.id)" v-for="leccion, leccion_index in lecciones_de_curso" v-bind:key="'leccion-' + leccion_index">
                 <div class="titulo_de_leccion">{{ leccion.titulo }}</div>
                 <div class="fecha_de_creacion_de_leccion">
@@ -62,6 +62,9 @@ asigno window.PaginaDeEscuelaParaVerCurso como un componente vue2 con nombre "Pa
                   <div>{{ leccion.descripcion }}</div>
                 </div>
               </div>
+            </div>
+            <div v-else-if="lecciones_de_curso.length === 0">
+              No hay lecciones de curso.
             </div>
           </div>
           <div class="panel_de_botones_superior">

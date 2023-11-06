@@ -124,6 +124,26 @@ INSERT INTO Leccion_de_curso_de_escuela(
     texto += item2;
 }
 
+
+
+// NOTICIAS DE PRENSA:
+
+Noticias_de_prensa:
+for (let index = 0; index < 100; index++) {
+    // break Noticias_de_prensa;
+    const item = `
+-- Sentencia:
+INSERT INTO Noticia_de_prensa(titulo, subtitulo, contenido, fecha_de_creacion, id_de_autor) VALUES(
+    'Noticia ${index}',
+    'Subtítulo de post ${index}',
+    'Contenido del post ${index}. En algún lugar de la Mancha de cuyo nombre no quiero acordarme residía un tal hidalgo que no sé qué y no sé cuantos bla bla habladurías y letras, muchas letras explicando una historieta larguísima de un tal Quijote.',
+    '05-01-2026 14:50:00',
+    1
+);
+`;
+    texto += item;
+}
+
 require("fs").writeFileSync(__dirname + "/migracion.generada.sql", texto, "utf8");
 const migracion_en_texto = require("fs").readFileSync(__dirname + "/migracion.generada.sql").toString();
 const migracion_inicial = require("fs").readFileSync(__dirname + "/migracion.sql").toString();

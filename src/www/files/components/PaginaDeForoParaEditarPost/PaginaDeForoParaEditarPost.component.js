@@ -36,7 +36,7 @@ window.PaginaDeForoParaEditarPost = Castelog.metodos.un_componente_vue2("PaginaD
  + "          </div>"
  + "          <div class=\"campo_de_formulario\">"
  + "            <div class=\"enunciado_de_campo_de_formulario\">Contenido:</div>"
- + "            <textarea v-model=\"post.contenido\"></textarea>"
+ + "            <textarea v-model=\"post.contenido\" placeholder=\"Este campo acepta HTML.\"></textarea>"
  + "          </div>"
  + "          <div class=\"campo_de_formulario\">"
  + "            <div class=\"enunciado_de_campo_de_formulario\">Tags:</div>"

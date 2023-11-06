@@ -13,5 +13,6 @@
     "HAS_BLOG": true,
     "HAS_FORO": true,
     "HAS_MENSAJERIA": true,
-    "HAS_ESCUELA": true
+    "HAS_ESCUELA": true,
+    "HAS_PRENSA": true
 }

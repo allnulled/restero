@@ -413,3 +413,6 @@ Pero todavía no...
 
 **Versión `v0.0.70`.** *El 5 de noviembre de 2023 a las 22:17pm.*
 - [✔] Módulo de Escuela (BD y UI) funcional y securizado
+
+**Versión `v0.0.71`.** *El 6 de noviembre de 2023 a las 12:30pm.*
+- [✔] Módulo de Prensa (BD y UI) funcional y securizado

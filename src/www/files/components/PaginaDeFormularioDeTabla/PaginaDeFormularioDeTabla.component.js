@@ -207,6 +207,7 @@ const respuesta_crear = (await Castelog.metodos.una_peticion_http(`/api/v1/inser
 }, null, null));
 this.$window.utilidades.gestion_de_error_desde_respuesta( respuesta_crear,
 this );
+this.$router.history.push( "/explorador/" + this.$route.params.id_de_tabla );
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
 },

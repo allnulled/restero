@@ -32,7 +32,7 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
               Escrito el {{ post_del_blog.fecha_de_creacion }} por {{ autor.nombre }}
             </div>
             <div class="contenido_de_post">
-              <div>{{ post_del_blog.contenido }}</div>
+              <div v-html="post_del_blog.contenido"></div>
             </div>
             <div class="tags_de_post">
               <div>Tags: {{ post_del_blog.tags }}</div>
@@ -41,8 +41,8 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
           <div class="panel_de_comentarios" style="margin-top: 4px;">
             <div class="ver_post">
               <h5>Ver comentarios</h5>
-              <div style="padding: 4px; padding-top: 0px;">
-                <div class="panel_de_botones_superior" style="text-align: left;">
+              <div style="padding: 4px; padding-top: 0px; padding-bottom: 0px;">
+                <div class="" style="text-align: left; padding-bottom: 4px;">
                   <button style="width: 100%;" v-on:click="() => abrir_creador_de_comentarios()" v-if="!esta_mostrando_creador_de_comentario">➕ Crear comentario</button>
                   <div class="panel_de_creador_de_comentarios" v-else>
                     <button style="width: 100%;" v-on:click="() => cerrar_creador_de_comentarios()">Cerrar</button>
@@ -64,7 +64,7 @@ asigno window.PaginaDeBlogParaVerPost como un componente vue2 con nombre "Pagina
                       <td>
                         <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_comentarios()"> « </button>
                       </td>
-                      <td style="width: 100%;"></td>
+                      <td style="width: 100%; text-align: center;">Página {{ pagina_de_comentarios }}</td>
                       <td>
                         <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_comentarios()"> » </button>
                       </td>

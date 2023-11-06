@@ -197,6 +197,7 @@ asigno window.PaginaDeFormularioDeDatoDeTabla como un componente vue2 con nombre
           }
           con cabeceras { authorization: this.root.token_de_sesion }.
         hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_crear, this).
+        hago this.$router.history.push("/explorador/" + this.$route.params.id_de_tabla).
       } en errores hago this.$window.$notificaciones.notificar_error(error).
       método asíncrono eliminar_fila () donde {
         debugo "PaginaDeFormularioDeDatoDeTabla.eliminar_fila".

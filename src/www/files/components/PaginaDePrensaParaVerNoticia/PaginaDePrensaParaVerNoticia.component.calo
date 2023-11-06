@@ -1,0 +1,131 @@
+asigno window.PaginaDePrensaParaVerNoticia como un componente vue2 con nombre "PaginaDePrensaParaVerNoticia" con plantilla {
+  <div class="PaginaDePrensaParaVerNoticia Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Ver noticia</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body" v-if="noticia_de_prensa">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Noticias',link:'/prensa/ver/noticias'}]"></BreadcrumbGenerico>
+        <h5>Ver noticia</h5>
+        <div class="panel_principal">
+          <div class="panel_de_botones_superior" v-if="es_autor_de_noticia">
+            <button v-on:click="() => eliminar_noticia()">🗑 Eliminar noticia</button>
+            <button v-on:click="() => ir_a_editar_noticia()">🖊 Editar noticia</button>
+          </div>
+          <div class="ver_post">
+            <div class="titulo_de_post">{{ noticia_de_prensa.titulo }}</div>
+            <div class="subtitulo_de_post">{{ noticia_de_prensa.subtitulo }}</div>
+            <div class="autor_de_post">
+              Escrito el {{ noticia_de_prensa.fecha_de_creacion }} por {{ autor.nombre }}
+            </div>
+            <div class="contenido_de_post">
+              <div v-html="noticia_de_prensa.contenido"></div>
+            </div>
+            <div class="tags_de_post">
+              <div>Tags: {{ noticia_de_prensa.tags }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDePrensaParaVerNoticia.data".
+      retorno {
+        es_autor_de_noticia: false,
+        noticia_de_prensa: {},
+        autor: {},
+        pagina_de_comentarios: 1,
+        comentarios: [],
+        autores_de_comentarios: {},
+        esta_mostrando_creador_de_comentario: false,
+        esta_creando_comentario: false,
+        nuevo_comentario: ""
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono eliminar_noticia donde {
+        debugo "PaginaDePrensaParaVerNoticia.eliminar_noticia".
+        creo confirmacion como this.$window.confirm("¿Seguro que quieres eliminar esta noticia?").
+        si no confirmacion retorno.
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/delete/Noticia_de_prensa"
+          con método "POST"
+          con cuerpo {
+            id: this.noticia_de_prensa.id
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        hago this.$router.history.push("/prensa/ver/noticias").
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método ir_a_editar_noticia donde {
+        debugo "PaginaDePrensaParaVerNoticia.ir_a_editar_noticia".
+        hago this.$router.history.push("/prensa/editar/noticia/" + this.$route.params.id).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_noticia donde {
+        debugo "PaginaDePrensaParaVerNoticia.obtener_noticia".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Noticia_de_prensa"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo dato_1 como respuesta_1.data.resultado[0].
+        creo respuesta_2 como asíncronamente una petición http
+          con url "/api/v1/select/Usuario"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", dato_1.id_de_autor]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_2, this).
+        creo dato_2 como respuesta_2.data.resultado[0].
+        asigno this.noticia_de_prensa como dato_1.
+        asigno this.autor como dato_2.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      debugo "PaginaDePrensaParaVerNoticia.mounted".
+      en proceso obtener_noticia {
+        hago asíncronamente this.obtener_noticia().
+      }.
+      en proceso averiguar_si_es_autor_de_noticia {
+        asigno this.es_autor_de_noticia como this.root.autentificacion.usuario.id es igual que this.noticia_de_prensa.id_de_autor.
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

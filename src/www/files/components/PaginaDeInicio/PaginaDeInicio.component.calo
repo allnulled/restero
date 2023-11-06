@@ -19,43 +19,50 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       </div>
       <div v-if="root.esquema" class="window-body">
         <h5>Inicio</h5>
-        <ul>
-          <li v-if="tiene_blog">
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/blog/ver/posts')">
-              Blog
-            </span>
-          </li>
-          <li v-if="tiene_foro">
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/foro/ver/temas')">
-              Foro
-            </span>
-          </li>
-          <li v-if="tiene_mensajeria">
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/mensajes/inicio')">
-              Mensajes
-            </span>
-          </li>
-          <li v-if="tiene_escuela">
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/escuela/ver/cursos')">
-              Escuela
-            </span>
-          </li>
-          <li>
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/administracion')">
-              Panel de administración
-            </span>
-          </li>
-          <li v-if="$window.utilidades.es_administrador(root.autentificacion)">
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/importar_exportar_datos')">
-              Importar o exportar datos
-            </span>
-          </li>
-          <li>
-            <span class="como_link" v-on:click="() => abrir_pagina_de('/configuraciones')">
-              Configuraciones
-            </span>
-          </li>
-        </ul>
+        <div style="text-align: center;">
+          <ul class="lista_de_menu_principal" style="display: inline-block; padding: 0;">
+            <li v-if="tiene_blog">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/blog/ver/posts')">
+                Blog
+              </span>
+            </li>
+            <li v-if="tiene_foro">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/foro/ver/temas')">
+                Foro
+              </span>
+            </li>
+            <li v-if="tiene_mensajeria">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/mensajes/inicio')">
+                Mensajes
+              </span>
+            </li>
+            <li v-if="tiene_escuela">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/escuela/ver/cursos')">
+                Escuela
+              </span>
+            </li>
+            <li v-if="tiene_prensa">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/prensa/ver/noticias')">
+                Noticias
+              </span>
+            </li>
+            <li>
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/administracion')">
+                Panel de administración
+              </span>
+            </li>
+            <li v-if="$window.utilidades.es_administrador(root.autentificacion)">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/importar_exportar_datos')">
+                Importar o exportar datos
+              </span>
+            </li>
+            <li>
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/configuraciones')">
+                Configuraciones
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -73,7 +80,8 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
         tiene_blog: false,
         tiene_foro: false,
         tiene_mensajeria: false,
-        tiene_escuela: false
+        tiene_escuela: false,
+        tiene_prensa: false
       }.
     } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
@@ -104,6 +112,12 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       }, false).
       asigno this.tiene_escuela como this.root.esquema.reduce(una función con (salida, tabla) donde {
         si tabla.tabla es igual que "Curso_de_escuela" {
+          asigno salida como true.
+        }.
+        retorno salida.
+      }, false).
+      asigno this.tiene_prensa como this.root.esquema.reduce(una función con (salida, tabla) donde {
+        si tabla.tabla es igual que "Noticia_de_prensa" {
           asigno salida como true.
         }.
         retorno salida.

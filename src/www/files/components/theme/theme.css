@@ -403,8 +403,33 @@ hr {
     font-size: 10px;
     padding: 4px;
 }
-
 .lista_de_cursos > .curso_en_lista.nohover:hover {
     background-color: inherit;
     cursor: default;
+}
+
+.lista_de_menu_principal {
+    list-style-type: none;
+}
+.lista_de_menu_principal > li {
+    display: inline-block;
+    padding: 4px;
+    vertical-align: top;
+}
+.lista_de_menu_principal > li > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    border-radius: 4pt;
+    border: 1px solid #333;
+    vertical-align: top;
+    font-size: 10px;
+    word-wrap: anywhere;
+    padding: 4px;
+}
+.lista_de_menu_principal > li > span:hover {
+    background-color: #CCC;
 }

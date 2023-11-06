@@ -15,7 +15,9 @@ CREATE TABLE Post_de_blog /*
   */,
   imagen VARCHAR(255),
   tags VARCHAR(1024),
-  contenido TEXT NOT NULL,
+  contenido TEXT NOT NULL /*
+    @tiene_autorizador: solo_html_seguro
+  */,
   id_de_autor INTEGER /*
     @tiene_autorizador: fijar_id_de_usuario
   */,

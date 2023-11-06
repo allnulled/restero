@@ -13,7 +13,7 @@ module.exports = function (deployer) {
                     // Solo asegurarse que sea parseable es suficiente:
                     // Aquí es donde hay que usar la librería: sanitize-html
                     // 
-                    Editor_wysiwyg_parser.parse(request.hql_data.item[columna_id]);
+                    request.hql_data.item[columna_id] = require("sanitize-html")(request.hql_data.item[columna_id]);
                     // 
                 } catch(error) {
                     throw new Error(`La columna «${columna_id}» requiere de ser escrita para ser HTML seguro por autorizador de columna «solo_html_seguro»`);

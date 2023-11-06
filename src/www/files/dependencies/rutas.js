@@ -131,6 +131,30 @@ component:PaginaDeEscuelaParaVerLeccion,
 props:{ 
 }
 },
+{ path:"/prensa/ver/noticias",
+name:"PaginaDePrensaParaVerNoticias",
+component:PaginaDePrensaParaVerNoticias,
+props:{ 
+}
+},
+{ path:"/prensa/ver/noticia/:id",
+name:"PaginaDePrensaParaVerNoticia",
+component:PaginaDePrensaParaVerNoticia,
+props:{ 
+}
+},
+{ path:"/prensa/crear/noticia",
+name:"PaginaDePrensaParaEditarNoticia",
+component:PaginaDePrensaParaEditarNoticia,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/prensa/editar/noticia/:id",
+name:"PaginaDePrensaParaEditarNoticia",
+component:PaginaDePrensaParaEditarNoticia,
+props:{ modalidad:"editar"
+}
+},
 { path:"/",
 name:"Inicio",
 component:PaginaDeInicio,
