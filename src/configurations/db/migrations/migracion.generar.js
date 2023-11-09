@@ -144,6 +144,80 @@ INSERT INTO Noticia_de_prensa(titulo, subtitulo, contenido, fecha_de_creacion, i
     texto += item;
 }
 
+
+// VOTACIONES DE ASAMBLEA:
+
+Votaciones_de_asamblea:
+for (let index = 0; index < 100; index++) {
+    // break Votaciones_de_asamblea;
+    const item = `
+-- Sentencia:
+INSERT INTO Votacion_de_asamblea(fecha_de_creacion, fecha_de_finalizacion, estado) VALUES(
+    '2023-01-05 10:30',
+    '2023-01-25 10:30',
+    '${ index % 2 ? "Inactivo" : "Problemas"}'
+);
+`;
+    texto += item;
+}
+
+// PROBLEMAS DE ASAMBLEA:
+
+Problemas_de_asamblea:
+for (let index = 0; index < 100; index++) {
+    // break Problemas_de_asamblea;
+    const item = `
+-- Sentencia:
+INSERT INTO Problema_de_asamblea(titulo, descripcion, contenido, estado, id_de_votacion, fecha_de_creacion) VALUES(
+    'Titulo ${index}',
+    'Descripción ${index}',
+    'Contenido ${index}',
+    'Propuesto',
+    '1',
+    '2023-01-25 10:30'
+);
+`;
+    texto += item;
+}
+
+// SOLUCIONES DE ASAMBLEA:
+
+Soluciones_de_asamblea:
+for (let index = 0; index < 100; index++) {
+    // break Soluciones_de_asamblea;
+    const item = `
+-- Sentencia:
+INSERT INTO Solucion_de_asamblea(titulo, descripcion, contenido, estado, id_de_votacion, fecha_de_creacion) VALUES(
+    'Titulo ${index}',
+    'Descripción ${index}',
+    'Contenido ${index}',
+    'Propuesto',
+    '1',
+    '2023-01-25 10:30'
+);
+`;
+    texto += item;
+}
+
+// IMPLEMENTACIONES DE ASAMBLEA:
+
+Implementaciones_de_asamblea:
+for (let index = 0; index < 100; index++) {
+    // break Implementaciones_de_asamblea;
+    const item = `
+-- Sentencia:
+INSERT INTO Implementacion_de_asamblea(titulo, descripcion, contenido, estado, id_de_votacion, fecha_de_creacion) VALUES(
+    'Titulo ${index}',
+    'Descripción ${index}',
+    'Contenido ${index}',
+    'Propuesto',
+    '1',
+    '2023-01-25 10:30'
+);
+`;
+    texto += item;
+}
+
 require("fs").writeFileSync(__dirname + "/migracion.generada.sql", texto, "utf8");
 const migracion_en_texto = require("fs").readFileSync(__dirname + "/migracion.generada.sql").toString();
 const migracion_inicial = require("fs").readFileSync(__dirname + "/migracion.sql").toString();

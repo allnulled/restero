@@ -1,0 +1,66 @@
+asigno window.PaginaDeAsambleaInicio como un componente vue2 con nombre "PaginaDeAsambleaInicio" con plantilla {
+  <div class="PaginaDeAsambleaInicio Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Asamblea</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'}]"></BreadcrumbGenerico>
+        <h5>Asamblea</h5>
+        <div class="" style="text-align: center;">
+          <ul class="lista_de_menu_principal" style="display: inline-block; padding: 0;">
+            <li>
+              <span class="como_link" v-on:click="() => ir_a_votaciones()">Votaciones</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeAsambleaInicio.data".
+      retorno {
+
+      }.
+    }.
+    propiedad methods como {
+      método ir_a_votaciones donde {
+        debugo "PaginaDeAsambleaInicio.ir_a_votaciones".
+        hago this.$router.history.push("/asamblea/ver/votaciones").
+      }.
+      método ir_a_problemas donde {
+        debugo "PaginaDeAsambleaInicio.ir_a_problemas".
+        hago this.$router.history.push("/asamblea/ver/problemas").
+      }.
+      método ir_a_soluciones donde {
+        debugo "PaginaDeAsambleaInicio.ir_a_soluciones".
+        hago this.$router.history.push("/asamblea/ver/soluciones").
+      }.
+      método ir_a_implementaciones donde {
+        debugo "PaginaDeAsambleaInicio.ir_a_implementaciones".
+        hago this.$router.history.push("/asamblea/ver/implementaciones").
+      }.
+    }.
+  }.
+}.

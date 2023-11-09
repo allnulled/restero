@@ -952,5 +952,367 @@
             }
         ],
         "script": "\n\nCREATE TABLE Comentario_de_noticia_de_prensa /*\n  @tiene_autorizador: solo_eliminable_por_mismo_usuario: id_de_autor\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  contenido TEXT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n    @tiene_autorizador: no_modificable\n  */,\n  id_de_autor INTEGER /*\n    @tiene_autorizador: fijar_id_de_usuario\n  */,\n  id_de_noticia INTEGER,\n  FOREIGN KEY (id_de_autor) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_noticia) REFERENCES Noticia_de_prensa (id)\n);"
+    },
+    {
+        "tabla": "Votacion_de_asamblea",
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_finalizacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "estado",
+                "tipo": "VARCHAR",
+                "detalles": "",
+                "atributos": [
+                    "es_opcion: Inactivo|Problemas|Soluciones|Implementaciones|Histórico",
+                    "tiene_autorizador: fijar_valor_estatico_inicial: Inactivo"
+                ]
+            }
+        ],
+        "script": "\n\n\n\n\n\nCREATE TABLE Votacion_de_asamblea /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  fecha_de_finalizacion DATETIME,\n  estado VARCHAR /*\n    @es_opcion: Inactivo|Problemas|Soluciones|Implementaciones|Histórico\n    @tiene_autorizador: fijar_valor_estatico_inicial: Inactivo\n  */\n);"
+    },
+    {
+        "tabla": "Problema_de_asamblea",
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "titulo",
+                "tipo": "VARCHAR",
+                "detalles": "(1024)",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contenido",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "estado",
+                "tipo": "VARCHAR",
+                "detalles": "NOT NULL",
+                "atributos": [
+                    "es_opcion: Propuesto|Clasificado|Aprobado|Desestimado"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_votacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_votacion",
+                "tabla_foranea": "Votacion_de_asamblea",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Problema_de_asamblea /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  titulo VARCHAR(1024),\n  descripcion TEXT,\n  contenido TEXT,\n  estado VARCHAR NOT NULL /*\n    @es_opcion: Propuesto|Clasificado|Aprobado|Desestimado\n  */,\n  id_de_votacion INTEGER,\n  FOREIGN KEY (id_de_votacion) REFERENCES Votacion_de_asamblea (id)\n);"
+    },
+    {
+        "tabla": "Solucion_de_asamblea",
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "titulo",
+                "tipo": "VARCHAR",
+                "detalles": "(1024)",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contenido",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "estado",
+                "tipo": "VARCHAR",
+                "detalles": "NOT NULL",
+                "atributos": [
+                    "es_opcion: Propuesto|Clasificado|Aprobado|Desestimado"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_problema",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_votacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_problema",
+                "tabla_foranea": "Solucion_de_asamblea",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_votacion",
+                "tabla_foranea": "Votacion_de_asamblea",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Solucion_de_asamblea /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  titulo VARCHAR(1024),\n  descripcion TEXT,\n  contenido TEXT,\n  estado VARCHAR NOT NULL /*\n    @es_opcion: Propuesto|Clasificado|Aprobado|Desestimado\n  */,\n  id_de_problema INTEGER,\n  id_de_votacion INTEGER,\n  FOREIGN KEY (id_de_problema) REFERENCES Solucion_de_asamblea (id),\n  FOREIGN KEY (id_de_votacion) REFERENCES Votacion_de_asamblea (id)\n);"
+    },
+    {
+        "tabla": "Implementacion_de_asamblea",
+        "atributos": [
+            "tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "titulo",
+                "tipo": "VARCHAR",
+                "detalles": "(1024)",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "descripcion",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "contenido",
+                "tipo": "TEXT",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "estado",
+                "tipo": "VARCHAR",
+                "detalles": "NOT NULL",
+                "atributos": [
+                    "es_opcion: Propuesto|Clasificado|Aprobado|Desestimado"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_solucion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_votacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_solucion",
+                "tabla_foranea": "Solucion_de_asamblea",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_votacion",
+                "tabla_foranea": "Votacion_de_asamblea",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Implementacion_de_asamblea /*\n  @tiene_autorizador: incluir: insert | update | delete: {\"permisos\":[\"permiso de administración\"]}\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  titulo VARCHAR(1024),\n  descripcion TEXT,\n  contenido TEXT,\n  estado VARCHAR NOT NULL /*\n    @es_opcion: Propuesto|Clasificado|Aprobado|Desestimado\n  */,\n  id_de_solucion INTEGER,\n  id_de_votacion INTEGER,\n  FOREIGN KEY (id_de_solucion) REFERENCES Solucion_de_asamblea (id),\n  FOREIGN KEY (id_de_votacion) REFERENCES Votacion_de_asamblea (id)\n);"
+    },
+    {
+        "tabla": "Voto_de_asamblea",
+        "atributos": [
+            "tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_usuario"
+        ],
+        "composicion": [
+            {
+                "sentencia": "columna",
+                "columna": "id",
+                "tipo": "INTEGER",
+                "detalles": "PRIMARY KEY AUTOINCREMENT",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "fecha_de_creacion",
+                "tipo": "DATETIME",
+                "detalles": "",
+                "atributos": [
+                    "tiene_autorizador: fijar_momento_de_creacion"
+                ]
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_usuario",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_problema",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_solucion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_implementacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "columna",
+                "columna": "id_de_votacion",
+                "tipo": "INTEGER",
+                "detalles": "",
+                "atributos": []
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_usuario",
+                "tabla_foranea": "Usuario",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_problema",
+                "tabla_foranea": "Problema_de_asamblea",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_solucion",
+                "tabla_foranea": "Solucion_de_asamblea",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_implementacion",
+                "tabla_foranea": "Implementacion_de_asamblea",
+                "columna_foranea": "id"
+            },
+            {
+                "sentencia": "clave foránea",
+                "columna": "id_de_votacion",
+                "tabla_foranea": "Votacion_de_asamblea",
+                "columna_foranea": "id"
+            }
+        ],
+        "script": "\n\nCREATE TABLE Voto_de_asamblea /*\n  @tiene_autorizador: solo_modificable_por_mismo_usuario: id_de_usuario\n*/ (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  fecha_de_creacion DATETIME /*\n    @tiene_autorizador: fijar_momento_de_creacion\n  */,\n  id_de_usuario INTEGER,\n  id_de_problema INTEGER,\n  id_de_solucion INTEGER,\n  id_de_implementacion INTEGER,\n  id_de_votacion INTEGER,\n  FOREIGN KEY (id_de_usuario) REFERENCES Usuario (id),\n  FOREIGN KEY (id_de_problema) REFERENCES Problema_de_asamblea (id),\n  FOREIGN KEY (id_de_solucion) REFERENCES Solucion_de_asamblea (id),\n  FOREIGN KEY (id_de_implementacion) REFERENCES Implementacion_de_asamblea (id),\n  FOREIGN KEY (id_de_votacion) REFERENCES Votacion_de_asamblea (id)\n);"
     }
 ]

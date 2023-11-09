@@ -191,6 +191,108 @@ component:PaginaDePrensaParaEditarNoticia,
 props:{ modalidad:"editar"
 }
 },
+{ path:"/asamblea/inicio",
+name:"PaginaDeAsambleaInicio",
+component:PaginaDeAsambleaInicio,
+props:{ 
+}
+},
+{ path:"/asamblea/ver/votaciones",
+name:"PaginaDeAsambleaVerVotaciones",
+component:PaginaDeAsambleaVerVotaciones,
+props:{ 
+}
+},
+{ path:"/asamblea/ver/votacion/:id",
+name:"PaginaDeAsambleaVerVotacion",
+component:PaginaDeAsambleaVerVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/editar/votacion/:id",
+name:"PaginaDeAsambleaEditarVotacion",
+component:PaginaDeAsambleaEditarVotacion,
+props:{ modalidad:"editar "
+}
+},
+{ path:"/asamblea/crear/votacion",
+name:"PaginaDeAsambleaEditarVotacion",
+component:PaginaDeAsambleaEditarVotacion,
+props:{ modalidad:"crear "
+}
+},
+{ path:"/asamblea/ver/problemas/de/votacion/:id_de_votacion",
+name:"PaginaDeAsambleaVerProblemasDeVotacion",
+component:PaginaDeAsambleaVerProblemasDeVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/ver/problema/:id",
+name:"PaginaDeAsambleaVerProblemaDeVotacion",
+component:PaginaDeAsambleaVerProblemaDeVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/editar/problema/:id",
+name:"PaginaDeAsambleaEditarProblemaDeVotacion",
+component:PaginaDeAsambleaEditarProblemaDeVotacion,
+props:{ modalidad:"editar"
+}
+},
+{ path:"/asamblea/crear/problema/de/votacion/:id_de_votacion",
+name:"PaginaDeAsambleaEditarProblemaDeVotacion",
+component:PaginaDeAsambleaEditarProblemaDeVotacion,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/asamblea/ver/soluciones/de/votacion/:id_de_votacion",
+name:"PaginaDeAsambleaVerSolucionesDeVotacion",
+component:PaginaDeAsambleaVerSolucionesDeVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/ver/solucion/:id",
+name:"PaginaDeAsambleaVerSolucionDeVotacion",
+component:PaginaDeAsambleaVerSolucionDeVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/editar/solucion/:id",
+name:"PaginaDeAsambleaEditarSolucionDeVotacion",
+component:PaginaDeAsambleaEditarSolucionDeVotacion,
+props:{ modalidad:"editar"
+}
+},
+{ path:"/asamblea/crear/solucion/de/votacion/:id_de_problema",
+name:"PaginaDeAsambleaEditarSolucionDeVotacion",
+component:PaginaDeAsambleaEditarSolucionDeVotacion,
+props:{ modalidad:"crear"
+}
+},
+{ path:"/asamblea/ver/implementaciones/de/votacion/:id_de_votacion",
+name:"PaginaDeAsambleaVerImplementacionesDeVotacion",
+component:PaginaDeAsambleaVerImplementacionesDeVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/ver/implementacion/:id",
+name:"PaginaDeAsambleaVerImplementacionDeVotacion",
+component:PaginaDeAsambleaVerImplementacionDeVotacion,
+props:{ 
+}
+},
+{ path:"/asamblea/editar/implementacion/:id",
+name:"PaginaDeAsambleaEditarImplementacionDeVotacion",
+component:PaginaDeAsambleaEditarImplementacionDeVotacion,
+props:{ modalidad:"editar"
+}
+},
+{ path:"/asamblea/crear/implementacion/de/votacion/:id_de_solucion",
+name:"PaginaDeAsambleaEditarImplementacionDeVotacion",
+component:PaginaDeAsambleaEditarImplementacionDeVotacion,
+props:{ modalidad:"crear"
+}
+},
 { path:"/",
 name:"Inicio",
 component:PaginaDeInicio,

@@ -31,11 +31,6 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
                 Foro
               </span>
             </li>
-            <li v-if="tiene_mensajeria">
-              <span class="como_link" v-on:click="() => abrir_pagina_de('/mensajes/inicio')">
-                Mensajes
-              </span>
-            </li>
             <li v-if="tiene_escuela">
               <span class="como_link" v-on:click="() => abrir_pagina_de('/escuela/ver/cursos')">
                 Escuela
@@ -44,6 +39,16 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
             <li v-if="tiene_prensa">
               <span class="como_link" v-on:click="() => abrir_pagina_de('/prensa/ver/noticias')">
                 Noticias
+              </span>
+            </li>
+            <li v-if="tiene_asamblea">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/asamblea/inicio')">
+                Asamblea
+              </span>
+            </li>
+            <li v-if="tiene_mensajeria">
+              <span class="como_link" v-on:click="() => abrir_pagina_de('/mensajes/inicio')">
+                Mensajes
               </span>
             </li>
             <li>
@@ -81,7 +86,8 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
         tiene_foro: false,
         tiene_mensajeria: false,
         tiene_escuela: false,
-        tiene_prensa: false
+        tiene_prensa: false,
+        tiene_asamblea: false
       }.
     } en errores hago this.$window.$notificaciones.notificar_error(error).
     propiedad methods como {
@@ -118,6 +124,12 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       }, false).
       asigno this.tiene_prensa como this.root.esquema.reduce(una función con (salida, tabla) donde {
         si tabla.tabla es igual que "Noticia_de_prensa" {
+          asigno salida como true.
+        }.
+        retorno salida.
+      }, false).
+      asigno this.tiene_asamblea como this.root.esquema.reduce(una función con (salida, tabla) donde {
+        si tabla.tabla es igual que "Votacion_de_asamblea" {
           asigno salida como true.
         }.
         retorno salida.

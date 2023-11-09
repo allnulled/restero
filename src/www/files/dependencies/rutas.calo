@@ -159,6 +159,91 @@ asigno window.rutas_de_aplicacion como [{
     propiedad component como PaginaDePrensaParaEditarNoticia.
     propiedad props como { modalidad: "editar" }.
 }, {
+    propiedad path como "/asamblea/inicio".
+    propiedad name como "PaginaDeAsambleaInicio".
+    propiedad component como PaginaDeAsambleaInicio.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/ver/votaciones".
+    propiedad name como "PaginaDeAsambleaVerVotaciones".
+    propiedad component como PaginaDeAsambleaVerVotaciones.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/ver/votacion/:id".
+    propiedad name como "PaginaDeAsambleaVerVotacion".
+    propiedad component como PaginaDeAsambleaVerVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/editar/votacion/:id".
+    propiedad name como "PaginaDeAsambleaEditarVotacion".
+    propiedad component como PaginaDeAsambleaEditarVotacion.
+    propiedad props como { modalidad: "editar "}.
+}, {
+    propiedad path como "/asamblea/crear/votacion".
+    propiedad name como "PaginaDeAsambleaEditarVotacion".
+    propiedad component como PaginaDeAsambleaEditarVotacion.
+    propiedad props como { modalidad: "crear "}.
+}, {
+    propiedad path como "/asamblea/ver/problemas/de/votacion/:id_de_votacion".
+    propiedad name como "PaginaDeAsambleaVerProblemasDeVotacion".
+    propiedad component como PaginaDeAsambleaVerProblemasDeVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/ver/problema/:id".
+    propiedad name como "PaginaDeAsambleaVerProblemaDeVotacion".
+    propiedad component como PaginaDeAsambleaVerProblemaDeVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/editar/problema/:id".
+    propiedad name como "PaginaDeAsambleaEditarProblemaDeVotacion".
+    propiedad component como PaginaDeAsambleaEditarProblemaDeVotacion.
+    propiedad props como { modalidad: "editar" }.
+}, {
+    propiedad path como "/asamblea/crear/problema/de/votacion/:id_de_votacion".
+    propiedad name como "PaginaDeAsambleaEditarProblemaDeVotacion".
+    propiedad component como PaginaDeAsambleaEditarProblemaDeVotacion.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/asamblea/ver/soluciones/de/votacion/:id_de_votacion".
+    propiedad name como "PaginaDeAsambleaVerSolucionesDeVotacion".
+    propiedad component como PaginaDeAsambleaVerSolucionesDeVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/ver/solucion/:id".
+    propiedad name como "PaginaDeAsambleaVerSolucionDeVotacion".
+    propiedad component como PaginaDeAsambleaVerSolucionDeVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/editar/solucion/:id".
+    propiedad name como "PaginaDeAsambleaEditarSolucionDeVotacion".
+    propiedad component como PaginaDeAsambleaEditarSolucionDeVotacion.
+    propiedad props como { modalidad: "editar" }.
+}, {
+    propiedad path como "/asamblea/crear/solucion/de/votacion/:id_de_problema".
+    propiedad name como "PaginaDeAsambleaEditarSolucionDeVotacion".
+    propiedad component como PaginaDeAsambleaEditarSolucionDeVotacion.
+    propiedad props como { modalidad: "crear" }.
+}, {
+    propiedad path como "/asamblea/ver/implementaciones/de/votacion/:id_de_votacion".
+    propiedad name como "PaginaDeAsambleaVerImplementacionesDeVotacion".
+    propiedad component como PaginaDeAsambleaVerImplementacionesDeVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/ver/implementacion/:id".
+    propiedad name como "PaginaDeAsambleaVerImplementacionDeVotacion".
+    propiedad component como PaginaDeAsambleaVerImplementacionDeVotacion.
+    propiedad props como {}.
+}, {
+    propiedad path como "/asamblea/editar/implementacion/:id".
+    propiedad name como "PaginaDeAsambleaEditarImplementacionDeVotacion".
+    propiedad component como PaginaDeAsambleaEditarImplementacionDeVotacion.
+    propiedad props como { modalidad: "editar" }.
+}, {
+    propiedad path como "/asamblea/crear/implementacion/de/votacion/:id_de_solucion".
+    propiedad name como "PaginaDeAsambleaEditarImplementacionDeVotacion".
+    propiedad component como PaginaDeAsambleaEditarImplementacionDeVotacion.
+    propiedad props como { modalidad: "crear" }.
+}, {
     propiedad path como "/".
     propiedad name como "Inicio".
     propiedad component como PaginaDeInicio.

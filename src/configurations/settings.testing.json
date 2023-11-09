@@ -14,5 +14,6 @@
     "HAS_FORO": true,
     "HAS_MENSAJERIA": true,
     "HAS_ESCUELA": true,
-    "HAS_PRENSA": true
+    "HAS_PRENSA": true,
+    "HAS_ASAMBLEA": true
 }

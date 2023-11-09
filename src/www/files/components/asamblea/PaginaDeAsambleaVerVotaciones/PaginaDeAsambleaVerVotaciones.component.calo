@@ -1,0 +1,276 @@
+asigno window.PaginaDeAsambleaVerVotaciones como un componente vue2 con nombre "PaginaDeAsambleaVerVotaciones" con plantilla {
+  <div class="PaginaDeAsambleaVerVotaciones Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Votaciones</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Asamblea',link:'/asamblea/inicio'}]"></BreadcrumbGenerico>
+        <h5 style="margin-bottom: 1px;">Votaciones activas</h5>
+        <div class="panel_principal">
+          <div class="panel_de_botones_superior">
+            <button>➕ Crear votación</button>
+          </div>
+          <div v-if="votaciones_activas.length">
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion_de_votaciones_activas()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion_de_votaciones_activas()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina_de_votaciones_activas }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_paginacion_de_votaciones_activas()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion_de_votaciones_activas()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="panel_de_botones_superior">
+              <div class="lista_de_cartas_de_datos">
+                <template v-for="votacion, votacion_index in votaciones_activas">
+                  <div class="carta_de_datos" v-bind:key="'tabla-de-votaciones-activas-fila-' + votacion_index" v-on:click="() => ir_a_votacion(votacion.id)">
+                    <div class="dato_nivel_1_de_carta">
+                      Votación «{{ votacion.id }}»
+                    </div>
+                    <table style="width: 100%;">
+                      <tr>
+                        <td>
+                          <div class="dato_nivel_4_de_carta">
+                            Creada el: <br/>«{{ votacion.fecha_de_creacion }}»
+                          </div>
+                        </td>
+                        <td>
+                          <div class="dato_nivel_5_de_carta">
+                            Finaliza el: <br/>«{{ votacion.fecha_de_finalizacion }}»
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="dato_nivel_3_de_carta" style="text-align: center;">
+                      Estado: «{{ votacion.estado }}»
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion_de_votaciones_activas()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion_de_votaciones_activas()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina_de_votaciones_activas }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_paginacion_de_votaciones_activas()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion_de_votaciones_activas()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div v-else>
+            No hay votaciones activas en este momento.
+          </div>
+        </div>
+        <h5 style="margin-bottom: 1px;">Votaciones inactivas</h5>
+        <div class="panel_principal">
+          <div v-if="votaciones_inactivas.length">
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion_de_votaciones_inactivas()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion_de_votaciones_inactivas()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina_de_votaciones_inactivas }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_paginacion_de_votaciones_inactivas()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion_de_votaciones_inactivas()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="panel_de_botones_superior">
+              <div class="lista_de_cartas_de_datos">
+                <div class="carta_de_datos" v-for="votacion, votacion_index in votaciones_inactivas" v-bind:key="'tabla-de-votaciones-inactivas-fila-' + votacion_index">
+                  <div class="dato_nivel_1_de_carta">
+                    Votación «{{ votacion.id }}»
+                  </div>
+                  <div class="dato_nivel_4_de_carta">
+                    Creada el «{{ votacion.fecha_de_creacion }}»
+                  </div>
+                  <div class="dato_nivel_4_de_carta">
+                    Finaliza el «{{ votacion.fecha_de_finalizacion }}»
+                  </div>
+                  <div class="dato_nivel_4_de_carta">
+                    Estado: «{{ votacion.estado }}»
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion_de_votaciones_inactivas()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion_de_votaciones_inactivas()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina_de_votaciones_activas }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_paginacion_de_votaciones_inactivas()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion_de_votaciones_inactivas()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div v-else>
+            No hay votaciones inactivas en este momento.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeAsambleaVerVotaciones.data".
+      retorno {
+        votaciones_activas: [],
+        pagina_de_votaciones_activas: 1,
+        votaciones_inactivas: [],
+        pagina_de_votaciones_inactivas: 1
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    propiedad methods como {
+      método asíncrono ir_a_votacion con (id_votacion) donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_votacion".
+        hago this.$router.history.push("/asamblea/ver/votacion/" + id_votacion).
+      }.
+      método asíncrono obtener_votaciones_activas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.obtener_votaciones_activas".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Votacion_de_asamblea"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["estado", "IN", "Problemas;Soluciones;Implementaciones"]
+            ] textualizado,
+            page: this.pagina_de_votaciones_activas
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        si respuesta_1.data.resultado.length es igual que 0 retorno 0.
+        asigno this.votaciones_activas como respuesta_1.data.resultado.
+        hago this.$forceUpdate(true).
+        retorno this.votaciones_activas.length.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono obtener_votaciones_inactivas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.obtener_votaciones_inactivas".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Votacion_de_asamblea"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["estado", "IN", "Inactivo;Histórico"]
+            ] textualizado,
+            page: this.pagina_de_votaciones_inactivas
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        si respuesta_1.data.resultado.length es igual que 0 retorno 0.
+        asigno this.votaciones_inactivas como respuesta_1.data.resultado.
+        hago this.$forceUpdate(true).
+        retorno this.votaciones_inactivas.length.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_principio_de_paginacion_de_votaciones_activas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_principio_de_paginacion_de_votaciones_activas".
+        asigno this.pagina_de_votaciones_activas como 1.
+        creo resultado como asíncronamente this.obtener_votaciones_activas().
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_anterior_de_paginacion_de_votaciones_activas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_anterior_de_paginacion_de_votaciones_activas".
+        si this.pagina_de_votaciones_activas es igual que 1 retorno.
+        decremento this.pagina_de_votaciones_activas.
+        creo resultado como asíncronamente this.obtener_votaciones_activas().
+        hago this.$forceUpdate(true).
+        si resultado es igual que 0 incremento this.pagina.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_siguiente_de_paginacion_de_votaciones_activas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_siguiente_de_paginacion_de_votaciones_activas".
+        incremento this.pagina_de_votaciones_activas.
+        creo resultado como asíncronamente this.obtener_votaciones_activas().
+        hago this.$forceUpdate(true).
+        si resultado es igual que 0 decremento this.pagina_de_votaciones_activas.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_principio_de_paginacion_de_votaciones_inactivas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_principio_de_paginacion_de_votaciones_inactivas".
+        asigno this.pagina_de_votaciones_inactivas como 1.
+        creo resultado como asíncronamente this.obtener_votaciones_inactivas().
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_anterior_de_paginacion_de_votaciones_inactivas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_anterior_de_paginacion_de_votaciones_inactivas".
+        si this.pagina_de_votaciones_inactivas es igual que 1 retorno.
+        decremento this.pagina_de_votaciones_inactivas.
+        creo resultado como asíncronamente this.obtener_votaciones_inactivas().
+        hago this.$forceUpdate(true).
+        si resultado es igual que 0 incremento this.pagina.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_siguiente_de_paginacion_de_votaciones_inactivas donde {
+        debugo "PaginaDeAsambleaVerVotaciones.ir_a_siguiente_de_paginacion_de_votaciones_inactivas".
+        incremento this.pagina_de_votaciones_inactivas.
+        creo resultado como asíncronamente this.obtener_votaciones_inactivas().
+        hago this.$forceUpdate(true).
+        si resultado es igual que 0 decremento this.pagina_de_votaciones_inactivas.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtener_votaciones_activas().
+      hago asíncronamente this.obtener_votaciones_inactivas().
+    }.
+  }.
+}.

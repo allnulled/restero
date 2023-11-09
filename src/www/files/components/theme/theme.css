@@ -229,6 +229,7 @@ hr {
 .lista_de_posts {
 
 }
+.carta_de_datos,
 .lista_de_lecciones > .leccion_en_lista,
 .lista_de_cursos > .curso_en_lista,
 .lista_de_posts > .post_en_lista {
@@ -236,22 +237,32 @@ hr {
     margin-bottom: 4px;
     cursor: pointer;
 }
+.carta_de_datos.no_hover {
+    cursor: inherit;
+}
+.carta_de_datos:hover,
 .lista_de_lecciones > .leccion_en_lista:hover,
 .lista_de_cursos > .curso_en_lista:hover,
 .lista_de_posts > .post_en_lista:hover {
     background-color: #DDDDDD;
 }
+.carta_de_datos.no_hover:hover {
+    background-color: inherit;
+}
+
+.carta_de_datos .dato_nivel_1_de_carta,
 .leccion_en_lista > .titulo_de_leccion,
 .curso_en_lista > .titulo_de_curso,
 .ver_post > .titulo_de_post,
 .lista_de_posts > .post_en_lista > .titulo_de_post {
     font-size: 15px;
     font-weight: bold;
-    background-color: #222;
+    background-color: #666;
     color: #FFF;
     padding: 4px;
     text-align: center;
 }
+.carta_de_datos .dato_nivel_2_de_carta,
 .ver_post > .subtitulo_de_post,
 .lista_de_posts > .post_en_lista > .subtitulo_de_post {
     font-size: 12px;
@@ -260,6 +271,7 @@ hr {
     padding: 4px;
     text-align: justify;
 }
+.carta_de_datos .dato_nivel_3_de_carta,
 .leccion_en_lista > .descripcion_de_leccion,
 .curso_en_lista > .descripcion_de_curso,
 .ver_post > .contenido_de_post,
@@ -268,6 +280,7 @@ hr {
     padding: 4px;
     text-align: justify;
 }
+.carta_de_datos .dato_nivel_4_de_carta,
 .leccion_en_lista > .fecha_de_creacion_de_leccion,
 .curso_en_lista > .fecha_de_creacion_de_curso,
 .ver_post .autor_de_post,
@@ -277,6 +290,7 @@ hr {
     font-size: 8px;
     padding: 4px;
 }
+.carta_de_datos .dato_nivel_5_de_carta,
 .ver_post .fecha_de_creacion_de_post,
 .lista_de_posts > .post_en_lista .fecha_de_creacion_de_post {
     color: #666;
@@ -314,11 +328,13 @@ hr {
     color: #666;
     padding: 4px;
 }
+
 .post_en_lista {
     border: 1px solid #333;
     margin-bottom: 4px;
     cursor: pointer;
 }
+.carta_de_datos:hover,
 .post_en_lista:hover {
     background-color: #CCC;
 }

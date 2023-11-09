@@ -24,8 +24,6 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
 1. [Los hiperatributos](#los-hiperatributos)
    1. Hiperatributo de columna: `tiene_fichero`
    1. Hiperatributo de columna: `es_opcion`
-   1. Hiperatributo de columna: `fijar_dia_de_creacion`
-   1. Hiperatributo de columna: `fijar_momento_de_creacion`
 1. [Los autorizadores](#los-autorizadores)
    1. Autorizador de tabla: `no_actualizable`
    1. Autorizador de tabla: `no_eliminable`
@@ -45,6 +43,12 @@ Despliega aplicaciones REST basadas en ficheros [HQL (o Hyper Query Language)](h
    1. Autorizador de columna: `no_insertable`
    1. Autorizador de columna: `no_modificable`
    1. Autorizador de columna: `solo_modificable_por`
+   1. Autorizador de columna: `fijar_dia_de_creacion`
+   1. Autorizador de columna: `fijar_momento_de_creacion`
+   1. Autorizador de columna: `fijar_valor_estatico`
+   1. Autorizador de columna: `fijar_valor_estatico_inicial`
+   1. Autorizador de columna: `fijar_id_de_usuario`
+   1. Autorizador de columna: `solo_html_seguro`
    1. Usando múltiples autorizables
 1. [Interfaz de línea de comandos](#interfaz-de-línea-de-comandos)
    1. Comando `restero generar`
@@ -385,54 +389,6 @@ CREATE TABLE x (
 );
 ```
 
-#### Hiperatributo de columna: `fijar_id_de_usuario`
-
-Función:
-
-> Al insertar, coloca el id del usuario en la columna indicada.
-
-Ejemplo:
-
-```sql
-CREATE TABLE x (
-  id_de_usuario DATETIME /*
-    @tiene_autorizador: fijar_id_de_usuario
-  */
-);
-```
-
-#### Hiperatributo de columna: `fijar_dia_de_creacion`
-
-Función:
-
-> Al insertar, coloca la fecha (`año-mes-día`) en la columna indicada.
-
-Ejemplo:
-
-```sql
-CREATE TABLE x (
-  fecha DATETIME /*
-    @tiene_autorizador: fijar_dia_de_creacion
-  */
-);
-```
-
-#### Hiperatributo de columna: `fijar_momento_de_creacion`
-
-Función:
-
-> Al insertar, coloca la fecha (`año-mes-día hora:minuto:segundo`) en la columna indicada.
-
-Ejemplo:
-
-```sql
-CREATE TABLE x (
-  fecha DATETIME /*
-    @tiene_autorizador: fijar_momento_de_creacion
-  */
-);
-```
-
 ## Los autorizadores
 
 Los **autorizadores** o *authorizers* son un conjunto de hiperatributos que nos permiten determinarle al desplegador cómo gestionar los servicios web que van a poner a disposición de los usuarios la información de la base de datos, basándonos en el esquema de datos, vía HTTP. Hay un correlato entre los nombres de los autorizadores y los ficheros bajo la carpeta `src/autorhizers`. Del mismo modo, para crear nuevos solo tienes que añadir nuevos ficheros en esta carpeta, porque se cargarán automáticamente por `src/authorizers/index.js`.
@@ -701,6 +657,122 @@ CREATE TABLE x (
 );
 ```
 
+#### Autorizador de columna: `fijar_id_de_usuario`
+
+Función:
+
+> Al insertar, coloca el id del usuario en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  id_de_usuario DATETIME /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */
+);
+```
+
+#### Autorizador de columna: `fijar_dia_de_creacion`
+
+Función:
+
+> Al insertar, coloca la fecha (`año-mes-día`) en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  fecha DATETIME /*
+    @tiene_autorizador: fijar_dia_de_creacion
+  */
+);
+```
+
+#### Autorizador de columna: `fijar_momento_de_creacion`
+
+Función:
+
+> Al insertar, coloca la fecha (`año-mes-día hora:minuto:segundo`) en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  fecha DATETIME /*
+    @tiene_autorizador: fijar_momento_de_creacion
+  */
+);
+```
+
+#### Autorizador de columna: `fijar_valor_estatico`
+
+Función:
+
+> Al insertar, coloca un valor estático en la columna indicada. Al actualizar, no deja cambiarlo porque elimina el valor del ítem.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  valor VARCHAR(255) /*
+    @tiene_autorizador: fijar_valor_estatico: Un texto estático
+  */
+);
+```
+
+#### Autorizador de columna: `fijar_valor_estatico_inicial`
+
+Función:
+
+> Al insertar, coloca un valor estático en la columna indicada. Al actualizar, permite cambiar el valor.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  valor VARCHAR(255) /*
+    @tiene_autorizador: fijar_valor_estatico_inicial: Un texto estático
+  */
+);
+```
+
+#### Autorizador de columna: `fijar_id_de_usuario`
+
+Función:
+
+> Al insertar, coloca el ID de usuario en la columna indicada.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  id_de_usuario INTEGER /*
+    @tiene_autorizador: fijar_id_de_usuario
+  */
+);
+```
+
+#### Autorizador de columna: `solo_html_seguro`
+
+Función:
+
+> Al insertar o actualizar, comprueba que el texto sea HTML seguro (que no inserta JavaScript de ningún modo). Este autorizador utiliza la librería `sanitize-html` con sus parámetros por defecto.
+
+Ejemplo:
+
+```sql
+CREATE TABLE x (
+  contenido TEXT /*
+    @tiene_autorizador: solo_html_seguro
+  */
+);
+```
+
+
+   1. Autorizador de columna: ``
+   1. Autorizador de columna: ``
+
 #### Usando múltiples autorizables
 
 A menudo te vas a encontrar con que aplicar un *autorizador* o *authorizer* no es suficiente porque necesitas dar varias opciones en lugar de aplicar una sola regla. Por ejemplo, queremos que una tabla «Mensaje» sea modificable para cuando el usuario está implicado por la columna «id_usuario_emisor», cuando está implicado por la columna «id_usuario_receptor» o cuando el usuario es administrador. En 3 casos diferentes, queremos que el «mensaje» esté modificable. Aquí es cuando viene el uso del **hiperatributo** `tiene_autorizables:` conjugado con **hipersubatributos**. Ejemplo:
@@ -738,6 +810,8 @@ CREATE TABLE Mensaje /*
   FOREIGN KEY (id_usuario_receptor) REFERENCES Usuario (id)
 )
 ```
+
+Estrictamente, lo que ocurre por debajo de esta sintaxis es que el servidor entenderá que es válido siempre que 1 de las condiciones no lance un error. Por lo cual, se pueden acumular distintos autorizadores, que mientras que solo 1 funcione, la operación será autorizada.
 
 ## Interfaz de línea de comandos
 

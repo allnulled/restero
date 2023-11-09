@@ -1,3 +1,13 @@
-[x] Botón y Página para crear tema en el foro
-[x] Botón y Página para crear curso en la escuela
-[x] Botón y Página para crear lección en la escuela
+[ ] Página de crear problema 
+  [ ] No hay versión de "editar" problema
+  [ ] Se autorrellena id_de_votacion
+[ ] Página de crear solución
+  [ ] No hay versión de "editar" solución
+  [ ] Se autorrellena id_de_problema
+  [ ] No hay campo de id_de_votacion
+[ ] Página de crear implementación
+  [ ] No hay versión de "editar" implementación
+  [ ] Se autorrellena id_de_solucion
+  [ ] No hay campo de id_de_votacion
+
+[ ] 

@@ -21,3 +21,7 @@
 <% if(deployer.settings.HAS_PRENSA) { %>
 <%- include("/db/modules/prensa.ejs.sql", { deployer }); %>
 <% } %>
+
+<% if(deployer.settings.HAS_ASAMBLEA) { %>
+<%- include("/db/modules/asamblea.ejs.sql", { deployer }); %>
+<% } %>

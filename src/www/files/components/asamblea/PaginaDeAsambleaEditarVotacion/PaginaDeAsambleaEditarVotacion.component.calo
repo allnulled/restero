@@ -1,0 +1,122 @@
+asigno window.PaginaDeAsambleaEditarVotacion como un componente vue2 con nombre "PaginaDeAsambleaEditarVotacion" con plantilla {
+  <div class="PaginaDeAsambleaEditarVotacion Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">{{ modalidad === "crear" ? "Crear" : "Editar" }} post</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-if="root.esquema" class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Blog',link:'/blog/ver/posts'}]"></BreadcrumbGenerico>
+        <h5>{{ modalidad === "crear" ? "Crear" : "Editar" }} post</h5>
+        <div class="">
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Título del post:</div>
+            <input style="width: 100%;" type="text" v-model="post.titulo" />
+          </div>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Subtítulo del post: (opcional)</div>
+            <input style="width: 100%;" type="text" v-model="post.subtitulo" />
+          </div>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Contenido:</div>
+            <textarea v-model="post.contenido" placeholder="Este campo acepta HTML."></textarea>
+          </div>
+          <div class="campo_de_formulario">
+            <div class="enunciado_de_campo_de_formulario">Tags:</div>
+            <textarea v-model="post.tags"></textarea>
+          </div>
+          <div class="panel_de_botones_inferior">
+            <button v-if="modalidad === 'crear'" v-on:click="() => crear_post()">➕ Crear post</button>
+            <button v-else-if="modalidad === 'editar'" v-on:click="() => guardar_post()">💾 Guardar post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      },
+      modalidad: {
+        type: String,
+        default: "crear"
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeAsambleaEditarVotacion.data".
+      retorno {
+        es_administrador: false,
+        post: {}
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono crear_post donde {
+        debugo "PaginaDeAsambleaEditarVotacion.crear_post".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/insert/Post_de_blog"
+          con método "POST"
+          con cuerpo {
+            ...incluyo this.post
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        imprimo respuesta_1.
+        hago this.$router.history.push("/blog/ver/posts").
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono guardar_post donde {
+        debugo "PaginaDeAsambleaEditarVotacion.guardar_post".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/update/Post_de_blog/" + this.$route.params.id
+          con método "POST"
+          con cuerpo {
+            id: this.$route.params.id,
+            ...incluyo this.post
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        imprimo respuesta_1.
+        hago this.$router.history.push("/blog/ver/post/" + this.post.id).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      debugo "PaginaDeAsambleaEditarVotacion.mounted".
+      si this.modalidad es igual que "editar" {
+        creo post_id como this.$route.params.id.
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Post_de_blog"
+          con método "POST"
+          con cuerpo {
+            where: [
+              [ "id", "=", post_id ]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        creo dato_1 como respuesta_1.data.resultado[0].
+        si dato_1 es tipo indefinido retorno.
+        asigno this.post como dato_1.
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

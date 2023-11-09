@@ -1,0 +1,159 @@
+asigno window.PaginaDeAsambleaVerProblemasDeVotacion como un componente vue2 con nombre "PaginaDeAsambleaVerProblemasDeVotacion" con plantilla {
+  <div class="PaginaDeAsambleaVerProblemasDeVotacion Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Problemas</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Asamblea',link:'/asamblea/inicio'},{texto:'Votaciones',link:'/asamblea/ver/votaciones'},{texto:'Votación',link:'/asamblea/ver/votacion/' + this.$route.params.id_de_votacion}]"></BreadcrumbGenerico>
+        <h5>Problemas</h5>
+        <div class="panel_principal">
+          <div class="panel_de_botones_superior">
+            <button>➕ Crear problema</button>
+          </div>
+          <div v-if="problemas.length">
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_paginacion()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="panel_de_botones_superior">
+              <div class="lista_de_cartas_de_datos">
+                <template v-for="problema, problema_index in problemas">
+                  <div class="carta_de_datos" v-on:click="() => ir_a_ver_problema(problema.id)" v-bind:key="'tabla-de-problemas-fila-' + problema_index">
+                    <div class="dato_nivel_1_de_carta">
+                      Problema «{{ problema.id }}»: {{ problema.titulo }}
+                    </div>
+                    <div class="dato_nivel_4_de_carta">
+                      Estado: «{{ problema.estado }}»
+                    </div>
+                    <div class="dato_nivel_4_de_carta">
+                      Creado el «{{ problema.fecha_de_creacion }}»
+                    </div>
+                    <div class="dato_nivel_2_de_carta">
+                      Descripción: {{ problema.descripcion }}
+                    </div>
+                    <div class="dato_nivel_3_de_carta">
+                      Contenido: {{ problema.contenido }}
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <div class="panel_de_botones_superior">
+              <table>
+                <tr>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_principio_de_paginacion()"> «« </button>
+                  </td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_anterior_de_paginacion()"> « </button>
+                  </td>
+                  <td style="width: 100%; text-align: center;">Página {{ pagina }}</td>
+                  <td>
+                    <button style="min-width: auto;" v-on:click="() => ir_a_siguiente_de_paginacion()"> » </button>
+                  </td>
+                  <td style="display: none;">
+                    <button style="min-width: auto;" v-on:click="() => ir_a_final_de_paginacion()"> »» </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeAsambleaVerProblemasDeVotacion.data".
+      retorno {
+        problemas: [],
+        pagina: 1
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    propiedad methods como {
+      método asíncrono ir_a_ver_problema con (id_problema) donde {
+        debugo "PaginaDeAsambleaVerProblemasDeVotacion.ir_a_ver_problema".
+        hago this.$router.history.push("/asamblea/ver/problema/" + id_problema).
+      }.
+      método asíncrono obtener_datos donde {
+        debugo "PaginaDeAsambleaVerProblemasDeVotacion.obtener_datos".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Problema_de_asamblea"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id_de_votacion", "=", this.$route.params.id_de_votacion]
+            ] textualizado,
+            page: this.pagina
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        si respuesta_1.data.resultado.length es igual que 0 retorno 0.
+        asigno this.problemas como respuesta_1.data.resultado.
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_principio_de_paginacion donde {
+        debugo "PaginaDeAsambleaVerProblemasDeVotacion.ir_a_principio_de_paginacion".
+        asigno this.pagina como 1.
+        creo resultado como asíncronamente this.obtener_datos().
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_anterior_de_paginacion donde {
+        debugo "PaginaDeAsambleaVerProblemasDeVotacion.ir_a_anterior_de_paginacion".
+        si this.pagina es igual que 1 retorno.
+        decremento this.pagina.
+        creo resultado como asíncronamente this.obtener_datos().
+        hago this.$forceUpdate(true).
+        si resultado es igual que 0 incremento this.pagina.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono ir_a_siguiente_de_paginacion donde {
+        debugo "PaginaDeAsambleaVerProblemasDeVotacion.ir_a_siguiente_de_paginacion".
+        incremento this.pagina.
+        creo resultado como asíncronamente this.obtener_datos().
+        hago this.$forceUpdate(true).
+        si resultado es igual que 0 decremento this.pagina.
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtener_datos().
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+  }.
+}.

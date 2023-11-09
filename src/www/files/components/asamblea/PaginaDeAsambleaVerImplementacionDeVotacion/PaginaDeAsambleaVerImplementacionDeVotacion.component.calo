@@ -1,0 +1,107 @@
+asigno window.PaginaDeAsambleaVerImplementacionDeVotacion como un componente vue2 con nombre "PaginaDeAsambleaVerImplementacionDeVotacion" con plantilla {
+  <div class="PaginaDeAsambleaVerImplementacionDeVotacion Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Implementación</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body" v-if="implementacion">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Asamblea',link:'/asamblea/inicio'},{texto:'Votaciones',link:'/asamblea/ver/votaciones'},{texto:'Votación',link:'/asamblea/ver/votacion/' + implementacion.id_de_votacion},{texto:'Implementaciones',link:'/asamblea/ver/implementaciones/de/votacion/' + implementacion.id_de_votacion}]"></BreadcrumbGenerico>
+        <h5 style="margin-bottom: 1px;">Implementación</h5>
+        <div class="panel_principal">
+          <div class="carta_de_datos no_hover">
+            <div class="dato_nivel_1_de_carta">
+              Implementacion «{{ implementacion.id }}»
+            </div>
+            <table style="width: 100%;">
+              <tr>
+                <td>
+                  <div class="dato_nivel_4_de_carta">
+                    Creada el: «{{ implementacion.fecha_de_creacion }}»
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="dato_nivel_3_de_carta">
+              <u>Estado:</u> «{{ implementacion.estado }}»
+            </div>
+            <div class="dato_nivel_3_de_carta">
+              <u>Descripción:</u> «{{ implementacion.descripcion }}»
+            </div>
+            <div class="dato_nivel_3_de_carta">
+              <u>Contenido:</u> «{{ implementacion.contenido }}»
+            </div>
+          </div>
+          <div>
+            <table style="width: 100%;">
+              <tr>
+                <td style="width: 50%;">
+                  <button style="width: 100%;" v-on:click="() => votar_en_contra()">En contra</button>
+                </td>
+                <td style="width: 50%;">
+                  <button style="width: 100%;" v-on:click="() => votar_a_favor()">A favor</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeAsambleaVerImplementacionDeVotacion.data".
+      retorno {
+        implementacion: false
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    propiedad methods como {
+      método asíncrono obtener_implementacion donde {
+        debugo "PaginaDeAsambleaVerImplementacionDeVotacion.obtener_implementacion".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Implementacion_de_asamblea"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        si respuesta_1.data.resultado.length no es igual que 1 lanzo un nuevo Error(`La votación «${this.$route.params.id}» no fue encontrada`).
+        asigno this.implementacion como respuesta_1.data.resultado[0].
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono votar_a_favor donde {
+        @POR-HACER...
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+      método asíncrono votar_en_contra donde {
+        @POR-HACER...
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtener_implementacion().
+    }.
+  }.
+}.

@@ -3,47 +3,90 @@ Ejecutable como documento HTML5
     con nombre index
     con versión 1
 <head>
+
+    <!-- Cabeceras HTML -->
     <title>🌐 Restero | UI</title>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Estilos -->
     <link rel="stylesheet" type="text/css" href="./components/win7/win7.scoped.2.css" />
     <link rel="stylesheet" type="text/css" href="./components/theme/theme.css" />
     <link rel="stylesheet" type="text/css" href="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.css" />
+    
+    <!-- Castelog -->
     <script src="./components/calo/calo.js"></script>
+    
+    <!-- Dependencias -->
     <script src="./dependencies/generar_gestor_de_hooks.js"></script>
     <script src="./dependencies/utilidades.js"></script>
     <script src="./dependencies/editor-wysiwyg/wysiwyg-parser.js"></script>
     <script src="./dependencies/editor-wysiwyg/editor-wysiwyg-vuejs.js"></script>
+    
+    <!-- Hooks -->
     <script src="./hooks/hooks.js"></script>
-    <script src="./components/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js"></script>
-    <script src="./components/BreadcrumbGenerico/BreadcrumbGenerico.component.js"></script>
-    <script src="./components/ExploradorDeDatos/ExploradorDeDatos.component.js"></script>
-    <script src="./components/PaginaDeInicio/PaginaDeInicio.component.js"></script>
-    <script src="./components/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js"></script>
-    <script src="./components/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js"></script>
-    <script src="./components/PaginaDeLogin/PaginaDeLogin.component.js"></script>
-    <script src="./components/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
-    <script src="./components/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js"></script>
-    <script src="./components/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js"></script>
-    <script src="./components/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js"></script>
-    <script src="./components/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js"></script>
-    <script src="./components/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js"></script>
-    <script src="./components/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js"></script>
-    <script src="./components/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
-    <script src="./components/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
-    <script src="./components/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
-    <script src="./components/PaginaDeForoParaEditarTema/PaginaDeForoParaEditarTema.component.js"></script>
-    <script src="./components/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js"></script>
-    <script src="./components/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js"></script>
-    <script src="./components/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js"></script>
-    <script src="./components/PaginaDeEscuelaParaVerCursos/PaginaDeEscuelaParaVerCursos.component.js"></script>
-    <script src="./components/PaginaDeEscuelaParaVerCurso/PaginaDeEscuelaParaVerCurso.component.js"></script>
-    <script src="./components/PaginaDeEscuelaParaEditarCurso/PaginaDeEscuelaParaEditarCurso.component.js"></script>
-    <script src="./components/PaginaDeEscuelaParaVerLeccion/PaginaDeEscuelaParaVerLeccion.component.js"></script>
-    <script src="./components/PaginaDeEscuelaParaEditarLeccion/PaginaDeEscuelaParaEditarLeccion.component.js"></script>
-    <script src="./components/PaginaDePrensaParaVerNoticias/PaginaDePrensaParaVerNoticias.component.js"></script>
-    <script src="./components/PaginaDePrensaParaVerNoticia/PaginaDePrensaParaVerNoticia.component.js"></script>
-    <script src="./components/PaginaDePrensaParaEditarNoticia/PaginaDePrensaParaEditarNoticia.component.js"></script>
+    
+    <!-- Componentes generales -->
+    <script src="./components/general/PuertoDeNotificaciones/PuertoDeNotificaciones.component.js"></script>
+    <script src="./components/general/BreadcrumbGenerico/BreadcrumbGenerico.component.js"></script>
+    <script src="./components/general/ExploradorDeDatos/ExploradorDeDatos.component.js"></script>
+    
+    <!-- Páginas generales -->
+    <script src="./components/general/PaginaDeInicio/PaginaDeInicio.component.js"></script>
+    <script src="./components/general/PaginaDePanelDeAdministracion/PaginaDePanelDeAdministracion.component.js"></script>
+    <script src="./components/general/PaginaDePanelDeConfiguraciones/PaginaDePanelDeConfiguraciones.component.js"></script>
+    <script src="./components/general/PaginaDeLogin/PaginaDeLogin.component.js"></script>
+    <script src="./components/general/PaginaDeExploradorDeDatosDeTabla/PaginaDeExploradorDeDatosDeTabla.component.js"></script>
+    <script src="./components/general/PaginaDeImportarExportarDatos/PaginaDeImportarExportarDatos.component.js"></script>
+    <script src="./components/general/PaginaDeFormularioDeTabla/PaginaDeFormularioDeTabla.component.js"></script>
+
+    <!-- Páginas de Blog -->
+    <script src="./components/blog/PaginaDeBlogParaVerPosts/PaginaDeBlogParaVerPosts.component.js"></script>
+    <script src="./components/blog/PaginaDeBlogParaVerPost/PaginaDeBlogParaVerPost.component.js"></script>
+    <script src="./components/blog/PaginaDeBlogParaEditarPost/PaginaDeBlogParaEditarPost.component.js"></script>
+    
+    <!-- Páginas de Foro -->
+    <script src="./components/foro/PaginaDeForoParaVerTemas/PaginaDeForoParaVerTemas.component.js"></script>
+    <script src="./components/foro/PaginaDeForoParaVerPosts/PaginaDeForoParaVerPosts.component.js"></script>
+    <script src="./components/foro/PaginaDeForoParaVerPost/PaginaDeForoParaVerPost.component.js"></script>
+    <script src="./components/foro/PaginaDeForoParaEditarPost/PaginaDeForoParaEditarPost.component.js"></script>
+    <script src="./components/foro/PaginaDeForoParaEditarTema/PaginaDeForoParaEditarTema.component.js"></script>
+    
+    <!-- Páginas de Mensajes -->
+    <script src="./components/mensajes/PaginaDeMensajesParaInicio/PaginaDeMensajesParaInicio.component.js"></script>
+    <script src="./components/mensajes/PaginaDeMensajesParaVerMensaje/PaginaDeMensajesParaVerMensaje.component.js"></script>
+    <script src="./components/mensajes/PaginaDeMensajesParaCrearMensaje/PaginaDeMensajesParaCrearMensaje.component.js"></script>
+    
+    <!-- Páginas de Escuela -->
+    <script src="./components/escuela/PaginaDeEscuelaParaVerCursos/PaginaDeEscuelaParaVerCursos.component.js"></script>
+    <script src="./components/escuela/PaginaDeEscuelaParaVerCurso/PaginaDeEscuelaParaVerCurso.component.js"></script>
+    <script src="./components/escuela/PaginaDeEscuelaParaEditarCurso/PaginaDeEscuelaParaEditarCurso.component.js"></script>
+    <script src="./components/escuela/PaginaDeEscuelaParaVerLeccion/PaginaDeEscuelaParaVerLeccion.component.js"></script>
+    <script src="./components/escuela/PaginaDeEscuelaParaEditarLeccion/PaginaDeEscuelaParaEditarLeccion.component.js"></script>
+    
+    <!-- Páginas de Prensa -->
+    <script src="./components/prensa/PaginaDePrensaParaVerNoticias/PaginaDePrensaParaVerNoticias.component.js"></script>
+    <script src="./components/prensa/PaginaDePrensaParaVerNoticia/PaginaDePrensaParaVerNoticia.component.js"></script>
+    <script src="./components/prensa/PaginaDePrensaParaEditarNoticia/PaginaDePrensaParaEditarNoticia.component.js"></script>
+    
+    <!-- Páginas de Asamblea -->
+    <script src="./components/asamblea/PaginaDeAsambleaInicio/PaginaDeAsambleaInicio.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerVotaciones/PaginaDeAsambleaVerVotaciones.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerVotacion/PaginaDeAsambleaVerVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerProblemasDeVotacion/PaginaDeAsambleaVerProblemasDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerProblemaDeVotacion/PaginaDeAsambleaVerProblemaDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerSolucionDeVotacion/PaginaDeAsambleaVerSolucionDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerSolucionesDeVotacion/PaginaDeAsambleaVerSolucionesDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerImplementacionesDeVotacion/PaginaDeAsambleaVerImplementacionesDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaVerImplementacionDeVotacion/PaginaDeAsambleaVerImplementacionDeVotacion.component.js"></script>
+    
+    <script src="./components/asamblea/PaginaDeAsambleaEditarVotacion/PaginaDeAsambleaEditarVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaEditarProblemaDeVotacion/PaginaDeAsambleaEditarProblemaDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaEditarSolucionDeVotacion/PaginaDeAsambleaEditarSolucionDeVotacion.component.js"></script>
+    <script src="./components/asamblea/PaginaDeAsambleaEditarImplementacionDeVotacion/PaginaDeAsambleaEditarImplementacionDeVotacion.component.js"></script>
+
+    
+    <!-- Rutas -->
     <script src="./dependencies/rutas.js"></script>
 </head>
 <body><div id="app"></div></body>.

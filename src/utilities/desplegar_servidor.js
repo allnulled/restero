@@ -7,6 +7,7 @@ module.exports = function (deployer) {
             const path = require("path");
             const express = require("express");
             const body_parser = require("body-parser");
+            const bloque_de_middlewares_de_asamblea = [deployer.utilities.middleware_de_autentificacion];
             deployer.server = require("http").createServer();
             deployer.app = express(deployer.server);
             deployer.app.use(deployer.utilities.middleware_de_log);
@@ -32,6 +33,25 @@ module.exports = function (deployer) {
                 deployer.utilities.middleware_de_autentificacion,
                 deployer.controllers.controlador_de_eliminar_post_de_foro
             ]);
+            ////////////////////////////////////////////////////////////
+            deployer.app.use("api/v1/agregar_implementacion_de_asamblea", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_agregar_implementacion_de_asamblea);
+            deployer.app.use("api/v1/agregar_problema_de_asamblea", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_agregar_problema_de_asamblea);
+            deployer.app.use("api/v1/agregar_solucion_de_asamblea", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_agregar_solucion_de_asamblea);
+            deployer.app.use("api/v1/agregar_votacion_de_asamblea", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_agregar_votacion_de_asamblea);
+            deployer.app.use("api/v1/agregar_voto_de_asamblea", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_agregar_voto_de_asamblea);
+            ////////////////////////////////////////////////////////////
+            deployer.app.use("api/v1/cambiar_implementacion_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_cambiar_implementacion_de_asamblea);
+            deployer.app.use("api/v1/cambiar_problema_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_cambiar_problema_de_asamblea);
+            deployer.app.use("api/v1/cambiar_solucion_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_cambiar_solucion_de_asamblea);
+            deployer.app.use("api/v1/cambiar_votacion_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_cambiar_votacion_de_asamblea);
+            deployer.app.use("api/v1/cambiar_voto_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_cambiar_voto_de_asamblea);
+            ////////////////////////////////////////////////////////////
+            deployer.app.use("api/v1/eliminar_implementacion_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_eliminar_implementacion_de_asamblea);
+            deployer.app.use("api/v1/eliminar_problema_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_eliminar_problema_de_asamblea);
+            deployer.app.use("api/v1/eliminar_solucion_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_eliminar_solucion_de_asamblea);
+            deployer.app.use("api/v1/eliminar_votacion_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_eliminar_votacion_de_asamblea);
+            deployer.app.use("api/v1/eliminar_voto_de_asamblea/:id", bloque_de_middlewares_de_asamblea, deployer.controllers.controlador_de_eliminar_voto_de_asamblea);
+            ////////////////////////////////////////////////////////////
             deployer.app.use("/api/v1/:operation/:table", [
                 deployer.utilities.middleware_de_parametros,
                 deployer.utilities.middleware_de_autentificacion,

@@ -1,0 +1,110 @@
+asigno window.PaginaDeAsambleaVerVotacion como un componente vue2 con nombre "PaginaDeAsambleaVerVotacion" con plantilla {
+  <div class="PaginaDeAsambleaVerVotacion Component">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <table class="">
+            <tbody>
+              <tr>
+                <td>
+                  <span class="partenon" v-on:click="() => $router.history.push('/')">🏛️</span>
+                </td>
+                <td>
+                  <span class="">Votación</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="window-body">
+        <BreadcrumbGenerico :root="root" :migas="[{texto:'Inicio',link:'/'},{texto:'Asamblea',link:'/asamblea/inicio'},{texto:'Votaciones',link:'/asamblea/ver/votaciones'}]"></BreadcrumbGenerico>
+        <h5 style="margin-bottom: 1px;">Votación</h5>
+        <div class="panel_principal">
+          <div class="carta_de_datos no_hover">
+            <div class="dato_nivel_1_de_carta">
+              Votación «{{ votacion.id }}»
+            </div>
+            <table style="width: 100%;">
+              <tr>
+                <td>
+                  <div class="dato_nivel_4_de_carta">
+                    Creada el: <br/>«{{ votacion.fecha_de_creacion }}»
+                  </div>
+                </td>
+                <td>
+                  <div class="dato_nivel_5_de_carta">
+                    Finaliza el: <br/>«{{ votacion.fecha_de_finalizacion }}»
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="dato_nivel_3_de_carta" style="text-align: center;">
+              Estado: «{{ votacion.estado }}»
+            </div>
+          </div>
+          <div class="" style="text-align: center;">
+            <ul class="lista_de_menu_principal" style="display: inline-block; padding: 0;">
+              <li>
+                <span class="como_link" v-on:click="() => ir_a_problemas_de_votacion()">Problemas</span>
+              </li>
+              <li>
+                <span class="como_link" v-on:click="() => ir_a_soluciones_de_votacion()">Soluciones</span>
+              </li>
+              <li>
+                <span class="como_link" v-on:click="() => ir_a_implementaciones_de_votacion()">Implementaciones</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      debugo "PaginaDeAsambleaVerVotacion.data".
+      retorno {
+        votacion: false
+      }.
+    } en errores hago this.$window.$notificaciones.notificar_error(error).
+    propiedad methods como {
+      método ir_a_problemas_de_votacion donde {
+        hago this.$router.history.push("/asamblea/ver/problemas/de/votacion/" + this.$route.params.id).
+      }.
+      método ir_a_soluciones_de_votacion donde {
+        hago this.$router.history.push("/asamblea/ver/soluciones/de/votacion/" + this.$route.params.id).
+      }.
+      método ir_a_implementaciones_de_votacion donde {
+        hago this.$router.history.push("/asamblea/ver/implementaciones/de/votacion/" + this.$route.params.id).
+      }.
+      método asíncrono obtener_votacion donde {
+        debugo "PaginaDeAsambleaVerVotacion.obtener_votacion".
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/api/v1/select/Votacion_de_asamblea"
+          con método "POST"
+          con cuerpo {
+            where: [
+              ["id", "=", this.$route.params.id]
+            ] textualizado
+          }
+          con cabeceras {
+            authorization: this.root.token_de_sesion
+          }.
+        hago this.$window.utilidades.gestion_de_error_desde_respuesta(respuesta_1, this).
+        si respuesta_1.data.resultado.length no es igual que 1 lanzo un nuevo Error(`La votación «${this.$route.params.id}» no fue encontrada`).
+        asigno this.votacion como respuesta_1.data.resultado[0].
+        hago this.$forceUpdate(true).
+      } en errores hago this.$window.$notificaciones.notificar_error(error).
+    }.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtener_votacion().
+    }.
+  }.
+}.

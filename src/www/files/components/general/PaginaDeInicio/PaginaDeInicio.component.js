@@ -32,11 +32,6 @@ window.PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "                Foro"
  + "              </span>"
  + "            </li>"
- + "            <li v-if=\"tiene_mensajeria\">"
- + "              <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/mensajes/inicio')\">"
- + "                Mensajes"
- + "              </span>"
- + "            </li>"
  + "            <li v-if=\"tiene_escuela\">"
  + "              <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/escuela/ver/cursos')\">"
  + "                Escuela"
@@ -45,6 +40,16 @@ window.PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "            <li v-if=\"tiene_prensa\">"
  + "              <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/prensa/ver/noticias')\">"
  + "                Noticias"
+ + "              </span>"
+ + "            </li>"
+ + "            <li v-if=\"tiene_asamblea\">"
+ + "              <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/asamblea/inicio')\">"
+ + "                Asamblea"
+ + "              </span>"
+ + "            </li>"
+ + "            <li v-if=\"tiene_mensajeria\">"
+ + "              <span class=\"como_link\" v-on:click=\"() => abrir_pagina_de('/mensajes/inicio')\">"
+ + "                Mensajes"
  + "              </span>"
  + "            </li>"
  + "            <li>"
@@ -77,7 +82,8 @@ return { tiene_blog:false,
 tiene_foro:false,
 tiene_mensajeria:false,
 tiene_escuela:false,
-tiene_prensa:false
+tiene_prensa:false,
+tiene_asamblea:false
 };
 } catch(error) {
 this.$window.$notificaciones.notificar_error( error );}
@@ -146,6 +152,19 @@ false );
 this.tiene_prensa = this.root.esquema.reduce( function( salida,
 tabla ) {try {
 if(tabla.tabla === "Noticia_de_prensa") {
+salida = true;
+}
+return salida;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+false );
+this.tiene_asamblea = this.root.esquema.reduce( function( salida,
+tabla ) {try {
+if(tabla.tabla === "Votacion_de_asamblea") {
 salida = true;
 }
 return salida;
